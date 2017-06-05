@@ -9,6 +9,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
     /// </summary>
     public class KingsportMillSafetyTrainingDbContext : DbContext
     {
+        public KingsportMillSafetyTrainingDbContext()
+            : base("KingsportMillSafetyTrainingDbContext")
+        {           
+        }
+
         /// <summary>
         /// The answers table.
         /// </summary>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MichaelBrandonMorris.KingsportMillSafetyTraining.Startup))]
+[assembly: OwinStartup(typeof(MichaelBrandonMorris.KingsportMillSafetyTraining.Startup))]
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     public partial class Startup
