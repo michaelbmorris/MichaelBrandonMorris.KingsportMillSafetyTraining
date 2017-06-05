@@ -118,6 +118,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                             RememberMe = false
                         });
                 case SignInStatus.Failure:
+                    goto default;
                 default:
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
@@ -276,6 +277,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                             model.RememberMe
                         });
                 case SignInStatus.Failure:
+                    goto default;
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -507,8 +509,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    break;
+                    goto default;
                 case SignInStatus.Failure:
+                    goto default;
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
