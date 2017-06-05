@@ -1,0 +1,196 @@
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+
+@Html.ValidationSummary(true, "", new
+{
+    @class = "text-danger"
+})
+
+@Html.HiddenFor(model => model.Id)
+
+<div class="form-group">
+    @Html.LabelFor(x => x.CategoryId)
+    @foreach (var category in Model.Categories)
+    {
+        <div class="radio">
+            @Html.RadioButtonFor(x => x.CategoryId, category.Id)
+            @Html.Label(category.Title)
+        </div>
+    }
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.Title, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @Html.EditorFor(model => model.Title, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        })
+        @Html.ValidationMessageFor(model => model.Title, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+
+    @Html.LabelFor(model => model.Content, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @Html.TextAreaFor(model => model.Content, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        })
+        @Html.ValidationMessageFor(model => model.Content, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.ImageBytes, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        <input class = ""
+               name = "Image"
+               type = "file" />
+        @Html.ValidationMessageFor(model => model.ImageBytes, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.ImageDescription, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @Html.EditorFor(model => model.ImageDescription, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        })
+        @Html.ValidationMessageFor(model => model.ImageDescription, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.Index, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @Html.EditorFor(model => model.Index, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        })
+        @Html.ValidationMessageFor(model => model.Index, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.Question, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @Html.EditorFor(model => model.Question, new
+        {
+            htmlAttributes = new
+            {
+                @class = "form-control"
+            }
+        })
+        @Html.ValidationMessageFor(model => model.Question, "", new
+        {
+            @class = "text-danger"
+        })
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.ShouldShowImageOnQuiz, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        <div class = "checkbox" >
+            @Html.EditorFor(model => model.ShouldShowImageOnQuiz)
+            @Html.ValidationMessageFor(model => model.ShouldShowImageOnQuiz, "", new
+            {
+                @class = "text-danger"
+            })
+        </div>
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.ShouldShowQuestionOnQuiz, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        <div class = "checkbox" >
+            @Html.EditorFor(model => model.ShouldShowQuestionOnQuiz)
+            @Html.ValidationMessageFor(model => model.ShouldShowQuestionOnQuiz, "", new
+            {
+                @class = "text-danger"
+            })
+        </div>
+    </div>
+</div>
+
+<div class = "form-group" >
+    @Html.LabelFor(model => model.ShouldShowSlideInSlideshow, new
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        <div class = "checkbox" >
+            @Html.EditorFor(model => model.ShouldShowSlideInSlideshow)
+            @Html.ValidationMessageFor(model => model.ShouldShowSlideInSlideshow, "", new
+            {
+                @class = "text-danger"
+            })
+        </div>
+    </div>
+</div>
+
+<div class = "form-group"
+     id = "answers-list" >
+    @Html.LabelFor(x => x.Answers)
+    @Html.EditorForMany(x => x.Answers)
+</div>
+
+<input class = "btn btn-default"
+       id = "add-answer"
+       type = "button"
+       value = "Add New Answer" />

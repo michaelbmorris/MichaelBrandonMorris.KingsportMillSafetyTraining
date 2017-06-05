@@ -1,0 +1,107 @@
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Slide>
+
+@{
+    ViewBag.Title = "Reorder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script>
+        $(function() {
+            $('#sort tbody').sortable({
+                stop: function() {
+                    $("#sort tbody tr").each(function(index, element) {
+                        var hiddenInput = $(element).children(".index").children().last();
+                        hiddenInput.val(index);
+                    });
+                }
+            });
+        });
+
+        $('td, th', '#sort').each(function() {
+            var cell = $(this);
+            cell.width(cell.width());
+        });
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    <table class = "table table-condensed table-hover table-striped"
+           id = "sort" >
+        <thead>
+            <tr>
+                <th>
+                    Drag to Reorder
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Single().Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Single().Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Single().ImageBytes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Single().ImageDescription)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    @* ReSharper disable once UnknownCssClass
+                        The index class is used by the sorting function. *@
+                    <td class = "index" >
+                        &#8597;
+                        @Html.HiddenFor(x => Model[i].Id)
+                        @Html.HiddenFor(x => Model[i].Index, new
+                        {
+                            htmlAttributes = new
+                            {
+                                name = $"slides[{i}].Index",
+                                @readonly = true
+                            }
+                        })
+                    </td>
+                    <td>
+                        @Html.HiddenFor(x => Model[i].Title)
+                        @Html.DisplayFor(x => Model[i].Title)
+                    </td>
+                    <td>
+                        @Html.HiddenFor(x => Model[i].Content)
+                        @Html.DisplayFor(x => Model[i].Content)
+                    </td>
+                    <td class = "image" >
+                        @Html.HiddenFor(x => Model[i].ImageBytes)
+                        <img src = "@Url.Action("RenderImage", new
+                                    {
+                                        id = Model[i].Id
+                                    })"
+                             alt = "@Model[i].ImageDescription" />
+                    </td>
+                    <td>
+                        @Html.HiddenFor(x => Model[i].ImageDescription)
+                        @Html.DisplayFor(x => Model[i].ImageDescription)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <div class = "form-group" >
+        <div class = "col-md-10 col-md-offset-2" >
+            <input class = "btn btn-default"
+                   type = "submit"
+                   value = "Save Order" />
+            <button class = "btn btn-default"
+                    onclick = "location.href = '@Url.Action("Index")';return false;" >
+                Cancel
+            </button>
+        </div>
+    </div>
+}

@@ -1,0 +1,30 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Answer
+
+<div class="form-group row answer" id="answer-@Model.Index">
+    <div class="col-md-1" style="text-align: right;">
+        <label style="height: 34px; line-height: 34px; padding: 0;">
+            @Html.HiddenFor(x => x.Index)
+            <input id="Answer-@Model.Index"
+                   type="radio"
+                   name="CorrectAnswerIndex"
+                   value="@Model.Index" />
+            &#10004;
+        </label>
+    </div>
+    <div class="col-md-8">
+        @Html.HiddenFor(x => x.Id)
+        @Html.TextBoxFor(x => x.Title, new
+   {
+       @class = "form-control"
+   })
+    </div>
+    <div class="col-md-3">
+        @* ReSharper disable once PossiblyUnassignedProperty
+            The removeAnswer function is defined in the view(s) that use(s) this view.*@
+        <button class="btn btn-default"
+                onclick="removeAnswer(@Model.Index);return false;">
+            Remove
+        </button>
+    </div>
+</div>
+

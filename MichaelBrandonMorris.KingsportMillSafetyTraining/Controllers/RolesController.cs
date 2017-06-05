@@ -14,6 +14,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             new KingsportMillSafetyTrainingDbContext();
 
         [HttpGet]
+        public ActionResult AssignCategories()
+        {
+            return View(_db.GetAssignCategoriesViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult AssignCategories(
+            AssignCategoriesViewModel assignCategoriesViewModel)
+        {
+            return null;
+        }
+
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -120,7 +133,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetRoles());
+            return View(_db.GetRoleViewModels());
         }
 
         protected override void Dispose(bool disposing)

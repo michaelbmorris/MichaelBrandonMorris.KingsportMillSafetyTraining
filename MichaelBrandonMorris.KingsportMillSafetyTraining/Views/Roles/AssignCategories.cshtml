@@ -1,0 +1,38 @@
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel
+
+@{
+    ViewBag.Title = "Assign Categories";
+    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<h2>Assign Categories</h2>
+
+@using (Html.BeginForm())
+{
+    <table class = "table table-condensed table-striped" >
+        <thead>
+            <tr>
+                @foreach (var role in Model.Roles)
+                {
+                    <th>@Html.DisplayFor(role.Title)</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoryViewModel in Model.CategoryViewModels)
+            {
+                <tr>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <td>
+                            <input name="roleCategories"
+                                   type="checkbox"
+                                   value=""/>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}

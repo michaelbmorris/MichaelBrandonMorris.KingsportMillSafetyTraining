@@ -122,7 +122,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetCategories());
+            return View(_db.GetCategoryViewModels());
         }
 
         protected override void Dispose(bool disposing)

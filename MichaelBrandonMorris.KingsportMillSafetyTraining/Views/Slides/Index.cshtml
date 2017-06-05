@@ -1,88 +1,139 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Slide>
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+    ViewBag.Title = "Slides";
 }
 
-<h2>Index</h2>
-
+<h1>Slides</h1>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") |
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CorrectAnswerIndex)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageBytes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Index)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Question)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShouldShowImageOnQuiz)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShouldShowQuestionOnQuiz)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShouldShowSlideInSlideshow)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th></th>
-    </tr>
+<table class = "table table-bordered table-striped" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().CategoryTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().ImageBytes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().ImageDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().ShouldShowSlideInSlideshow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().ShouldShowQuestionOnQuiz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().ShouldShowImageOnQuiz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().Question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(x => Model.Single().Answers)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    @{
+        int rowCount;
+    }
+    @for (var i = 0; i < Model.Count; i += rowCount)
+    {
+        var j = i;
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CorrectAnswerIndex)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageBytes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Index)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Question)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShouldShowImageOnQuiz)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShouldShowQuestionOnQuiz)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShouldShowSlideInSlideshow)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        while (Model[i].CategoryTitle == Model[j].CategoryTitle && ++j < Model.Count)
+        {
+        }
 
+        rowCount = j - i;
+
+        for (var k = i; k < j; k++)
+        {
+            <tr>
+                @if (k == i)
+                {
+                    <td rowspan = "@rowCount" >
+                        @Html.DisplayFor(Model[k].CategoryTitle)
+                        @Html.ActionLink("Reorder", "Reorder", new
+                        {
+                            categoryId = Model[k].CategoryId
+                        })
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(Model[k].Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].Content)
+                </td>
+                <td>
+                    <img src = "@Url.Action("RenderImage", new
+                                {
+                                    id = Model[k].Id
+                                })"
+                         alt = "@Model[k].ImageDescription" />
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].ImageDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].ShouldShowSlideInSlideshow)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].ShouldShowQuestionOnQuiz)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].ShouldShowImageOnQuiz)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model[k].Question)
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var answer in Model[k].Answers)
+                        {
+                            if (Model[k].CorrectAnswerIndex == answer.Index)
+                            {
+                                <li class = "correct" >@answer.Title</li>
+                            }
+                            else
+                            {
+                                <li class = "incorrect" >@answer.Title</li>
+                            }
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+                    {
+                        id = Model[k].Id
+                    })
+                    <br />
+                    @Html.ActionLink("Details", "Details", new
+                    {
+                        id = Model[k].Id
+                    })
+                    <br />
+                    @Html.ActionLink("Delete", "Delete", new
+                    {
+                        id = Model[k].Id
+                    })
+                </td>
+            </tr>
+        }
+    }
 </table>

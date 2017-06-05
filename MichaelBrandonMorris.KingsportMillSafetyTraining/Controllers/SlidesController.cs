@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
@@ -8,38 +9,52 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     public class SlidesController : Controller
     {
         private const string FieldsToInclude =
-            "Id,"
+            "Answers"
             + "Content,"
             + "CorrectAnswerIndex,"
             + "ImageBytes,"
             + "ImageDescription,"
-            + "Index,"
             + "Question,"
             + "ShouldShowImageOnQuiz,"
             + "ShouldShowQuestionOnQuiz,"
             + "ShouldShowSlideInSlideshow,"
             + "Title";
 
+        private const string JpgType = "image/jpg";
+
         private readonly KingsportMillSafetyTrainingDbContext _db =
             new KingsportMillSafetyTrainingDbContext();
+
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+        public ActionResult AddAnswer()
+        {
+            return View(
+                new SlideViewModel
+                {
+                    Answers = new List<Answer>
+                    {
+                        new Answer()
+                    }
+                });
+        }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View(new SlideViewModel(null, _db.GetCategories()));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
-            [Bind(Include = FieldsToInclude)] Slide slide)
+            [Bind(Include = FieldsToInclude)] SlideViewModel slideViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View(slide);
+                return View(slideViewModel);
             }
 
-            _db.CreateSlide(slide);
+            _db.CreateSlide(slideViewModel);
             return RedirectToAction("Index");
         }
 
@@ -103,31 +118,52 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var slideViewModel = _db.GetSlideViewModel(id.Value);
+
+            if (slideViewModel == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(slideViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(
+            [Bind(Include = FieldsToInclude)] SlideViewModel slideViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(slideViewModel);
+            }
+
+            _db.Edit(slideViewModel);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View(_db.GetSlideViewModels());
+        }
+
+        public ActionResult RenderImage(int id)
+        {
+            var slide = _db.GetSlide(id);
 
             if (slide == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = FieldsToInclude)] Slide slide)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(slide);
-            }
-
-            _db.Edit(slide);
-            return RedirectToAction("Index");
+            return slide.ImageBytes == null
+                ? null
+                : File(slide.ImageBytes, JpgType);
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Reorder(int categoryId)
         {
             return View(_db.GetSlides());
         }
