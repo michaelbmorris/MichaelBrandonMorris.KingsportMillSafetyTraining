@@ -1,24 +1,14 @@
-﻿using System.Net;
+﻿using System.Data.Entity;
+using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class SlidesController : Controller
+    public class RolesController : Controller
     {
-        private const string FieldsToInclude =
-            "Id,"
-            + "Content,"
-            + "CorrectAnswerIndex,"
-            + "ImageBytes,"
-            + "ImageDescription,"
-            + "Index,"
-            + "Question,"
-            + "ShouldShowImageOnQuiz,"
-            + "ShouldShowQuestionOnQuiz,"
-            + "ShouldShowSlideInSlideshow,"
-            + "Title";
+        private const string FieldsToInclude = "Id,Description,Title";
 
         private readonly KingsportMillSafetyTrainingDbContext _db =
             new KingsportMillSafetyTrainingDbContext();
@@ -31,15 +21,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = FieldsToInclude)] Slide slide)
+        public ActionResult Create([Bind(Include = FieldsToInclude)] Role role)
         {
             if (!ModelState.IsValid)
             {
-                return View(slide);
+                return View(role);
             }
 
-            _db.CreateSlide(slide);
+            _db.CreateRole(role);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -51,26 +41,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var role = _db.GetRole(id.Value);
 
-            if (slide == null)
+            if (role == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(role);
         }
 
-        [ActionName("Delete")]
         [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var slide = _db.GetSlide(id);
+            var role = _db.GetRole(id);
 
-            if (slide != null)
+            if (role != null)
             {
-                _db.DeleteSlide(slide);
+                _db.DeleteRole(role);
             }
 
             _db.SaveChanges();
@@ -85,14 +75,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var role = _db.GetRole(id.Value);
 
-            if (slide == null)
+            if (role == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(role);
         }
 
         [HttpGet]
@@ -103,33 +93,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var role = _db.GetRole(id.Value);
 
-            if (slide == null)
+            if (role == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(role);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = FieldsToInclude)] Slide slide)
+        public ActionResult Edit([Bind(Include = FieldsToInclude)] Role role)
         {
             if (!ModelState.IsValid)
             {
-                return View(slide);
+                return View(role);
             }
 
-            _db.Edit(slide);
+            _db.Entry(role).State = EntityState.Modified;
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetSlides());
+            return View(_db.GetRoles());
         }
 
         protected override void Dispose(bool disposing)

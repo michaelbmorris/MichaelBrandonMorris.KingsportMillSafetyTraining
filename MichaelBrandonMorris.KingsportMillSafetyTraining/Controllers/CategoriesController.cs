@@ -1,24 +1,14 @@
-﻿using System.Net;
+﻿using System.Data.Entity;
+using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class SlidesController : Controller
+    public class CategoriesController : Controller
     {
-        private const string FieldsToInclude =
-            "Id,"
-            + "Content,"
-            + "CorrectAnswerIndex,"
-            + "ImageBytes,"
-            + "ImageDescription,"
-            + "Index,"
-            + "Question,"
-            + "ShouldShowImageOnQuiz,"
-            + "ShouldShowQuestionOnQuiz,"
-            + "ShouldShowSlideInSlideshow,"
-            + "Title";
+        private const string FieldsToInclude = "Id,Description,Title,Index";
 
         private readonly KingsportMillSafetyTrainingDbContext _db =
             new KingsportMillSafetyTrainingDbContext();
@@ -32,14 +22,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(
-            [Bind(Include = FieldsToInclude)] Slide slide)
+            [Bind(Include = FieldsToInclude)] Category category)
         {
             if (!ModelState.IsValid)
             {
-                return View(slide);
+                return View(category);
             }
 
-            _db.CreateSlide(slide);
+            _db.CreateCategory(category);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -51,26 +42,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var category = _db.GetCategory(id.Value);
 
-            if (slide == null)
+            if (category == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(category);
         }
-
+     
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var slide = _db.GetSlide(id);
+            var category = _db.GetCategory(id);
 
-            if (slide != null)
+            if (category != null)
             {
-                _db.DeleteSlide(slide);
+                _db.DeleteCategory(category);
             }
 
             _db.SaveChanges();
@@ -85,14 +76,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var category = _db.GetCategory(id.Value);
 
-            if (slide == null)
+            if (category == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(category);
         }
 
         [HttpGet]
@@ -103,33 +94,35 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var category = _db.GetCategory(id.Value);
 
-            if (slide == null)
+            if (category == null)
             {
                 return HttpNotFound();
             }
 
-            return View(slide);
+            return View(category);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = FieldsToInclude)] Slide slide)
+        public ActionResult Edit(
+            [Bind(Include = FieldsToInclude)] Category category)
         {
             if (!ModelState.IsValid)
             {
-                return View(slide);
+                return View(category);
             }
 
-            _db.Edit(slide);
+            _db.Entry(category).State = EntityState.Modified;
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetSlides());
+            return View(_db.GetCategories());
         }
 
         protected override void Dispose(bool disposing)
