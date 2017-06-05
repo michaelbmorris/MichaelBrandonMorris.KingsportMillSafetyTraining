@@ -2,10 +2,27 @@
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    /// <summary>
+    /// Categories have a list of slides and are assigned to roles.
+    /// </summary>
     public class Category
     {
         /// <summary>
-        ///     The category's description
+        /// Tracks the current index being used by categories.
+        /// </summary>
+        public static int CurrentIndex;
+
+        /// <summary>
+        /// Creates a new <see cref="Category"/> with the next 
+        /// <see cref="Index"/>.
+        /// </summary>
+        public Category()
+        {
+            Index = ++CurrentIndex;
+        }
+
+        /// <summary>
+        /// The category's description
         /// </summary>
         public string Description
         {
@@ -14,7 +31,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     The category's ID, generated automatically by the database
+        /// The category's ID, generated automatically by the database
         /// </summary>
         public int Id
         {
@@ -23,27 +40,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     The category's roles
+        /// The category's roles
         /// </summary>
         public IList<Role> Roles
         {
             get;
             set;
-        }
+        } = new List<Role>();
 
         /// <summary>
-        ///     The category's slides
+        /// The category's slides
         /// </summary>
         public IList<Slide> Slides
+        {
+            get;
+            set;
+        } = new List<Slide>();
+
+        /// <summary>
+        /// The category's title
+        /// </summary>
+        public string Title
         {
             get;
             set;
         }
 
         /// <summary>
-        ///     The category's title
+        /// Determines the ordering of this category.
         /// </summary>
-        public string Title
+        public int Index
         {
             get;
             set;

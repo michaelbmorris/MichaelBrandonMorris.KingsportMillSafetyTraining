@@ -6,7 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
     /// <summary>
-    /// Represents a single slide belonging to a category
+    /// Slides are the basic content element of the safety training program.
+    /// They have text content, an image, and a question with multiple choice
+    /// answers about the content or image. They are assigned to a category.
     /// </summary>
     public class Slide : IEquatable<Slide>
     {
@@ -16,13 +18,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public static int CurrentIndex;
 
         /// <summary>
+        /// Creates a new <see cref="Slide" /> with the next <see cref="Index" />.
+        /// </summary>
+        public Slide()
+        {
+            Index = ++CurrentIndex;
+        }
+
+        /// <summary>
         /// The slide's children answers
         /// </summary>
+        [ListQuantity(0, 5, ErrorMessage = "There may be no more than five (5) answers.")]
         public virtual IList<Answer> Answers
         {
             get;
             set;
-        }
+        } = new List<Answer>();
 
         /// <summary>
         /// The slide's parent category

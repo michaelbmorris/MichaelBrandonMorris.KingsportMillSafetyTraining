@@ -2,19 +2,22 @@
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    /// <summary>
+    /// Roles are assigned categories and are assigned to users.
+    /// </summary>
     public class Role
     {
         /// <summary>
-        ///     The role's categories
+        /// The role's categories
         /// </summary>
         public virtual IList<Category> Categories
         {
             get;
             set;
-        }
+        } = new List<Category>();
 
         /// <summary>
-        ///     The role's description
+        /// The role's description
         /// </summary>
         public string Description
         {
@@ -23,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     The role's ID, generated automatically by the database
+        /// The role's ID, generated automatically by the database
         /// </summary>
         public int Id
         {
@@ -32,7 +35,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     The role's title
+        /// The role's title
         /// </summary>
         public string Title
         {
