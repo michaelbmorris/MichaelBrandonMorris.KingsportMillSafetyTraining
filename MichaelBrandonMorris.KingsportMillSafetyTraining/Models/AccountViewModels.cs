@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -129,6 +130,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
     public class RegisterViewModel
     {
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
+        [Required]
+        public DateTime BirthDate
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Company Name")]
+        public string CompanyName
+        {
+            get;
+            set;
+        }
+
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [System.ComponentModel.DataAnnotations.Compare(
@@ -145,6 +162,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "First Name")]
+        [Required]
+        public string FirstName
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Last Name")]
+        [Required]
+        public string LastName
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Middle Name")]
+        public string MiddleName
         {
             get;
             set;

@@ -21,7 +21,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             bundles.Add(
                 new ScriptBundle("~/bundles/bootstrap").Include(
                     "~/Scripts/bootstrap.js",
-                    "~/Scripts/respond.js"));
+                    "~/Scripts/respond.js",
+                    "~/Scripts/moment.js",
+                    "~/Scripts/bootstrap-datetimepicker.js"));
 
             bundles.Add(
                 new ScriptBundle("~/bundles/jqueryui").Include(
@@ -31,6 +33,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 new StyleBundle("~/Content/css").Include(
                     "~/Content/reset.css",
                     "~/Content/bootstrap.css",
+                    "~/Content/bootstrap-datetimepicker.css",
                     "~/Content/site.css"));
         }
     }
