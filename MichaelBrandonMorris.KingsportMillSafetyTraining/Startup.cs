@@ -14,10 +14,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            CreateRolesAndUsers();
+            CreateRoles();
+            UpdateCurrentIndices();
         }
 
-        private void CreateRolesAndUsers()
+        private static void UpdateCurrentIndices()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                db.UpdateCurrentAnswerIndex();
+                db.UpdateCurrentCategoryIndex();
+                db.UpdateCurrentSlideIndex();
+            }
+        }
+
+        private void CreateRoles()
         {
             using (var db = new ApplicationDbContext())
             {

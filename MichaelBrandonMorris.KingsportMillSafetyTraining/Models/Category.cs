@@ -42,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         /// The category's roles
         /// </summary>
-        public IList<Role> Roles
+        public virtual IList<Role> Roles
         {
             get;
             set;
@@ -51,7 +51,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         /// The category's slides
         /// </summary>
-        public IList<Slide> Slides
+        public virtual IList<Slide> Slides
         {
             get;
             set;

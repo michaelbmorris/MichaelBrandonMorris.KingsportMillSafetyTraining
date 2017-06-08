@@ -5,7 +5,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
     public class CategoryViewModel
     {
         public CategoryViewModel()
-        {         
+        {
         }
 
         public CategoryViewModel(Category category)
@@ -14,6 +14,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Id = category.Id;
             Index = category.Index;
             Roles = category.Roles;
+            Slides = category.Slides;
             Title = category.Title;
         }
 
@@ -40,6 +41,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             get;
             set;
         } = new List<Role>();
+
+        public IList<Slide> Slides
+        {
+            get;
+            set;
+        } = new List<Slide>();
 
         public string Title
         {

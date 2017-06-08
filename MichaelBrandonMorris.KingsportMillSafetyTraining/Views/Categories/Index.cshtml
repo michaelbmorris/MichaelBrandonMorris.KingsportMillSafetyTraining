@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Categories";
-    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
 <h2>Categories</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Reorder", "Reorder", "Categories") | @Html.ActionLink("Assign Roles", "AssignRoles", "Categories")
 </p>
 <table class = "table" >
     <tr>
@@ -17,6 +17,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Slides)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Roles)
@@ -36,23 +39,33 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
+                @item.Slides.Count
+            </td>
+            <td>
                 <ul>
                     @foreach (var role in item.Roles)
                     {
                         <li>@Html.DisplayFor(itemRole => role.Title)</li>
                     }
-                </ul> 
+                </ul>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new
                 {
                     id = item.Id
-                }) |
+                })
+                <br />
                 @Html.ActionLink("Details", "Details", new
                 {
                     id = item.Id
-                }) |
+                })
+                <br />
                 @Html.ActionLink("Delete", "Delete", new
+                {
+                    id = item.Id
+                })
+                <br />
+                @Html.ActionLink("Assign Roles", "AssignRoles", new
                 {
                     id = item.Id
                 })

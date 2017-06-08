@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
 <h2>Roles</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Assign Categories", "AssignCategories")
 </p>
 <table class = "table" >
     <tr>
@@ -47,12 +47,19 @@
                 @Html.ActionLink("Edit", "Edit", new
                 {
                     id = item.Id
-                }) |
+                })
+                <br />
                 @Html.ActionLink("Details", "Details", new
                 {
                     id = item.Id
-                }) |
+                })
+                <br />
                 @Html.ActionLink("Delete", "Delete", new
+                {
+                    id = item.Id
+                })
+                <br />
+                @Html.ActionLink("Assign Categories", "AssignCategories", new
                 {
                     id = item.Id
                 })

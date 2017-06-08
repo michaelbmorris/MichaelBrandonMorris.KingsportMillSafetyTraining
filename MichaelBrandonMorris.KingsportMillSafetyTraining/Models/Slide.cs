@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MichaelBrandonMorris.Extensions.OtherExtensions;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
@@ -17,6 +18,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         public static int CurrentIndex;
 
+        public Slide(SlideViewModel slideViewModel)
+            : this()
+        {
+            Content = slideViewModel.Content;
+            CorrectAnswerIndex = slideViewModel.CorrectAnswerIndex;
+
+            if (slideViewModel.Image != null)
+            {
+                ImageBytes = slideViewModel.Image.ToBytes();
+            }
+
+            ImageDescription = slideViewModel.ImageDescription;
+            Question = slideViewModel.Question;
+            ShouldShowImageOnQuiz = slideViewModel.ShouldShowImageOnQuiz;
+            ShouldShowQuestionOnQuiz = slideViewModel.ShouldShowQuestionOnQuiz;
+
+            ShouldShowSlideInSlideshow =
+                slideViewModel.ShouldShowSlideInSlideshow;
+
+            Title = slideViewModel.Title;
+        }
+
         /// <summary>
         /// Creates a new <see cref="Slide" /> with the next <see cref="Index" />.
         /// </summary>
@@ -28,7 +51,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         /// The slide's children answers
         /// </summary>
-        [ListQuantity(0, 5, ErrorMessage = "There may be no more than five (5) answers.")]
+        [ListQuantity(
+            0,
+            5,
+            ErrorMessage = "There may be no more than five (5) answers.")]
         public virtual IList<Answer> Answers
         {
             get;

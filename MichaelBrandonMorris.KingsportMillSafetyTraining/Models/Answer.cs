@@ -18,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         public Answer()
         {
-            Index = ++Index;
+            Index = ++CurrentIndex;
         }
 
         /// <summary>

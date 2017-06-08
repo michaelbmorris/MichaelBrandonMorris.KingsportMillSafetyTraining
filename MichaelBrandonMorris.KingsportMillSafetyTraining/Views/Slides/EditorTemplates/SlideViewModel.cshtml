@@ -8,15 +8,22 @@
 
 @Html.HiddenFor(model => model.Id)
 
-<div class="form-group">
-    @Html.LabelFor(x => x.CategoryId)
-    @foreach (var category in Model.Categories)
+<div class = "form-group" >
+    @Html.LabelFor(x => x.CategoryId, new
     {
-        <div class="radio">
-            @Html.RadioButtonFor(x => x.CategoryId, category.Id)
-            @Html.Label(category.Title)
-        </div>
-    }
+        @class = "control-label col-md-2"
+    })
+    <div class = "col-md-10" >
+        @foreach (var category in Model.Categories)
+        {
+            
+            <div class = "radio" >
+                <label>
+                    @Html.RadioButtonFor(x => x.CategoryId, category.Id) @category.Title
+                </label>
+            </div>
+        }
+    </div>
 </div>
 
 <div class = "form-group" >
@@ -48,10 +55,7 @@
     <div class = "col-md-10" >
         @Html.TextAreaFor(model => model.Content, new
         {
-            htmlAttributes = new
-            {
-                @class = "form-control"
-            }
+            @class = "form-control"
         })
         @Html.ValidationMessageFor(model => model.Content, "", new
         {
@@ -97,26 +101,6 @@
 </div>
 
 <div class = "form-group" >
-    @Html.LabelFor(model => model.Index, new
-    {
-        @class = "control-label col-md-2"
-    })
-    <div class = "col-md-10" >
-        @Html.EditorFor(model => model.Index, new
-        {
-            htmlAttributes = new
-            {
-                @class = "form-control"
-            }
-        })
-        @Html.ValidationMessageFor(model => model.Index, "", new
-        {
-            @class = "text-danger"
-        })
-    </div>
-</div>
-
-<div class = "form-group" >
     @Html.LabelFor(model => model.Question, new
     {
         @class = "control-label col-md-2"
@@ -133,6 +117,38 @@
         {
             @class = "text-danger"
         })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ShouldShowSlideInSlideshow, new
+{
+    @class = "control-label col-md-2"
+})
+    <div class="col-md-10">
+        <div class="checkbox">
+            @Html.EditorFor(model => model.ShouldShowSlideInSlideshow)
+            @Html.ValidationMessageFor(model => model.ShouldShowSlideInSlideshow, "", new
+       {
+           @class = "text-danger"
+       })
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ShouldShowQuestionOnQuiz, new
+{
+    @class = "control-label col-md-2"
+})
+    <div class="col-md-10">
+        <div class="checkbox">
+            @Html.EditorFor(model => model.ShouldShowQuestionOnQuiz)
+            @Html.ValidationMessageFor(model => model.ShouldShowQuestionOnQuiz, "", new
+       {
+           @class = "text-danger"
+       })
+        </div>
     </div>
 </div>
 
@@ -153,44 +169,17 @@
 </div>
 
 <div class = "form-group" >
-    @Html.LabelFor(model => model.ShouldShowQuestionOnQuiz, new
-    {
-        @class = "control-label col-md-2"
-    })
+    @Html.LabelFor(x => x.Answers, new
+{
+    @class = "control-label col-md-2"
+})
     <div class = "col-md-10" >
-        <div class = "checkbox" >
-            @Html.EditorFor(model => model.ShouldShowQuestionOnQuiz)
-            @Html.ValidationMessageFor(model => model.ShouldShowQuestionOnQuiz, "", new
-            {
-                @class = "text-danger"
-            })
+        <div id ="answers-list">
+            @Html.EditorForMany(x => x.Answers)
         </div>
-    </div>
+        <input class = "btn btn-default"
+               id = "add-answer"
+               type = "button"
+               value = "Add New Answer" />
+    </div>  
 </div>
-
-<div class = "form-group" >
-    @Html.LabelFor(model => model.ShouldShowSlideInSlideshow, new
-    {
-        @class = "control-label col-md-2"
-    })
-    <div class = "col-md-10" >
-        <div class = "checkbox" >
-            @Html.EditorFor(model => model.ShouldShowSlideInSlideshow)
-            @Html.ValidationMessageFor(model => model.ShouldShowSlideInSlideshow, "", new
-            {
-                @class = "text-danger"
-            })
-        </div>
-    </div>
-</div>
-
-<div class = "form-group"
-     id = "answers-list" >
-    @Html.LabelFor(x => x.Answers)
-    @Html.EditorForMany(x => x.Answers)
-</div>
-
-<input class = "btn btn-default"
-       id = "add-answer"
-       type = "button"
-       value = "Add New Answer" />

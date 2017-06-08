@@ -46,8 +46,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = FieldsToInclude)] SlideViewModel slideViewModel)
+        public ActionResult Create(SlideViewModel slideViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -130,8 +129,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(
-            [Bind(Include = FieldsToInclude)] SlideViewModel slideViewModel)
+        public ActionResult Edit(SlideViewModel slideViewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -148,6 +146,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(_db.GetSlideViewModels());
         }
 
+        [HttpGet]
         public ActionResult RenderImage(int id)
         {
             var slide = _db.GetSlide(id);
@@ -163,9 +162,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [HttpGet]
-        public ActionResult Reorder(int categoryId)
+        public ActionResult Reorder(int? categoryId)
         {
-            return View(_db.GetSlides());
+            if (categoryId == null)
+            {
+                return RedirectToAction("SelectCategoryToReorder");
+            }
+
+            var model = _db.GetSlides(categoryId, x => x.Index);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Reorder(IList<Slide> slides)
+        {
+            _db.Reorder(slides);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult SelectCategoryToReorder()
+        {
+            var model = _db.GetCategories();
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

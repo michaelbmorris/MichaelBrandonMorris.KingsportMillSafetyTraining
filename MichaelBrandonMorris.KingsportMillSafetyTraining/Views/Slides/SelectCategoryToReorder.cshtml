@@ -1,0 +1,27 @@
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Category>
+
+@{
+    ViewBag.Title = "Select Category To Reorder";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<h2>Select Category To Reorder</h2>
+<hr />
+
+@foreach (var item in Model)
+{
+    <button class = "btn btn-default"
+            onclick = "location.href = '@Url.Action("Reorder", new
+                                        {
+                                            categoryId = item.Id
+                                        })';return false;" >
+        @item.Title
+    </button>
+}
+
+<span>&nbsp;or&nbsp;</span>
+
+<button class = "btn btn-default"
+        onclick = "location.href = '@Url.Action("Reorder", "Categories")';return false;" >
+    Reorder Categories
+</button>

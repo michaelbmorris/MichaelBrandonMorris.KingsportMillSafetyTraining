@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -17,6 +19,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult AssignRoles(int? id)
+        {
+            var model = _db.GetAssignRolesViewModel(id);
+            return View(model);
         }
 
         [HttpPost]
@@ -76,14 +85,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var category = _db.GetCategory(id.Value);
+            var model = _db.GetCategoryViewModel(id.Value);
 
-            if (category == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return View(category);
+            return View(model);
         }
 
         [HttpGet]
@@ -120,9 +129,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [HttpGet]
+        public ActionResult Reorder()
+        {
+            var model = _db.GetCategories(x => x.Index);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Reorder(IList<Category> categories)
+        {
+            _db.Reorder(categories);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetCategoryViewModels());
+            return View(_db.GetCategoryViewModels().OrderBy(x => x.Index));
         }
 
         protected override void Dispose(bool disposing)

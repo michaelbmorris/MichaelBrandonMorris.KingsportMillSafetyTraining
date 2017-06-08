@@ -16,9 +16,16 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+div.checkbox input[type="checkbox"] {
+    margin-left: 0;
+}
+
+.correct:before {
+    content: '✔';
+    margin-right: .2em;
+}
+
+.incorrect:before {
+    content: 'X';
+    margin-right: 0.5em;
 }

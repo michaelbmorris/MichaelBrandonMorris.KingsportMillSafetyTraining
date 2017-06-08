@@ -11,14 +11,14 @@
             &#10004;
         </label>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
         @Html.HiddenFor(x => x.Id)
         @Html.TextBoxFor(x => x.Title, new
    {
        @class = "form-control"
    })
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         @* ReSharper disable once PossiblyUnassignedProperty
             The removeAnswer function is defined in the view(s) that use(s) this view.*@
         <button class="btn btn-default"

@@ -151,20 +151,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 // Get the information about the user from the external login provider
                 var info =
                     await AuthenticationManager.GetExternalLoginInfoAsync();
+
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email
                 };
+
                 var result = await UserManager.CreateAsync(user);
+
                 if (result.Succeeded)
                 {
                     result =
                         await UserManager.AddLoginAsync(user.Id, info.Login);
+
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, false, false);
@@ -178,73 +183,68 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
-        //
-        // GET: /Account/ForgotPassword
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ForgotPassword
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]     
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(
             ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null
-                    || !await UserManager.IsEmailConfirmedAsync(user.Id))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return View(model);
             }
+
+            var user = await UserManager.FindByNameAsync(model.Email);
+
+            if (user == null
+                || !await UserManager.IsEmailConfirmedAsync(user.Id))
+            {
+                // Don't reveal that the user does not exist or is not confirmed
+                return View("ForgotPasswordConfirmation");
+            }
+
+            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+            // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            // return RedirectToAction("ForgotPasswordConfirmation", "Account");
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //
-        // POST: /Account/Login
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]      
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(
             LoginViewModel model,
@@ -262,6 +262,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 model.Password,
                 model.RememberMe,
                 false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -284,8 +285,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        //
-        // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -295,18 +294,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/Register
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]     
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -343,18 +339,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ResetPassword
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
 
-        //
-        // POST: /Account/ResetPassword
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]      
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(
             ResetPasswordViewModel model)
@@ -386,17 +379,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View();
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/SendCode
         [AllowAnonymous]
+        [HttpGet]
         public async Task<ActionResult> SendCode(
             string returnUrl,
             bool rememberMe)
@@ -428,10 +419,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]       
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
@@ -457,9 +446,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // GET: /Account/VerifyCode
         [AllowAnonymous]
+        [HttpGet]
         public async Task<ActionResult> VerifyCode(
             string provider,
             string returnUrl,
@@ -480,10 +468,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]       
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {

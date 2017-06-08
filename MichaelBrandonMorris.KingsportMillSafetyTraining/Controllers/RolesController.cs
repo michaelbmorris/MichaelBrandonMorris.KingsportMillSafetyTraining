@@ -14,16 +14,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             new KingsportMillSafetyTrainingDbContext();
 
         [HttpGet]
-        public ActionResult AssignCategories()
+        public ActionResult AssignCategories(int? id)
         {
-            return View(_db.GetAssignCategoriesViewModel());
+            var model = _db.GetAssignCategoriesViewModel(id);           
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult AssignCategories(
-            AssignCategoriesViewModel assignCategoriesViewModel)
+        public ActionResult AssignCategories(int[] roleCategories)
         {
-            return null;
+            _db.UnpairCategoriesAndRoles();
+
+            if (roleCategories == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            foreach (var roleCategory in roleCategories)
+            {
+                var cantorInversePair = Helpers.CantorInverse(roleCategory);
+                var roleId = cantorInversePair.Item1;
+                var categoryId = cantorInversePair.Item2;
+                _db.PairCategoryAndRole(categoryId, roleId);
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -64,8 +79,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(role);
         }
 
-        [HttpPost]
         [ActionName("Delete")]
+        [HttpPost]       
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -88,14 +103,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var role = _db.GetRole(id.Value);
+            var model = _db.GetRoleViewModel(id.Value);
 
-            if (role == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return View(role);
+            return View(model);
         }
 
         [HttpGet]

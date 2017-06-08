@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Assign Categories";
-    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
 <h2>Assign Categories</h2>
@@ -26,13 +26,28 @@
                     @foreach (var role in Model.Roles)
                     {
                         <td>
-                            <input name="roleCategories"
-                                   type="checkbox"
-                                   value=""/>
+                            <div class = "checkbox" >
+                                <label>
+                                    <input name = "roleCategories"
+                                           type = "checkbox"
+                                           value = "@Helpers.CantorPair(role.Id, categoryViewModel.Id)"
+                                           @Html.Attribute("checked", "checked", categoryViewModel.Roles.Contains(role)) />
+                                    @Html.DisplayFor(modelCategoryViewModel => categoryViewModel.Title)
+                                </label>
+                            </div>
+                            
                         </td>
                     }
                 </tr>
             }
         </tbody>
     </table>
+
+    <input class="btn btn-default"
+           type ="submit"
+           value ="Submit"/>
+    <button class = "btn btn-default"
+            onclick = "location.href = '@Url.Action("Index")';return false;" >
+        Cancel
+    </button>
 }

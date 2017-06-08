@@ -1,0 +1,63 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Category
+    
+<div>
+    <h4>Category</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Slides)
+        </dt>
+
+        <dd>
+            @if (Model.Slides.Any())
+            {
+                <ul>
+                    @foreach (var slide in Model.Slides)
+                    {
+                        <li>@Html.DisplayFor(modelSlide => slide.Title)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>This category has no slides.</span>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Roles)
+        </dt>
+
+        <dd>
+            @if (Model.Roles.Any())
+            {
+                <ul>
+                    @foreach (var role in Model.Roles)
+                    {
+                        <li>@Html.DisplayFor(modelRole => role.Title)</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <span>This category has no roles.</span>
+            }
+        </dd>
+    </dl>
+</div>

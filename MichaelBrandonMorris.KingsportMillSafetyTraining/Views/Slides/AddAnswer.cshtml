@@ -1,3 +1,8 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+    
+@{
+    Layout = null;
+}
 
-@Html.EditorFor(x => x.Answers)
+@Html.EditorForMany(x => x.Answers)
