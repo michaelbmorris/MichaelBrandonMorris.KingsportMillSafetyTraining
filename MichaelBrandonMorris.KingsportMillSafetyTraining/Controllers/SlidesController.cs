@@ -4,7 +4,6 @@ using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -12,20 +11,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize(Roles = "Administrator")]
     public class SlidesController : Controller
     {
-        private const string FieldsToInclude =
-            "Answers"
-            + "Content,"
-            + "CorrectAnswerIndex,"
-            + "ImageBytes,"
-            + "ImageDescription,"
-            + "Question,"
-            + "ShouldShowImageOnQuiz,"
-            + "ShouldShowQuestionOnQuiz,"
-            + "ShouldShowSlideInSlideshow,"
-            + "Title";
-
         private const string JpgType = "image/jpg";
-
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
