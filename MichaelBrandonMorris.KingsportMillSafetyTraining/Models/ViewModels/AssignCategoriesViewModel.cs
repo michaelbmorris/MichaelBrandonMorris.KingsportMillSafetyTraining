@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
 {
     public class AssignCategoriesViewModel
     {

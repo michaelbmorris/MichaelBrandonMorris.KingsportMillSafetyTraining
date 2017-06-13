@@ -1,22 +1,21 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class RolesController : Controller
     {
-        private const string FieldsToInclude = "Id,Description,Title";
-
-        private readonly KingsportMillSafetyTrainingDbContext _db =
-            new KingsportMillSafetyTrainingDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         [HttpGet]
         public ActionResult AssignCategories(int? id)
         {
-            var model = _db.GetAssignCategoriesViewModel(id);           
+            var model = _db.GetAssignCategoriesViewModel(id);
             return View(model);
         }
 
@@ -49,7 +48,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = FieldsToInclude)] Role role)
+        public ActionResult Create(Role role)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +79,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [ActionName("Delete")]
-        [HttpPost]       
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -133,7 +132,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = FieldsToInclude)] Role role)
+        public ActionResult Edit(Role role)
         {
             if (!ModelState.IsValid)
             {
@@ -148,7 +147,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetRoleViewModels());
+            var model = _db.GetRoleViewModels(x => x.Index);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Reorder()
+        {
+            var model = _db.GetRoles(x => x.Index);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Reorder(IList<Role> roles)
+        {
+            _db.Reorder(roles);
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

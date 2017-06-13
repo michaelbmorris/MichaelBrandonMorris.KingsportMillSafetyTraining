@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels.SlideViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -8,7 +8,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
 {
     @Html.AntiForgeryToken()
 
@@ -16,7 +19,7 @@
         <h4>Slide</h4>
         <hr />
 
-        @Html.EditorFor(x => x)
+        @Html.EditorForModel(Model)
 
         <div class = "form-group" >
             <div class = "col-md-10 col-md-offset-2" >
@@ -47,7 +50,7 @@
                 });
         });
 
-        var s = "input[name=CorrectAnswerId][value=";
+        var s = "input[name=CorrectAnswerIndex][value=";
 
         $(document).ready(function() {
             $(s + @Model.CorrectAnswerIndex + "]").prop("checked", true);

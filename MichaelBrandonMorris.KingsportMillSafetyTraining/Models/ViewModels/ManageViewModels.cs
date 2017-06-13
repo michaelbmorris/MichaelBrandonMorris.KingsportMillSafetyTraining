@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
 {
     public class IndexViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels
 {
     /// <summary>
     /// Answers are assigned to slides

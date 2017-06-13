@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -22,8 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         private const string JpgType = "image/jpg";
 
-        private readonly KingsportMillSafetyTrainingDbContext _db =
-            new KingsportMillSafetyTrainingDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AddAnswer()
@@ -52,6 +55,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return View(slideViewModel);
             }
+
+            Debug.WriteLine(slideViewModel.Image == null);
 
             _db.CreateSlide(slideViewModel);
             return RedirectToAction("Index");
@@ -136,6 +141,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(slideViewModel);
             }
 
+            Debug.WriteLine(slideViewModel.Image == null);
             _db.Edit(slideViewModel);
             return RedirectToAction("Index");
         }
@@ -146,6 +152,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(_db.GetSlideViewModels());
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult RenderImage(int id)
         {

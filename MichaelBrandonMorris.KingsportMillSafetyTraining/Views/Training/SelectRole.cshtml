@@ -1,0 +1,90 @@
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels.Role>
+
+@{
+    ViewBag.Title = "Select Role";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<h2>Select Role</h2>
+@using (Html.BeginForm())
+{
+    <div class = "carousel"
+         data-interval = "false"
+         data-ride = ""
+         data-wrap = "false"
+         id = "carousel" >
+        <div class = "carousel-inner" >
+            @foreach (var item in Model)
+            {
+                <div class = "item @(item == Model.First() ? "active" : string.Empty)" >
+                    <div class = "carousel-content" >
+                        <p>
+                            @item.Question
+                            <button class = "btn btn-default"
+                                    name = "roleId"
+                                    value = "@item.Id" >
+                                Yes
+                            </button>
+                            @if (item == Model.Last())
+                            {
+                                <button class = "btn btn-default"
+                                        name = "roleId"
+                                        value = "null" >
+                                    No
+                                </button>
+                            }
+                            else
+                            {
+                                <button class = "btn btn-default"
+                                        data-slide = "next"
+                                        href = "#carousel" >
+                                    No
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+@section Scripts
+{
+    <script>
+        var slideHeight = [];
+
+        $(document).ready(function() {
+            $("#carousel .item").each(function() {
+                slideHeight.push($(this).height());
+            });
+
+            var max = Math.max.apply(null, slideHeight);
+            var carouselWidth = $("#carousel").width();
+            var carouselControlWidth = $(".carousel-control").width();
+
+            $("#carousel .carousel-content").each(function() {
+                $(this).css("height", max + "px");
+                $(this).css("width", carouselWidth - 2 * carouselControlWidth);
+            });
+
+            var checkitem = function() {
+                var $this = $("#carousel");
+                if ($("#carousel .carousel-inner .item:first").hasClass("active")) {
+                    $this.children(".left").hide();
+                    $this.children(".right").show();
+                } else if ($("#carousel .carousel-inner .item:last").hasClass("active")) {
+                    $this.children(".right").hide();
+                    $this.children(".left").show();
+                } else {
+                    $this.children(".carousel-control").show();
+                }
+            };
+
+            checkitem();
+
+            $("#carousel").on("slid.bs.carousel", "", checkitem);
+        });
+    </script>
+}

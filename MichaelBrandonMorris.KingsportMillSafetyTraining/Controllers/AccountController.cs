@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -55,9 +56,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        //
-        // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        [HttpGet]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -69,14 +69,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            // Request a redirect to the external login provider
             return new ChallengeResult(
                 provider,
                 Url.Action(
@@ -88,9 +85,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     }));
         }
 
-        //
-        // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
+        [HttpGet]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager
@@ -100,9 +96,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("Login");
             }
 
-            // Sign in the user with this external login provider if the user already has a login
             var result =
                 await SignInManager.ExternalSignInAsync(loginInfo, false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -120,7 +116,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 case SignInStatus.Failure:
                     goto default;
                 default:
-                    // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View(
@@ -132,10 +127,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        //
-        // POST: /Account/ExternalLoginConfirmation
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(
             ExternalLoginConfirmationViewModel model,
@@ -148,7 +141,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             if (ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
                 var info =
                     await AuthenticationManager.GetExternalLoginInfoAsync();
 
@@ -198,7 +190,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]     
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ForgotPassword(
             ForgotPasswordViewModel model)
@@ -244,7 +236,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]      
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(
             LoginViewModel model,
@@ -291,6 +283,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             AuthenticationManager.SignOut(
                 DefaultAuthenticationTypes.ApplicationCookie);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -302,7 +295,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]     
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -311,10 +304,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
-            var user = new ApplicationUser
+            var user = new ApplicationUser(model)
             {
-                UserName = model.Email,
-                Email = model.Email
+                Email = model.Email,
+                UserName = model.Email
             };
 
             var result =
@@ -347,7 +340,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]      
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ResetPassword(
             ResetPasswordViewModel model)
@@ -420,7 +413,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]       
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
@@ -469,7 +462,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]       
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {

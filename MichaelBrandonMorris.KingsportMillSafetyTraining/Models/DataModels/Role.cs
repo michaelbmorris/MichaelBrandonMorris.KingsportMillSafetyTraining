@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels
 {
     /// <summary>
     /// Roles are assigned categories and are assigned to users.
@@ -29,6 +29,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// The role's ID, generated automatically by the database
         /// </summary>
         public int Id
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The role's index, used to determine role order and the default role
+        /// </summary>
+        public int Index
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The role's question, asked to users to determine if they belong to
+        /// this role.
+        /// </summary>
+        public string Question
         {
             get;
             set;

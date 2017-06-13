@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Role
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels.Role
 
 @Html.ValidationSummary(true, "", new
 {
@@ -39,5 +39,22 @@
         {
             @class = "text-danger"
         })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Question, new
+{
+    @class = "control-label col-md-2"
+})
+    <div class="col-md-10">
+        @Html.TextAreaFor(model => model.Question, new
+   {
+       @class = "form-control"
+   })
+        @Html.ValidationMessageFor(model => model.Question, "", new
+   {
+       @class = "text-danger"
+   })
     </div>
 </div>

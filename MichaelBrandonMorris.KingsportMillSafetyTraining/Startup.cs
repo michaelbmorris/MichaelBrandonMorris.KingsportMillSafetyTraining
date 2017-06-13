@@ -16,11 +16,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             ConfigureAuth(app);
             CreateRoles();
             UpdateCurrentIndices();
+            app.CreatePerOwinContext<ApplicationUserManager>(
+                ApplicationUserManager.Create);
         }
 
         private static void UpdateCurrentIndices()
         {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
+            using (var db = new ApplicationDbContext())
             {
                 db.UpdateCurrentAnswerIndex();
                 db.UpdateCurrentCategoryIndex();
@@ -38,18 +40,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
                 if (!roleManager.RoleExists("Administrator"))
                 {
-                    roleManager.Create(new IdentityRole
-                    {
-                        Name = "Administrator"
-                    });
+                    roleManager.Create(
+                        new IdentityRole
+                        {
+                            Name = "Administrator"
+                        });
                 }
 
                 if (!roleManager.RoleExists("User"))
                 {
-                    roleManager.Create(new IdentityRole
-                    {
-                        Name = "User"
-                    });
+                    roleManager.Create(
+                        new IdentityRole
+                        {
+                            Name = "User"
+                        });
                 }
             }
         }

@@ -1,13 +1,40 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels
 {
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+        }
+
+        public ApplicationUser(RegisterViewModel model)
+        {
+            BirthDate = model.BirthDate;
+            CompanyName = model.CompanyName;
+            FirstName = model.FirstName;
+            LastName = model.LastName;
+            MiddleName = model.MiddleName;
+        }
+
+        public string MobilePhoneNumber
+        {
+            get;
+            set;
+        }
+
+        public string WorkPhoneNumber
+        {
+            get;
+            set;
+        }
+
         public DateTime BirthDate
         {
             get;
@@ -38,7 +65,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
-        public Role Role
+        public virtual Role Role
         {
             get;
             set;
@@ -55,16 +82,5 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-    }
+    
 }

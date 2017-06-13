@@ -4,6 +4,8 @@ using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -12,8 +14,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     {
         private const string FieldsToInclude = "Id,Description,Title,Index";
 
-        private readonly KingsportMillSafetyTrainingDbContext _db =
-            new KingsportMillSafetyTrainingDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         [HttpGet]
         public ActionResult Create()

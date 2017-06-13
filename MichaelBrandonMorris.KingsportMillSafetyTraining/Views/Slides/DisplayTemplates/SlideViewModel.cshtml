@@ -1,0 +1,98 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels.SlideViewModel
+
+@{
+    Layout = null;
+}
+
+<dl class = "dl-horizontal" > 
+    <dt>
+        @Html.DisplayNameFor(model => Model.CategoryTitle)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => Model.CategoryTitle)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Content)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Content)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ImageBytes)
+    </dt>
+
+    <dd>
+        <img src = "@Url.Action("RenderImage", new
+                    {
+                        id = Model.Id
+                    })"
+             alt = "@Model.ImageDescription" />
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ImageDescription)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ImageDescription)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ShouldShowSlideInSlideshow)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ShouldShowSlideInSlideshow)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.ShouldShowQuestionOnQuiz)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ShouldShowQuestionOnQuiz)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ShouldShowImageOnQuiz)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ShouldShowImageOnQuiz)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Question)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Question)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.Answers)
+    </dt>
+    
+    <dd>
+        <ul>
+            @foreach (var answer in Model.Answers)
+            {
+                <li class = "@(answer.Index == Model.CorrectAnswerIndex ? "correct" : "incorrect")" >
+                    @Html.DisplayFor(modelAnswer => answer.Title)
+                </li>
+            }
+        </ul>
+    </dd>
+</dl>

@@ -16,8 +16,20 @@
     white-space: normal;
 }
 
-div.checkbox input[type="checkbox"] {
+div.form-group div.checkbox input[type="checkbox"] {
     margin-left: 0;
+}
+
+table img {
+    display: block;
+    height: 100%;
+    max-height: 100px;
+    max-width: 100px;
+    width: 100%;
+}
+
+td.image {
+    height: 100px;
 }
 
 .correct:before {
@@ -28,4 +40,21 @@ div.checkbox input[type="checkbox"] {
 .incorrect:before {
     content: 'X';
     margin-right: 0.5em;
+}
+
+p.bg-info {
+    padding: 15px;
+}
+
+#carousel .carousel-content {
+    margin: 0 auto;
+}
+
+#carousel a.carousel-control {
+    background-image: none;
+}
+
+span.glyphicon-chevron-right, span.glyphicon-chevron-left {
+    color: black;
+    text-shadow: none;
 }

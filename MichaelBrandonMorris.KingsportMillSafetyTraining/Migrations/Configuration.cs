@@ -8,9 +8,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey =
-                "MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ApplicationDbContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(ApplicationDbContext context)

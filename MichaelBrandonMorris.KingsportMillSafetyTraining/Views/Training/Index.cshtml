@@ -1,0 +1,102 @@
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels.SlideViewModel>
+
+@{
+    ViewBag.Title = "Training";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<div class = "carousel"
+     data-interval = "false"
+     data-ride = ""
+     data-wrap = "false"
+     id = "carousel" >
+    <div class = "carousel-inner" >
+        @foreach (var item in Model)
+        {
+            <div class = "item @(item == Model.First() ? "active" : "")" >
+                <div class = "carousel-content" >
+                    <h1>
+                        @Html.DisplayFor(item.CategoryTitle)
+                    </h1>
+                    <h2>
+                        @Html.DisplayFor(item.Title)
+                    </h2>
+                    <div class = "row" >
+                        <div class = "col-md-6" >
+                            <p>
+                                @Html.DisplayFor(item.Content)
+                            </p>
+                        </div>
+                        <div class = "col-md-6" >
+                            <img src = "@Url.Action("RenderImage", "Slides", new
+                                        {
+                                            id = item.Id
+                                        })"
+                                 alt = "@item.ImageDescription" />
+                        </div>
+                    </div>
+                    @if (item == Model.Last())
+                    {
+                        <br />
+                        <button class = "btn btn-default form-control"
+                                onclick = "location.href = '@Url.Action("Quiz")';return false;" >
+                            Go To Quiz
+                        </button>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <a class = "carousel-control left"
+       data-slide = "prev"
+       href = "#carousel"
+       role = "button" >
+        <span class = "glyphicon glyphicon-chevron-left" ></span>
+    </a>
+    <a class = "carousel-control right"
+       data-slide = "next"
+       href = "#carousel"
+       role = "button" >
+        <span class = "glyphicon glyphicon-chevron-right" ></span>
+    </a>
+</div>
+
+@section Scripts
+{
+    <script>
+        var slideHeight = [];
+
+        $(document).ready(function() {
+            $("#carousel .item").each(function() {
+                slideHeight.push($(this).height());
+            });
+
+            var max = Math.max.apply(null, slideHeight);
+            var carouselWidth = $("#carousel").width();
+            var carouselControlWidth = $(".carousel-control").width();
+
+            $("#carousel .carousel-content").each(function() {
+                $(this).css("height", max + "px");
+                $(this).css("width", carouselWidth - 2 * carouselControlWidth);
+            });
+
+            var checkitem = function() {
+                var $this = $("#carousel");
+                if ($("#carousel .carousel-inner .item:first").hasClass("active")) {
+                    $this.children(".left").hide();
+                    $this.children(".right").show();
+                } else if ($("#carousel .carousel-inner .item:last").hasClass("active")) {
+                    $this.children(".right").hide();
+                    $this.children(".left").show();
+                } else {
+                    $this.children(".carousel-control").show();
+                }
+            };
+
+            checkitem();
+
+            $("#carousel").on("slid.bs.carousel", "", checkitem);
+        });
+    </script>
+}

@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Slide
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels.Slide
 
 @{
     ViewBag.Title = "Details";
@@ -10,88 +10,7 @@
 <div>
     <h4>Slide</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CorrectAnswerIndex)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CorrectAnswerIndex)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageBytes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageBytes)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ImageDescription)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Index)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Index)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Question)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Question)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShouldShowImageOnQuiz)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShouldShowImageOnQuiz)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShouldShowQuestionOnQuiz)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShouldShowQuestionOnQuiz)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShouldShowSlideInSlideshow)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ShouldShowSlideInSlideshow)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-    </dl>
+    @Html.DisplayForModel(Model)
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

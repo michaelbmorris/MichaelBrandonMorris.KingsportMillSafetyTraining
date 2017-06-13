@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
 {
     public class SlideViewModel
     {
@@ -39,23 +40,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Categories = categories;
         }
 
-        public IList<Category> Categories
-        {
-            get;
-            set;
-        } = new List<Category>();
-
-        public HttpPostedFileBase Image
-        {
-            get;
-            set;
-        }
-
         public IList<Answer> Answers
         {
             get;
             set;
         } = new List<Answer>();
+
+        public IList<Category> Categories
+        {
+            get;
+            set;
+        } = new List<Category>();
 
         public int CategoryId
         {
@@ -88,6 +83,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        public HttpPostedFileBase Image
+        {
+            get;
+            set;
+        }
+
         public byte[] ImageBytes
         {
             get;
@@ -102,6 +103,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         public int Index
+        {
+            get;
+            set;
+        }
+
+        public string Question
         {
             get;
             set;
@@ -129,12 +136,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         public string Title
-        {
-            get;
-            set;
-        }
-
-        public string Question
         {
             get;
             set;

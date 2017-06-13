@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel>
+﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels.RoleViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -8,7 +8,10 @@
 <h2>Roles</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Assign Categories", "AssignCategories")
+    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Reorder", "Reorder") | @Html.ActionLink("Assign Categories", "AssignCategories")
+</p>
+<p class = "bg-info" >
+    On the role selection page, roles will be selected in the order below, with the last role being the default.
 </p>
 <table class = "table" >
     <tr>
@@ -17,6 +20,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Question)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Categories)
@@ -34,6 +40,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question)
             </td>
             <td>
                 <ul>

@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
-    /// <summary>
-    /// The database context for the program. Stores references to all the
-    /// database tables, as well as methods to perform operations on all the
-    /// data in transactions.
-    /// </summary>
-    public class KingsportMillSafetyTrainingDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public KingsportMillSafetyTrainingDbContext()
-            : base("KingsportMillSafetyTrainingDbContext")
+        public ApplicationDbContext()
+            : base("DefaultConnection", false)
         {
+        }
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         /// The roles table.
         /// </summary>
-        public DbSet<Role> Roles
+        public DbSet<Role> TrainingRoles
         {
             get;
             set;
@@ -150,9 +153,39 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetRole(id));
         }
 
-        public IList<Role> GetRoles()
+        public ApplicationUser GetUser(string id)
         {
-            return DoTransaction(_GetRoles);
+            return DoTransaction(() => Users.Find(id));
+        }
+
+        public IList<SlideViewModel> GetSlideshowViewModel(Role role)
+        {
+            return DoTransaction(() => _GetSlideshowViewModel(role));
+        }
+
+        private IList<SlideViewModel> _GetSlideshowViewModel(Role role)
+        {
+            var slideViewModels = new List<SlideViewModel>();
+
+            foreach (var category in role.Categories.OrderBy(x => x.Index))
+            {
+                foreach (var slide in category.Slides.OrderBy(x => x.Index))
+                {
+                    slideViewModels.Add(new SlideViewModel(slide));
+                }
+            }
+
+            return slideViewModels;
+        }
+
+        public Role GetRole(Func<Role, bool> predicate)
+        {
+            return DoTransaction(() => _GetRole(predicate));
+        }
+
+        public IList<Role> GetRoles(Func<Role, object> orderByPredicate = null)
+        {
+            return DoTransaction(() => _GetRoles(orderByPredicate));
         }
 
         public RoleViewModel GetRoleViewModel(int id)
@@ -160,9 +193,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetRoleViewModel(id));
         }
 
-        public IList<RoleViewModel> GetRoleViewModels()
+        public IList<RoleViewModel> GetRoleViewModels(
+            Func<Role, object> orderByPredicate = null)
         {
-            return DoTransaction(_GetRoleViewModels);
+            return DoTransaction(() => _GetRoleViewModels(orderByPredicate));
         }
 
         public Slide GetSlide(int id)
@@ -203,6 +237,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             DoTransaction(() => _Reorder(slides));
         }
 
+        public void Reorder(IList<Role> roles)
+        {
+            DoTransaction(() => _Reorder(roles));
+        }
+
         public void UnpairCategoriesAndRoles()
         {
             DoTransaction(_UnpairCategoriesAndRoles);
@@ -230,7 +269,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _CreateRole(Role role)
         {
-            Roles.Add(role);
+            TrainingRoles.Add(role);
         }
 
         private void _CreateSlide(SlideViewModel slideViewModel)
@@ -261,8 +300,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _DeleteRole(Role role)
         {
-            Roles.Attach(role);
-            Roles.Remove(role);
+            TrainingRoles.Attach(role);
+            TrainingRoles.Remove(role);
         }
 
         private void _DeleteSlide(Slide slide)
@@ -342,7 +381,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             if (id == null)
             {
-                roles = Roles.ToList();
+                roles = TrainingRoles.ToList();
             }
             else
             {
@@ -424,28 +463,43 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private Role _GetRole(int id)
         {
-            return Roles.Find(id);
+            return TrainingRoles.Find(id);
         }
 
-        private IList<Role> _GetRoles()
+        private Role _GetRole(Func<Role, bool> predicate)
         {
-            return Roles.ToList();
+            return TrainingRoles.Single(predicate);
+        }
+
+        private IList<Role> _GetRoles(
+            Func<Role, object> orderByPredicate = null)
+        {
+            var roles = TrainingRoles;
+
+            return orderByPredicate == null
+                ? roles.ToList()
+                : roles.OrderBy(orderByPredicate).ToList();
         }
 
         private RoleViewModel _GetRoleViewModel(int id)
         {
-            var role = Roles.Find(id);
+            var role = TrainingRoles.Find(id);
             return new RoleViewModel(role);
         }
 
-        private IList<RoleViewModel> _GetRoleViewModels()
+        private IList<RoleViewModel> _GetRoleViewModels(
+            Func<Role, object> orderByPredicate = null)
         {
+            var roles = orderByPredicate == null
+                ? TrainingRoles.AsEnumerable()
+                : TrainingRoles.OrderBy(orderByPredicate);
+
             var roleViewModels = new List<RoleViewModel>();
 
             /* ReSharper disable once LoopCanBeConvertedToQuery
              * Replacing this loop with a LINQ expression will cause errors.
              */
-            foreach (var role in Roles)
+            foreach (var role in roles)
             {
                 roleViewModels.Add(new RoleViewModel(role));
             }
@@ -520,7 +574,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 slides = category.Slides.OrderBy(x => x.Index).ToList();
             }
 
-            return slides.ToList().Select(slide => new SlideViewModel(slide)).ToList();       
+            return slides.ToList()
+                .Select(slide => new SlideViewModel(slide))
+                .ToList();
         }
 
         private void _PairCategoryAndRole(int categoryId, int roleId)
@@ -532,7 +588,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 throw new Exception();
             }
 
-            var role = Roles.Find(roleId);
+            var role = TrainingRoles.Find(roleId);
 
             if (role == null)
             {
@@ -561,9 +617,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
+        private void _Reorder(IEnumerable<Role> roles)
+        {
+            foreach (var role in roles)
+            {
+                var roleToEdit = _GetRole(role.Id);
+                roleToEdit.Index = role.Index;
+            }
+        }
+
         private void _UnpairCategoriesAndRoles()
         {
-            Debug.WriteLine("unpairing");
             foreach (var category in Categories)
             {
                 foreach (var role in category.Roles.ToList())
@@ -572,7 +636,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 }
             }
 
-            foreach (var role in Roles)
+            foreach (var role in TrainingRoles)
             {
                 foreach (var category in role.Categories.ToList())
                 {

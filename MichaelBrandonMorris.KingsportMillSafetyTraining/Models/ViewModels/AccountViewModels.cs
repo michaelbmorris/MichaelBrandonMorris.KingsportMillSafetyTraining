@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
@@ -159,7 +159,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         [Required]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email
         {
