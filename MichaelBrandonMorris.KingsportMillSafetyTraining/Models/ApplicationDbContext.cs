@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
@@ -16,11 +17,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
         }
 
         /// <summary>
@@ -42,6 +38,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
+        /// The slides table.
+        /// </summary>
+        public DbSet<Slide> Slides
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The roles table.
         /// </summary>
         public DbSet<Role> TrainingRoles
@@ -51,29 +56,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// The slides table.
+        /// Creates a new <see cref="ApplicationDbContext" />.
         /// </summary>
-        public DbSet<Slide> Slides
+        /// <returns></returns>
+        public static ApplicationDbContext Create()
         {
-            get;
-            set;
+            return new ApplicationDbContext();
         }
 
-        public IList<QuizSlideViewModel> GetQuizViewModel()
-        {
-            return DoTransaction(_GetQuizViewModel);
-        }
-
-        private IList<QuizSlideViewModel> _GetQuizViewModel()
-        {
-            
-        }
-
+        /// <summary>
+        /// Uses a transaction to add the specified <see cref="Category" /> to
+        /// the database.
+        /// </summary>
+        /// <param name="category"></param>
         public void CreateCategory(Category category)
         {
             DoTransaction(() => _CreateCategory(category));
         }
 
+        /// <summary>
+        /// Uses a transaction to add the specified <see cref="Role" /> to the
+        /// database.
+        /// </summary>
+        /// <param name="role"></param>
         public void CreateRole(Role role)
         {
             DoTransaction(() => _CreateRole(role));
@@ -104,6 +109,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             DoTransaction(() => _DeleteSlide(slide));
         }
 
+        /// <summary>
+        /// Uses a transaction to modify the specified <see cref="T" /> in the
+        /// database.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of object to modify. Must be a class.
+        /// Should be a type in the database.
+        /// </typeparam>
+        /// <param name="t">The object to modify.</param>
         public void Edit<T>(T t)
             where T : class
         {
@@ -158,34 +172,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(_GetCategoryViewModels);
         }
 
+        /// <summary>
+        /// Uses a transaction to get the
+        /// <see cref="IList{QuizSlideViewModel}" /> for the specified role.
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public IList<QuizSlideViewModel> GetQuizViewModel(Role role)
+        {
+            return DoTransaction(() => _GetQuizViewModel(role));
+        }
+
         public Role GetRole(int id)
         {
             return DoTransaction(() => _GetRole(id));
-        }
-
-        public ApplicationUser GetUser(string id)
-        {
-            return DoTransaction(() => Users.Find(id));
-        }
-
-        public IList<SlideViewModel> GetSlideshowViewModel(Role role)
-        {
-            return DoTransaction(() => _GetSlideshowViewModel(role));
-        }
-
-        private IList<SlideViewModel> _GetSlideshowViewModel(Role role)
-        {
-            var slideViewModels = new List<SlideViewModel>();
-
-            foreach (var category in role.Categories.OrderBy(x => x.Index))
-            {
-                foreach (var slide in category.Slides.OrderBy(x => x.Index))
-                {
-                    slideViewModels.Add(new SlideViewModel(slide));
-                }
-            }
-
-            return slideViewModels;
         }
 
         public Role GetRole(Func<Role, bool> predicate)
@@ -222,6 +222,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 () => _GetSlides(categoryId, orderByPredicate));
         }
 
+        public IList<SlideViewModel> GetSlideshowViewModel(Role role)
+        {
+            return DoTransaction(() => _GetSlideshowViewModel(role));
+        }
+
         public SlideViewModel GetSlideViewModel(int id)
         {
             return DoTransaction(() => _GetSlideViewModel(id));
@@ -230,6 +235,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public IList<SlideViewModel> GetSlideViewModels(int? categoryId = null)
         {
             return DoTransaction(() => _GetSlideViewModels(categoryId));
+        }
+
+        public ApplicationUser GetUser(string id)
+        {
+            return DoTransaction(() => Users.Find(id));
         }
 
         public void PairCategoryAndRole(int categoryId, int roleId)
@@ -270,6 +280,45 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public void UpdateCurrentSlideIndex()
         {
             DoTransaction(_UpdateCurrentSlideIndex);
+        }
+
+        private static IList<QuizSlideViewModel> _GetQuizViewModel(Role role)
+        {
+            var quizViewModel = new List<QuizSlideViewModel>();
+
+            foreach (var category in role.Categories)
+            {
+                foreach (var slide in category.Slides)
+                {
+                    if (slide.ShouldShowSlideInSlideshow
+                        && slide.ShouldShowQuestionOnQuiz)
+                    {
+                        quizViewModel.Add(new QuizSlideViewModel(slide));
+                    }
+                }
+            }
+
+            return quizViewModel.Shuffle();
+        }
+
+        private static IList<SlideViewModel> _GetSlideshowViewModel(Role role)
+        {
+            var slideViewModels = new List<SlideViewModel>();
+
+            foreach (var category in Enumerable.OrderBy(
+                role.Categories,
+                x => x.Index))
+            {
+                foreach (var slide in Enumerable.OrderBy(
+                        category.Slides,
+                        x => x.Index)
+                    .Where(x => x.ShouldShowSlideInSlideshow))
+                {
+                    slideViewModels.Add(new SlideViewModel(slide));
+                }
+            }
+
+            return slideViewModels;
         }
 
         private void _CreateCategory(Category category)
@@ -368,7 +417,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 }
             }
 
-            foreach (var answer in slide.Answers.Where(x => x.Id != 0)
+            foreach (var answer in Enumerable
+                .Where(slide.Answers, x => x.Id != 0)
                 .ToList())
             {
                 if (model.Answers.All(x => x.Id != answer.Id))
@@ -566,7 +616,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             {
                 foreach (var category in Categories.OrderBy(x => x.Index))
                 {
-                    foreach (var slide in category.Slides.OrderBy(x => x.Index))
+                    foreach (var slide in Enumerable.OrderBy(
+                        category.Slides,
+                        x => x.Index))
                     {
                         slides.Add(slide);
                     }
@@ -581,7 +633,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     throw new Exception();
                 }
 
-                slides = category.Slides.OrderBy(x => x.Index).ToList();
+                slides = Enumerable.OrderBy(category.Slides, x => x.Index)
+                    .ToList();
             }
 
             return slides.ToList()
