@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.
+    Account
 {
-    public class ExternalLoginConfirmationViewModel
+    public class ForgotPasswordViewModel
     {
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email
         {

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
 {
     public class ApplicationUser : IdentityUser
     {

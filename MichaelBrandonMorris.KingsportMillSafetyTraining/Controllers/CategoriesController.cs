@@ -4,8 +4,7 @@ using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {

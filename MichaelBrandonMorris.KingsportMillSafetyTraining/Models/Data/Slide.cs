@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {
     /// <summary>
     /// Slides are the basic content element of the safety training program.

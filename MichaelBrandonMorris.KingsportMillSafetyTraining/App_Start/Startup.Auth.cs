@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {

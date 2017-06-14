@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {
     /// <summary>
     /// Categories have a list of slides and are assigned to roles.

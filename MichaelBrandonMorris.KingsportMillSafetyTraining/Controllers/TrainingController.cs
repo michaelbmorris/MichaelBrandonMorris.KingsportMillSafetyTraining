@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using Microsoft.AspNet.Identity;
 using MoreLinq;
 
@@ -17,6 +18,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            var role = GetCurrentUserRole();
+
+            if (role == null)
+            {
+                return RedirectToAction("SelectRole");
+            }
+
+            var model = _db.GetSlideshowViewModel(role);
+            return View(model);
+        }
+
+        private Role GetCurrentUserRole()
+        {
             var user = _db.GetUser(User.Identity.GetUserId());
 
             if (user == null)
@@ -24,20 +38,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 throw new Exception();
             }
 
-            if (user.Role == null)
-            {
-                return RedirectToAction("SelectRole");
-            }
-
-            var model = _db.GetSlideshowViewModel(user.Role);
-            return View(model);
+            return user.Role;
         }
 
         [HttpGet]
         public ActionResult Quiz()
         {
-            // TODO
-            return null;
+            var role = GetCurrentUserRole();
+            var model = _db.GetQuizViewModel();
+            return View(model);
         }
 
         [HttpPost]

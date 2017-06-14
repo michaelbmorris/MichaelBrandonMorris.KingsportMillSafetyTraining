@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

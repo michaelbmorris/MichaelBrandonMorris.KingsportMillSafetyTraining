@@ -4,9 +4,9 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.IdentityModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -57,6 +57,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
+        }
+
+        public IList<QuizSlideViewModel> GetQuizViewModel()
+        {
+            return DoTransaction(_GetQuizViewModel);
+        }
+
+        private IList<QuizSlideViewModel> _GetQuizViewModel()
+        {
+            
         }
 
         public void CreateCategory(Category category)

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels
 {
     public class SlideViewModel
     {

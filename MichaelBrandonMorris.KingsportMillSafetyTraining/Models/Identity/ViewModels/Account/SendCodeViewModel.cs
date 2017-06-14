@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account
 {
     public class SendCodeViewModel
     {

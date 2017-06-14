@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.DataModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {
     /// <summary>
     /// Roles are assigned categories and are assigned to users.
