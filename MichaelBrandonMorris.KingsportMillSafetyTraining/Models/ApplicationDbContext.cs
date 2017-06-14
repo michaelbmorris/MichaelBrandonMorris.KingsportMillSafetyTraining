@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
@@ -71,6 +70,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public void AddQuizResult(
+            int trainingResultId,
+            int questionsCorrect,
+            int totalQuestions)
+        {
+            DoTransaction(
+                () => _AddQuizResult(
+                    trainingResultId,
+                    questionsCorrect,
+                    totalQuestions));
         }
 
         public void AddTrainingResult(string userId)
@@ -278,6 +289,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             DoTransaction(() => _Reorder(roles));
         }
 
+        public void SetUserLatestQuizStartDateTime(string userId)
+        {
+            DoTransaction(() => _SetUserLatestQuizStartDateTime(userId));
+        }
+
+        public void SetUserLatestTrainingStartDateTime(string userId)
+        {
+            DoTransaction(() => _SetUserLatestTrainingStartDateTime(userId));
+        }
+
         public void UnpairCategoriesAndRoles()
         {
             DoTransaction(_UnpairCategoriesAndRoles);
@@ -321,10 +342,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 select new SlideViewModel(slide)).ToList();
         }
 
+        private void _AddQuizResult(
+            int trainingResultId,
+            int questionsCorrect,
+            int totalQuestions)
+        {
+            var trainingResult = TrainingResults.Find(trainingResultId);
+
+            if (trainingResult == null)
+            {
+                throw new Exception();
+            }
+
+            var timeToComplete = DateTime.Now
+                                 - trainingResult.User.LatestQuizStartDateTime;
+
+            trainingResult.QuizResults.Add(
+                new QuizResult
+                {
+                    QuestionsCorrect = questionsCorrect,
+                    TimeToComplete = timeToComplete,
+                    TotalQuestions = totalQuestions
+                });
+        }
+
         private void _AddTrainingResult(string userId)
         {
             var user = Users.Find(userId);
-            Debug.WriteLine($"2 {user.Role == null}");
 
             user.TrainingResults.Add(
                 new TrainingResult
@@ -396,8 +440,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             {
                 throw new Exception();
             }
-
-            Debug.WriteLine($"1 {originalTrainingResult.Role == null}");
 
             var trainingResultEntry = Entry(trainingResult);
             trainingResultEntry.CurrentValues.SetValues(trainingResult);
@@ -666,8 +708,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 ? user.TrainingResults.Last()
                 : TrainingResults.Find(trainingResultId);
 
-            Debug.WriteLine(trainingResult == null);
-            Debug.WriteLine(trainingResult.Role == null);
             return new TrainingResultViewModel(user, trainingResult);
         }
 
@@ -716,6 +756,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 var roleToEdit = _GetRole(role.Id);
                 roleToEdit.Index = role.Index;
             }
+        }
+
+        private void _SetUserLatestQuizStartDateTime(string userId)
+        {
+            var user = Users.Find(userId);
+            user.LatestQuizStartDateTime = DateTime.Now;
+        }
+
+        private void _SetUserLatestTrainingStartDateTime(string userId)
+        {
+            var user = Users.Find(userId);
+            user.LatestTrainingStartDateTime = DateTime.Now;
         }
 
         private void _UnpairCategoriesAndRoles()

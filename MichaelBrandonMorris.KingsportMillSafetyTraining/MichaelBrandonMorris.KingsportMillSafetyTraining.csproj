@@ -205,11 +205,13 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SlidesController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Identity\QuizResult.cs" />
     <Compile Include="Models\Identity\TrainingResult.cs" />
     <Compile Include="Models\Identity\ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Data\Answer.cs" />
@@ -227,6 +229,7 @@
     <Compile Include="Models\Identity\ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Result\TrainingResultViewModel.cs" />
+    <Compile Include="Models\Identity\ViewModels\User\UserViewModel.cs" />
     <Compile Include="Models\ListQuantityAttribute.cs" />
     <Compile Include="Models\Identity\ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Account\ExternalLoginListViewModel.cs" />
@@ -480,6 +483,11 @@
     <Content Include="Views\Slides\DisplayTemplates\Slide.cshtml" />
     <Content Include="Views\Training\Quiz.cshtml" />
     <Content Include="Views\Training\Results.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

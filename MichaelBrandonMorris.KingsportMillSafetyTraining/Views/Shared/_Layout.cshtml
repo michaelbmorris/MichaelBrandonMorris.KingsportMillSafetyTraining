@@ -53,6 +53,28 @@
                          id = "navbar" >
                         <ul class = "nav navbar-nav" >
                             <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Users <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Users")
+                                    </li>
+                                    <li class="divider"
+                                        role="separator">
+                                    </li>
+                                    <li class="dropdown-header">Actions</li>
+                                    <li>
+                                        @Html.ActionLink("Create", "Create", "Users")
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a aria-expanded = "false"
                                    aria-haspopup = "true"
                                    class = "dropdown-toggle"
@@ -74,10 +96,10 @@
                                     </li>
                                     <li>
                                         @Html.ActionLink("Reorder", "Reorder", "Categories")
-                                    </li>      
+                                    </li>
                                     <li>
                                         @Html.ActionLink("Assign Roles", "AssignRoles", "Categories")
-                                    </li>   
+                                    </li>
                                 </ul>
                             </li>
                             <li>

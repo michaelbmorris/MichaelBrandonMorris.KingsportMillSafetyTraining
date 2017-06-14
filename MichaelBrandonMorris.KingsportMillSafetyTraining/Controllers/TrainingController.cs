@@ -25,9 +25,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectRole");
             }
 
-            var user = _db.GetUser(User.Identity.GetUserId());
-            user.LatestTrainingStartDateTime = DateTime.Now;
-            _db.Edit(user);
+            _db.SetUserLatestTrainingStartDateTime(User.Identity.GetUserId());
             var model = _db.GetSlideshowViewModel(role);
             return View(model);
         }
@@ -39,6 +37,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var model = _db.GetQuizViewModel(role);
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
             _db.AddTrainingResult(User.Identity.GetUserId());
+            _db.SetUserLatestQuizStartDateTime(User.Identity.GetUserId());
             return View(model);
         }
 
@@ -57,10 +56,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             model = quizViewModel;
             var user = _db.GetUser(User.Identity.GetUserId());
             var trainingResult = user.TrainingResults.Last();
-            trainingResult.QuizAttemptsCount++;
+
+            _db.AddQuizResult(
+                trainingResult.Id,
+                model.Count(x => x.IsCorrect()),
+                model.Count);
 
             if (!model.All(x => x.IsCorrect()))
             {
+                _db.SetUserLatestQuizStartDateTime(User.Identity.GetUserId());
                 return View(model);
             }
 

@@ -1,16 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
 {
     public class TrainingResult
     {
-        public virtual ApplicationUser User
-        {
-            get;
-            set;
-        }
-
         public DateTime CompletionDateTime
         {
             get;
@@ -23,11 +18,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             set;
         }
 
-        public int QuizAttemptsCount
+        public virtual IList<QuizResult> QuizResults
         {
             get;
             set;
-        }
+        } = new List<QuizResult>();
 
         public virtual Role Role
         {
@@ -36,6 +31,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         }
 
         public TimeSpan TimeToComplete
+        {
+            get;
+            set;
+        }
+
+        public virtual ApplicationUser User
         {
             get;
             set;

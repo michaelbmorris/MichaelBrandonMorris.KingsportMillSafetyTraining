@@ -73,6 +73,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             set;
         }
 
+        public DateTime LatestQuizStartDateTime
+        {
+            get;
+            set;
+        }
+
         public virtual IList<TrainingResult> TrainingResults
         {
             get;

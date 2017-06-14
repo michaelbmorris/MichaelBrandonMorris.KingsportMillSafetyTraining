@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Result
@@ -22,9 +22,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             UserId = user.Id;
             CompletionDateTime = trainingResult.CompletionDateTime;
             Id = trainingResult.Id;
-            QuizAttemptsCount = trainingResult.QuizAttemptsCount;
+            QuizResults = trainingResult.QuizResults;
             RoleTitle = trainingResult.Role.Title;
             TimeToComplete = trainingResult.TimeToComplete;
+        }
+
+        [DisplayName("Number of Quiz Attempts")]
+        public int QuizAttemptsCount
+        {
+            get
+            {
+                return QuizResults.Count;
+            }
         }
 
         [DisplayName("Company")]
@@ -67,8 +76,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             set;
         }
 
-        [DisplayName("Number of Quiz Attempts")]
-        public int QuizAttemptsCount
+        [DisplayName("Quiz Results")]
+        public IList<QuizResult> QuizResults
         {
             get;
             set;
