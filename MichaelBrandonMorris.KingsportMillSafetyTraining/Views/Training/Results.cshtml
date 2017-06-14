@@ -1,0 +1,65 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result.TrainingResultViewModel
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr/>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.CompanyName)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.CompanyName)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.RoleTitle)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.RoleTitle)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.CompletionDateTime)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.CompletionDateTime)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.TimeToComplete)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.TimeToComplete)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.QuizAttemptsCount)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.QuizAttemptsCount)
+    </dd>
+</dl>

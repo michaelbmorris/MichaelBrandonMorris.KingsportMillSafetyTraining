@@ -75,6 +75,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
         private QuestionState QuestionState
         {
             get;
+            set;
+        }
+
+        internal void AnswerQuestion(int selectedAnswerIndex)
+        {
+            SelectedAnswerIndex = selectedAnswerIndex;
+
+            QuestionState = CorrectAnswerIndex == SelectedAnswerIndex
+                ? QuestionState.Correct
+                : QuestionState.Incorrect;
         }
 
         public bool IsCorrect()

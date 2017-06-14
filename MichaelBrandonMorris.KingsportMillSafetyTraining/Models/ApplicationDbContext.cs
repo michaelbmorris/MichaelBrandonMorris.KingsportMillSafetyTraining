@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Result;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -46,6 +49,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        public DbSet<TrainingResult> TrainingResults
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// The roles table.
         /// </summary>
@@ -62,6 +71,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public void AddTrainingResult(string userId)
+        {
+            DoTransaction(() => _AddTrainingResult(userId));
         }
 
         /// <summary>
@@ -129,14 +143,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             DoTransaction(() => _Edit(slideViewModel));
         }
 
-        public void EditSlide(SlideViewModel slideViewModel)
+        public void Edit(TrainingResult trainingResult)
         {
-            var slide = Slides.Find(slideViewModel.Id);
-
-            if (slide == null)
-            {
-                throw new Exception();
-            }
+            DoTransaction(() => _Edit(trainingResult));
         }
 
         public AssignCategoriesViewModel GetAssignCategoriesViewModel(
@@ -167,9 +176,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetCategoryViewModel(id));
         }
 
-        public IList<CategoryViewModel> GetCategoryViewModels()
+        public IList<CategoryViewModel> GetCategoryViewModels(
+            Func<Category, object> orderByPredicate)
         {
-            return DoTransaction(_GetCategoryViewModels);
+            return DoTransaction(
+                () => _GetCategoryViewModels(orderByPredicate));
         }
 
         /// <summary>
@@ -237,6 +248,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlideViewModels(categoryId));
         }
 
+        public TrainingResultViewModel GetTrainingResultViewModel(string userId)
+        {
+            return DoTransaction(() => _GetTrainingResultViewModel(userId));
+        }
+
         public ApplicationUser GetUser(string id)
         {
             return DoTransaction(() => Users.Find(id));
@@ -284,41 +300,37 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private static IList<QuizSlideViewModel> _GetQuizViewModel(Role role)
         {
-            var quizViewModel = new List<QuizSlideViewModel>();
-
-            foreach (var category in role.Categories)
-            {
-                foreach (var slide in category.Slides)
-                {
-                    if (slide.ShouldShowSlideInSlideshow
-                        && slide.ShouldShowQuestionOnQuiz)
-                    {
-                        quizViewModel.Add(new QuizSlideViewModel(slide));
-                    }
-                }
-            }
+            var quizViewModel = (from category in role.Categories
+                from slide in category.Slides.Where(
+                    x => x.ShouldShowSlideInSlideshow
+                         && x.ShouldShowQuestionOnQuiz)
+                select new QuizSlideViewModel(slide)).ToList();
 
             return quizViewModel.Shuffle();
         }
 
         private static IList<SlideViewModel> _GetSlideshowViewModel(Role role)
         {
-            var slideViewModels = new List<SlideViewModel>();
-
-            foreach (var category in Enumerable.OrderBy(
-                role.Categories,
-                x => x.Index))
-            {
-                foreach (var slide in Enumerable.OrderBy(
+            return (from category in Enumerable.OrderBy(
+                    role.Categories,
+                    x => x.Index)
+                from slide in Enumerable.OrderBy(
                         category.Slides,
                         x => x.Index)
-                    .Where(x => x.ShouldShowSlideInSlideshow))
-                {
-                    slideViewModels.Add(new SlideViewModel(slide));
-                }
-            }
+                    .Where(x => x.ShouldShowSlideInSlideshow)
+                select new SlideViewModel(slide)).ToList();
+        }
 
-            return slideViewModels;
+        private void _AddTrainingResult(string userId)
+        {
+            var user = Users.Find(userId);
+            Debug.WriteLine($"2 {user.Role == null}");
+
+            user.TrainingResults.Add(
+                new TrainingResult
+                {
+                    Role = user.Role
+                });
         }
 
         private void _CreateCategory(Category category)
@@ -373,6 +385,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             Slides.Attach(slide);
             Slides.Remove(slide);
+        }
+
+        private void _Edit(TrainingResult trainingResult)
+        {
+            var originalTrainingResult =
+                TrainingResults.Find(trainingResult.Id);
+
+            if (originalTrainingResult == null)
+            {
+                throw new Exception();
+            }
+
+            Debug.WriteLine($"1 {originalTrainingResult.Role == null}");
+
+            var trainingResultEntry = Entry(trainingResult);
+            trainingResultEntry.CurrentValues.SetValues(trainingResult);
         }
 
         private void _Edit(SlideViewModel model)
@@ -505,20 +533,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return new CategoryViewModel(category);
         }
 
-        private IList<CategoryViewModel> _GetCategoryViewModels()
+        private IList<CategoryViewModel> _GetCategoryViewModels(
+            Func<Category, object> orderByPredicate = null)
         {
-            var categoryViewModels = new List<CategoryViewModel>();
+            var categories = orderByPredicate == null
+                ? Categories.AsEnumerable()
+                : Categories.OrderBy(orderByPredicate);
 
-            /* ReSharper disable once LoopCanBeConvertedToQuery
-             * Replacing this loop with a LINQ expression will cause errors.
-             */
-            foreach (var category in Categories)
-            {
-                categoryViewModels.Add(
-                    new CategoryViewModel(category));
-            }
-
-            return categoryViewModels;
+            return categories
+                .Select(category => new CategoryViewModel(category))
+                .ToList();
         }
 
         private Role _GetRole(int id)
@@ -554,17 +578,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 ? TrainingRoles.AsEnumerable()
                 : TrainingRoles.OrderBy(orderByPredicate);
 
-            var roleViewModels = new List<RoleViewModel>();
-
-            /* ReSharper disable once LoopCanBeConvertedToQuery
-             * Replacing this loop with a LINQ expression will cause errors.
-             */
-            foreach (var role in roles)
-            {
-                roleViewModels.Add(new RoleViewModel(role));
-            }
-
-            return roleViewModels;
+            return roles.Select(role => new RoleViewModel(role)).ToList();
         }
 
         private Slide _GetSlide(int id)
@@ -640,6 +654,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return slides.ToList()
                 .Select(slide => new SlideViewModel(slide))
                 .ToList();
+        }
+
+        private TrainingResultViewModel _GetTrainingResultViewModel(
+            string userId,
+            int? trainingResultId = null)
+        {
+            var user = Users.Find(userId);
+
+            var trainingResult = trainingResultId == null
+                ? user.TrainingResults.Last()
+                : TrainingResults.Find(trainingResultId);
+
+            Debug.WriteLine(trainingResult == null);
+            Debug.WriteLine(trainingResult.Role == null);
+            return new TrainingResultViewModel(user, trainingResult);
         }
 
         private void _PairCategoryAndRole(int categoryId, int roleId)

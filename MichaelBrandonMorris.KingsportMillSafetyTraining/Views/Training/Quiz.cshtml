@@ -1,0 +1,206 @@
+﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels.QuizSlideViewModel>
+
+@{
+    ViewBag.Title = "Quiz";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<h2>Quiz</h2>
+<div class = "row" >
+    @if (!Model.All(x => x.IsUnanswered()))
+    {
+        <p>Result: @Model.Count(x => x.IsCorrect())/@Model.Count</p>
+
+        if (Model.All(x => x.IsCorrect()))
+        {
+            @Html.ActionLink("Back to List", "Index")
+        }
+    }
+    @using (Html.BeginForm())
+    {
+        for (var i = 0; i < Model.Count; i++)
+        {
+            if (Model[i].IsCorrect())
+            {
+                @Html.HiddenFor(x => Model[i].SelectedAnswerIndex)
+            }
+            <div class = "row"
+                 id = "Question-@Model[i].Id" >
+                <div class = "col-md-4" >
+                    @if (Model[i].ShouldShowImageOnQuiz)
+                    {
+                        <img alt = "@Model[i].ImageDescription"
+                             src = "@Url.Action("RenderImage", "Slides", new
+                                    {
+                                        id = Model[i].Id
+                                    })" />
+                    }
+                </div>
+                <div class = "col-md-8" >
+                    <div class = "row" >
+                        <div class = "col-md-8" >
+                            @if (Model[i].IsIncorrect())
+                            {
+                                <p>
+                                    Your answer was incorrect. Click <a onclick = "viewSlide(@Model[i].Id);"
+                                                                        href = "#" >
+                                        here
+                                    </a> to review, and then retry the question.
+                                </p>
+                            }
+                            <span>@(i + 1)</span>. @Html.DisplayFor(Model[i].Question)
+                        </div>
+                    </div>
+                    <div class = "row" >
+                        <div class = "col-md-8" >
+                            <ul>
+                                @foreach (var answer in Model[i].Answers)
+                                {
+                                    if (Model[i].IsUnanswered())
+                                    {
+                                        <li>
+                                            <div class = "radio" >
+                                                <label class = "unanswered" >
+                                                    @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index)
+                                                    @answer.Title
+                                                </label>
+                                            </div>
+                                        </li>
+                                    }
+                                    else if (Model[i].IsIncorrect())
+                                    {
+                                        if (answer.Index == Model[i].SelectedAnswerIndex)
+                                        {
+                                            <li>
+                                                <div class = "radio" >
+                                                    <label class = "incorrect" >
+                                                        @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
+                                                        {
+                                                            @class = "AnswerFor-" + Model[i].Id,
+                                                            disabled = "disabled"
+                                                        })
+                                                        @Html.DisplayFor(x => answer.Title)
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <div class = "radio" >
+                                                    <label class = "unanswered" >
+                                                        @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
+                                                        {
+                                                            @class = "AnswerFor-" + Model[i].Id,
+                                                            disabled = "disabled"
+                                                        })
+                                                        @answer.Title
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                    else if (Model[i].IsCorrect())
+                                    {
+                                        if (answer.Index == Model[i].CorrectAnswerIndex)
+                                        {
+                                            <li>
+                                                <div class = "radio" >
+                                                    <label class = "correct" >
+                                                        @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
+                                                        {
+                                                            disabled = "disabled"
+                                                        })
+                                                        @answer.Title
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <div class = "radio" >
+                                                    <label class = "unanswered" >
+                                                        @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
+                                                        {
+                                                            disabled = "disabled"
+                                                        })
+                                                        @answer.Title
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                            <p>
+                                @Html.ValidationMessageFor(x => Model[i].SelectedAnswerIndex, "", new
+                                {
+                                    @class = "danger"
+                                })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+        }
+        if (!Model.All(x => x.IsCorrect()))
+        {
+            <input class = "btn btn-default"
+                   type = "submit"
+                   value = "Submit" />
+        }
+    }
+</div>
+<div class = "row" >
+    <div class = "col-md-12" >
+        @if (Model.All(x => x.IsCorrect()))
+        {
+            @Html.ActionLink("Back to List", "Index")
+        }
+    </div>
+</div>
+
+<iframe id = "frame" ></iframe>
+<div class = "row"
+     id = "close-slide" >
+    <div class = "col-md-1 col-md-offset-11" >
+        <button class = "btn btn-default"
+                onclick = "closeSlide();" >
+            Back to Quiz
+        </button>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type = "text/javascript" >
+        $(document).ready(function() {
+            $("#frame").hide();
+            $("#close-slide").hide();
+        });
+
+        function viewSlide(slideId) {
+            $("#frame").attr("src", "/Slides/ViewSlide/" + slideId);
+            $("#frame").show();
+            $("#close-slide").show();
+            $(".AnswerFor-" + slideId).prop("disabled", false);
+            currentSlide = slideId;
+            $(body).addClass("stop-scrolling");
+            return false;
+        }
+
+        var currentSlide;
+
+        function closeSlide() {
+            $("#frame").hide();
+            $("#close-slide").hide();
+            $(body).removeClass("stop-scrolling");
+            window.location.hash = "#Question-" + currentSlide;
+            return false;
+        }
+
+    </script>
+}

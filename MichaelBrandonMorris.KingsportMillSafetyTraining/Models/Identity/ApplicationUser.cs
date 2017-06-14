@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -22,18 +23,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             FirstName = model.FirstName;
             LastName = model.LastName;
             MiddleName = model.MiddleName;
-        }
-
-        public string MobilePhoneNumber
-        {
-            get;
-            set;
-        }
-
-        public string WorkPhoneNumber
-        {
-            get;
-            set;
         }
 
         public DateTime BirthDate
@@ -66,7 +55,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             set;
         }
 
+        public string MobilePhoneNumber
+        {
+            get;
+            set;
+        }
+
         public virtual Role Role
+        {
+            get;
+            set;
+        }
+
+        public DateTime LatestTrainingStartDateTime
+        {
+            get;
+            set;
+        }
+
+        public virtual IList<TrainingResult> TrainingResults
+        {
+            get;
+            set;
+        } = new List<TrainingResult>();
+
+        public string WorkPhoneNumber
         {
             get;
             set;
@@ -82,6 +95,4 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             return userIdentity;
         }
     }
-
-    
 }

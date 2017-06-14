@@ -25,37 +25,64 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectRole");
             }
 
+            var user = _db.GetUser(User.Identity.GetUserId());
+            user.LatestTrainingStartDateTime = DateTime.Now;
+            _db.Edit(user);
             var model = _db.GetSlideshowViewModel(role);
             return View(model);
-        }
-
-        private Role GetCurrentUserRole()
-        {
-            var user = _db.GetUser(User.Identity.GetUserId());
-
-            if (user == null)
-            {
-                throw new Exception();
-            }
-
-            return user.Role;
         }
 
         [HttpGet]
         public ActionResult Quiz()
         {
             var role = GetCurrentUserRole();
-            var model = _db.GetQuizViewModel();
+            var model = _db.GetQuizViewModel(role);
+            System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
+            _db.AddTrainingResult(User.Identity.GetUserId());
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Quiz(IList<QuizSlideViewModel> model)
         {
-            // TODO
-            return null;
+            var quizViewModel =
+                (IList<QuizSlideViewModel>) System.Web.HttpContext.Current
+                    .Session["QuizViewModel"];
+
+            for (var i = 0; i < model.Count; i++)
+            {
+                quizViewModel[i].AnswerQuestion(model[i].SelectedAnswerIndex);
+            }
+
+            model = quizViewModel;
+            var user = _db.GetUser(User.Identity.GetUserId());
+            var trainingResult = user.TrainingResults.Last();
+            trainingResult.QuizAttemptsCount++;
+
+            if (!model.All(x => x.IsCorrect()))
+            {
+                return View(model);
+            }
+
+            trainingResult.CompletionDateTime = DateTime.Now;
+
+            trainingResult.TimeToComplete =
+                trainingResult.CompletionDateTime
+                - user.LatestTrainingStartDateTime;
+
+            _db.Edit(trainingResult);
+
+            return RedirectToAction("Results");
         }
 
+        [HttpGet]
+        public ActionResult Results()
+        {
+            var model =
+                _db.GetTrainingResultViewModel(User.Identity.GetUserId());
+
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult SelectRole()
@@ -87,6 +114,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private Role GetCurrentUserRole()
+        {
+            var user = _db.GetUser(User.Identity.GetUserId());
+
+            if (user == null)
+            {
+                throw new Exception();
+            }
+
+            return user.Role;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static void SetQuizViewModel(
+            this IController controller,
+            IList<QuizSlideViewModel> quizViewModel)
+        {
         }
     }
 }

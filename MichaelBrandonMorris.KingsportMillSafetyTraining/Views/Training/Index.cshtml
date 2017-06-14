@@ -16,12 +16,12 @@
         {
             <div class = "item @(item == Model.First() ? "active" : "")" >
                 <div class = "carousel-content" >
-                    <h1>
-                        @Html.DisplayFor(item.CategoryTitle)
-                    </h1>
                     <h2>
-                        @Html.DisplayFor(item.Title)
+                        @Html.DisplayFor(item.CategoryTitle)
                     </h2>
+                    <h4>
+                        @Html.DisplayFor(item.Title)
+                    </h4>
                     <div class = "row" >
                         <div class = "col-md-6" >
                             <p>

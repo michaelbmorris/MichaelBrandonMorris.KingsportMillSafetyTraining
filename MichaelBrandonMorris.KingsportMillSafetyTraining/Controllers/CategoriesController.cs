@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
-using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
@@ -11,15 +9,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
-        private const string FieldsToInclude = "Id,Description,Title,Index";
-
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         [HttpGet]
         public ActionResult AssignRoles(int? id)
@@ -28,10 +18,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = FieldsToInclude)] Category category)
+        public ActionResult Create(Category category)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +34,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             _db.CreateCategory(category);
-            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -60,7 +54,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             return View(category);
         }
-     
+
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -73,7 +67,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 _db.DeleteCategory(category);
             }
 
-            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -115,17 +108,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(
-            [Bind(Include = FieldsToInclude)] Category category)
+        public ActionResult Edit(Category category)
         {
             if (!ModelState.IsValid)
             {
                 return View(category);
             }
 
-            _db.Entry(category).State = EntityState.Modified;
-            _db.SaveChanges();
+            _db.Edit(category);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            var model = _db.GetCategoryViewModels(x => x.Index);
+            return View(model);
         }
 
         [HttpGet]
@@ -140,12 +138,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             _db.Reorder(categories);
             return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View(_db.GetCategoryViewModels().OrderBy(x => x.Index));
         }
 
         protected override void Dispose(bool disposing)
