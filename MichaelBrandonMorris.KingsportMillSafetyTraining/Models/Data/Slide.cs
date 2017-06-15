@@ -9,8 +9,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {
     /// <summary>
     ///     Slides are the basic content element of the safety training program.
-    ///     They have text content, an image, and a question with multiple choice
-    ///     answers about the content or image. They are assigned to a category.
+    ///     They have text content, an image, and a question with multiple
+    ///     choice answers about the content or image. They are assigned to a
+    ///     category.
     /// </summary>
     public class Slide : IEquatable<Slide>
     {
@@ -42,7 +43,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     Creates a new <see cref="Slide" /> with the next <see cref="Index" />.
+        ///     Creates a new <see cref="Slide" /> with the next
+        ///     <see cref="Index" />.
         /// </summary>
         public Slide()
         {
@@ -56,88 +58,141 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
             0,
             5,
             ErrorMessage = "There may be no more than five (5) answers.")]
-        public virtual IList<Answer> Answers { get; set; } = new List<Answer>();
+        public virtual IList<Answer> Answers
+        {
+            get;
+            set;
+        } = new List<Answer>();
 
         /// <summary>
         ///     The slide's parent category
         /// </summary>
-        public virtual Category Category { get; set; }
+        public virtual Category Category
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's text content
         /// </summary>
         [Required]
-        public string Content { get; set; }
+        public string Content
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The index of the slide's correct answer
         /// </summary>
         [Display(Name = "Correct Answer Index")]
-        public int CorrectAnswerIndex { get; set; }
+        public int CorrectAnswerIndex
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's ID, generated automatically by the database
         /// </summary>
         [Key]
         [Column(Order = 0)]
-        public int Id { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's image, stored as an array of bytes
         /// </summary>
         [Display(Name = "Image")]
-        public byte[] ImageBytes { get; set; }
+        public byte[] ImageBytes
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's image's description, used for alternate text
         /// </summary>
         [Display(Name = "Image Description")]
-        public string ImageDescription { get; set; }
+        public string ImageDescription
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's index, which should be unique within the category
         /// </summary>
-        public int Index { get; set; }
+        public int Index
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's question
         /// </summary>
-        public string Question { get; set; }
+        public string Question
+        {
+            get;
+            set;
+        }
 
         /// <summary>
-        ///     Whether or not the slide's image should be displayed on the quiz
-        ///     Value is irrelevant if <see cref="ShouldShowQuestionOnQuiz" /> is
-        ///     false or <see cref="ShouldShowSlideInSlideshow" /> is false
+        ///     Whether or not the slide's image should be displayed on the
+        ///     quiz. Value is irrelevant if
+        ///     <see cref="ShouldShowQuestionOnQuiz" /> is false or
+        ///     <see cref="ShouldShowSlideInSlideshow" /> is false.
         /// </summary>
         [Display(Name = "Show Image on Quiz?")]
         [Required]
-        public bool ShouldShowImageOnQuiz { get; set; }
+        public bool ShouldShowImageOnQuiz
+        {
+            get;
+            set;
+        }
 
         /// <summary>
-        ///     Whether or not the slide's question should be displayed on the quiz
-        ///     Value is irrelevant if <see cref="ShouldShowSlideInSlideshow" />
-        ///     is false
+        ///     Whether or not the slide's question should be displayed on the
+        ///     quiz. Value is irrelevant if
+        ///     <see cref="ShouldShowSlideInSlideshow" /> is false
         /// </summary>
         [Display(Name = "Show Question on Quiz?")]
         [Required]
-        public bool ShouldShowQuestionOnQuiz { get; set; }
+        public bool ShouldShowQuestionOnQuiz
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     Whether or not the slide should be displayed in the slideshow
         /// </summary>
         [Display(Name = "Show Slide in Slideshow?")]
         [Required]
-        public bool ShouldShowSlideInSlideshow { get; set; }
+        public bool ShouldShowSlideInSlideshow
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slide's title
         /// </summary>
         [Required]
-        public string Title { get; set; }
+        public string Title
+        {
+            get;
+            set;
+        }
 
         /// <summary>
-        ///     Checks for equality with another slide. If the slides have the same
-        ///     reference or ID, they are equal.
+        ///     Checks for equality with another slide. If the slides have the
+        ///     same reference or ID, they are equal.
         /// </summary>
         /// <param name="other">The slide to compare this slide to.</param>
         /// <returns></returns>
@@ -170,7 +225,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
                 return true;
             }
 
-            if ((object) x == null || (object) y == null)
+            if ((object) x == null
+                || (object) y == null)
             {
                 return false;
             }
@@ -179,8 +235,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     Checks for slide inequality. Implemented in terms of the equality
-        ///     operator.
+        ///     Checks for slide inequality. Implemented in terms of the
+        ///     equality operator.
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -192,8 +248,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 
         /// <summary>
         ///     Checks for equality with another object. If this slide and the
-        ///     object have the same reference, or the object is a slide and passes
-        ///     <see cref="Equals(Slide)" />, they are equal.
+        ///     object have the same reference, or the object is a slide and
+        ///     passes <see cref="Equals(Slide)" />, they are equal.
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

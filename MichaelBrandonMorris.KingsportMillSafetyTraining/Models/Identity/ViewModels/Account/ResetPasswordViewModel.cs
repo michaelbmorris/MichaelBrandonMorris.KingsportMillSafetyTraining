@@ -1,11 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.
-    Account
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account
 {
     public class ResetPasswordViewModel
     {
-        public string Code { get; set; }
+        public string Code
+        {
+            get;
+            set;
+        }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -13,12 +17,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewM
             "Password",
             ErrorMessage =
                 "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword
+        {
+            get;
+            set;
+        }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get;
+            set;
+        }
 
         [Required]
         [StringLength(
@@ -27,6 +39,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewM
             MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string Password
+        {
+            get;
+            set;
+        }
     }
 }

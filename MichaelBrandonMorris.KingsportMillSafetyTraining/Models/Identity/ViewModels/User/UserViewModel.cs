@@ -30,38 +30,77 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
                 return;
             }
 
-            LastTrainingResultDateTime =
-                lastTrainingResult.CompletionDateTime;
+            LastTrainingResultDateTime = lastTrainingResult.CompletionDateTime;
 
             LastTrainingResultId = lastTrainingResult.Id;
         }
 
         [DisplayName("Birth Date")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate
+        {
+            get;
+            set;
+        }
 
         [DisplayName("Company")]
-        public string CompanyName { get; set; }
+        public string CompanyName
+        {
+            get;
+            set;
+        }
 
-        public string Email { get; set; }
+        public string Email
+        {
+            get;
+            set;
+        }
 
         [DisplayName("First Name")]
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get;
+            set;
+        }
 
-        public string Id { get; set; }
+        public string Id
+        {
+            get;
+            set;
+        }
 
         [DisplayName("Last Name")]
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get;
+            set;
+        }
 
         [DisplayName("Last Training Completed On")]
-        public DateTime? LastTrainingResultDateTime { get; set; }
+        public DateTime? LastTrainingResultDateTime
+        {
+            get;
+            set;
+        }
 
-        public int LastTrainingResultId { get; set; }
+        public int LastTrainingResultId
+        {
+            get;
+            set;
+        }
 
         [DisplayName("Middle Name")]
-        public string MiddleName { get; set; }
+        public string MiddleName
+        {
+            get;
+            set;
+        }
 
         [DisplayName("Phone Number")]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber
+        {
+            get;
+            set;
+        }
     }
 }

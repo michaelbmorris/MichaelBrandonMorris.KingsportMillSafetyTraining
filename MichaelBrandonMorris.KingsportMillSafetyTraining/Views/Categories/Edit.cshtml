@@ -2,19 +2,15 @@
 
 @{
     ViewBag.Title = "Edit";
+    ViewBag.Subtitle = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr/>
 
         @Html.HiddenFor(model => model.Id)
         @Html.EditorForModel(Model)

@@ -12,9 +12,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             MaxElements = maxElements;
         }
 
-        private int MaxElements { get; }
+        private int MaxElements
+        {
+            get;
+        }
 
-        private int MinElements { get; }
+        private int MinElements
+        {
+            get;
+        }
 
         public override bool IsValid(object value)
         {
@@ -25,7 +31,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 throw new ArgumentException();
             }
 
-            if (MinElements == 0 && MaxElements == 0)
+            if (MinElements == 0
+                && MaxElements == 0)
             {
                 return true;
             }

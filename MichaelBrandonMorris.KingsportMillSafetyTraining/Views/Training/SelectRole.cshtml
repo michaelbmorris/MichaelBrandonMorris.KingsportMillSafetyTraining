@@ -18,8 +18,9 @@
             {
                 <div class="item @(item == Model.First() ? "active" : string.Empty)">
                     <div class="carousel-content">
-                        <p>
-                            @item.Question
+                    <p>
+                        @Html.Raw(Html.Encode(item.Question).Replace("\n", "<br />"))
+                    </p>
                             <button class="btn btn-default"
                                     name="roleId"
                                     value="@item.Id">
@@ -41,7 +42,6 @@
                                     No
                                 </button>
                             }
-                        </p>
                     </div>
                 </div>
             }

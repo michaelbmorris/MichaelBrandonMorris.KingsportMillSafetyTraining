@@ -24,22 +24,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         /// <summary>
         ///     The answer's ID, generated automatically by the database.
         /// </summary>
-        public int Id { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The answer's index, assigned by its parent slide
         /// </summary>
-        public int Index { get; set; }
+        public int Index
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The answer's parent slide
         /// </summary>
-        public virtual Slide Slide { get; set; }
+        public virtual Slide Slide
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The answer's title/text
         /// </summary>
         [Required]
-        public string Title { get; set; }
+        public string Title
+        {
+            get;
+            set;
+        }
     }
 }

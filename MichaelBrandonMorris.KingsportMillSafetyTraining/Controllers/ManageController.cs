@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Manage;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Manage;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -76,6 +77,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         PhoneNumber = model.Number
                     });
             }
+
             var message = new IdentityMessage
             {
                 Destination = model.Number,
@@ -361,6 +363,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         Message = ManageMessageId.Error
                     });
             }
+
             var user =
                 await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
@@ -402,8 +405,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             if (result.Succeeded)
             {
                 var user =
-                    await UserManager.FindByIdAsync(
-                        User.Identity.GetUserId());
+                    await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
                 if (user != null)
                 {
@@ -498,7 +500,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        private IAuthenticationManager AuthenticationManager => HttpContext
+            .GetOwinContext()
+            .Authentication;
 
         private void AddErrors(IdentityResult result)
         {

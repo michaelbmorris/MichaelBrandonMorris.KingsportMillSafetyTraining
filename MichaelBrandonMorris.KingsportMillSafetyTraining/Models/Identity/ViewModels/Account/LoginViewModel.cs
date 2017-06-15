@@ -1,20 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account
 {
     public class LoginViewModel
     {
         [Required]
         [Display(Name = "Email")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string Email
+        {
+            get;
+            set;
+        }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string Password
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        public bool RememberMe
+        {
+            get;
+            set;
+        }
     }
 }

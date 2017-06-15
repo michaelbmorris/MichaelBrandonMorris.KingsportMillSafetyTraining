@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
+    ViewModels
 {
     public class SlideViewModel
     {
@@ -39,41 +40,105 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModel
             Categories = categories;
         }
 
-        public IList<Answer> Answers { get; set; } = new List<Answer>();
+        public IList<Answer> Answers
+        {
+            get;
+            set;
+        } = new List<Answer>();
 
-        public IList<Category> Categories { get; set; } = new List<Category>();
+        public IList<Category> Categories
+        {
+            get;
+            set;
+        } = new List<Category>();
 
-        public int CategoryId { get; set; }
+        public int CategoryId
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Category")]
-        public string CategoryTitle { get; set; }
+        public string CategoryTitle
+        {
+            get;
+            set;
+        }
 
-        public string Content { get; set; }
+        public string Content
+        {
+            get;
+            set;
+        }
 
-        public int CorrectAnswerIndex { get; set; }
+        public int CorrectAnswerIndex
+        {
+            get;
+            set;
+        }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
-        public HttpPostedFileBase Image { get; set; }
+        public HttpPostedFileBase Image
+        {
+            get;
+            set;
+        }
 
-        public byte[] ImageBytes { get; set; }
+        public byte[] ImageBytes
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Image Description")]
-        public string ImageDescription { get; set; }
+        public string ImageDescription
+        {
+            get;
+            set;
+        }
 
-        public int Index { get; set; }
+        public int Index
+        {
+            get;
+            set;
+        }
 
-        public string Question { get; set; }
+        public string Question
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Show Image on Quiz?")]
-        public bool ShouldShowImageOnQuiz { get; set; }
+        public bool ShouldShowImageOnQuiz
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Show Question on Quiz?")]
-        public bool ShouldShowQuestionOnQuiz { get; set; }
+        public bool ShouldShowQuestionOnQuiz
+        {
+            get;
+            set;
+        }
 
         [Display(Name = "Show Slide in Slideshow?")]
-        public bool ShouldShowSlideInSlideshow { get; set; }
+        public bool ShouldShowSlideInSlideshow
+        {
+            get;
+            set;
+        }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get;
+            set;
+        }
     }
 }

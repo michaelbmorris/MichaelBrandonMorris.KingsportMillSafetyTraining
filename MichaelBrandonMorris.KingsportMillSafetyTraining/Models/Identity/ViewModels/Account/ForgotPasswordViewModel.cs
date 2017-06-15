@@ -1,13 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.
-    Account
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account
 {
     public class ForgotPasswordViewModel
     {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get;
+            set;
+        }
     }
 }

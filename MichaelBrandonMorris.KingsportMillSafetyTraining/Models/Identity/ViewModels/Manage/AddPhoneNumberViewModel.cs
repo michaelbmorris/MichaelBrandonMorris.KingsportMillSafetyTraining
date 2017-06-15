@@ -8,6 +8,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         [Required]
         [Phone]
         [Display(Name = "Phone Number")]
-        public string Number { get; set; }
+        public string Number
+        {
+            get;
+            set;
+        }
     }
 }

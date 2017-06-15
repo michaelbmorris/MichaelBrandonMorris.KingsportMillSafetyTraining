@@ -20,7 +20,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [HttpPost]
-        public ActionResult AssignCategories(int[] roleCategories)
+        public ActionResult AssignCategories(IList<int> roleCategories)
         {
             _db.UnpairCategoriesAndRoles();
 

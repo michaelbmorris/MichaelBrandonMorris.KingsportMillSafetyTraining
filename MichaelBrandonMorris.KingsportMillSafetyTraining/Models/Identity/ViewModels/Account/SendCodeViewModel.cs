@@ -1,16 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account
 {
     public class SendCodeViewModel
     {
-        public ICollection<SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers
+        {
+            get;
+            set;
+        }
 
-        public bool RememberMe { get; set; }
+        public bool RememberMe
+        {
+            get;
+            set;
+        }
 
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl
+        {
+            get;
+            set;
+        }
 
-        public string SelectedProvider { get; set; }
+        public string SelectedProvider
+        {
+            get;
+            set;
+        }
     }
 }

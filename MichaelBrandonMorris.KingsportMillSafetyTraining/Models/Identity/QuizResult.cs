@@ -9,19 +9,39 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             ? 0.ToString("P")
             : (QuestionsCorrect / (float) TotalQuestions).ToString("P");
 
-        public int Id { get; set; }
-
-        [DisplayName("Questions Correct")]
-        public int QuestionsCorrect { get; set; }
-
-        [DisplayName("Time to Complete")]
-        public TimeSpan TimeToComplete { get; set; }
-
         public string TimeToCompleteString => TimeToComplete.ToString(@"mm");
 
-        [DisplayName("Total Questions")]
-        public int TotalQuestions { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
-        public virtual TrainingResult TrainingResult { get; set; }
+        [DisplayName("Questions Correct")]
+        public int QuestionsCorrect
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Time to Complete")]
+        public TimeSpan TimeToComplete
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Total Questions")]
+        public int TotalQuestions
+        {
+            get;
+            set;
+        }
+
+        public virtual TrainingResult TrainingResult
+        {
+            get;
+            set;
+        }
     }
 }

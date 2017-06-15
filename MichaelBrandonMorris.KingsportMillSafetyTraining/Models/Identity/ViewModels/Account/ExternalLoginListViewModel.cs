@@ -1,7 +1,12 @@
-﻿namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account
+﻿namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account
 {
     public class ExternalLoginListViewModel
     {
-        public string ReturnUrl { get; set; }
+        public string ReturnUrl
+        {
+            get;
+            set;
+        }
     }
 }

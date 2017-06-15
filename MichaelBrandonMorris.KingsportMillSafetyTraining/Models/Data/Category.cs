@@ -24,31 +24,55 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         /// <summary>
         ///     The category's description
         /// </summary>
-        public string Description { get; set; }
+        public string Description
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The category's ID, generated automatically by the database
         /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
-        ///     The category's roles
-        /// </summary>
-        public virtual IList<Role> Roles { get; set; } = new List<Role>();
-
-        /// <summary>
-        ///     The category's slides
-        /// </summary>
-        public virtual IList<Slide> Slides { get; set; } = new List<Slide>();
-
-        /// <summary>
-        ///     The category's title
-        /// </summary>
-        public string Title { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     Determines the ordering of this category.
         /// </summary>
-        public int Index { get; set; }
+        public int Index
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     The category's roles
+        /// </summary>
+        public virtual IList<Role> Roles
+        {
+            get;
+            set;
+        } = new List<Role>();
+
+        /// <summary>
+        ///     The category's slides
+        /// </summary>
+        public virtual IList<Slide> Slides
+        {
+            get;
+            set;
+        } = new List<Slide>();
+
+        /// <summary>
+        ///     The category's title
+        /// </summary>
+        public string Title
+        {
+            get;
+            set;
+        }
     }
 }

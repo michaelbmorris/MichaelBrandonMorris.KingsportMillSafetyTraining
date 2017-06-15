@@ -1,78 +1,85 @@
 ﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels.RoleViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
-<h2>Roles</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Reorder", "Reorder") | @Html.ActionLink("Assign Categories", "AssignCategories")
+    @Html.ActionLink("Create New", "Create") |
+    @Html.ActionLink("Reorder", "Reorder") |
+    @Html.ActionLink("Assign Categories", "AssignCategories")
 </p>
+
 <p class="bg-info">
     On the role selection page, roles will be selected in the order below, with the last role being the default.
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Question)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Categories)
-        </th>
-        <th>
-            Actions
-        </th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Question)
-            </td>
-            <td>
-                <ul>
-                    @foreach (var category in item.Categories)
-                    {
-                        <li>@Html.DisplayFor(itemCategory => category.Title)</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new
-                {
-                    id = item.Id
-                })
-                <br/>
-                @Html.ActionLink("Details", "Details", new
-                {
-                    id = item.Id
-                })
-                <br/>
-                @Html.ActionLink("Delete", "Delete", new
-                {
-                    id = item.Id
-                })
-                <br/>
-                @Html.ActionLink("Assign Categories", "AssignCategories", new
-                {
-                    id = item.Id
-                })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Question)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categories)
+            </th>
+            <th>
+                Actions
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.Raw(Html.Encode(item.Question).Replace("\n", "<br />"))
+                </td>
+                <td>
+                    <ul>
+                        @foreach (var category in item.Categories)
+                        {
+                            <li>@Html.DisplayFor(itemCategory => category.Title)</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new
+                    {
+                        id = item.Id
+                    })
+                    <br/>
+                    @Html.ActionLink("Details", "Details", new
+                    {
+                        id = item.Id
+                    })
+                    <br/>
+                    @Html.ActionLink("Delete", "Delete", new
+                    {
+                        id = item.Id
+                    })
+                    <br/>
+                    @Html.ActionLink("Assign Categories", "AssignCategories", new
+                    {
+                        id = item.Id
+                    })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

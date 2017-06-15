@@ -14,9 +14,13 @@
    will truncate terms that are too long to fit in the left column 
 */
 
-.dl-horizontal dt { white-space: normal; }
+.dl-horizontal dt {
+    white-space: normal;
+}
 
-.form-group .checkbox input[type="checkbox"] { margin-left: 0; }
+.form-group .checkbox input[type="checkbox"] {
+    margin-left: 0;
+}
 
 table img {
     display: block;
@@ -26,19 +30,32 @@ table img {
     width: 100%;
 }
 
-.image { height: 100px; }
+.image {
+    height: 100px;
+}
 
-:not(label).correct:before { content: '✔'; }
+:not(label).correct:before {
+    content: '✔';
+}
 
-:not(label).incorrect:before { content: 'X'; }
+:not(label).incorrect:before {
+    content: 'X';
+}
 
-.bg-info { padding: 15px; }
+.bg-info {
+    padding: 15px;
+}
 
-#carousel .carousel-content { margin: 0 auto; }
+#carousel .carousel-content {
+    margin: 0 auto;
+}
 
-#carousel .carousel-control { background-image: none; }
+#carousel .carousel-control {
+    background-image: none;
+}
 
-.glyphicon-chevron-right, .glyphicon-chevron-left {
+.glyphicon-chevron-right,
+.glyphicon-chevron-left {
     color: black;
     text-shadow: none;
 }
@@ -48,6 +65,10 @@ table img {
     overflow: hidden;
 }
 
-.index { padding-left: 1em; }
+.index {
+    padding-left: 1em;
+}
 
-.link { cursor: pointer; }
+.link {
+    cursor: pointer;
+}

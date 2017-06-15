@@ -29,30 +29,53 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             ShouldShowImageOnQuiz = slide.ShouldShowImageOnQuiz;
         }
 
-        public IList<Answer> Answers { get; set; }
+        public IList<Answer> Answers
+        {
+            get;
+            set;
+        }
 
-        public int CorrectAnswerIndex { get; set; }
+        public int CorrectAnswerIndex
+        {
+            get;
+            set;
+        }
 
-        public int Id { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
-        public string ImageDescription { get; set; }
+        public string ImageDescription
+        {
+            get;
+            set;
+        }
 
-        public string Question { get; set; }
+        public string Question
+        {
+            get;
+            set;
+        }
 
         [Required(ErrorMessage = "Please select an answer.")]
-        public int SelectedAnswerIndex { get; set; }
-
-        public bool ShouldShowImageOnQuiz { get; set; }
-
-        private QuestionState QuestionState { get; set; }
-
-        internal void AnswerQuestion(int selectedAnswerIndex)
+        public int SelectedAnswerIndex
         {
-            SelectedAnswerIndex = selectedAnswerIndex;
+            get;
+            set;
+        }
 
-            QuestionState = CorrectAnswerIndex == SelectedAnswerIndex
-                ? QuestionState.Correct
-                : QuestionState.Incorrect;
+        public bool ShouldShowImageOnQuiz
+        {
+            get;
+            set;
+        }
+
+        private QuestionState QuestionState
+        {
+            get;
+            set;
         }
 
         public bool IsCorrect()
@@ -68,6 +91,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
         public bool IsUnanswered()
         {
             return QuestionState == QuestionState.Unanswered;
+        }
+
+        internal void AnswerQuestion(int selectedAnswerIndex)
+        {
+            SelectedAnswerIndex = selectedAnswerIndex;
+
+            QuestionState = CorrectAnswerIndex == SelectedAnswerIndex
+                ? QuestionState.Correct
+                : QuestionState.Incorrect;
         }
     }
 }

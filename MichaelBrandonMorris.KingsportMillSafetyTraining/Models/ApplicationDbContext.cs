@@ -8,8 +8,10 @@ using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Result;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.User;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -24,24 +26,44 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The answers table.
         /// </summary>
-        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Answer> Answers
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The categories table.
         /// </summary>
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The slides table.
         /// </summary>
-        public DbSet<Slide> Slides { get; set; }
+        public DbSet<Slide> Slides
+        {
+            get;
+            set;
+        }
 
-        public DbSet<TrainingResult> TrainingResults { get; set; }
+        public DbSet<TrainingResult> TrainingResults
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     The roles table.
         /// </summary>
-        public DbSet<Role> TrainingRoles { get; set; }
+        public DbSet<Role> TrainingRoles
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         ///     Creates a new <see cref="ApplicationDbContext" />.
@@ -70,8 +92,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Uses a transaction to add the specified <see cref="Category" /> to
-        ///     the database.
+        ///     Uses a transaction to add the specified <see cref="Category" />
+        ///     to the database.
         /// </summary>
         /// <param name="category"></param>
         public void CreateCategory(Category category)
@@ -80,8 +102,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Uses a transaction to add the specified <see cref="Role" /> to the
-        ///     database.
+        ///     Uses a transaction to add the specified <see cref="Role" /> to
+        ///     the database.
         /// </summary>
         /// <param name="role"></param>
         public void CreateRole(Role role)
@@ -115,8 +137,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Uses a transaction to modify the specified <see cref="T" /> in the
-        ///     database.
+        ///     Uses a transaction to modify the specified <see cref="T" /> in
+        ///     the database.
         /// </summary>
         /// <typeparam name="T">
         ///     The type of object to modify. Must be a class.
@@ -329,12 +351,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private static IList<SlideViewModel> _GetSlideshowViewModel(Role role)
         {
-            return (from category in Enumerable.OrderBy(
-                    role.Categories,
-                    x => x.Index)
-                from slide in Enumerable.OrderBy(
-                        category.Slides,
-                        x => x.Index)
+            return (from category in
+                Enumerable.OrderBy(role.Categories, x => x.Index)
+                from slide in Enumerable.OrderBy(category.Slides, x => x.Index)
                     .Where(x => x.ShouldShowSlideInSlideshow)
                 select new SlideViewModel(slide)).ToList();
         }
@@ -357,7 +376,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
 
             var timeToComplete = DateTime.Now
-                                 - trainingResult.User.LatestQuizStartDateTime.Value;
+                                 - trainingResult.User.LatestQuizStartDateTime
+                                     .Value;
 
             trainingResult.QuizResults.Add(
                 new QuizResult
@@ -474,8 +494,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             foreach (var answer in model.Answers)
             {
-                var originalAnswer = slide.Answers
-                    .SingleOrDefault(x => x.Id == answer.Id && x.Id != 0);
+                var originalAnswer =
+                    slide.Answers.SingleOrDefault(
+                        x => x.Id == answer.Id && x.Id != 0);
 
                 if (originalAnswer != null)
                 {
@@ -509,19 +530,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private AssignCategoriesViewModel _GetAssignCategoriesViewModel(
             int? id = null)
         {
-            IList<Role> roles;
-
-            if (id == null)
-            {
-                roles = TrainingRoles.ToList();
-            }
-            else
-            {
-                roles = new List<Role>
+            IList<Role> roles = id == null
+                ? TrainingRoles.ToList()
+                : new List<Role>
                 {
                     _GetRole(id.Value)
                 };
-            }
 
             return new AssignCategoriesViewModel(
                 roles,
@@ -530,20 +544,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private AssignRolesViewModel _GetAssignRolesViewModel(int? id = null)
         {
-            IList<Category> categories;
-
-            if (id == null)
-            {
-                categories = Categories.ToList();
-            }
-            else
-            {
-                categories = new List<Category>
+            IList<Category> categories = id == null
+                ? Categories.ToList()
+                : new List<Category>
                 {
                     _GetCategory(id.Value)
                 };
-            }
-
             return new AssignRolesViewModel(categories, _GetRoleViewModels());
         }
 
@@ -580,9 +586,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private IList<CategoryViewModel> _GetCategoryViewModels(
             Func<Category, object> orderByPredicate = null)
         {
-            var categories = orderByPredicate == null
-                ? Categories.AsEnumerable()
-                : Categories.OrderBy(orderByPredicate);
+            IList<Category> categories =
+                orderByPredicate == null
+                    ? Categories.ToList()
+                    : Categories.OrderBy(orderByPredicate).ToList();
 
             return categories
                 .Select(category => new CategoryViewModel(category))
@@ -618,9 +625,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private IList<RoleViewModel> _GetRoleViewModels(
             Func<Role, object> orderByPredicate = null)
         {
-            var roles = orderByPredicate == null
-                ? TrainingRoles.AsEnumerable()
-                : TrainingRoles.OrderBy(orderByPredicate);
+            IList<Role> roles = orderByPredicate == null
+                ? TrainingRoles.ToList()
+                : TrainingRoles.OrderBy(orderByPredicate).ToList();
 
             return roles.Select(role => new RoleViewModel(role)).ToList();
         }
@@ -709,8 +716,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             var user = Users.Find(id);
 
-            return user.TrainingResults.Select(
-                    x => new TrainingResultViewModel(x))
+            return user.TrainingResults
+                .Select(x => new TrainingResultViewModel(x))
                 .ToList();
         }
 
@@ -787,13 +794,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _UnpairCategoriesAndRoles()
         {
-            foreach (var category in Categories)
+            foreach (var category in Categories.ToList())
             foreach (var role in category.Roles.ToList())
             {
                 category.Roles.Remove(role);
             }
 
-            foreach (var role in TrainingRoles)
+            foreach (var role in TrainingRoles.ToList())
             foreach (var category in role.Categories.ToList())
             {
                 role.Categories.Remove(category);
@@ -833,13 +840,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 }
                 catch (DbEntityValidationException)
                 {
-                    // The model failed to validate.
                     transaction.Rollback();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
-                    Console.WriteLine(e);
                     throw;
                 }
             }

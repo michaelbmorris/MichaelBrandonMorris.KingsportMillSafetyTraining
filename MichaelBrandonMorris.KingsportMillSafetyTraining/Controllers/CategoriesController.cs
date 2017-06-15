@@ -18,6 +18,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult AssignRoles(IList<int> categoryRoles)
+        {
+            _db.UnpairCategoriesAndRoles();
+
+            if (categoryRoles == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            foreach (var categoryRole in categoryRoles)
+            {
+                var cantorInversePair = Helpers.CantorInverse(categoryRole);
+                var categoryId = cantorInversePair.Item1;
+                var roleId = cantorInversePair.Item2;             
+                _db.PairCategoryAndRole(categoryId, roleId);
+            }
+
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult Create()
         {

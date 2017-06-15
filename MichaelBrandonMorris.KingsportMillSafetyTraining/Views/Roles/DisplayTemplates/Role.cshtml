@@ -19,6 +19,14 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+        
+        <dd>
+            @Html.Raw(Html.Encode(Model.Question).Replace("\n", "<br />"))
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Categories)

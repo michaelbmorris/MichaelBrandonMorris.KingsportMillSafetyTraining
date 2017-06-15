@@ -1,13 +1,10 @@
 ﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.Category>
 
 @{
-    ViewBag.Title = "Reorder - Categories";
+    ViewBag.Title = "Reorder";
+    ViewBag.Subtitle = "Categories";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
-
-<h2>Reorder</h2>
-<h4>Categories</h4>
-<hr/>
 
 @using (Html.BeginForm())
 {
@@ -37,8 +34,7 @@
                     {
                         htmlAttributes = new
                         {
-                            name = string.Format("slides[{0}].Index", i),
-                            @readonly = true
+                            name = string.Format("slides[{0}].Index", i), @readonly = true
                         }
                     })
                 </td>

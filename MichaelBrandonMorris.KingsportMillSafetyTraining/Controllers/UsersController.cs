@@ -119,8 +119,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(
-            Func<ApplicationUser, object> orderByPredicate)
+        public ActionResult Index()
         {
             var model = _db.GetUserViewModels();
             return View(model);

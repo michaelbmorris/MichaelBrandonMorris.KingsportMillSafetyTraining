@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Account;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -48,7 +49,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null)
+            if (userId == null
+                || code == null)
             {
                 return View("Error");
             }
@@ -90,10 +92,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             switch (result)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
+                case SignInStatus.Success: return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut: return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction(
                         "SendCode",
@@ -102,8 +102,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                             ReturnUrl = returnUrl,
                             RememberMe = false
                         });
-                case SignInStatus.Failure:
-                    goto default;
+                case SignInStatus.Failure: goto default;
                 default:
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
@@ -148,7 +147,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result =
+                        await UserManager.AddLoginAsync(user.Id, info.Login);
 
                     if (result.Succeeded)
                     {
@@ -191,7 +191,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             var user = await UserManager.FindByNameAsync(model.Email);
 
-            if (user == null || !await UserManager.IsEmailConfirmedAsync(user.Id))
+            if (user == null
+                || !await UserManager.IsEmailConfirmedAsync(user.Id))
             {
                 return View("ForgotPasswordConfirmation");
             }
@@ -244,10 +245,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             switch (result)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
+                case SignInStatus.Success: return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut: return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction(
                         "SendCode",
@@ -256,8 +255,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                             ReturnUrl = returnUrl,
                             model.RememberMe
                         });
-                case SignInStatus.Failure:
-                    goto default;
+                case SignInStatus.Failure: goto default;
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
@@ -297,8 +295,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 UserName = model.Email
             };
 
-            var result =
-                await UserManager.CreateAsync(user, model.Password);
+            var result = await UserManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
             {
@@ -471,12 +468,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    goto default;
-                case SignInStatus.Failure:
-                    goto default;
+                case SignInStatus.LockedOut: return View("Lockout");
+                case SignInStatus.RequiresVerification: goto default;
+                case SignInStatus.Failure: goto default;
                 default:
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
@@ -508,7 +502,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+        private IAuthenticationManager AuthenticationManager => HttpContext
+            .GetOwinContext()
+            .Authentication;
 
         private void AddErrors(IdentityResult result)
         {
@@ -524,6 +520,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return Redirect(returnUrl);
             }
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -544,11 +541,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 UserId = userId;
             }
 
-            public string LoginProvider { get; set; }
+            public string LoginProvider
+            {
+                get;
+                set;
+            }
 
-            public string RedirectUri { get; set; }
+            public string RedirectUri
+            {
+                get;
+                set;
+            }
 
-            public string UserId { get; set; }
+            public string UserId
+            {
+                get;
+                set;
+            }
 
             public override void ExecuteResult(ControllerContext context)
             {

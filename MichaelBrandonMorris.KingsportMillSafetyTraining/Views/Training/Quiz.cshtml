@@ -77,8 +77,7 @@
                                                     <label class="incorrect">
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            @class = "AnswerFor-" + Model[i].Id,
-                                                            disabled = "disabled"
+                                                            @class = "AnswerFor-" + Model[i].Id, disabled = "disabled"
                                                         })
                                                         @Html.DisplayFor(x => answer.Title)
                                                     </label>
@@ -92,8 +91,7 @@
                                                     <label class="unanswered">
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            @class = "AnswerFor-" + Model[i].Id,
-                                                            disabled = "disabled"
+                                                            @class = "AnswerFor-" + Model[i].Id, disabled = "disabled"
                                                         })
                                                         @answer.Title
                                                     </label>
@@ -146,6 +144,7 @@
             </div>
             <hr/>
         }
+
         if (!Model.All(x => x.IsCorrect()))
         {
             <input class="btn btn-default"

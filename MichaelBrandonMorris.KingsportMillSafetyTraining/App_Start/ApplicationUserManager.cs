@@ -23,11 +23,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 new UserStore<ApplicationUser>(
                     context.Get<ApplicationDbContext>()));
 
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
+            manager.UserValidator =
+                new UserValidator<ApplicationUser>(manager)
+                {
+                    AllowOnlyAlphanumericUserNames = false,
+                    RequireUniqueEmail = true
+                };
 
             manager.PasswordValidator = new PasswordValidator
             {

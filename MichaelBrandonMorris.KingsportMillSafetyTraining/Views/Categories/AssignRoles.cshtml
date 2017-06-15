@@ -6,8 +6,6 @@
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
-<h2>Assign Roles</h2>
-
 @using (Html.BeginForm())
 {
     <table class="table table-condensed table-striped">
@@ -28,7 +26,7 @@
                     <td>
                         <div class="checkbox">
                             <label>
-                                <input name="roleCategories"
+                                <input name="categoryRoles"
                                        type="checkbox"
                                        value="@Helpers.CantorPair(category.Id, roleViewModel.Id)"
                                        @Html.Attribute("checked", "checked", roleViewModel.Categories.Contains(category))/>
