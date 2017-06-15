@@ -11,20 +11,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         {
         }
 
-        public TrainingResultViewModel(
-            ApplicationUser user,
-            TrainingResult trainingResult)
-        {
-            CompanyName = user.CompanyName;
-            Email = user.Email;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            UserId = user.Id;
+        public TrainingResultViewModel(TrainingResult trainingResult)
+        {           
             CompletionDateTime = trainingResult.CompletionDateTime;
             Id = trainingResult.Id;
             QuizResults = trainingResult.QuizResults;
             RoleTitle = trainingResult.Role.Title;
             TimeToComplete = trainingResult.TimeToComplete;
+
+            var user = trainingResult.User;
+            CompanyName = user.CompanyName;
+            Email = user.Email;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            UserId = user.Id;
         }
 
         [DisplayName("Number of Quiz Attempts")]
@@ -44,7 +44,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         }
 
         [DisplayName("Completed On")]
-        public DateTime CompletionDateTime
+        public DateTime? CompletionDateTime
         {
             get;
             set;

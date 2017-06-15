@@ -1,13 +1,15 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ApplicationUser>
+﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User.UserViewModel>
 
 @{
     ViewBag.Title = "Users";
 }
 
 <h2>@ViewBag.Title</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class = "table table-striped" >
     <thead>
         <tr>
@@ -31,6 +33,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastTrainingResultDateTime)
             </th>
             <th>
                 Actions
@@ -63,6 +68,19 @@
                     @Html.DisplayFor(modelItem => item.BirthDate)
                 </td>
                 <td>
+                    @if (item.LastTrainingResultDateTime == null)
+                    {
+                        <span>Training not completed.</span>
+                    }
+                    else
+                    {
+                        @Html.ActionLink(item.LastTrainingResultDateTime.Value.ToString("MM/dd/yyyy"), "TrainingResult", new
+                        {
+                            id = item.LastTrainingResultId
+                        })
+                    }
+                </td>
+                <td>
                     @Html.ActionLink("Edit", "Edit", new
                     {
                         id = item.Id
@@ -77,9 +95,13 @@
                     {
                         id = item.Id
                     })
+                    <br />
+                    @Html.ActionLink("View All Results", "TrainingResults", new
+                    {
+                        id = item.Id
+                    })
                 </td>
             </tr>
         }
     </tbody>
-
 </table>

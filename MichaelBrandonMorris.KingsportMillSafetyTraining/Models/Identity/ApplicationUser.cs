@@ -67,13 +67,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             set;
         }
 
-        public DateTime LatestTrainingStartDateTime
+        public DateTime? LatestTrainingStartDateTime
         {
             get;
             set;
         }
 
-        public DateTime LatestQuizStartDateTime
+        public DateTime? LatestQuizStartDateTime
         {
             get;
             set;

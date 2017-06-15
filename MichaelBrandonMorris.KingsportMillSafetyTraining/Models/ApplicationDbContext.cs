@@ -10,6 +10,8 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Result;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    ViewModels.User;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -259,14 +261,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlideViewModels(categoryId));
         }
 
-        public TrainingResultViewModel GetTrainingResultViewModel(string userId)
+        public TrainingResultViewModel GetTrainingResultViewModel(int id)
         {
-            return DoTransaction(() => _GetTrainingResultViewModel(userId));
+            return DoTransaction(() => _GetTrainingResultViewModel(id));
+        }
+
+        public IList<TrainingResultViewModel> GetTrainingResultViewModels(
+            string id)
+        {
+            return DoTransaction(() => _GetTrainingResultViewModels(id));
         }
 
         public ApplicationUser GetUser(string id)
         {
             return DoTransaction(() => Users.Find(id));
+        }
+
+        public IList<UserViewModel> GetUserViewModels()
+        {
+            return DoTransaction(_GetUserViewModels);
+        }
+
+        public bool IsUserTrainingResult(string userId, int trainingResultId)
+        {
+            return DoTransaction(
+                () => _IsUserTrainingResult(userId, trainingResultId));
         }
 
         public void PairCategoryAndRole(int categoryId, int roleId)
@@ -354,8 +373,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 throw new Exception();
             }
 
+            if (trainingResult.User.LatestQuizStartDateTime == null)
+            {
+                throw new Exception();
+            }
+
             var timeToComplete = DateTime.Now
-                                 - trainingResult.User.LatestQuizStartDateTime;
+                                 - trainingResult.User.LatestQuizStartDateTime.Value;
 
             trainingResult.QuizResults.Add(
                 new QuizResult
@@ -698,17 +722,32 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 .ToList();
         }
 
-        private TrainingResultViewModel _GetTrainingResultViewModel(
-            string userId,
-            int? trainingResultId = null)
+        private TrainingResultViewModel _GetTrainingResultViewModel(int id)
+        {
+            var trainingResult = TrainingResults.Find(id);
+            return new TrainingResultViewModel(trainingResult);
+        }
+
+        private IList<TrainingResultViewModel> _GetTrainingResultViewModels(
+            string id)
+        {
+            var user = Users.Find(id);
+
+            return user.TrainingResults.Select(
+                    x => new TrainingResultViewModel(x))
+                .ToList();
+        }
+
+        private IList<UserViewModel> _GetUserViewModels()
+        {
+            var users = Users.ToList().Select(user => new UserViewModel(user));
+            return users.ToList();
+        }
+
+        private bool _IsUserTrainingResult(string userId, int trainingResultId)
         {
             var user = Users.Find(userId);
-
-            var trainingResult = trainingResultId == null
-                ? user.TrainingResults.Last()
-                : TrainingResults.Find(trainingResultId);
-
-            return new TrainingResultViewModel(user, trainingResult);
+            return user.TrainingResults.Any(x => x.Id == trainingResultId);
         }
 
         private void _PairCategoryAndRole(int categoryId, int roleId)

@@ -43,8 +43,8 @@
                             @if (Model[i].IsIncorrect())
                             {
                                 <p>
-                                    Your answer was incorrect. Click <a onclick = "viewSlide(@Model[i].Id);"
-                                                                        href = "#" >
+                                    Your answer was incorrect. Click <a class = "link"
+                                                                        onclick = "viewSlide(@Model[i].Id);" >
                                         here
                                     </a> to review, and then retry the question.
                                 </p>
@@ -163,44 +163,13 @@
     </div>
 </div>
 
-<iframe id = "frame" ></iframe>
-<div class = "row"
-     id = "close-slide" >
-    <div class = "col-md-1 col-md-offset-11" >
-        <button class = "btn btn-default"
-                onclick = "closeSlide();" >
-            Back to Quiz
-        </button>
-    </div>
-</div>
-
 @section Scripts
 {
     <script type = "text/javascript" >
-        $(document).ready(function() {
-            $("#frame").hide();
-            $("#close-slide").hide();
-        });
-
         function viewSlide(slideId) {
-            $("#frame").attr("src", "/Slides/ViewSlide/" + slideId);
-            $("#frame").show();
-            $("#close-slide").show();
+            window.open("/Slides/ViewSlide/" + slideId);
             $(".AnswerFor-" + slideId).prop("disabled", false);
-            currentSlide = slideId;
-            $(body).addClass("stop-scrolling");
             return false;
         }
-
-        var currentSlide;
-
-        function closeSlide() {
-            $("#frame").hide();
-            $("#close-slide").hide();
-            $(body).removeClass("stop-scrolling");
-            window.location.hash = "#Question-" + currentSlide;
-            return false;
-        }
-
     </script>
 }

@@ -180,6 +180,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult ViewSlide(int id)
+        {
+            var model = _db.GetSlideViewModel(id);
+            return View(model);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

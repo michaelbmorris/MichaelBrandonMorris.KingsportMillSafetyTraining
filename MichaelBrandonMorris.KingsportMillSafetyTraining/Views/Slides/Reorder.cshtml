@@ -29,8 +29,6 @@
                     @for (var i = 0; i < Model.Count; i++)
                     {
                         <tr>
-                            @* ReSharper disable once UnknownCssClass
-                        The index class is used by the sorting function. *@
                             <td class = "index" >
                                 &#8597;
                                 @Html.HiddenFor(model => Model[i].Id)
@@ -38,7 +36,7 @@
                                 {
                                     htmlAttributes = new
                                     {
-                                        name = $"slides[{i}].Index",
+                                        name = string.Format("slides[{0}].Index", i),
                                         @readonly = true
                                     }
                                 })

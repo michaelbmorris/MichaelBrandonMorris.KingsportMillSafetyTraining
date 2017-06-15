@@ -119,9 +119,32 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(
+            Func<ApplicationUser, object> orderByPredicate)
         {
-            return View(_db.Users.ToList());
+            var model = _db.GetUserViewModels();
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult TrainingResult(int id)
+        {
+            var model = _db.GetTrainingResultViewModel(id);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult TrainingResults(string id)
+        {
+            var model = _db.GetTrainingResultViewModels(id);
+
+            if (model.Any())
+            {
+                return View(model);
+            }
+
+            return new HttpNotFoundResult(
+                "The specified user has no training roles.");
         }
 
         protected override void Dispose(bool disposing)

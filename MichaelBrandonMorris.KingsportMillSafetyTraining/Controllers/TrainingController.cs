@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
 using MoreLinq;
 
@@ -70,21 +72,48 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             trainingResult.CompletionDateTime = DateTime.Now;
 
+            if (user.LatestTrainingStartDateTime == null)
+            {
+                throw new Exception();
+            }
+
             trainingResult.TimeToComplete =
-                trainingResult.CompletionDateTime
-                - user.LatestTrainingStartDateTime;
+                trainingResult.CompletionDateTime.Value
+                - user.LatestTrainingStartDateTime.Value;
 
             _db.Edit(trainingResult);
 
-            return RedirectToAction("Results");
+            return RedirectToAction(
+                "Result",
+                new
+                {
+                    id = trainingResult.Id
+                });
         }
 
+        /// <summary>
+        /// Shows the result of the training. Since this controller does not
+        /// require authorization, only training results belonging to the
+        /// current user will be shown. Administrators have access to the
+        /// Result action in the Users controller to view results for all users.
+        /// </summary>
+        /// <param name="id">The <see cref="TrainingResult" /> id.</param>
+        /// <returns>
+        /// If the user is authorized, the view of the specified
+        /// <see cref="TrainingResult" />. Otherwise, a
+        /// <see cref="HttpStatusCode.Forbidden" />.
+        /// </returns>
         [HttpGet]
-        public ActionResult Results()
+        public ActionResult Result(int id)
         {
-            var model =
-                _db.GetTrainingResultViewModel(User.Identity.GetUserId());
+            if (!_db.IsUserTrainingResult(User.Identity.GetUserId(), id))
+            {
+                return new HttpStatusCodeResult(
+                    HttpStatusCode.Forbidden,
+                    "You do not have permission to view training results for other users.");
+            }
 
+            var model = _db.GetTrainingResultViewModel(id);
             return View(model);
         }
 

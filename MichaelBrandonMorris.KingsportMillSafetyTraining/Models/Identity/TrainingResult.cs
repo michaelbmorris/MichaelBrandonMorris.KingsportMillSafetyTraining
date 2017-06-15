@@ -6,11 +6,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
 {
     public class TrainingResult
     {
-        public DateTime CompletionDateTime
+        public DateTime? CompletionDateTime
         {
             get;
             set;
-        } = DateTime.MaxValue;
+        }
 
         public int Id
         {

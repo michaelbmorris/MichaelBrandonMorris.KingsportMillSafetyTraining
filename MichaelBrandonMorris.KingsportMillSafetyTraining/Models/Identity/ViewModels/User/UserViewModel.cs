@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
@@ -16,6 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             CompanyName = user.CompanyName;
             Email = user.Email;
             FirstName = user.FirstName;
+            Id = user.Id;
             LastName = user.LastName;
             MiddleName = user.MiddleName;
             PhoneNumber = user.PhoneNumber;
@@ -33,12 +36,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             LastTrainingResultId = lastTrainingResult.Id;
         }
 
+        [DisplayName("Birth Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime BirthDate
         {
             get;
             set;
         }
 
+        [DisplayName("Company")]
         public string CompanyName
         {
             get;
@@ -51,19 +57,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             set;
         }
 
+        [DisplayName("First Name")]
         public string FirstName
         {
             get;
             set;
         }
 
+        public string Id
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Last Name")]
         public string LastName
         {
             get;
             set;
         }
 
-        public DateTime LastTrainingResultDateTime
+        [DisplayName("Last Training Completed On")]
+        public DateTime? LastTrainingResultDateTime
         {
             get;
             set;
@@ -75,12 +90,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             set;
         }
 
+        [DisplayName("Middle Name")]
         public string MiddleName
         {
             get;
             set;
         }
 
+        [DisplayName("Phone Number")]
         public string PhoneNumber
         {
             get;
