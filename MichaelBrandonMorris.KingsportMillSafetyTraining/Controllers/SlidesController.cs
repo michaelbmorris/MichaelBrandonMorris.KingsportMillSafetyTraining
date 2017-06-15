@@ -38,7 +38,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Create(SlideViewModel slideViewModel)
         {
             if (!ModelState.IsValid)
+            {
                 return View(slideViewModel);
+            }
 
             Debug.WriteLine(slideViewModel.Image == null);
 
@@ -50,12 +52,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var slide = _db.GetSlide(id.Value);
 
             if (slide == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(slide);
         }
@@ -68,7 +74,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var slide = _db.GetSlide(id);
 
             if (slide != null)
+            {
                 _db.DeleteSlide(slide);
+            }
 
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -78,12 +86,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var slide = _db.GetSlide(id.Value);
 
             if (slide == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(slide);
         }
@@ -92,12 +104,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var slideViewModel = _db.GetSlideViewModel(id.Value);
 
             if (slideViewModel == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(slideViewModel);
         }
@@ -107,7 +123,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(SlideViewModel slideViewModel)
         {
             if (!ModelState.IsValid)
+            {
                 return View(slideViewModel);
+            }
 
             Debug.WriteLine(slideViewModel.Image == null);
             _db.Edit(slideViewModel);
@@ -127,7 +145,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var slide = _db.GetSlide(id);
 
             if (slide == null)
+            {
                 return HttpNotFound();
+            }
 
             return slide.ImageBytes == null
                 ? null
@@ -138,7 +158,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Reorder(int? categoryId)
         {
             if (categoryId == null)
+            {
                 return RedirectToAction("SelectCategoryToReorder");
+            }
 
             var model = _db.GetSlides(categoryId, x => x.Index);
             return View(model);
@@ -168,7 +190,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
                 _db.Dispose();
+            }
 
             base.Dispose(disposing);
         }

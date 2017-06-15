@@ -13,7 +13,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModel
         public SlideViewModel(Slide slide)
         {
             if (slide == null)
+            {
                 return;
+            }
 
             Answers = slide.Answers;
             CategoryId = slide.Category.Id;

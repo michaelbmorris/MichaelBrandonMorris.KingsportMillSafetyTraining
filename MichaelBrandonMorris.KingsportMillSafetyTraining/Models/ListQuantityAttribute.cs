@@ -21,16 +21,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var list = value as IList;
 
             if (list == null)
+            {
                 throw new ArgumentException();
+            }
 
             if (MinElements == 0 && MaxElements == 0)
+            {
                 return true;
+            }
 
             if (MinElements == 0)
+            {
                 return list.Count <= MaxElements;
+            }
 
             if (MaxElements == 0)
+            {
                 return list.Count >= MinElements;
+            }
 
             return list.Count <= MaxElements && list.Count >= MinElements;
         }

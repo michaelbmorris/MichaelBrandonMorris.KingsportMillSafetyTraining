@@ -26,7 +26,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
             CorrectAnswerIndex = slideViewModel.CorrectAnswerIndex;
 
             if (slideViewModel.Image != null)
+            {
                 ImageBytes = slideViewModel.Image.ToBytes();
+            }
 
             ImageDescription = slideViewModel.ImageDescription;
             Question = slideViewModel.Question;
@@ -142,10 +144,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         public bool Equals(Slide other)
         {
             if (ReferenceEquals(null, other))
+            {
                 return false;
+            }
 
             if (ReferenceEquals(this, other))
+            {
                 return true;
+            }
 
             return Id == other.Id;
         }
@@ -160,10 +166,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         public static bool operator ==(Slide x, Slide y)
         {
             if (ReferenceEquals(x, y))
+            {
                 return true;
+            }
 
             if ((object) x == null || (object) y == null)
+            {
                 return false;
+            }
 
             return x.Id == y.Id;
         }
@@ -190,10 +200,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
+            {
                 return false;
+            }
 
             if (ReferenceEquals(this, obj))
+            {
                 return true;
+            }
 
             return obj.GetType() == GetType() && Equals((Slide) obj);
         }

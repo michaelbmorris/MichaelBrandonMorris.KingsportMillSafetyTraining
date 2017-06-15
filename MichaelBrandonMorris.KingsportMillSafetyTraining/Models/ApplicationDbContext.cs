@@ -347,10 +347,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var trainingResult = TrainingResults.Find(trainingResultId);
 
             if (trainingResult == null)
+            {
                 throw new Exception();
+            }
 
             if (trainingResult.User.LatestQuizStartDateTime == null)
+            {
                 throw new Exception();
+            }
 
             var timeToComplete = DateTime.Now
                                  - trainingResult.User.LatestQuizStartDateTime.Value;
@@ -403,7 +407,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private void _DeleteCategory(Category category)
         {
             foreach (var slide in category.Slides.ToList())
+            {
                 slide.Category = null;
+            }
 
             Categories.Attach(category);
             Categories.Remove(category);
@@ -433,7 +439,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 TrainingResults.Find(trainingResult.Id);
 
             if (originalTrainingResult == null)
+            {
                 throw new Exception();
+            }
 
             var trainingResultEntry = Entry(trainingResult);
             trainingResultEntry.CurrentValues.SetValues(trainingResult);
@@ -444,14 +452,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var slide = Slides.Find(model.Id);
 
             if (slide == null)
+            {
                 throw new Exception();
+            }
 
             slide.Category = _GetCategory(model.CategoryId);
             slide.Title = model.Title;
             slide.Content = model.Content;
 
             if (model.Image != null)
+            {
                 slide.ImageBytes = model.Image.ToBytes();
+            }
 
             slide.ImageDescription = model.ImageDescription;
             slide.ShouldShowSlideInSlideshow = model.ShouldShowSlideInSlideshow;
@@ -480,8 +492,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             foreach (var answer in Enumerable
                 .Where(slide.Answers, x => x.Id != 0)
                 .ToList())
+            {
                 if (model.Answers.All(x => x.Id != answer.Id))
+                {
                     Answers.Remove(answer);
+                }
+            }
         }
 
         private void _Edit<T>(T t)
@@ -496,12 +512,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IList<Role> roles;
 
             if (id == null)
+            {
                 roles = TrainingRoles.ToList();
+            }
             else
+            {
                 roles = new List<Role>
                 {
                     _GetRole(id.Value)
                 };
+            }
 
             return new AssignCategoriesViewModel(
                 roles,
@@ -513,12 +533,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IList<Category> categories;
 
             if (id == null)
+            {
                 categories = Categories.ToList();
+            }
             else
+            {
                 categories = new List<Category>
                 {
                     _GetCategory(id.Value)
                 };
+            }
 
             return new AssignRolesViewModel(categories, _GetRoleViewModels());
         }
@@ -530,10 +554,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IEnumerable<Category> categories = Categories;
 
             if (orderByPredicate != null)
+            {
                 categories = categories.OrderBy(orderByPredicate);
+            }
 
             if (wherePredicate != null)
+            {
                 categories = categories.Where(wherePredicate);
+            }
 
             return categories.ToList();
         }
@@ -617,7 +645,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 var category = Categories.Find(categoryId);
 
                 if (category == null)
+                {
                     throw new Exception();
+                }
 
                 slides = category.Slides;
             }
@@ -646,14 +676,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 foreach (var slide in Enumerable.OrderBy(
                     category.Slides,
                     x => x.Index))
+                {
                     slides.Add(slide);
+                }
             }
             else
             {
                 var category = Categories.Find(categoryId);
 
                 if (category == null)
+                {
                     throw new Exception();
+                }
 
                 slides = Enumerable.OrderBy(category.Slides, x => x.Index)
                     .ToList();
@@ -697,12 +731,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var category = Categories.Find(categoryId);
 
             if (category == null)
+            {
                 throw new Exception();
+            }
 
             var role = TrainingRoles.Find(roleId);
 
             if (role == null)
+            {
                 throw new Exception();
+            }
 
             role.Categories.Add(category);
             category.Roles.Add(role);
@@ -751,11 +789,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             foreach (var category in Categories)
             foreach (var role in category.Roles.ToList())
+            {
                 category.Roles.Remove(role);
+            }
 
             foreach (var role in TrainingRoles)
             foreach (var category in role.Categories.ToList())
+            {
                 role.Categories.Remove(category);
+            }
         }
 
         private void _UpdateCurrentAnswerIndex()

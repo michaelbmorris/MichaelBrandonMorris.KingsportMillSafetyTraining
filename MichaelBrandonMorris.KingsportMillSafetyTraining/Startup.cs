@@ -39,18 +39,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         new RoleStore<IdentityRole>(db));
 
                 if (!roleManager.RoleExists("Administrator"))
+                {
                     roleManager.Create(
                         new IdentityRole
                         {
                             Name = "Administrator"
                         });
+                }
 
                 if (!roleManager.RoleExists("User"))
+                {
                     roleManager.Create(
                         new IdentityRole
                         {
                             Name = "User"
                         });
+                }
             }
         }
     }

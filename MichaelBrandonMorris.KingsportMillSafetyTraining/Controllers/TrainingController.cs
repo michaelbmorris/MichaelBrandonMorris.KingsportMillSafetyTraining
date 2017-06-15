@@ -23,7 +23,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var role = GetCurrentUserRole();
 
             if (role == null)
+            {
                 return RedirectToAction("SelectRole");
+            }
 
             _db.SetUserLatestTrainingStartDateTime(User.Identity.GetUserId());
             var model = _db.GetSlideshowViewModel(role);
@@ -49,7 +51,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     .Session["QuizViewModel"];
 
             for (var i = 0; i < model.Count; i++)
+            {
                 quizViewModel[i].AnswerQuestion(model[i].SelectedAnswerIndex);
+            }
 
             model = quizViewModel;
             var user = _db.GetUser(User.Identity.GetUserId());
@@ -69,7 +73,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             trainingResult.CompletionDateTime = DateTime.Now;
 
             if (user.LatestTrainingStartDateTime == null)
+            {
                 throw new Exception();
+            }
 
             trainingResult.TimeToComplete =
                 trainingResult.CompletionDateTime.Value
@@ -101,9 +107,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Result(int id)
         {
             if (!_db.IsUserTrainingResult(User.Identity.GetUserId(), id))
+            {
                 return new HttpStatusCodeResult(
                     HttpStatusCode.Forbidden,
                     "You do not have permission to view training results for other users.");
+            }
 
             var model = _db.GetTrainingResultViewModel(id);
             return View(model);
@@ -134,7 +142,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
                 _db.Dispose();
+            }
 
             base.Dispose(disposing);
         }
@@ -144,7 +154,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var user = _db.GetUser(User.Identity.GetUserId());
 
             if (user == null)
+            {
                 throw new Exception();
+            }
 
             return user.Role;
         }

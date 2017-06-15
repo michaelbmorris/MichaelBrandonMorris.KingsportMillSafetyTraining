@@ -26,7 +26,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             var lastTrainingResult = user.TrainingResults.LastOrDefault();
 
             if (lastTrainingResult == null)
+            {
                 return;
+            }
 
             LastTrainingResultDateTime =
                 lastTrainingResult.CompletionDateTime;

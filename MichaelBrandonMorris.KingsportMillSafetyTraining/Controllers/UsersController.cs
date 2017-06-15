@@ -24,7 +24,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Create(ApplicationUser user)
         {
             if (!ModelState.IsValid)
+            {
                 return View(user);
+            }
 
             _db.Users.Add(user);
             _db.SaveChanges();
@@ -35,12 +37,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Delete(string id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var applicationUser = _db.Users.Find(id);
 
             if (applicationUser == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(applicationUser);
         }
@@ -53,7 +59,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var applicationUser = _db.Users.Find(id);
 
             if (applicationUser == null)
+            {
                 throw new Exception();
+            }
 
             _db.Users.Remove(applicationUser);
             _db.SaveChanges();
@@ -64,12 +72,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Details(string id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var applicationUser = _db.Users.Find(id);
 
             if (applicationUser == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(applicationUser);
         }
@@ -78,12 +90,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(string id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
             var applicationUser = _db.Users.Find(id);
 
             if (applicationUser == null)
+            {
                 return HttpNotFound();
+            }
 
             return View(applicationUser);
         }
@@ -93,7 +109,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(ApplicationUser user)
         {
             if (!ModelState.IsValid)
+            {
                 return View(user);
+            }
 
             _db.Entry(user).State = EntityState.Modified;
             _db.SaveChanges();
@@ -121,7 +139,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var model = _db.GetTrainingResultViewModels(id);
 
             if (model.Any())
+            {
                 return View(model);
+            }
 
             return new HttpNotFoundResult(
                 "The specified user has no training roles.");
@@ -130,7 +150,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
                 _db.Dispose();
+            }
 
             base.Dispose(disposing);
         }
