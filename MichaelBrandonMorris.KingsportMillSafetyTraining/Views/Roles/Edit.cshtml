@@ -2,23 +2,17 @@
 
 @{
     ViewBag.Title = "Edit";
+    ViewBag.Subtitle = "Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Role</h4>
-        <hr/>
-
         @Html.HiddenFor(model => model.Id)
         @Html.EditorForModel(Model)
-
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
                 <input class="btn btn-default"

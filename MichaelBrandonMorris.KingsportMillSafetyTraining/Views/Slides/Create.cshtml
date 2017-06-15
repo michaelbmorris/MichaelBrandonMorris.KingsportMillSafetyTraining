@@ -2,11 +2,9 @@
 
 @{
     ViewBag.Title = "Create";
+    ViewBag.Subtitle = "Slide";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new
 {
@@ -16,11 +14,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Slide</h4>
-        <hr/>
-
         @Html.EditorForModel(Model)
-
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
                 <input class="btn btn-default"

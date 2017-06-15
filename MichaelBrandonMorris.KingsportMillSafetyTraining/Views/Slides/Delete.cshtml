@@ -2,14 +2,10 @@
 
 @{
     ViewBag.Title = "Delete";
+    ViewBag.Subtitle = "Are you sure you want to delete this?";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Slide</h4>
-    <hr/>
     @Html.DisplayForModel(Model)
 
     @using (Html.BeginForm())

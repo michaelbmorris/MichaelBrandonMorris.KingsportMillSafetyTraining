@@ -1,9 +1,8 @@
 ﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Manage.AddPhoneNumberViewModel
 @{
     ViewBag.Title = "Phone Number";
+    ViewBag.Subtitle = "Add a phone number";
 }
-
-<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new
 {
@@ -11,8 +10,6 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <h4>Add a phone number</h4>
-    <hr/>
     @Html.ValidationSummary("", new
     {
         @class = "text-danger"
