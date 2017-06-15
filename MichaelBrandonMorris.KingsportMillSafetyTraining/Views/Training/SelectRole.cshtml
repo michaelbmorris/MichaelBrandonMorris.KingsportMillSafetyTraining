@@ -8,36 +8,36 @@
 <h2>Select Role</h2>
 @using (Html.BeginForm())
 {
-    <div class = "carousel"
-         data-interval = "false"
-         data-ride = ""
-         data-wrap = "false"
-         id = "carousel" >
-        <div class = "carousel-inner" >
+    <div class="carousel"
+         data-interval="false"
+         data-ride=""
+         data-wrap="false"
+         id="carousel">
+        <div class="carousel-inner">
             @foreach (var item in Model)
             {
-                <div class = "item @(item == Model.First() ? "active" : string.Empty)" >
-                    <div class = "carousel-content" >
+                <div class="item @(item == Model.First() ? "active" : string.Empty)">
+                    <div class="carousel-content">
                         <p>
                             @item.Question
-                            <button class = "btn btn-default"
-                                    name = "roleId"
-                                    value = "@item.Id" >
+                            <button class="btn btn-default"
+                                    name="roleId"
+                                    value="@item.Id">
                                 Yes
                             </button>
                             @if (item == Model.Last())
                             {
-                                <button class = "btn btn-default"
-                                        name = "roleId"
-                                        value = "null" >
+                                <button class="btn btn-default"
+                                        name="roleId"
+                                        value="null">
                                     No
                                 </button>
                             }
                             else
                             {
-                                <button class = "btn btn-default"
-                                        data-slide = "next"
-                                        href = "#carousel" >
+                                <button class="btn btn-default"
+                                        data-slide="next"
+                                        href="#carousel">
                                     No
                                 </button>
                             }

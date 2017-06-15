@@ -11,11 +11,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             "NewPassword",
             ErrorMessage =
                 "The new password and confirmation password do not match.")]
-        public string ConfirmPassword
-        {
-            get;
-            set;
-        }
+        public string ConfirmPassword { get; set; }
 
         [Required]
         [StringLength(
@@ -24,10 +20,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
-        public string NewPassword
-        {
-            get;
-            set;
-        }
+        public string NewPassword { get; set; }
     }
 }

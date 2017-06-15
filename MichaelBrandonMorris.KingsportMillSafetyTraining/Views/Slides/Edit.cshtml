@@ -15,19 +15,19 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class = "form-horizontal" >
+    <div class="form-horizontal">
         <h4>Slide</h4>
-        <hr />
+        <hr/>
 
         @Html.EditorForModel(Model)
 
-        <div class = "form-group" >
-            <div class = "col-md-10 col-md-offset-2" >
-                <input class = "btn btn-default"
-                       type = "submit"
-                       value = "Save" />
-                <button class = "btn btn-default"
-                        onclick = "location.href = '@Url.Action("Index")';return false;" >
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <input class="btn btn-default"
+                       type="submit"
+                       value="Save"/>
+                <button class="btn btn-default"
+                        onclick="location.href = '@Url.Action("Index")';return false;">
                     Cancel
                 </button>
             </div>
@@ -35,7 +35,7 @@
     </div>
 }
 
-@section Scripts 
+@section Scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
 

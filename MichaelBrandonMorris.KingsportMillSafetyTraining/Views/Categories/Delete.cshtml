@@ -11,14 +11,15 @@
 
 @Html.DisplayForModel(Model)
 
-@using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <button class = "btn btn-default"
-                    onclick = "location.href = '@Url.Action("Index")';return false;" >
-                Cancel
-            </button>
-        </div>
-    }
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default"/> |
+        <button class="btn btn-default"
+                onclick="location.href = '@Url.Action("Index")';return false;">
+            Cancel
+        </button>
+    </div>
+}

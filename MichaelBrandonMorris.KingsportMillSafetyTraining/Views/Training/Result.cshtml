@@ -5,8 +5,8 @@
 }
 
 <h2>@ViewBag.Title</h2>
-<hr />
-<dl class = "dl-horizontal" >
+<hr/>
+<dl class="dl-horizontal">
     <dt>
         @Html.DisplayNameFor(model => model.FirstName)
     </dt>
@@ -68,51 +68,51 @@
     </dt>
 
     <dd>
-        <table class = "table table-condensed" >
+        <table class="table table-condensed">
             <thead>
-                <tr>
-                    <th>
-                        Attempt #
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().QuestionsCorrect)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().TotalQuestions)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().Score)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().TimeToComplete)
-                    </th>
-                </tr>
+            <tr>
+                <th>
+                    Attempt #
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizResults.Single().QuestionsCorrect)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizResults.Single().TotalQuestions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizResults.Single().Score)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuizResults.Single().TimeToComplete)
+                </th>
+            </tr>
             </thead>
             <tbody>
-                @{
-                    var i = 1;
-                }
-                @foreach (var quizResult in Model.QuizResults)
-                {
-                    <tr>
-                        <td>
-                            @i
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.QuestionsCorrect)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.TotalQuestions)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.Score)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.TimeToComplete)
-                        </td>
-                    </tr>
-                    i++;
-                }
+            @{
+                var i = 1;
+            }
+            @foreach (var quizResult in Model.QuizResults)
+            {
+                <tr>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelQuizResult => quizResult.QuestionsCorrect)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelQuizResult => quizResult.TotalQuestions)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelQuizResult => quizResult.Score)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelQuizResult => quizResult.TimeToComplete)
+                    </td>
+                </tr>
+                i++;
+            }
             </tbody>
         </table>
     </dd>

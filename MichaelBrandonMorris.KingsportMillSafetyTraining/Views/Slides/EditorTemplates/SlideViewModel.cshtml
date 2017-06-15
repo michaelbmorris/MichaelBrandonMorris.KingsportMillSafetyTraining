@@ -8,16 +8,15 @@
 
 @Html.HiddenFor(model => model.Id)
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(x => x.CategoryId, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @foreach (var category in Model.Categories)
         {
-            
-            <div class = "radio" >
+            <div class="radio">
                 <label>
                     @Html.RadioButtonFor(x => x.CategoryId, category.Id) @category.Title
                 </label>
@@ -26,12 +25,12 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.Title, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.EditorFor(model => model.Title, new
         {
             htmlAttributes = new
@@ -46,13 +45,13 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
 
     @Html.LabelFor(model => model.Content, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.TextAreaFor(model => model.Content, new
         {
             @class = "form-control"
@@ -64,15 +63,15 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.Image, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
-        <input class = ""
-               name = "Image"
-               type = "file" />
+    <div class="col-md-10">
+        <input class=""
+               name="Image"
+               type="file"/>
         @Html.ValidationMessageFor(model => model.Image, "", new
         {
             @class = "text-danger"
@@ -80,12 +79,12 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.ImageDescription, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.EditorFor(model => model.ImageDescription, new
         {
             htmlAttributes = new
@@ -100,12 +99,12 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.Question, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.EditorFor(model => model.Question, new
         {
             htmlAttributes = new
@@ -122,43 +121,43 @@
 
 <div class="form-group">
     @Html.LabelFor(model => model.ShouldShowSlideInSlideshow, new
-{
-    @class = "control-label col-md-2"
-})
+    {
+        @class = "control-label col-md-2"
+    })
     <div class="col-md-10">
         <div class="checkbox">
             @Html.EditorFor(model => model.ShouldShowSlideInSlideshow)
             @Html.ValidationMessageFor(model => model.ShouldShowSlideInSlideshow, "", new
-       {
-           @class = "text-danger"
-       })
+            {
+                @class = "text-danger"
+            })
         </div>
     </div>
 </div>
 
 <div class="form-group">
     @Html.LabelFor(model => model.ShouldShowQuestionOnQuiz, new
-{
-    @class = "control-label col-md-2"
-})
+    {
+        @class = "control-label col-md-2"
+    })
     <div class="col-md-10">
         <div class="checkbox">
             @Html.EditorFor(model => model.ShouldShowQuestionOnQuiz)
             @Html.ValidationMessageFor(model => model.ShouldShowQuestionOnQuiz, "", new
-       {
-           @class = "text-danger"
-       })
+            {
+                @class = "text-danger"
+            })
         </div>
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.ShouldShowImageOnQuiz, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
-        <div class = "checkbox" >
+    <div class="col-md-10">
+        <div class="checkbox">
             @Html.EditorFor(model => model.ShouldShowImageOnQuiz)
             @Html.ValidationMessageFor(model => model.ShouldShowImageOnQuiz, "", new
             {
@@ -168,18 +167,18 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(x => x.Answers, new
-{
-    @class = "control-label col-md-2"
-})
-    <div class = "col-md-10" >
-        <div id ="answers-list">
+    {
+        @class = "control-label col-md-2"
+    })
+    <div class="col-md-10">
+        <div id="answers-list">
             @Html.EditorForMany(x => x.Answers)
         </div>
-        <input class = "btn btn-default"
-               id = "add-answer"
-               type = "button"
-               value = "Add New Answer" />
-    </div>  
+        <input class="btn btn-default"
+               id="add-answer"
+               type="button"
+               value="Add New Answer"/>
+    </div>
 </div>

@@ -7,16 +7,16 @@
             <input id="Answer-@Model.Index"
                    type="radio"
                    name="CorrectAnswerIndex"
-                   value="@Model.Index" />
+                   value="@Model.Index"/>
             &#10004;
         </label>
     </div>
     <div class="col-md-9">
         @Html.HiddenFor(x => x.Id)
         @Html.TextBoxFor(x => x.Title, new
-   {
-       @class = "form-control"
-   })
+        {
+            @class = "form-control"
+        })
     </div>
     <div class="col-md-2">
         @* ReSharper disable once PossiblyUnassignedProperty
@@ -27,4 +27,3 @@
         </button>
     </div>
 </div>
-

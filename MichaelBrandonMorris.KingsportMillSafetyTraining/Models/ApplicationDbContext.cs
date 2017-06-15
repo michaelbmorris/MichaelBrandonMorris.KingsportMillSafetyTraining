@@ -8,10 +8,8 @@ using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.Result;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.User;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -24,49 +22,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// The answers table.
+        ///     The answers table.
         /// </summary>
-        public DbSet<Answer> Answers
-        {
-            get;
-            set;
-        }
+        public DbSet<Answer> Answers { get; set; }
 
         /// <summary>
-        /// The categories table.
+        ///     The categories table.
         /// </summary>
-        public DbSet<Category> Categories
-        {
-            get;
-            set;
-        }
+        public DbSet<Category> Categories { get; set; }
 
         /// <summary>
-        /// The slides table.
+        ///     The slides table.
         /// </summary>
-        public DbSet<Slide> Slides
-        {
-            get;
-            set;
-        }
+        public DbSet<Slide> Slides { get; set; }
 
-        public DbSet<TrainingResult> TrainingResults
-        {
-            get;
-            set;
-        }
+        public DbSet<TrainingResult> TrainingResults { get; set; }
 
         /// <summary>
-        /// The roles table.
+        ///     The roles table.
         /// </summary>
-        public DbSet<Role> TrainingRoles
-        {
-            get;
-            set;
-        }
+        public DbSet<Role> TrainingRoles { get; set; }
 
         /// <summary>
-        /// Creates a new <see cref="ApplicationDbContext" />.
+        ///     Creates a new <see cref="ApplicationDbContext" />.
         /// </summary>
         /// <returns></returns>
         public static ApplicationDbContext Create()
@@ -92,8 +70,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// Uses a transaction to add the specified <see cref="Category" /> to
-        /// the database.
+        ///     Uses a transaction to add the specified <see cref="Category" /> to
+        ///     the database.
         /// </summary>
         /// <param name="category"></param>
         public void CreateCategory(Category category)
@@ -102,8 +80,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// Uses a transaction to add the specified <see cref="Role" /> to the
-        /// database.
+        ///     Uses a transaction to add the specified <see cref="Role" /> to the
+        ///     database.
         /// </summary>
         /// <param name="role"></param>
         public void CreateRole(Role role)
@@ -137,12 +115,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// Uses a transaction to modify the specified <see cref="T" /> in the
-        /// database.
+        ///     Uses a transaction to modify the specified <see cref="T" /> in the
+        ///     database.
         /// </summary>
         /// <typeparam name="T">
-        /// The type of object to modify. Must be a class.
-        /// Should be a type in the database.
+        ///     The type of object to modify. Must be a class.
+        ///     Should be a type in the database.
         /// </typeparam>
         /// <param name="t">The object to modify.</param>
         public void Edit<T>(T t)
@@ -197,8 +175,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// Uses a transaction to get the
-        /// <see cref="IList{QuizSlideViewModel}" /> for the specified role.
+        ///     Uses a transaction to get the
+        ///     <see cref="IList{QuizSlideViewModel}" /> for the specified role.
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
@@ -369,14 +347,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var trainingResult = TrainingResults.Find(trainingResultId);
 
             if (trainingResult == null)
-            {
                 throw new Exception();
-            }
 
             if (trainingResult.User.LatestQuizStartDateTime == null)
-            {
                 throw new Exception();
-            }
 
             var timeToComplete = DateTime.Now
                                  - trainingResult.User.LatestQuizStartDateTime.Value;
@@ -429,9 +403,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private void _DeleteCategory(Category category)
         {
             foreach (var slide in category.Slides.ToList())
-            {
                 slide.Category = null;
-            }
 
             Categories.Attach(category);
             Categories.Remove(category);
@@ -461,9 +433,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 TrainingResults.Find(trainingResult.Id);
 
             if (originalTrainingResult == null)
-            {
                 throw new Exception();
-            }
 
             var trainingResultEntry = Entry(trainingResult);
             trainingResultEntry.CurrentValues.SetValues(trainingResult);
@@ -474,18 +444,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var slide = Slides.Find(model.Id);
 
             if (slide == null)
-            {
                 throw new Exception();
-            }
 
             slide.Category = _GetCategory(model.CategoryId);
             slide.Title = model.Title;
             slide.Content = model.Content;
 
             if (model.Image != null)
-            {
                 slide.ImageBytes = model.Image.ToBytes();
-            }
 
             slide.ImageDescription = model.ImageDescription;
             slide.ShouldShowSlideInSlideshow = model.ShouldShowSlideInSlideshow;
@@ -514,12 +480,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             foreach (var answer in Enumerable
                 .Where(slide.Answers, x => x.Id != 0)
                 .ToList())
-            {
                 if (model.Answers.All(x => x.Id != answer.Id))
-                {
                     Answers.Remove(answer);
-                }
-            }
         }
 
         private void _Edit<T>(T t)
@@ -534,16 +496,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IList<Role> roles;
 
             if (id == null)
-            {
                 roles = TrainingRoles.ToList();
-            }
             else
-            {
                 roles = new List<Role>
                 {
                     _GetRole(id.Value)
                 };
-            }
 
             return new AssignCategoriesViewModel(
                 roles,
@@ -555,16 +513,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IList<Category> categories;
 
             if (id == null)
-            {
                 categories = Categories.ToList();
-            }
             else
-            {
                 categories = new List<Category>
                 {
                     _GetCategory(id.Value)
                 };
-            }
 
             return new AssignRolesViewModel(categories, _GetRoleViewModels());
         }
@@ -576,14 +530,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             IEnumerable<Category> categories = Categories;
 
             if (orderByPredicate != null)
-            {
                 categories = categories.OrderBy(orderByPredicate);
-            }
 
             if (wherePredicate != null)
-            {
                 categories = categories.Where(wherePredicate);
-            }
 
             return categories.ToList();
         }
@@ -667,9 +617,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 var category = Categories.Find(categoryId);
 
                 if (category == null)
-                {
                     throw new Exception();
-                }
 
                 slides = category.Slides;
             }
@@ -695,23 +643,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             if (categoryId == null)
             {
                 foreach (var category in Categories.OrderBy(x => x.Index))
-                {
-                    foreach (var slide in Enumerable.OrderBy(
-                        category.Slides,
-                        x => x.Index))
-                    {
-                        slides.Add(slide);
-                    }
-                }
+                foreach (var slide in Enumerable.OrderBy(
+                    category.Slides,
+                    x => x.Index))
+                    slides.Add(slide);
             }
             else
             {
                 var category = Categories.Find(categoryId);
 
                 if (category == null)
-                {
                     throw new Exception();
-                }
 
                 slides = Enumerable.OrderBy(category.Slides, x => x.Index)
                     .ToList();
@@ -755,16 +697,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             var category = Categories.Find(categoryId);
 
             if (category == null)
-            {
                 throw new Exception();
-            }
 
             var role = TrainingRoles.Find(roleId);
 
             if (role == null)
-            {
                 throw new Exception();
-            }
 
             role.Categories.Add(category);
             category.Roles.Add(role);
@@ -812,20 +750,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private void _UnpairCategoriesAndRoles()
         {
             foreach (var category in Categories)
-            {
-                foreach (var role in category.Roles.ToList())
-                {
-                    category.Roles.Remove(role);
-                }
-            }
+            foreach (var role in category.Roles.ToList())
+                category.Roles.Remove(role);
 
             foreach (var role in TrainingRoles)
-            {
-                foreach (var category in role.Categories.ToList())
-                {
-                    role.Categories.Remove(category);
-                }
-            }
+            foreach (var category in role.Categories.ToList())
+                role.Categories.Remove(category);
         }
 
         private void _UpdateCurrentAnswerIndex()

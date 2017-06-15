@@ -12,39 +12,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             MaxElements = maxElements;
         }
 
-        private int MaxElements
-        {
-            get;
-        }
+        private int MaxElements { get; }
 
-        private int MinElements
-        {
-            get;
-        }
+        private int MinElements { get; }
 
         public override bool IsValid(object value)
         {
             var list = value as IList;
 
             if (list == null)
-            {
                 throw new ArgumentException();
-            }
 
             if (MinElements == 0 && MaxElements == 0)
-            {
                 return true;
-            }
 
             if (MinElements == 0)
-            {
                 return list.Count <= MaxElements;
-            }
 
             if (MaxElements == 0)
-            {
                 return list.Count >= MinElements;
-            }
 
             return list.Count <= MaxElements && list.Count >= MinElements;
         }

@@ -6,10 +6,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewM
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email
-        {
-            get;
-            set;
-        }
+        public string Email { get; set; }
     }
 }

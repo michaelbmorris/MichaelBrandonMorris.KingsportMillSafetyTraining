@@ -10,98 +10,98 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class = "table table-striped" >
+<table class="table table-striped">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MiddleName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastTrainingResultDateTime)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MiddleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastTrainingResultDateTime)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MiddleName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @if (item.LastTrainingResultDateTime == null)
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @if (item.LastTrainingResultDateTime == null)
+                {
+                    <span>Training not completed.</span>
+                }
+                else
+                {
+                    @Html.ActionLink(item.LastTrainingResultDateTime.Value.ToString("MM/dd/yyyy"), "TrainingResult", new
                     {
-                        <span>Training not completed.</span>
-                    }
-                    else
-                    {
-                        @Html.ActionLink(item.LastTrainingResultDateTime.Value.ToString("MM/dd/yyyy"), "TrainingResult", new
-                        {
-                            id = item.LastTrainingResultId
-                        })
-                    }
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new
-                    {
-                        id = item.Id
+                        id = item.LastTrainingResultId
                     })
-                    <br />
-                    @Html.ActionLink("Details", "Details", new
-                    {
-                        id = item.Id
-                    })
-                    <br />
-                    @Html.ActionLink("Delete", "Delete", new
-                    {
-                        id = item.Id
-                    })
-                    <br />
-                    @Html.ActionLink("View All Results", "TrainingResults", new
-                    {
-                        id = item.Id
-                    })
-                </td>
-            </tr>
-        }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new
+                {
+                    id = item.Id
+                })
+                <br/>
+                @Html.ActionLink("Details", "Details", new
+                {
+                    id = item.Id
+                })
+                <br/>
+                @Html.ActionLink("Delete", "Delete", new
+                {
+                    id = item.Id
+                })
+                <br/>
+                @Html.ActionLink("View All Results", "TrainingResults", new
+                {
+                    id = item.Id
+                })
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

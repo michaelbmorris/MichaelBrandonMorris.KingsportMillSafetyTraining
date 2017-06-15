@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Reorder", "Reorder", "Categories") | @Html.ActionLink("Assign Roles", "AssignRoles", "Categories")
 </p>
-<table class = "table" >
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -54,17 +54,17 @@
                 {
                     id = item.Id
                 })
-                <br />
+                <br/>
                 @Html.ActionLink("Details", "Details", new
                 {
                     id = item.Id
                 })
-                <br />
+                <br/>
                 @Html.ActionLink("Delete", "Delete", new
                 {
                     id = item.Id
                 })
-                <br />
+                <br/>
                 @Html.ActionLink("Assign Roles", "AssignRoles", new
                 {
                     id = item.Id

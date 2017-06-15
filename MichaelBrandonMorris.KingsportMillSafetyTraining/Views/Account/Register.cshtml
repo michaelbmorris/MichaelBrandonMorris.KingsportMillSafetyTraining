@@ -12,18 +12,18 @@
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
-    <hr />
+    <hr/>
     @Html.ValidationSummary("", new
     {
         @class = "text-danger"
     })
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.FirstName, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.TextBoxFor(m => m.FirstName, new
             {
                 @class = "form-control"
@@ -31,12 +31,12 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.MiddleName, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.TextBoxFor(m => m.MiddleName, new
             {
                 @class = "form-control"
@@ -44,12 +44,12 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.LastName, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.TextBoxFor(m => m.LastName, new
             {
                 @class = "form-control"
@@ -57,31 +57,31 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.BirthDate, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
-            <div class = "date input-group"
-                 id = 'datetimepicker1' >
+        <div class="col-md-10">
+            <div class="date input-group"
+                 id='datetimepicker1'>
                 @Html.TextBoxFor(m => m.BirthDate, new
                 {
                     @class = "form-control"
                 })
-                <span class = "input-group-addon" >
-                    <span class = "glyphicon glyphicon-calendar" ></span>
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
                 </span>
             </div>
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.CompanyName, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.TextBoxFor(m => m.CompanyName, new
             {
                 @class = "form-control"
@@ -89,12 +89,12 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new
             {
                 @class = "form-control"
@@ -102,12 +102,12 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.Password, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new
             {
                 @class = "form-control"
@@ -115,12 +115,12 @@
         </div>
     </div>
 
-    <div class = "form-group" >
+    <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new
         {
             @class = "col-md-2 control-label"
         })
-        <div class = "col-md-10" >
+        <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new
             {
                 @class = "form-control"
@@ -128,11 +128,11 @@
         </div>
     </div>
 
-    <div class = "form-group" >
-        <div class = "col-md-10 col-md-offset-2" >
-            <input class = "btn btn-default"
-                   type = "submit"
-                   value = "Register" />
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <input class="btn btn-default"
+                   type="submit"
+                   value="Register"/>
         </div>
     </div>
 }
@@ -140,7 +140,7 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type = "text/javascript" >
+    <script type="text/javascript">
         $(function() {
             $('#datetimepicker1').datetimepicker({
                 format: "MM/DD/YYYY"

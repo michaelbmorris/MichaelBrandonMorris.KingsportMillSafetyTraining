@@ -7,57 +7,57 @@
 
 <h2>Reorder</h2>
 <h4>Categories</h4>
-<hr />
+<hr/>
 
 @using (Html.BeginForm())
 {
-    <table class = "table table-condensed table-hover table-striped"
-           id = "sort" >
+    <table class="table table-condensed table-hover table-striped"
+           id="sort">
         <thead>
-            <tr>
-                <th>
-                    Drag to Reorder
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Single().Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Single().Description)
-                </th>
-            </tr>
+        <tr>
+            <th>
+                Drag to Reorder
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Single().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Single().Description)
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @for (var i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td class = "index" >
-                        &#8597;
-                        @Html.HiddenFor(model => Model[i].Id)
-                        @Html.HiddenFor(model => Model[i].Index, new
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td class="index">
+                    &#8597;
+                    @Html.HiddenFor(model => Model[i].Id)
+                    @Html.HiddenFor(model => Model[i].Index, new
+                    {
+                        htmlAttributes = new
                         {
-                            htmlAttributes = new
-                            {
-                                name = string.Format("slides[{0}].Index", i),
-                                @readonly = true
-                            }
-                        })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => Model[i].Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => Model[i].Description)
-                    </td>
-                </tr>
-            }
+                            name = string.Format("slides[{0}].Index", i),
+                            @readonly = true
+                        }
+                    })
+                </td>
+                <td>
+                    @Html.DisplayFor(m => Model[i].Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => Model[i].Description)
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 
-    <input class = "btn btn-default"
-           type = "submit"
-           value = "Save Order" />
-    <button class = "btn btn-default"
-            onclick = "location.href = '@Url.Action("Index")';return false;" >
+    <input class="btn btn-default"
+           type="submit"
+           value="Save Order"/>
+    <button class="btn btn-default"
+            onclick="location.href = '@Url.Action("Index")';return false;">
         Cancel
     </button>
 }

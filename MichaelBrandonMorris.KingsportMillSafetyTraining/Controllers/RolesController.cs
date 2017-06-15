@@ -25,9 +25,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             _db.UnpairCategoriesAndRoles();
 
             if (roleCategories == null)
-            {
                 return RedirectToAction("Index");
-            }
 
             foreach (var roleCategory in roleCategories)
             {
@@ -51,9 +49,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Create(Role role)
         {
             if (!ModelState.IsValid)
-            {
                 return View(role);
-            }
 
             _db.CreateRole(role);
             _db.SaveChanges();
@@ -64,16 +60,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var role = _db.GetRole(id.Value);
 
             if (role == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(role);
         }
@@ -86,9 +78,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var role = _db.GetRole(id);
 
             if (role != null)
-            {
                 _db.DeleteRole(role);
-            }
 
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -98,16 +88,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var model = _db.GetRoleViewModel(id.Value);
 
             if (model == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(model);
         }
@@ -116,16 +102,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var role = _db.GetRole(id.Value);
 
             if (role == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(role);
         }
@@ -135,9 +117,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(Role role)
         {
             if (!ModelState.IsValid)
-            {
                 return View(role);
-            }
 
             _db.Entry(role).State = EntityState.Modified;
             _db.SaveChanges();
@@ -168,9 +148,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 _db.Dispose();
-            }
 
             base.Dispose(disposing);
         }

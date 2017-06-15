@@ -16,16 +16,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModel
             RoleViewModels = roleViewModels;
         }
 
-        public IList<Category> Categories
-        {
-            get;
-            set;
-        }
+        public IList<Category> Categories { get; set; }
 
-        public IList<RoleViewModel> RoleViewModels
-        {
-            get;
-            set;
-        }
+        public IList<RoleViewModel> RoleViewModels { get; set; }
     }
 }

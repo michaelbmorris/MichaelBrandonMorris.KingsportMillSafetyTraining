@@ -10,44 +10,44 @@
 
 @using (Html.BeginForm())
 {
-    <table class = "table table-condensed table-striped" >
+    <table class="table table-condensed table-striped">
         <thead>
+        <tr>
+            @foreach (var role in Model.Roles)
+            {
+                <th>@Html.DisplayFor(role.Title)</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var categoryViewModel in Model.CategoryViewModels)
+        {
             <tr>
                 @foreach (var role in Model.Roles)
                 {
-                    <th>@Html.DisplayFor(role.Title)</th>
+                    <td>
+                        <div class="checkbox">
+                            <label>
+                                <input name="roleCategories"
+                                       type="checkbox"
+                                       value="@Helpers.CantorPair(role.Id, categoryViewModel.Id)"
+                                       @Html.Attribute("checked", "checked", categoryViewModel.Roles.Contains(role))/>
+                                @Html.DisplayFor(modelCategoryViewModel => categoryViewModel.Title)
+                            </label>
+                        </div>
+
+                    </td>
                 }
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var categoryViewModel in Model.CategoryViewModels)
-            {
-                <tr>
-                    @foreach (var role in Model.Roles)
-                    {
-                        <td>
-                            <div class = "checkbox" >
-                                <label>
-                                    <input name = "roleCategories"
-                                           type = "checkbox"
-                                           value = "@Helpers.CantorPair(role.Id, categoryViewModel.Id)"
-                                           @Html.Attribute("checked", "checked", categoryViewModel.Roles.Contains(role)) />
-                                    @Html.DisplayFor(modelCategoryViewModel => categoryViewModel.Title)
-                                </label>
-                            </div>
-                            
-                        </td>
-                    }
-                </tr>
-            }
+        }
         </tbody>
     </table>
 
     <input class="btn btn-default"
-           type ="submit"
-           value ="Submit"/>
-    <button class = "btn btn-default"
-            onclick = "location.href = '@Url.Action("Index")';return false;" >
+           type="submit"
+           value="Submit"/>
+    <button class="btn btn-default"
+            onclick="location.href = '@Url.Action("Index")';return false;">
         Cancel
     </button>
 }

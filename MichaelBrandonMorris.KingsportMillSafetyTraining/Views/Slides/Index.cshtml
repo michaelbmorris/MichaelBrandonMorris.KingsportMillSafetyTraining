@@ -12,43 +12,43 @@
     @Html.ActionLink("Create New", "Create") | @Html.ActionLink("Reorder", "Reorder")
 </p>
 
-<table class = "table table-bordered table-striped" >
+<table class="table table-bordered table-striped">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().CategoryTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().ImageBytes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().ImageDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowSlideInSlideshow)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowQuestionOnQuiz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowImageOnQuiz)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().Question)
-            </th>
-            <th>
-                @Html.DisplayNameFor(x => Model.Single().Answers)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().CategoryTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().ImageBytes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().ImageDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().ShouldShowSlideInSlideshow)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().ShouldShowQuestionOnQuiz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().ShouldShowImageOnQuiz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().Question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => Model.Single().Answers)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
     </thead>
     @{
         int rowCount;
@@ -68,7 +68,7 @@
             <tr>
                 @if (k == i)
                 {
-                    <td rowspan = "@rowCount" >
+                    <td rowspan="@rowCount">
                         @Html.DisplayFor(Model[k].CategoryTitle)
                         @Html.ActionLink("Reorder", "Reorder", new
                         {
@@ -83,11 +83,11 @@
                     @Html.DisplayFor(Model[k].Content)
                 </td>
                 <td>
-                    <img src = "@Url.Action("RenderImage", new
-                                {
-                                    id = Model[k].Id
-                                })"
-                         alt = "@Model[k].ImageDescription" />
+                    <img src="@Url.Action("RenderImage", new
+                              {
+                                  id = Model[k].Id
+                              })"
+                         alt="@Model[k].ImageDescription"/>
                 </td>
                 <td>
                     @Html.DisplayFor(Model[k].ImageDescription)
@@ -110,11 +110,11 @@
                         {
                             if (Model[k].CorrectAnswerIndex == answer.Index)
                             {
-                                <li class = "correct" >@answer.Title</li>
+                                <li class="correct">@answer.Title</li>
                             }
                             else
                             {
-                                <li class = "incorrect" >@answer.Title</li>
+                                <li class="incorrect">@answer.Title</li>
                             }
                         }
                     </ul>
@@ -124,12 +124,12 @@
                     {
                         id = Model[k].Id
                     })
-                    <br />
+                    <br/>
                     @Html.ActionLink("Details", "Details", new
                     {
                         id = Model[k].Id
                     })
-                    <br />
+                    <br/>
                     @Html.ActionLink("Delete", "Delete", new
                     {
                         id = Model[k].Id

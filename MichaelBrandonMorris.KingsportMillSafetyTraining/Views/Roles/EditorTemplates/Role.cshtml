@@ -5,12 +5,12 @@
     @class = "text-danger"
 })
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.Title, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.EditorFor(model => model.Title, new
         {
             htmlAttributes = new
@@ -25,12 +25,12 @@
     </div>
 </div>
 
-<div class = "form-group" >
+<div class="form-group">
     @Html.LabelFor(model => model.Description, new
     {
         @class = "control-label col-md-2"
     })
-    <div class = "col-md-10" >
+    <div class="col-md-10">
         @Html.TextAreaFor(model => model.Description, new
         {
             @class = "form-control"
@@ -44,17 +44,17 @@
 
 <div class="form-group">
     @Html.LabelFor(model => model.Question, new
-{
-    @class = "control-label col-md-2"
-})
+    {
+        @class = "control-label col-md-2"
+    })
     <div class="col-md-10">
         @Html.TextAreaFor(model => model.Question, new
-   {
-       @class = "form-control"
-   })
+        {
+            @class = "form-control"
+        })
         @Html.ValidationMessageFor(model => model.Question, "", new
-   {
-       @class = "text-danger"
-   })
+        {
+            @class = "text-danger"
+        })
     </div>
 </div>

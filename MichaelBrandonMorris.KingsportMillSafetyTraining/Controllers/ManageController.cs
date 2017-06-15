@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Manage;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -31,30 +29,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager
-                       ?? HttpContext.GetOwinContext()
-                           .Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
+            get => _signInManager
+                   ?? HttpContext.GetOwinContext()
+                       .Get<ApplicationSignInManager>();
+            private set => _signInManager = value;
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager
-                       ?? HttpContext.GetOwinContext()
-                           .GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get => _userManager
+                   ?? HttpContext.GetOwinContext()
+                       .GetUserManager<ApplicationUserManager>();
+            private set => _userManager = value;
         }
 
         //
@@ -72,9 +58,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             AddPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             // Generate the token and send it
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(
@@ -82,14 +66,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 model.Number);
 
             if (UserManager.SmsService == null)
-            {
                 return RedirectToAction(
                     "VerifyPhoneNumber",
                     new
                     {
                         PhoneNumber = model.Number
                     });
-            }
             var message = new IdentityMessage
             {
                 Destination = model.Number,
@@ -121,9 +103,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             var result = await UserManager.ChangePasswordAsync(
                 User.Identity.GetUserId(),
@@ -136,9 +116,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
                 if (user != null)
-                {
                     await SignInManager.SignInAsync(user, false, false);
-                }
 
                 return RedirectToAction(
                     "Index",
@@ -166,9 +144,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user != null)
-            {
                 await SignInManager.SignInAsync(user, false, false);
-            }
 
             return RedirectToAction("Index", "Manage");
         }
@@ -187,9 +163,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user != null)
-            {
                 await SignInManager.SignInAsync(user, false, false);
-            }
 
             return RedirectToAction("Index", "Manage");
         }
@@ -253,14 +227,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     User.Identity.GetUserId());
 
             if (loginInfo == null)
-            {
                 return RedirectToAction(
                     "ManageLogins",
                     new
                     {
                         Message = ManageMessageId.Error
                     });
-            }
 
             var result = await UserManager.AddLoginAsync(
                 User.Identity.GetUserId(),
@@ -291,9 +263,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
-            {
                 return View("Error");
-            }
 
             var userLogins =
                 await UserManager.GetLoginsAsync(User.Identity.GetUserId());
@@ -336,9 +306,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
                 if (user != null)
-                {
                     await SignInManager.SignInAsync(user, false, false);
-                }
 
                 message = ManageMessageId.RemoveLoginSuccess;
             }
@@ -367,21 +335,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     null);
 
             if (!result.Succeeded)
-            {
                 return RedirectToAction(
                     "Index",
                     new
                     {
                         Message = ManageMessageId.Error
                     });
-            }
             var user =
                 await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user != null)
-            {
                 await SignInManager.SignInAsync(user, false, false);
-            }
 
             return RedirectToAction(
                 "Index",
@@ -405,9 +369,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             var result = await UserManager.AddPasswordAsync(
                 User.Identity.GetUserId(),
@@ -420,9 +382,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         User.Identity.GetUserId());
 
                 if (user != null)
-                {
                     await SignInManager.SignInAsync(user, false, false);
-                }
 
                 return RedirectToAction(
                     "Index",
@@ -464,9 +424,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             VerifyPhoneNumberViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             var result = await UserManager.ChangePhoneNumberAsync(
                 User.Identity.GetUserId(),
@@ -479,9 +437,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
                 if (user != null)
-                {
                     await SignInManager.SignInAsync(user, false, false);
-                }
 
                 return RedirectToAction(
                     "Index",
@@ -512,20 +468,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
-            {
                 ModelState.AddModelError("", error);
-            }
         }
 
         private bool HasPassword()

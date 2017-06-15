@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<dl class = "dl-horizontal" >
+<dl class="dl-horizontal">
     <dt>
         @Html.DisplayNameFor(model => model.Title)
     </dt>
@@ -26,11 +26,11 @@
     </dt>
 
     <dd>
-        <img src = "@Url.Action("RenderImage", new
-                    {
-                        id = Model.Id
-                    })"
-             alt = "@Model.ImageDescription" />
+        <img src="@Url.Action("RenderImage", new
+                  {
+                      id = Model.Id
+                  })"
+             alt="@Model.ImageDescription"/>
     </dd>
 
     <dt>

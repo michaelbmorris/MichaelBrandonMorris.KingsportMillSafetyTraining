@@ -5,28 +5,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewM
 {
     public class SendCodeViewModel
     {
-        public ICollection<SelectListItem> Providers
-        {
-            get;
-            set;
-        }
+        public ICollection<SelectListItem> Providers { get; set; }
 
-        public bool RememberMe
-        {
-            get;
-            set;
-        }
+        public bool RememberMe { get; set; }
 
-        public string ReturnUrl
-        {
-            get;
-            set;
-        }
+        public string ReturnUrl { get; set; }
 
-        public string SelectedProvider
-        {
-            get;
-            set;
-        }
+        public string SelectedProvider { get; set; }
     }
 }

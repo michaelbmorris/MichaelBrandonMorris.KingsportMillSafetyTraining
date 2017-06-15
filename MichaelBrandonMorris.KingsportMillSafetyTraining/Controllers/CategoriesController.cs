@@ -29,9 +29,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Create(Category category)
         {
             if (!ModelState.IsValid)
-            {
                 return View(category);
-            }
 
             _db.CreateCategory(category);
             return RedirectToAction("Index");
@@ -41,16 +39,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var category = _db.GetCategory(id.Value);
 
             if (category == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(category);
         }
@@ -63,9 +57,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var category = _db.GetCategory(id);
 
             if (category != null)
-            {
                 _db.DeleteCategory(category);
-            }
 
             return RedirectToAction("Index");
         }
@@ -74,16 +66,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var model = _db.GetCategoryViewModel(id.Value);
 
             if (model == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(model);
         }
@@ -92,16 +80,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var category = _db.GetCategory(id.Value);
 
             if (category == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(category);
         }
@@ -111,9 +95,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Edit(Category category)
         {
             if (!ModelState.IsValid)
-            {
                 return View(category);
-            }
 
             _db.Edit(category);
             return RedirectToAction("Index");
@@ -143,9 +125,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 _db.Dispose();
-            }
 
             base.Dispose(disposing);
         }

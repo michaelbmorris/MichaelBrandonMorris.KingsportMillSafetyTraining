@@ -18,40 +18,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModel
             Title = category.Title;
         }
 
-        public string Description
-        {
-            get;
-            set;
-        }
+        public string Description { get; set; }
 
-        public int Id
-        {
-            get;
-            set;
-        }
+        public int Id { get; set; }
 
-        public int Index
-        {
-            get;
-            set;
-        }
+        public int Index { get; set; }
 
-        public IList<Role> Roles
-        {
-            get;
-            set;
-        } = new List<Role>();
+        public IList<Role> Roles { get; set; } = new List<Role>();
 
-        public IList<Slide> Slides
-        {
-            get;
-            set;
-        } = new List<Slide>();
+        public IList<Slide> Slides { get; set; } = new List<Slide>();
 
-        public string Title
-        {
-            get;
-            set;
-        }
+        public string Title { get; set; }
     }
 }
