@@ -165,7 +165,9 @@
 {
     <script type="text/javascript">
         function viewSlide(slideId) {
-            window.open("/Slides/ViewSlide/" + slideId);
+            var url = "@Url.Action("ViewSlide", "Slides", new { id = "_ID_"})";
+            
+            window.open(url.replace("_ID_", slideId));
             $(".AnswerFor-" + slideId).prop("disabled", false);
             return false;
         }

@@ -181,6 +181,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult ViewSlide(int id)
         {
