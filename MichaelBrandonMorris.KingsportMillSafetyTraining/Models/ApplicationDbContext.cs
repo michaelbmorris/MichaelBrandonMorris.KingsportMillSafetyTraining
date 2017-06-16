@@ -251,6 +251,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         public void SetUserRole(string userId, int? roleId)
         {
+            DoTransaction(() => _SetUserRole(userId, roleId));      
+        }
+
+        private void _SetUserRole(string userId, int? roleId)
+        {
             var user = Users.Find(userId);
 
             user.Role = roleId == null

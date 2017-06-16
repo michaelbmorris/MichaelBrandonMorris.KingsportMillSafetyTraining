@@ -13,5 +13,8 @@
             @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
             ]
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
     </dl>
 </div>

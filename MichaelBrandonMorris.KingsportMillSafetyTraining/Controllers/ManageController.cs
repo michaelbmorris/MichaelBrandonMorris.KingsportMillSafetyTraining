@@ -44,15 +44,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             private set => _userManager = value;
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(
@@ -63,7 +59,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
-            // Generate the token and send it
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(
                 User.Identity.GetUserId(),
                 model.Number);
@@ -94,15 +89,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // GET: /Manage/ChangePassword
+        [HttpGet]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(
@@ -140,8 +132,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
@@ -161,8 +151,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
@@ -182,8 +170,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // GET: /Manage/Index
+        [HttpGet]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -212,27 +199,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered =
                     await AuthenticationManager.TwoFactorBrowserRememberedAsync(
-                        userId)
+                        userId),
+                RoleTitle = UserManager.GetRole(userId).Result.Title
             };
 
             return View(model);
         }
 
-        //
-        // POST: /Manage/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
-            // Request a redirect to the external login provider to link a login for the current user
             return new AccountController.ChallengeResult(
                 provider,
                 Url.Action("LinkLoginCallback", "Manage"),
                 User.Identity.GetUserId());
         }
 
-        //
-        // GET: /Manage/LinkLoginCallback
+        [HttpGet]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo =
@@ -264,8 +248,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
         }
 
-        //
-        // GET: /Manage/ManageLogins
+        [HttpGet]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -304,8 +287,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // POST: /Manage/RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(
@@ -343,8 +324,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // POST: /Manage/RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
@@ -380,15 +359,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        //
-        // GET: /Manage/SetPassword
+        [HttpGet]
         public ActionResult SetPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -421,20 +397,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             AddErrors(result);
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Manage/VerifyPhoneNumber
+        [HttpGet]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(
                 User.Identity.GetUserId(),
                 phoneNumber);
 
-            // Send an SMS through the SMS provider to verify the phone number
             return phoneNumber == null
                 ? View("Error")
                 : View(
@@ -444,8 +416,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
         }
 
-        //
-        // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(
@@ -479,7 +449,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            // If we got this far, something failed, redisplay form
             ModelState.AddModelError("", "Failed to verify phone");
             return View(model);
         }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -13,6 +15,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
+        }
+
+        public async Task<Role> GetRole(string userId)
+        {
+            var user = await FindByIdAsync(userId);
+
+            if (user.Role == null)
+            {
+                throw new Exception();
+            }
+
+            return user.Role;
         }
 
         public static ApplicationUserManager Create(

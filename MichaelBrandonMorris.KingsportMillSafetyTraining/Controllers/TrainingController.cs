@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -9,7 +10,6 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
-using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -96,7 +96,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     Shows the result of the training. Since this controller does not
         ///     require authorization, only training results belonging to the
         ///     current user will be shown. Administrators have access to the
-        ///     Result action in the Users controller to view results for all users.
+        ///     Result action in the Users controller to view results for all
+        ///     users.
         /// </summary>
         /// <param name="id">The <see cref="TrainingResult" /> id.</param>
         /// <returns>
@@ -129,6 +130,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpPost]
         public ActionResult SelectRole(int? roleId)
         {
+            Debug.WriteLine(roleId);
             _db.SetUserRole(User.Identity.GetUserId(), roleId);
             return RedirectToAction("Index");
         }
