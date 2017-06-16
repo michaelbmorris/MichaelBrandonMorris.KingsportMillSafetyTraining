@@ -37,8 +37,7 @@
         $(document).ready(function($) {
             $("#add-answer").on('click',
                 function() {
-                    $.get(
-                        '/Slides/AddAnswer').done(function(html) {
+                    $.get("@Url.Action("AddAnswer")").done(function(html) {
                         $("#answers-list").append(html);
                     });
                 });

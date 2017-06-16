@@ -52,6 +52,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             set;
         } = new List<Category>();
 
+        [Display(Name = "Category")]
         public int CategoryId
         {
             get;

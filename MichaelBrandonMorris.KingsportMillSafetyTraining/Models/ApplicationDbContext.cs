@@ -643,7 +643,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             string id)
         {
             var user = Users.Find(id);
-            return user.GetTrainingResults().AsViewModels();
+            return user.GetTrainingResultsDescending(x => x.CompletionDateTime).AsViewModels();
         }
 
         private IList<UserViewModel> _GetUserViewModels()
@@ -938,6 +938,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Func<TrainingResult, bool> wherePredicate = null)
         {
             return user.TrainingResults.OrderByWhere(
+                orderByPredicate,
+                wherePredicate);
+        }
+
+        public static IList<TrainingResult> GetTrainingResultsDescending(
+            this ApplicationUser user,
+            Func<TrainingResult, object> orderByPredicate = null,
+            Func<TrainingResult, bool> wherePredicate = null)
+        {
+            return user.TrainingResults.OrderByDescendingWhere(
                 orderByPredicate,
                 wherePredicate);
         }

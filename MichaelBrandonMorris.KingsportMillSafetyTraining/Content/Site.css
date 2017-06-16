@@ -36,10 +36,12 @@ table img {
 
 :not(label).correct:before {
     content: '✔';
+    margin-right: 0.5em;
 }
 
 :not(label).incorrect:before {
     content: 'X';
+    margin-right: 0.73em;
 }
 
 .bg-info {
