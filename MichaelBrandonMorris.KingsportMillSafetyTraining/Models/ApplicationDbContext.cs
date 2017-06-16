@@ -13,6 +13,7 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.User;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
@@ -67,6 +68,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             get;
             set;
         }
+
+        private static Func<Category, object> OrderByCategoryIndex => x => x
+            .Index;
+
+        private static Func<Slide, object> OrderBySlideIndex => x => x.Index;
+
+        private static Func<Slide, bool> ShouldShowSlideInSlideshow => x => x
+            .ShouldShowSlideInSlideshow;
+
+        private static Func<Slide, bool> ShouldShowSlideOnQuiz => x =>
+            x.ShouldShowSlideInSlideshow && x.ShouldShowQuestionOnQuiz;
 
         /// <summary>
         ///     Creates a new <see cref="ApplicationDbContext" />.
@@ -175,13 +187,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetAssignRolesViewModel(id));
         }
 
-        public IList<Category> GetCategories(
-            Func<Category, object> orderBy = null,
-            Func<Category, bool> where = null)
-        {
-            return DoTransaction(() => _GetCategories(orderBy, where));
-        }
-
         public Category GetCategory(int id)
         {
             return DoTransaction(() => _GetCategory(id));
@@ -193,10 +198,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         public IList<CategoryViewModel> GetCategoryViewModels(
-            Func<Category, object> orderByPredicate)
+            Func<Category, object> orderByPredicate = null,
+            Func<Category, bool> wherePredicate = null)
         {
             return DoTransaction(
-                () => _GetCategoryViewModels(orderByPredicate));
+                () => GetCategories(orderByPredicate, wherePredicate)
+                    .AsViewModels());
         }
 
         /// <summary>
@@ -220,11 +227,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetRole(predicate));
         }
 
-        public IList<Role> GetRoles(Func<Role, object> orderByPredicate = null)
-        {
-            return DoTransaction(() => _GetRoles(orderByPredicate));
-        }
-
         public RoleViewModel GetRoleViewModel(int id)
         {
             return DoTransaction(() => _GetRoleViewModel(id));
@@ -241,12 +243,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlide(id));
         }
 
-        public IList<Slide> GetSlides(
-            int? categoryId = null,
-            Func<Slide, object> orderByPredicate = null)
+        public SlideViewModel GetNewSlideViewModel()
         {
             return DoTransaction(
-                () => _GetSlides(categoryId, orderByPredicate));
+                () => new SlideViewModel(null, GetCategories()));
+        }
+
+        public void SetUserRole(string userId, int? roleId)
+        {
+            var user = Users.Find(userId);
+
+            user.Role = roleId == null
+                ? TrainingRoles.MaxBy(x => x.Index)
+                : TrainingRoles.Find(roleId);
         }
 
         public IList<SlideViewModel> GetSlideshowViewModel(Role role)
@@ -343,22 +352,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private static IList<QuizSlideViewModel> _GetQuizViewModel(Role role)
         {
-            var quizViewModel = (from category in role.Categories
-                from slide in category.Slides.Where(
-                    x => x.ShouldShowSlideInSlideshow
-                         && x.ShouldShowQuestionOnQuiz)
-                select new QuizSlideViewModel(slide)).ToList();
+            var quizViewModel = from x in role.GetCategories()
+                from y in x.GetSlides(wherePredicate: ShouldShowSlideOnQuiz)
+                    .AsQuizSlideViewModels()
+                select y;
 
-            return quizViewModel.Shuffle();
+            return quizViewModel.ShuffleToList();
         }
 
         private static IList<SlideViewModel> _GetSlideshowViewModel(Role role)
         {
-            return (from category in
-                Enumerable.OrderBy(role.Categories, x => x.Index)
-                from slide in Enumerable.OrderBy(category.Slides, x => x.Index)
-                    .Where(x => x.ShouldShowSlideInSlideshow)
-                select new SlideViewModel(slide)).ToList();
+            return (from x in role.GetCategories(OrderByCategoryIndex)
+                from y in x.GetSlides(
+                        OrderBySlideIndex,
+                        ShouldShowSlideInSlideshow)
+                    .AsViewModels()
+                select y).ToList();
         }
 
         private void _AddQuizResult(
@@ -429,7 +438,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _DeleteCategory(Category category)
         {
-            foreach (var slide in category.Slides.ToList())
+            foreach (var slide in category.Slides)
             {
                 slide.Category = null;
             }
@@ -446,7 +455,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _DeleteSlide(Slide slide)
         {
-            foreach (var answer in slide.Answers.ToList())
+            foreach (var answer in slide.Answers())
             {
                 Answers.Attach(answer);
                 Answers.Remove(answer);
@@ -513,9 +522,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 }
             }
 
-            foreach (var answer in Enumerable
-                .Where(slide.Answers, x => x.Id != 0)
-                .ToList())
+            foreach (var answer in slide.Answers(x => x.Id != 0))
             {
                 if (model.Answers.All(x => x.Id != answer.Id))
                 {
@@ -533,8 +540,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private AssignCategoriesViewModel _GetAssignCategoriesViewModel(
             int? id = null)
         {
-            IList<Role> roles = id == null
-                ? TrainingRoles.ToList()
+            var roles = id == null
+                ? GetRoles()
                 : new List<Role>
                 {
                     _GetRole(id.Value)
@@ -542,37 +549,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             return new AssignCategoriesViewModel(
                 roles,
-                _GetCategoryViewModels());
+                GetCategories().AsViewModels());
         }
 
         private AssignRolesViewModel _GetAssignRolesViewModel(int? id = null)
         {
-            IList<Category> categories = id == null
-                ? Categories.ToList()
+            var categories = id == null
+                ? GetCategories()
                 : new List<Category>
                 {
                     _GetCategory(id.Value)
                 };
-            return new AssignRolesViewModel(categories, _GetRoleViewModels());
-        }
 
-        private IList<Category> _GetCategories(
-            Func<Category, object> orderByPredicate = null,
-            Func<Category, bool> wherePredicate = null)
-        {
-            IEnumerable<Category> categories = Categories;
-
-            if (orderByPredicate != null)
-            {
-                categories = categories.OrderBy(orderByPredicate);
-            }
-
-            if (wherePredicate != null)
-            {
-                categories = categories.Where(wherePredicate);
-            }
-
-            return categories.ToList();
+            return new AssignRolesViewModel(
+                categories,
+                GetRoles().AsViewModels());
         }
 
         private Category _GetCategory(int id)
@@ -582,21 +573,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private CategoryViewModel _GetCategoryViewModel(int id)
         {
-            var category = Categories.Find(id);
-            return new CategoryViewModel(category);
-        }
-
-        private IList<CategoryViewModel> _GetCategoryViewModels(
-            Func<Category, object> orderByPredicate = null)
-        {
-            IList<Category> categories =
-                orderByPredicate == null
-                    ? Categories.ToList()
-                    : Categories.OrderBy(orderByPredicate).ToList();
-
-            return categories
-                .Select(category => new CategoryViewModel(category))
-                .ToList();
+            return Categories.Find(id).AsViewModel();
         }
 
         private Role _GetRole(int id)
@@ -607,16 +584,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private Role _GetRole(Func<Role, bool> predicate)
         {
             return TrainingRoles.Single(predicate);
-        }
-
-        private IList<Role> _GetRoles(
-            Func<Role, object> orderByPredicate = null)
-        {
-            var roles = TrainingRoles;
-
-            return orderByPredicate == null
-                ? roles.ToList()
-                : roles.OrderBy(orderByPredicate).ToList();
         }
 
         private RoleViewModel _GetRoleViewModel(int id)
@@ -640,83 +607,48 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return Slides.Find(id);
         }
 
-        private IList<Slide> _GetSlides(
-            int? categoryId = null,
-            Func<Slide, object> orderByPredicate = null)
+        private SlideViewModel _GetSlideViewModel(int id)
+        {
+            var slide = Slides.Find(id);
+            return slide.AsViewModel(GetCategories());
+        }
+
+        private IList<SlideViewModel> _GetSlideViewModels(int? categoryId)
         {
             IList<Slide> slides;
 
             if (categoryId == null)
             {
-                slides = Slides.ToList();
+                slides = (from x in GetCategories(x => x.Index)
+                    from y in x.GetSlides(y => y.Index)
+                    select y).ToList();
             }
             else
             {
                 var category = Categories.Find(categoryId);
 
-                if (category == null)
-                {
-                    throw new Exception();
-                }
-
-                slides = category.Slides;
-            }
-
-            return orderByPredicate == null
-                ? slides
-                : slides.OrderBy(orderByPredicate).ToList();
-        }
-
-        private SlideViewModel _GetSlideViewModel(int id)
-        {
-            var slide = Slides.Find(id);
-
-            return slide == null
-                ? null
-                : new SlideViewModel(slide, _GetCategories());
-        }
-
-        private IList<SlideViewModel> _GetSlideViewModels(int? categoryId)
-        {
-            IEnumerable<Slide> slides;
-
-            if (categoryId == null)
-            {
-                slides = from x in this.Categories(x => x.Index)
-                    from y in x.Slides(y => y.Index)
-                    select y;
-            }
-            else
-            {
-                var category = Categories.Find(categoryId);
-
-                slides = category?.Slides(x => x.Index)
+                slides = category?.GetSlides(x => x.Index)
                          ?? throw new Exception();
             }
 
-            return slides.Select(x => new SlideViewModel(x)).ToList();
+            return slides.AsViewModels();
         }
 
         private TrainingResultViewModel _GetTrainingResultViewModel(int id)
         {
-            var trainingResult = TrainingResults.Find(id);
-            return new TrainingResultViewModel(trainingResult);
+            return TrainingResults.Find(id).AsViewModel();
         }
 
         private IList<TrainingResultViewModel> _GetTrainingResultViewModels(
             string id)
         {
             var user = Users.Find(id);
-
-            return user.TrainingResults
-                .Select(x => new TrainingResultViewModel(x))
-                .ToList();
+            return user.GetTrainingResults().AsViewModels();
         }
 
         private IList<UserViewModel> _GetUserViewModels()
         {
-            var users = Users.ToList().Select(user => new UserViewModel(user));
-            return users.ToList();
+            return GetUsers().AsViewModels();
         }
 
         private bool _IsUserTrainingResult(string userId, int trainingResultId)
@@ -786,14 +718,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _UnpairCategoriesAndRoles()
         {
-            foreach (var category in this.Categories())
-            foreach (var role in category.Roles.ToList())
+            foreach (var category in GetCategories())
+            foreach (var role in category.GetRoles())
             {
                 category.Roles.Remove(role);
             }
 
-            foreach (var role in TrainingRoles.ToList())
-            foreach (var category in role.Categories.ToList())
+            foreach (var role in GetRoles())
+            foreach (var category in role.GetCategories())
             {
                 role.Categories.Remove(category);
             }
@@ -864,35 +796,150 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             return t;
         }
+
+        private IList<Category> GetCategories(
+            Func<Category, object> orderByPredicate = null,
+            Func<Category, bool> wherePredicate = null)
+        {
+            return Categories.OrderByWhere(orderByPredicate, wherePredicate);
+        }
+
+        private IList<Role> GetRoles(
+            Func<Role, object> orderByPredicate = null,
+            Func<Role, bool> wherePredicate = null)
+        {
+            return TrainingRoles.OrderByWhere(orderByPredicate, wherePredicate);
+        }
+
+        private IList<ApplicationUser> GetUsers(
+            Func<ApplicationUser, object> orderByPredicate = null,
+            Func<ApplicationUser, bool> wherePredicate = null)
+        {
+            return Users.OrderByWhere(orderByPredicate, wherePredicate);
+        }
     }
 
     public static class Extensions
     {
-        public static IList<Category> Categories(
-            this ApplicationDbContext db,
-            Func<Category, object> orderByPredicate = null)
+        public static IList<Answer> Answers(
+            this Slide slide,
+            Func<Answer, object> orderByPredicate = null,
+            Func<Answer, bool> wherePredicate = null)
         {
-            var categories = db.Categories;
-
-            return orderByPredicate == null
-                ? categories.ToList()
-                : categories.OrderBy(orderByPredicate).ToList();
+            return slide.Answers.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
-        public static IList<Role> Roles(this Category category)
+        public static IList<QuizSlideViewModel> AsQuizSlideViewModels(
+            this IList<Slide> slides)
         {
-            return category.Roles.ToList();
+            return slides.Select(x => new QuizSlideViewModel(x));
         }
 
-        public static IList<Slide> Slides(
+        public static SlideViewModel AsViewModel(
+            this Slide slide,
+            IList<Category> categories = null)
+        {
+            if (slide == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return new SlideViewModel(slide, categories);
+        }
+
+        public static RoleViewModel AsViewModel(this Role role)
+        {
+            if (role == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return new RoleViewModel(role);
+        }
+
+        public static CategoryViewModel AsViewModel(this Category category)
+        {
+            if (category == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return new CategoryViewModel(category);
+        }
+
+        public static TrainingResultViewModel AsViewModel(
+            this TrainingResult trainingResult)
+        {
+            if (trainingResult == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return new TrainingResultViewModel(trainingResult);
+        }
+
+        public static IList<UserViewModel> AsViewModels(
+            this IList<ApplicationUser> users)
+        {
+            return users.Select(x => new UserViewModel(x));
+        }
+
+        public static IList<SlideViewModel> AsViewModels(
+            this IList<Slide> slides)
+        {
+            return slides.Select(x => new SlideViewModel(x));
+        }
+
+        public static IList<RoleViewModel> AsViewModels(this IList<Role> roles)
+        {
+            return roles.Select(x => new RoleViewModel(x));
+        }
+
+        public static IList<CategoryViewModel> AsViewModels(
+            this IList<Category> categories)
+        {
+            return categories.Select(x => new CategoryViewModel(x));
+        }
+
+        public static IList<TrainingResultViewModel> AsViewModels(
+            this IList<TrainingResult> trainingResults)
+        {
+            return trainingResults.Select(x => new TrainingResultViewModel(x));
+        }
+
+        public static IList<Category> GetCategories(
+            this Role role,
+            Func<Category, object> orderByPredicate = null,
+            Func<Category, bool> wherePredicate = null)
+        {
+            return role.Categories.OrderByWhere(
+                orderByPredicate,
+                wherePredicate);
+        }
+
+        public static IList<Role> GetRoles(this Category category)
+        {
+            return category.Roles;
+        }
+
+        public static IList<Slide> GetSlides(
             this Category category,
-            Func<Slide, object> orderByPredicate = null)
+            Func<Slide, object> orderByPredicate = null,
+            Func<Slide, bool> wherePredicate = null)
         {
-            var slides = category.Slides;
+            return category.Slides.OrderByWhere(
+                orderByPredicate,
+                wherePredicate);
+        }
 
-            return orderByPredicate == null
-                ? slides.ToList()
-                : slides.OrderBy(orderByPredicate).ToList();
+        public static IList<TrainingResult> GetTrainingResults(
+            this ApplicationUser user,
+            Func<TrainingResult, object> orderByPredicate = null,
+            Func<TrainingResult, bool> wherePredicate = null)
+        {
+            return user.TrainingResults.OrderByWhere(
+                orderByPredicate,
+                wherePredicate);
         }
     }
 }

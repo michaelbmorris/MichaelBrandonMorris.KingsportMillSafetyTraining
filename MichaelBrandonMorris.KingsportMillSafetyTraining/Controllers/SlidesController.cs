@@ -30,7 +30,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new SlideViewModel(null, _db.GetCategories()));
+            var model = _db.GetNewSlideViewModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -162,7 +163,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectCategoryToReorder");
             }
 
-            var model = _db.GetSlides(categoryId, x => x.Index);
+            var model = _db.GetSlideViewModels(categoryId);
             return View(model);
         }
 
@@ -176,7 +177,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectCategoryToReorder()
         {
-            var model = _db.GetCategories();
+            var model = _db.GetCategoryViewModels();
             return View(model);
         }
 

@@ -14,6 +14,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             Categories = role.Categories;
             Description = role.Description;
             Id = role.Id;
+            Index = role.Index;
             Question = role.Question;
             Title = role.Title;
         }
@@ -31,6 +32,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
         }
 
         public int Id
+        {
+            get;
+            set;
+        }
+
+        public int Index
         {
             get;
             set;

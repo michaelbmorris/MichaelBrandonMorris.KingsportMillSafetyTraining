@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
@@ -120,22 +121,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectRole()
         {
-            var roles = _db.GetRoles(x => x.Index);
-            roles = roles.Take(roles.Count - 1).ToList();
-            return View(roles);
+            var model = _db.GetRoleViewModels(x => x.Index);
+            model = model.Take(model.Count - 1);
+            return View(model);
         }
 
         [HttpPost]
         public ActionResult SelectRole(int? roleId)
         {
-            var user = _db.GetUser(User.Identity.GetUserId());
-
-            user.Role = roleId == null
-                ? _db.GetRoles().MaxBy(x => x.Index)
-                : _db.GetRole(roleId.Value);
-
-            _db.Edit(user);
-
+            _db.SetUserRole(User.Identity.GetUserId(), roleId);
             return RedirectToAction("Index");
         }
 

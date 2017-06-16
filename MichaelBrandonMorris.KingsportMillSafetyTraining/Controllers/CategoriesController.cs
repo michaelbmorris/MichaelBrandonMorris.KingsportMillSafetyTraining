@@ -150,7 +150,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Reorder()
         {
-            var model = _db.GetCategories(x => x.Index);
+            var model = _db.GetCategoryViewModels(x => x.Index);
             return View(model);
         }
 
