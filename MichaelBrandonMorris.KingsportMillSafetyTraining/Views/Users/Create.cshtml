@@ -1,28 +1,14 @@
 ﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ApplicationUser
 
 @{
-    Layout = null;
+    ViewBag.Title = "Create";
+    ViewBag.Subtitle = "User";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width"/>
-    <title>Create</title>
-</head>
-<body>
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
-
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
-    <h4>ApplicationUser</h4>
-    <hr/>
     @Html.ValidationSummary(true, "", new
     {
         @class = "text-danger"
@@ -442,5 +428,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-</body>
-</html>
