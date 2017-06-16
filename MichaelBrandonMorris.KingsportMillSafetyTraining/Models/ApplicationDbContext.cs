@@ -50,6 +50,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     The training results table.
+        /// </summary>
         public DbSet<TrainingResult> TrainingResults
         {
             get;
@@ -675,34 +678,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private IList<SlideViewModel> _GetSlideViewModels(int? categoryId)
         {
-            IList<Slide> slides = new List<Slide>();
+            IEnumerable<Slide> slides;
 
             if (categoryId == null)
             {
-                foreach (var category in Categories.OrderBy(x => x.Index))
-                foreach (var slide in Enumerable.OrderBy(
-                    category.Slides,
-                    x => x.Index))
-                {
-                    slides.Add(slide);
-                }
+                slides = from x in this.Categories(x => x.Index)
+                    from y in x.Slides(y => y.Index)
+                    select y;
             }
             else
             {
                 var category = Categories.Find(categoryId);
 
-                if (category == null)
-                {
-                    throw new Exception();
-                }
-
-                slides = Enumerable.OrderBy(category.Slides, x => x.Index)
-                    .ToList();
+                slides = category?.Slides(x => x.Index)
+                         ?? throw new Exception();
             }
 
-            return slides.ToList()
-                .Select(slide => new SlideViewModel(slide))
-                .ToList();
+            return slides.Select(x => new SlideViewModel(x)).ToList();
         }
 
         private TrainingResultViewModel _GetTrainingResultViewModel(int id)
@@ -794,7 +786,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private void _UnpairCategoriesAndRoles()
         {
-            foreach (var category in Categories.ToList())
+            foreach (var category in this.Categories())
             foreach (var role in category.Roles.ToList())
             {
                 category.Roles.Remove(role);
@@ -871,6 +863,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
 
             return t;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static IList<Category> Categories(
+            this ApplicationDbContext db,
+            Func<Category, object> orderByPredicate = null)
+        {
+            var categories = db.Categories;
+
+            return orderByPredicate == null
+                ? categories.ToList()
+                : categories.OrderBy(orderByPredicate).ToList();
+        }
+
+        public static IList<Role> Roles(this Category category)
+        {
+            return category.Roles.ToList();
+        }
+
+        public static IList<Slide> Slides(
+            this Category category,
+            Func<Slide, object> orderByPredicate = null)
+        {
+            var slides = category.Slides;
+
+            return orderByPredicate == null
+                ? slides.ToList()
+                : slides.OrderBy(orderByPredicate).ToList();
         }
     }
 }
