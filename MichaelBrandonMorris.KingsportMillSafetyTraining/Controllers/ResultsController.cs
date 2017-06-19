@@ -1,11 +1,12 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize]
-    public class TrainingResultsController : Controller
+    public class ResultsController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
@@ -17,25 +18,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            if (!User.IsInRole("Administrator")
+                && _db.IsUserTrainingResult(
+                    User.Identity.GetUserId(),
+                    id.Value))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             var model = _db.GetTrainingResultViewModel(id.Value);
             return View(model);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Index(string userId = null)
         {
-            if (User.IsInRole("Administrator"))
-            {
-                return AdministratorIndex(userId);
-            }
-
-            var model = _db.GetTrainingResultViewModels(userId);
+            var model = _db.GetTrainingResultsViewModel();
             return View(model);
         }
 
-        public ActionResult AdministratorIndex(string userId = null)
+        [HttpGet]
+        public ActionResult UserResults(string id = null)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var model = _db.GetTrainingResultsViewModel(id);
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

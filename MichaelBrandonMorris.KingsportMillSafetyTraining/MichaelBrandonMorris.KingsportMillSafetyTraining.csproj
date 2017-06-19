@@ -52,6 +52,9 @@
     <Reference Include="MichaelBrandonMorris.Extensions">
       <HintPath>C:\Users\morrisb\Source\Repos\MichaelBrandonMorris.Extensions\MichaelBrandonMorris.Extensions\bin\Debug\MichaelBrandonMorris.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="MichaelBrandonMorris.MvcGrid">
+      <HintPath>..\..\Source\Repos\MVCGrid.Net\MVCGrid\bin\Debug\MichaelBrandonMorris.MvcGrid.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -112,30 +115,18 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -164,7 +155,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -195,6 +188,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MvcGridConfig.cs" />
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -205,7 +199,7 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SlidesController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
-    <Compile Include="Controllers\TrainingResultsController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -229,6 +223,7 @@
     <Compile Include="Models\Identity\ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Identity\ViewModels\Result\TrainingResultsViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Result\TrainingResultViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\User\UserViewModel.cs" />
     <Compile Include="Models\ListQuantityAttribute.cs" />
@@ -483,18 +478,16 @@
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\Slide.cshtml" />
     <Content Include="Views\Training\Quiz.cshtml" />
-    <Content Include="Views\Training\Result.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\TrainingResult.cshtml" />
-    <Content Include="Views\Users\TrainingResults.cshtml" />
     <Content Include="Views\Slides\ViewSlide.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\TrainingResults\Index.cshtml" />
-    <Content Include="Views\TrainingResults\Details.cshtml" />
+    <Content Include="Views\Results\Index.cshtml" />
+    <Content Include="Views\Results\Details.cshtml" />
+    <Content Include="Views\Results\UserResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

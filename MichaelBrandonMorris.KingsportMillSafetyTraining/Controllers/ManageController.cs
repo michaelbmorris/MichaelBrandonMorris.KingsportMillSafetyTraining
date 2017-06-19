@@ -403,7 +403,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(
+            await UserManager.GenerateChangePhoneNumberTokenAsync(
                 User.Identity.GetUserId(),
                 phoneNumber);
 
@@ -486,12 +486,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var user = UserManager.FindById(User.Identity.GetUserId());
 
             return user?.PasswordHash != null;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            return user?.PhoneNumber != null;
         }
 
         public enum ManageMessageId

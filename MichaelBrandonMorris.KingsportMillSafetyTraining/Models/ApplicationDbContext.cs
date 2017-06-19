@@ -206,6 +206,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     .AsViewModels());
         }
 
+        public SlideViewModel GetNewSlideViewModel()
+        {
+            return DoTransaction(
+                () => new SlideViewModel(null, GetCategories()));
+        }
+
         /// <summary>
         ///     Uses a transaction to get the
         ///     <see cref="IList{QuizSlideViewModel}" /> for the specified role.
@@ -243,26 +249,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlide(id));
         }
 
-        public SlideViewModel GetNewSlideViewModel()
-        {
-            return DoTransaction(
-                () => new SlideViewModel(null, GetCategories()));
-        }
-
-        public void SetUserRole(string userId, int? roleId)
-        {
-            DoTransaction(() => _SetUserRole(userId, roleId));      
-        }
-
-        private void _SetUserRole(string userId, int? roleId)
-        {
-            var user = Users.Find(userId);
-
-            user.Role = roleId == null
-                ? TrainingRoles.MaxBy(x => x.Index)
-                : TrainingRoles.Find(roleId);
-        }
-
         public IList<SlideViewModel> GetSlideshowViewModel(Role role)
         {
             return DoTransaction(() => _GetSlideshowViewModel(role));
@@ -278,15 +264,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlideViewModels(categoryId));
         }
 
+        public TrainingResultsViewModel GetTrainingResultsViewModel(
+            string userId = null)
+        {
+            return DoTransaction(() => _GetTrainingResultsViewModel(userId));
+        }
+
         public TrainingResultViewModel GetTrainingResultViewModel(int id)
         {
             return DoTransaction(() => _GetTrainingResultViewModel(id));
         }
 
         public IList<TrainingResultViewModel> GetTrainingResultViewModels(
-            string id)
+            string userId = null)
         {
-            return DoTransaction(() => _GetTrainingResultViewModels(id));
+            return DoTransaction(() => _GetTrainingResultViewModels(userId));
         }
 
         public ApplicationUser GetUser(string id)
@@ -333,6 +325,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public void SetUserLatestTrainingStartDateTime(string userId)
         {
             DoTransaction(() => _SetUserLatestTrainingStartDateTime(userId));
+        }
+
+        public void SetUserRole(string userId, int? roleId)
+        {
+            DoTransaction(() => _SetUserRole(userId, roleId));
         }
 
         public void UnpairCategoriesAndRoles()
@@ -639,16 +636,42 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return slides.AsViewModels();
         }
 
+        private TrainingResultsViewModel _GetTrainingResultsViewModel(
+            string userId = null)
+        {
+            if (userId == null)
+            {
+                return new TrainingResultsViewModel(
+                    null,
+                    GetTrainingResultsDescending(x => x.CompletionDateTime)
+                        .AsViewModels());
+            }
+
+            var user = Users.Find(userId);
+
+            return new TrainingResultsViewModel(
+                new UserViewModel(user),
+                user.GetTrainingResultsDescending(x => x.CompletionDateTime)
+                    .AsViewModels());
+        }
+
         private TrainingResultViewModel _GetTrainingResultViewModel(int id)
         {
             return TrainingResults.Find(id).AsViewModel();
         }
 
         private IList<TrainingResultViewModel> _GetTrainingResultViewModels(
-            string id)
+            string userId = null)
         {
-            var user = Users.Find(id);
-            return user.GetTrainingResultsDescending(x => x.CompletionDateTime).AsViewModels();
+            if (userId == null)
+            {
+                return GetTrainingResultsDescending(x => x.CompletionDateTime)
+                    .AsViewModels();
+            }
+
+            return Users.Find(userId)
+                .GetTrainingResultsDescending(x => x.CompletionDateTime)
+                .AsViewModels();
         }
 
         private IList<UserViewModel> _GetUserViewModels()
@@ -719,6 +742,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             var user = Users.Find(userId);
             user.LatestTrainingStartDateTime = DateTime.Now;
+        }
+
+        private void _SetUserRole(string userId, int? roleId)
+        {
+            var user = Users.Find(userId);
+
+            user.Role = roleId == null
+                ? TrainingRoles.MaxBy(x => x.Index)
+                : TrainingRoles.Find(roleId);
         }
 
         private void _UnpairCategoriesAndRoles()
@@ -814,6 +846,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Func<Role, bool> wherePredicate = null)
         {
             return TrainingRoles.OrderByWhere(orderByPredicate, wherePredicate);
+        }
+
+        private IList<TrainingResult> GetTrainingResultsDescending(
+            Func<TrainingResult, object> orderByPredicate = null,
+            Func<TrainingResult, bool> wherePredicate = null)
+        {
+            return TrainingResults.OrderByDescendingWhere(
+                orderByPredicate,
+                wherePredicate);
         }
 
         private IList<ApplicationUser> GetUsers(

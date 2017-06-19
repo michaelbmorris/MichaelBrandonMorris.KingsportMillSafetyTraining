@@ -1,0 +1,66 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result.TrainingResultsViewModel
+
+@{
+    ViewBag.Title = "User Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => Model.User.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => Model.User.FirstName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => Model.User.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => Model.User.LastName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => Model.User.CompanyName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => Model.User.CompanyName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.User.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.User.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.User.PhoneNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.User.PhoneNumber)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.User.BirthDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.User.BirthDate)
+    </dd>
+</dl>
+
+<a class="btn btn-primary"
+   href="@Url.Action("Details", "Users", new
+         {
+             id = Model.User.Id
+         })">
+    View User Details
+</a>
+
+@Html.MvcGrid("UserTrainingResultsGrid")

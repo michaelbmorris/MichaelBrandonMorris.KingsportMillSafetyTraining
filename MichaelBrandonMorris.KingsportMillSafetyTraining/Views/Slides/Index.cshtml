@@ -82,7 +82,8 @@
                     @Html.DisplayFor(Model[k].Content)
                 </td>
                 <td>
-                    <img src="@Url.Action("RenderImage", new
+                    <img class="thumbnail"
+                         src="@Url.Action("RenderImage", new
                               {
                                   id = Model[k].Id
                               })"
