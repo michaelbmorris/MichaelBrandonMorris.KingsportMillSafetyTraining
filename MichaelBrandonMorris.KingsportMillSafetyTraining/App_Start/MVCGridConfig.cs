@@ -4,6 +4,7 @@ using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Result;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
@@ -26,6 +27,132 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     public static class MvcGridConfig
     {
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryAssignRolesColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "AssignRoles",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = string.Empty,
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "AssignRoles",
+                    "Categories",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Assign Roles</a>"
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryDeleteColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Delete",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = string.Empty,
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Delete",
+                    "Categories",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-danger' role='button'>Delete</a>"
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryDescriptionColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Description",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Description",
+                ValueExpression = (x, y) => x.Description
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryDetailsColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Details",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = string.Empty,
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Details",
+                    "Categories",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Details</a>"
+            };
+
+        private static readonly GridColumn<CategoryViewModel> CategoryEditColumn
+            = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Edit",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = string.Empty,
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Edit",
+                    "Categories",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Edit</a>"
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryIndexColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Index",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Index",
+                ValueExpression = (x, y) => x.Index.ToString()
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryRolesCountColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "RolesCount",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Number of Roles",
+                ValueExpression = (x, y) => x.RolesCount.ToString()
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategorySlidesCountColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "SlidesCount",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Number of Slides",
+                ValueExpression = (x, y) => x.SlidesCount.ToString()
+            };
+
+        private static readonly GridColumn<CategoryViewModel>
+            CategoryTitleColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Title",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Title",
+                ValueExpression = (x, y) => x.Title
+            };
+
         private static readonly GridColumn<TrainingResultViewModel>
             TrainingResultCompanyNameColumn =
                 new GridColumn<TrainingResultViewModel>
@@ -301,6 +428,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             var trainingResultsGrid = GetTrainingResultsGrid();
             var userTrainingResultsGrid = GetUserTrainingResultsGrid();
             var usersGrid = GetUsersGrid();
+            var categoriesGrid = GetCategoriesGrid();
 
             MvcGridDefinitionTable.Add(
                 trainingResultsGrid.Title,
@@ -311,6 +439,63 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 userTrainingResultsGrid.Grid);
 
             MvcGridDefinitionTable.Add(usersGrid.Title, usersGrid.Grid);
+
+            MvcGridDefinitionTable.Add(
+                categoriesGrid.Title,
+                categoriesGrid.Grid);
+        }
+
+        private static (string Title, MvcGridBuilder<CategoryViewModel> Grid)
+            GetCategoriesGrid()
+        {
+            const string title = "CategoriesGrid";
+
+            var grid = new MvcGridBuilder<CategoryViewModel>(
+                    new ColumnDefaults
+                    {
+                        EnableFiltering = true,
+                        EnableSorting = true
+                    }).WithAuthorizationType(AuthorizationType.Authorized)
+                .AddColumns(
+                    columns =>
+                    {
+                        columns.Add(CategoryIndexColumn);
+                        columns.Add(CategoryTitleColumn);
+                        columns.Add(CategoryDescriptionColumn);
+                        columns.Add(CategorySlidesCountColumn);
+                        columns.Add(CategoryRolesCountColumn);
+                        columns.Add(CategoryDetailsColumn);
+                        columns.Add(CategoryEditColumn);
+                        columns.Add(CategoryAssignRolesColumn);
+                        columns.Add(CategoryDeleteColumn);
+                    })
+                .WithSorting(true, "Index", SortDirection.Asc)
+                .WithRetrieveDataMethod(
+                    context =>
+                    {
+                        var sortColumnName =
+                            context.QueryOptions.SortColumnName;
+                        var sortDirection = context.QueryOptions.SortDirection;
+                        var result = new QueryResult<CategoryViewModel>();
+
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var query = db.GetCategoryViewModels();
+
+                            if (!sortColumnName.IsNullOrWhiteSpace())
+                            {
+                                query = query.OrderBy(
+                                    x => GetPropertyValue(x, sortColumnName),
+                                    sortDirection);
+                            }
+
+                            result.Items = query.ToList();
+                        }
+
+                        return result;
+                    });
+
+            return (title, grid);
         }
 
         private static object GetPropertyValue(object o, string propertyName)
@@ -460,7 +645,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         EnableFiltering = true,
                         EnableSorting = true
                     }).WithAuthorizationType(AuthorizationType.Authorized)
-                    .WithPageParameterNames("Id")
+                .WithPageParameterNames("Id")
                 .AddColumns(
                     columns =>
                     {

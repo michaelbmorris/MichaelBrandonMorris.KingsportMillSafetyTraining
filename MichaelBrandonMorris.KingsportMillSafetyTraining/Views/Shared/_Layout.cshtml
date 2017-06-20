@@ -9,7 +9,8 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0"
           name="viewport">
-    <meta http-equiv="x-ua-compatible" content="IE=11">
+    <meta content="IE=11"
+          http-equiv="x-ua-compatible">
     <title>
         @controllerName
         @(ViewBag.Title == null || actionName.Equals("Index") ? string.Empty : " - " + ViewBag.Title)
@@ -64,28 +65,6 @@
                 <div class="collapse navbar-collapse"
                      id="navbar">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Users <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Users")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Users")
-                                </li>
-                            </ul>
-                        </li>
                         <li>
                             <a aria-expanded="false"
                                aria-haspopup="true"
@@ -166,6 +145,33 @@
                                     @Html.ActionLink("Reorder", "Reorder", "Slides")
                                 </li>
                             </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a aria-expanded="false"
+                               aria-haspopup="true"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown"
+                               href="#"
+                               role="button">
+                                Users <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("View All", "Index", "Users")
+                                </li>
+                                <li class="divider"
+                                    role="separator">
+                                </li>
+                                <li class="dropdown-header">Actions</li>
+                                <li>
+                                    @Html.ActionLink("Create", "Create", "Users")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            @Html.ActionLink("Results", "Index", "Results")
                         </li>
                     </ul>
                 </div>

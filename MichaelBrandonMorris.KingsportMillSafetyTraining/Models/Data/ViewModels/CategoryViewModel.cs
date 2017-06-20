@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
     ViewModels
@@ -18,6 +19,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             Slides = category.Slides;
             Title = category.Title;
         }
+
+        public string RolesList => Roles.Aggregate(
+            string.Empty,
+            (current, role) => current + "<li>" + role.Title + "</li>");
+
+        public int SlidesCount => Slides.Count;
+        public int RolesCount => Roles.Count;
 
         public string Description
         {
