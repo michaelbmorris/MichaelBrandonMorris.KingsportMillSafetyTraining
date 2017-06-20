@@ -129,13 +129,4 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return user.Role;
         }
     }
-
-    public static class Extensions
-    {
-        public static void SetQuizViewModel(
-            this IController controller,
-            IList<QuizSlideViewModel> quizViewModel)
-        {
-        }
-    }
 }

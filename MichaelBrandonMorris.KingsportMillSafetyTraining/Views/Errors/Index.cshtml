@@ -1,0 +1,22 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel
+
+@{
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+    ViewBag.Title = "HTTP Error " + Model.CodeNumber;
+    ViewBag.Subtitle = Model.CodeName;
+}
+
+<div class="jumbotron">
+    @Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))
+</div>
+
+<p>
+    If you would like to help, report this issue on <a href="https://github.com/michaelbmorris/MichaelBrandonMorris.KingsportMillSafetyTraining/issues">GitHub</a>.
+    Include a screenshot or PDF of this page, and answer the following questions:
+    <ul>
+        <li>Can you reproduce the issue?</li>
+        <li>What are the exact steps that caused the problem?</li>
+        <li>What is your account's email address?</li>
+    </ul>
+    Thank you for your assistance.
+</p>

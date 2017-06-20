@@ -115,6 +115,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -194,6 +195,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\Extensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -206,6 +209,7 @@
     </Compile>
     <Compile Include="Helpers.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\Identity\QuizResult.cs" />
     <Compile Include="Models\Identity\TrainingResult.cs" />
     <Compile Include="Models\Identity\ViewModels\Account\ResetPasswordViewModel.cs" />
@@ -488,6 +492,7 @@
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\UserResults.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,7 +15,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
             if (!User.IsInRole("Administrator")
@@ -23,7 +25,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     User.Identity.GetUserId(),
                     id.Value))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                return new HttpStatusCodeResult(
+                    HttpStatusCode.Forbidden,
+                    "You do not have permission to view this.");
             }
 
             var model = _db.GetTrainingResultViewModel(id.Value);
@@ -32,7 +36,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public ActionResult Index(string userId = null)
+        public ActionResult Index()
         {
             var model = _db.GetTrainingResultsViewModel();
             return View(model);
@@ -43,7 +47,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nName: 'id'\nType: 'string'");
             }
 
             var model = _db.GetTrainingResultsViewModel(id);
