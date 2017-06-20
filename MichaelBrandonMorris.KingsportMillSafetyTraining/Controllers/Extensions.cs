@@ -40,6 +40,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     "Stored session error is null.");
             }
 
+            HttpContext.Current.Session["Error"] = null;
             return ((HttpStatusCode, string)) error;
         }
     }

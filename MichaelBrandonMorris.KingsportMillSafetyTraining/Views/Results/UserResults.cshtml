@@ -63,4 +63,7 @@
     View User Details
 </a>
 
-@Html.MvcGrid("UserTrainingResultsGrid")
+@Html.MvcGrid("UserTrainingResultsGrid", new
+{
+    id = Model.User.Id
+})

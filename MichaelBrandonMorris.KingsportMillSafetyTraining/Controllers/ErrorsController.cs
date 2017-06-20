@@ -29,5 +29,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     e.Message);
             }
         }
+
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
     }
 }

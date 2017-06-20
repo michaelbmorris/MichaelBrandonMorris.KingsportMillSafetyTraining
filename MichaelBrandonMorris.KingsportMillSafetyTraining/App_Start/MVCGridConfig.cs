@@ -55,6 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     ColumnName = "Details",
                     EnableFiltering = false,
                     EnableSorting = false,
+                    HeaderText = string.Empty,
                     HtmlEncode = false,
                     ValueExpression = (x, y) => y.UrlHelper.Action(
                         "Details",
@@ -217,6 +218,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             new GridColumn<UserViewModel>
             {
                 ColumnName = "Email",
+                EnableFiltering = true,
+                EnableSorting = true,
                 HeaderText = "Email",
                 ValueExpression = (x, y) => x.Email
             };
@@ -225,6 +228,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             new GridColumn<UserViewModel>
             {
                 ColumnName = "FirstName",
+                EnableFiltering = true,
+                EnableSorting = true,
                 HeaderText = "First Name",
                 ValueExpression = (x, y) => x.FirstName
             };
@@ -233,6 +238,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             new GridColumn<UserViewModel>
             {
                 ColumnName = "LastName",
+                EnableFiltering = true,
+                EnableSorting = true,
                 HeaderText = "Last Name",
                 ValueExpression = (x, y) => x.LastName
             };
@@ -241,6 +248,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             UserLastTrainingDateTimeColumn = new GridColumn<UserViewModel>
             {
                 ColumnName = "LastTrainingResultDateTime",
+                EnableFiltering = true,
+                EnableSorting = true,
                 HeaderText = "Last Training Completed On",
                 ValueExpression =
                     (x, y) => x.LastTrainingResultDateTime?.ToString("M/d/yy")
@@ -251,6 +260,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             new GridColumn<UserViewModel>
             {
                 ColumnName = "MiddleName",
+                EnableFiltering = true,
+                EnableSorting = true,
                 HeaderText = "Middle Name",
                 ValueExpression = (x, y) => x.MiddleName
             };
@@ -449,6 +460,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         EnableFiltering = true,
                         EnableSorting = true
                     }).WithAuthorizationType(AuthorizationType.Authorized)
+                    .WithPageParameterNames("Id")
                 .AddColumns(
                     columns =>
                     {
@@ -465,11 +477,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         var sortColumnName =
                             context.QueryOptions.SortColumnName;
                         var sortDirection = context.QueryOptions.SortDirection;
+
+                        var id =
+                            context.QueryOptions.GetPageParameterString("id");
+
                         var result = new QueryResult<TrainingResultViewModel>();
 
                         using (var db = new ApplicationDbContext())
                         {
-                            var query = db.GetTrainingResultViewModels();
+                            var query = db.GetTrainingResultViewModels(id);
 
                             if (!sortColumnName.IsNullOrWhiteSpace())
                             {
