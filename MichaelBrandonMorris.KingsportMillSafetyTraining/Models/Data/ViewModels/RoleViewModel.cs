@@ -31,6 +31,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             set;
         }
 
+        public int CategoriesCount => Categories.Count;
+
         public int Id
         {
             get;

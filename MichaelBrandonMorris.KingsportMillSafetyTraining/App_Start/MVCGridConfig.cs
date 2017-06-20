@@ -70,7 +70,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             {
                 ColumnName = "Description",
                 EnableFiltering = true,
-                EnableSorting = true,
                 HeaderText = "Description",
                 ValueExpression = (x, y) => x.Description
             };
@@ -145,6 +144,130 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
         private static readonly GridColumn<CategoryViewModel>
             CategoryTitleColumn = new GridColumn<CategoryViewModel>
+            {
+                ColumnName = "Title",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Title",
+                ValueExpression = (x, y) => x.Title
+            };
+
+        private static readonly GridColumn<RoleViewModel>
+            RoleAssignCategoriesColumn = new GridColumn<RoleViewModel>
+            {
+                ColumnName = "AssignCategories",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "AssignCategories",
+                    "Roles",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Assign Categories</a>"
+            };
+
+        private static readonly GridColumn<RoleViewModel>
+            RoleCategoriesCountColumn = new GridColumn<RoleViewModel>
+            {
+                ColumnName = "CategoriesCount",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Number of Categories",
+                ValueExpression = (x, y) => x.CategoriesCount.ToString()
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleDeleteColumn =
+            new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Delete",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Delete",
+                    "Roles",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-danger' role='button'>Delete</a>"
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleDescriptionColumn
+            = new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Description",
+                EnableFiltering = true,
+                HeaderText = "Description",
+                ValueExpression = (x, y) => x.Description
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleDetailsColumn =
+            new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Details",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Details",
+                    "Roles",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Details</a>"
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleEditColumn =
+            new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Edit",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Edit",
+                    "Roles",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Edit</a>"
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleIndexColumn =
+            new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Index",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Index",
+                ValueExpression = (x, y) => x.Index.ToString()
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleQuestionColumn =
+            new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Question",
+                EnableFiltering = true,
+                HeaderText = "Question",
+                ValueExpression = (x, y) => x.Question
+            };
+
+        private static readonly GridColumn<RoleViewModel> RoleTitleColumn =
+            new GridColumn<RoleViewModel>
             {
                 ColumnName = "Title",
                 EnableFiltering = true,
@@ -429,6 +552,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             var userTrainingResultsGrid = GetUserTrainingResultsGrid();
             var usersGrid = GetUsersGrid();
             var categoriesGrid = GetCategoriesGrid();
+            var rolesGrid = GetRolesGrid();
+            var slidesGrid = GetSlidesGrid();
 
             MvcGridDefinitionTable.Add(
                 trainingResultsGrid.Title,
@@ -443,6 +568,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             MvcGridDefinitionTable.Add(
                 categoriesGrid.Title,
                 categoriesGrid.Grid);
+
+            MvcGridDefinitionTable.Add(rolesGrid.Title, rolesGrid.Grid);
+            MvcGridDefinitionTable.Add(slidesGrid.Title, slidesGrid.Grid);
+        }
+
+        private static (string Title, MvcGridBuilder<SlideViewModel> Grid)
+            GetSlidesGrid()
+        {
+            const string title = "SlidesGrid";
+            var grid = new MvcGridBuilder<SlideViewModel>();
+            // TODO - Implement slides grid.
+            return (title, grid);
         }
 
         private static (string Title, MvcGridBuilder<CategoryViewModel> Grid)
@@ -508,6 +645,62 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return propertyInfo.GetValue(o, null);
+        }
+
+        private static (string Title, MvcGridBuilder<RoleViewModel> Grid)
+            GetRolesGrid()
+        {
+            const string title = "RolesGrid";
+
+            var grid = new MvcGridBuilder<RoleViewModel>()
+                .WithAuthorizationType(AuthorizationType.Authorized)
+                .WithPageParameterNames("Id")
+                .AddColumns(
+                    columns =>
+                    {
+                        columns.Add(RoleIndexColumn);
+                        columns.Add(RoleTitleColumn);
+                        columns.Add(RoleDescriptionColumn);
+                        columns.Add(RoleQuestionColumn);
+                        columns.Add(RoleCategoriesCountColumn);
+                        columns.Add(RoleDetailsColumn);
+                        columns.Add(RoleEditColumn);
+                        columns.Add(RoleAssignCategoriesColumn);
+                        columns.Add(RoleDeleteColumn);
+                    })
+                .WithSorting(true, "Index", SortDirection.Asc)
+                .WithRetrieveDataMethod(
+                    context =>
+                    {
+                        var sortColumnName =
+                            context.QueryOptions.SortColumnName;
+
+                        var id =
+                            context.QueryOptions.GetPageParameterString("id");
+
+                        id.TryParse(out int categoryId);
+                        var sortDirection = context.QueryOptions.SortDirection;
+                        var result = new QueryResult<RoleViewModel>();
+
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var category = db.GetCategory(categoryId);
+                            var query = category.GetRoles().AsViewModels();
+
+                            if (!sortColumnName.IsNullOrWhiteSpace())
+                            {
+                                query = query.OrderBy(
+                                    x => GetPropertyValue(x, sortColumnName),
+                                    sortDirection);
+                            }
+
+                            result.Items = query.ToList();
+                        }
+
+                        return result;
+                    });
+
+            return (title, grid);
         }
 
         private static (string Title, MvcGridBuilder<TrainingResultViewModel>

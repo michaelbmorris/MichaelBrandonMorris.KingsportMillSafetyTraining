@@ -6,78 +6,24 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create") |
-    @Html.ActionLink("Reorder", "Reorder") |
-    @Html.ActionLink("Assign Categories", "AssignCategories")
+    @Html.ActionLink("Create New", "Create", null, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Reorder", "Reorder", null, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Assign Categories", "AssignCategories", null, new
+    {
+        @class = "btn btn-primary"
+    })
 </p>
 
 <p class="bg-info">
-    On the role selection page, roles will be selected in the order below, with the last role being the default.
+    On the role selection page, the role questions will be shown in ascending index order.<br />
+    If the user answers &quot;Yes&quot; to any of the questions, they will be placed in that role.<br />
+    The last (highest index) role's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that role.<br />
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Question)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categories)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.Raw(Html.Encode(item.Question).Replace("\n", "<br />"))
-                </td>
-                <td>
-                    <ul>
-                        @foreach (var category in item.Categories)
-                        {
-                            <li>@Html.DisplayFor(itemCategory => category.Title)</li>
-                        }
-                    </ul>
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new
-                    {
-                        id = item.Id
-                    })
-                    <br/>
-                    @Html.ActionLink("Details", "Details", new
-                    {
-                        id = item.Id
-                    })
-                    <br/>
-                    @Html.ActionLink("Delete", "Delete", new
-                    {
-                        id = item.Id
-                    })
-                    <br/>
-                    @Html.ActionLink("Assign Categories", "AssignCategories", new
-                    {
-                        id = item.Id
-                    })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@Html.MvcGrid("RolesGrid")
