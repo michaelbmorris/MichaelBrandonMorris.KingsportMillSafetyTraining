@@ -17,17 +17,27 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+
+        <dt>
+            Roles
+        </dt>
+        
+        <dd>
+            @Html.MvcGrid("RolesGrid", new
+            {
+                id = Model.Id
+            })
+        </dd>
+
+        <dt>
+            Slides
+        </dt>
+
+        <dd>
+            @Html.MvcGrid("SlidesGrid", new
+            {
+                id = Model.Id
+            })
+        </dd>
     </dl>
-
-    <strong>Slides</strong>
-    @Html.MvcGrid("SlidesGrid", new
-    {
-        id = Model.Id
-    })
-
-    <strong>Roles</strong>
-    @Html.MvcGrid("RolesGrid", new
-    {
-        id = Model.Id
-    })
 </div>

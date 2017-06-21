@@ -473,7 +473,7 @@
     <Content Include="Views\Categories\EditorTemplates\Category.cshtml" />
     <Content Include="Views\Roles\EditorTemplates\Role.cshtml" />
     <Content Include="Views\Categories\AssignRoles.cshtml" />
-    <Content Include="Views\Roles\DisplayTemplates\Role.cshtml" />
+    <Content Include="Views\Roles\DisplayTemplates\RoleViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
     <Content Include="Views\Training\SelectRole.cshtml" />

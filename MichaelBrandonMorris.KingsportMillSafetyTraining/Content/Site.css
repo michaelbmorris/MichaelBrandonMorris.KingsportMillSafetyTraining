@@ -30,8 +30,8 @@ table img.thumbnail {
     width: 100%;
 }
 
-.image {
-    height: 100px;
+td img {
+    height: 34px;
 }
 
 :not(label).correct:before {

@@ -66,15 +66,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             };
 
         private static readonly GridColumn<CategoryViewModel>
-            CategoryDescriptionColumn = new GridColumn<CategoryViewModel>
-            {
-                ColumnName = "Description",
-                EnableFiltering = true,
-                HeaderText = "Description",
-                ValueExpression = (x, y) => x.Description
-            };
-
-        private static readonly GridColumn<CategoryViewModel>
             CategoryDetailsColumn = new GridColumn<CategoryViewModel>
             {
                 ColumnName = "Details",
@@ -200,15 +191,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     "<a href='{Value}' class='btn btn-danger' role='button'>Delete</a>"
             };
 
-        private static readonly GridColumn<RoleViewModel> RoleDescriptionColumn
-            = new GridColumn<RoleViewModel>
-            {
-                ColumnName = "Description",
-                EnableFiltering = true,
-                HeaderText = "Description",
-                ValueExpression = (x, y) => x.Description
-            };
-
         private static readonly GridColumn<RoleViewModel> RoleDetailsColumn =
             new GridColumn<RoleViewModel>
             {
@@ -257,17 +239,138 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 ValueExpression = (x, y) => x.Index.ToString()
             };
 
-        private static readonly GridColumn<RoleViewModel> RoleQuestionColumn =
-            new GridColumn<RoleViewModel>
-            {
-                ColumnName = "Question",
-                EnableFiltering = true,
-                HeaderText = "Question",
-                ValueExpression = (x, y) => x.Question
-            };
-
         private static readonly GridColumn<RoleViewModel> RoleTitleColumn =
             new GridColumn<RoleViewModel>
+            {
+                ColumnName = "Title",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Title",
+                ValueExpression = (x, y) => x.Title
+            };
+
+        private static readonly GridColumn<SlideViewModel> SlideDeleteColumn =
+            new GridColumn<SlideViewModel>
+            {
+                ColumnName = "Delete",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Delete",
+                    "Slides",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-danger' role='button'>Delete</a>"
+            };
+
+        private static readonly GridColumn<SlideViewModel> SlideDetailsColumn =
+            new GridColumn<SlideViewModel>
+            {
+                ColumnName = "Details",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Details",
+                    "Slides",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Details</a>"
+            };
+
+        private static readonly GridColumn<SlideViewModel> SlideEditColumn =
+            new GridColumn<SlideViewModel>
+            {
+                ColumnName = "Edit",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "Edit",
+                    "Slides",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<a href='{Value}' class='btn btn-primary' role='button'>Edit</a>"
+            };
+
+        private static readonly GridColumn<SlideViewModel> SlideImageColumn =
+            new GridColumn<SlideViewModel>
+            {
+                ColumnName = "Image",
+                EnableFiltering = false,
+                EnableSorting = false,
+                HeaderText = "Image",
+                HtmlEncode = false,
+                ValueExpression = (x, y) => y.UrlHelper.Action(
+                    "RenderImage",
+                    "Slides",
+                    new
+                    {
+                        id = x.Id
+                    }),
+                ValueTemplate =
+                    "<img src='{Value}' alt='{Model.ImageDescription}'>"
+            };
+
+        private static readonly GridColumn<SlideViewModel> SlideIndexColumn =
+            new GridColumn<SlideViewModel>
+            {
+                ColumnName = "Index",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Index",
+                ValueExpression = (x, y) => x.Index.ToString()
+            };
+
+        private static readonly GridColumn<SlideViewModel>
+            SlideShouldShowImageOnQuizColumn = new GridColumn<SlideViewModel>
+            {
+                ColumnName = "ShouldShowImageOnQuiz",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Show Image on Quiz?",
+                ValueExpression = (x, y) => x.ShouldShowImageOnQuiz.ToString()
+            };
+
+        private static readonly GridColumn<SlideViewModel>
+            SlideShouldShowQuestionOnQuizColumn =
+                new GridColumn<SlideViewModel>
+                {
+                    ColumnName = "ShouldShowQuestionOnQuiz",
+                    EnableFiltering = true,
+                    EnableSorting = true,
+                    HeaderText = "Show Question on Quiz?",
+                    ValueExpression =
+                        (x, y) => x.ShouldShowQuestionOnQuiz.ToString()
+                };
+
+        private static readonly GridColumn<SlideViewModel>
+            SlideShouldShowSlideInSlideshowColumn =
+                new GridColumn<SlideViewModel>
+                {
+                    ColumnName = "ShouldShowSlideInSlideshow",
+                    EnableFiltering = true,
+                    EnableSorting = true,
+                    HeaderText = "Show Slide in Slideshow?",
+                    ValueExpression =
+                        (x, y) => x.ShouldShowSlideInSlideshow.ToString()
+                };
+
+        private static readonly GridColumn<SlideViewModel> SlideTitleColumn =
+            new GridColumn<SlideViewModel>
             {
                 ColumnName = "Title",
                 EnableFiltering = true,
@@ -545,7 +648,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     "<a href='{Value}' class='btn btn-primary' role='button'>Results</a>"
             };
 
-
         public static void RegisterGrids()
         {
             var trainingResultsGrid = GetTrainingResultsGrid();
@@ -573,32 +675,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             MvcGridDefinitionTable.Add(slidesGrid.Title, slidesGrid.Grid);
         }
 
-        private static (string Title, MvcGridBuilder<SlideViewModel> Grid)
-            GetSlidesGrid()
-        {
-            const string title = "SlidesGrid";
-            var grid = new MvcGridBuilder<SlideViewModel>();
-            // TODO - Implement slides grid.
-            return (title, grid);
-        }
-
         private static (string Title, MvcGridBuilder<CategoryViewModel> Grid)
             GetCategoriesGrid()
         {
             const string title = "CategoriesGrid";
 
-            var grid = new MvcGridBuilder<CategoryViewModel>(
-                    new ColumnDefaults
-                    {
-                        EnableFiltering = true,
-                        EnableSorting = true
-                    }).WithAuthorizationType(AuthorizationType.Authorized)
+            var grid = new MvcGridBuilder<CategoryViewModel>()
+                .WithAuthorizationType(AuthorizationType.Authorized)
+                .WithPageParameterNames("Id")
                 .AddColumns(
                     columns =>
                     {
                         columns.Add(CategoryIndexColumn);
                         columns.Add(CategoryTitleColumn);
-                        columns.Add(CategoryDescriptionColumn);
                         columns.Add(CategorySlidesCountColumn);
                         columns.Add(CategoryRolesCountColumn);
                         columns.Add(CategoryDetailsColumn);
@@ -612,12 +701,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     {
                         var sortColumnName =
                             context.QueryOptions.SortColumnName;
+                        var id =
+                            context.QueryOptions.GetPageParameterString("id");
+
+                        id.TryParse(out int roleId);
                         var sortDirection = context.QueryOptions.SortDirection;
                         var result = new QueryResult<CategoryViewModel>();
 
                         using (var db = new ApplicationDbContext())
                         {
-                            var query = db.GetCategoryViewModels();
+                            var role = db.GetRole(roleId);
+
+                            var query =
+                                role == null
+                                    ? db.GetCategoryViewModels()
+                                    : role.GetCategories().AsViewModels();
 
                             if (!sortColumnName.IsNullOrWhiteSpace())
                             {
@@ -660,8 +758,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     {
                         columns.Add(RoleIndexColumn);
                         columns.Add(RoleTitleColumn);
-                        columns.Add(RoleDescriptionColumn);
-                        columns.Add(RoleQuestionColumn);
                         columns.Add(RoleCategoriesCountColumn);
                         columns.Add(RoleDetailsColumn);
                         columns.Add(RoleEditColumn);
@@ -685,7 +781,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         using (var db = new ApplicationDbContext())
                         {
                             var category = db.GetCategory(categoryId);
-                            var query = category.GetRoles().AsViewModels();
+
+                            var query =
+                                category == null
+                                    ? db.GetRoleViewModels()
+                                    : category.GetRoles().AsViewModels();
 
                             if (!sortColumnName.IsNullOrWhiteSpace())
                             {
@@ -695,6 +795,61 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                             }
 
                             result.Items = query.ToList();
+                        }
+
+                        return result;
+                    });
+
+            return (title, grid);
+        }
+
+        private static (string Title, MvcGridBuilder<SlideViewModel> Grid)
+            GetSlidesGrid()
+        {
+            const string title = "SlidesGrid";
+            var grid = new MvcGridBuilder<SlideViewModel>()
+                .WithAuthorizationType(AuthorizationType.Authorized)
+                .WithPageParameterNames("Id")
+                .AddColumns(
+                    columns =>
+                    {
+                        columns.Add(SlideIndexColumn);
+                        columns.Add(SlideTitleColumn);
+                        columns.Add(SlideImageColumn);
+                        columns.Add(SlideShouldShowSlideInSlideshowColumn);
+                        columns.Add(SlideShouldShowQuestionOnQuizColumn);
+                        columns.Add(SlideShouldShowImageOnQuizColumn);
+                        columns.Add(SlideDetailsColumn);
+                        columns.Add(SlideEditColumn);
+                        columns.Add(SlideDeleteColumn);
+                    })
+                .WithSorting(true, "Index", SortDirection.Asc)
+                .WithRetrieveDataMethod(
+                    context =>
+                    {
+                        var sortColumnName =
+                            context.QueryOptions.SortColumnName;
+
+                        var id =
+                            context.QueryOptions.GetPageParameterString("id");
+
+                        id.TryParse(out int categoryId);
+                        var sortDirection = context.QueryOptions.SortDirection;
+                        var result = new QueryResult<SlideViewModel>();
+
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var category = db.GetCategory(categoryId);
+                            var query = category.GetSlides().AsViewModels();
+
+                            if (!sortColumnName.IsNullOrWhiteSpace())
+                            {
+                                query = query.OrderBy(
+                                    x => GetPropertyValue(x, sortColumnName),
+                                    sortDirection);
+                            }
+
+                            result.Items = query;
                         }
 
                         return result;
