@@ -587,7 +587,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private CategoryViewModel _GetCategoryViewModel(int id)
         {
-            return Categories.Find(id).AsViewModel();
+            try
+            {
+                return Categories.Find(id).AsViewModel();
+            }
+            catch (ArgumentNullException)
+            {
+                throw new KeyNotFoundException($"Category with Id {id} not found.");
+            }        
         }
 
         private Role _GetRole(int id)

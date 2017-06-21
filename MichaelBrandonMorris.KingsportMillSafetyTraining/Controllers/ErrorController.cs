@@ -5,7 +5,7 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
-    public class ErrorsController : Controller
+    public class ErrorController : Controller
     {
         public ActionResult Index()
         {

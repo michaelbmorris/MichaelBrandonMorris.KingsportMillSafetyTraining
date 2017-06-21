@@ -195,7 +195,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
-    <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Extensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -470,7 +470,7 @@
     <Content Include="Views\Slides\AddAnswer.cshtml" />
     <Content Include="Views\Roles\AssignCategories.cshtml" />
     <Content Include="Views\Categories\Reorder.cshtml" />
-    <Content Include="Views\Categories\EditorTemplates\Category.cshtml" />
+    <Content Include="Views\Categories\EditorTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Roles\EditorTemplates\Role.cshtml" />
     <Content Include="Views\Categories\AssignRoles.cshtml" />
     <Content Include="Views\Roles\DisplayTemplates\RoleViewModel.cshtml" />
@@ -492,8 +492,7 @@
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\UserResults.cshtml" />
-    <Content Include="Views\Errors\Index.cshtml" />
-    <Content Include="Views\Errors\BadRequest.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

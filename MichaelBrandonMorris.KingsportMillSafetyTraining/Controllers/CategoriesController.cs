@@ -25,7 +25,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }        
+            }
         }
 
         [HttpPost]
@@ -55,7 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }         
+            }
         }
 
         [HttpGet]
@@ -92,7 +92,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }       
+            }
         }
 
         [HttpGet]
@@ -102,48 +102,74 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 if (id == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    throw new InvalidOperationException(
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
                 var category = _db.GetCategory(id.Value);
 
                 if (category == null)
                 {
-                    return HttpNotFound();
+                    throw new KeyNotFoundException(
+                        $"Category with Id {id} not found.");
                 }
 
                 return View(category);
+            }
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }          
+            }
         }
 
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                var category = _db.GetCategory(id);
-
-                if (category != null)
+                if (id == null)
                 {
-                    _db.DeleteCategory(category);
+                    throw new InvalidOperationException(
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
+                var category = _db.GetCategory(id.Value);
+
+                if (category == null)
+                {
+                    throw new KeyNotFoundException(
+                        $"Category with Id {id} not found.");
+                }
+
+                _db.DeleteCategory(category);
                 return RedirectToAction("Index");
+            }
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }       
+            }
         }
 
         [HttpGet]
@@ -153,24 +179,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 if (id == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    throw new InvalidOperationException(
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
                 var model = _db.GetCategoryViewModel(id.Value);
-
-                if (model == null)
-                {
-                    return HttpNotFound();
-                }
-
                 return View(model);
+            }
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }         
+            }
         }
 
         [HttpGet]
@@ -180,28 +209,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 if (id == null)
                 {
-                    return this.CreateError(
-                        HttpStatusCode.BadRequest,
+                    throw new InvalidOperationException(
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var category = _db.GetCategory(id.Value);
-
-                if (category == null)
-                {
-                    return this.CreateError(
-                        HttpStatusCode.NotFound,
-                        $"Category with id {id} could not be found.");
-                }
-
-                return View(category);
+                var model = _db.GetCategoryViewModel(id.Value);
+                return View(model);
+            }
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }          
+            }
         }
 
         [HttpPost]
@@ -223,7 +251,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }         
+            }
         }
 
         [HttpGet]
@@ -239,7 +267,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }       
+            }
         }
 
         [HttpGet]
@@ -255,7 +283,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }          
+            }
         }
 
         [HttpPost]
@@ -271,7 +299,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }         
+            }
         }
 
         protected override void Dispose(bool disposing)
