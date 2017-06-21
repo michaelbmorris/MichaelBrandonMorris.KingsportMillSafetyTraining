@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -14,66 +15,111 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult AssignRoles(int? id)
         {
-            var model = _db.GetAssignRolesViewModel(id);
-            return View(model);
+            try
+            {
+                var model = _db.GetAssignRolesViewModel(id);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [HttpPost]
         public ActionResult AssignRoles(IList<int> categoryRoles)
         {
-            _db.UnpairCategoriesAndRoles();
-
-            if (categoryRoles == null)
+            try
             {
+                _db.UnpairCategoriesAndRoles();
+
+                if (categoryRoles == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                foreach (var categoryRole in categoryRoles)
+                {
+                    var cantorInversePair = Helpers.CantorInverse(categoryRole);
+                    var categoryId = cantorInversePair.Item1;
+                    var roleId = cantorInversePair.Item2;
+                    _db.PairCategoryAndRole(categoryId, roleId);
+                }
+
                 return RedirectToAction("Index");
             }
-
-            foreach (var categoryRole in categoryRoles)
+            catch (Exception e)
             {
-                var cantorInversePair = Helpers.CantorInverse(categoryRole);
-                var categoryId = cantorInversePair.Item1;
-                var roleId = cantorInversePair.Item2;             
-                _db.PairCategoryAndRole(categoryId, roleId);
-            }
-
-            return RedirectToAction("Index");
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category category)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(category);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(category);
+                }
 
-            _db.CreateCategory(category);
-            return RedirectToAction("Index");
+                _db.CreateCategory(category);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }       
         }
 
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var category = _db.GetCategory(id.Value);
+
+                if (category == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(category);
             }
-
-            var category = _db.GetCategory(id.Value);
-
-            if (category == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
-            }
-
-            return View(category);
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [ActionName("Delete")]
@@ -81,84 +127,151 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var category = _db.GetCategory(id);
-
-            if (category != null)
+            try
             {
-                _db.DeleteCategory(category);
-            }
+                var category = _db.GetCategory(id);
 
-            return RedirectToAction("Index");
+                if (category != null)
+                {
+                    _db.DeleteCategory(category);
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }       
         }
 
         [HttpGet]
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var model = _db.GetCategoryViewModel(id.Value);
+
+                if (model == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(model);
             }
-
-            var model = _db.GetCategoryViewModel(id.Value);
-
-            if (model == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
-            }
-
-            return View(model);
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return this.CreateError(
+                        HttpStatusCode.BadRequest,
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                }
+
+                var category = _db.GetCategory(id.Value);
+
+                if (category == null)
+                {
+                    return this.CreateError(
+                        HttpStatusCode.NotFound,
+                        $"Category with id {id} could not be found.");
+                }
+
+                return View(category);
             }
-
-            var category = _db.GetCategory(id.Value);
-
-            if (category == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
-            }
-
-            return View(category);
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(category);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(category);
+                }
 
-            _db.Edit(category);
-            return RedirectToAction("Index");
+                _db.Edit(category);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetCategoryViewModels(x => x.Index);
-            return View(model);
+            try
+            {
+                var model = _db.GetCategoryViewModels(x => x.Index);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }       
         }
 
         [HttpGet]
         public ActionResult Reorder()
         {
-            var model = _db.GetCategoryViewModels(x => x.Index);
-            return View(model);
+            try
+            {
+                var model = _db.GetCategoryViewModels(x => x.Index);
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [HttpPost]
         public ActionResult Reorder(IList<Category> categories)
         {
-            _db.Reorder(categories);
-            return RedirectToAction("Index");
+            try
+            {
+                _db.Reorder(categories);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         protected override void Dispose(bool disposing)

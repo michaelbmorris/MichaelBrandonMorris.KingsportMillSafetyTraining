@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -49,14 +51,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null
-                || code == null)
+            try
             {
-                return View("Error");
-            }
+                if (userId == null
+                    || code == null)
+                {
+                    return View("Error");
+                }
 
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+                var result = await UserManager.ConfirmEmailAsync(userId, code);
+                return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         [AllowAnonymous]
@@ -64,54 +75,73 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ChallengeResult(
-                provider,
-                Url.Action(
-                    "ExternalLoginCallback",
-                    "Account",
-                    new
-                    {
-                        ReturnUrl = returnUrl
-                    }));
+            try
+            {
+                return new ChallengeResult(
+                    provider,
+                    Url.Action(
+                        "ExternalLoginCallback",
+                        "Account",
+                        new
+                        {
+                            ReturnUrl = returnUrl
+                        }));
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager
-                .GetExternalLoginInfoAsync();
-
-            if (loginInfo == null)
+            try
             {
-                return RedirectToAction("Login");
+                var loginInfo = await AuthenticationManager
+                    .GetExternalLoginInfoAsync();
+
+                if (loginInfo == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var result =
+                    await SignInManager.ExternalSignInAsync(loginInfo, false);
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut: return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction(
+                            "SendCode",
+                            new
+                            {
+                                ReturnUrl = returnUrl,
+                                RememberMe = false
+                            });
+                    case SignInStatus.Failure: goto default;
+                    default:
+                        ViewBag.ReturnUrl = returnUrl;
+                        ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                        return View(
+                            "ExternalLoginConfirmation",
+                            new ExternalLoginConfirmationViewModel
+                            {
+                                Email = loginInfo.Email
+                            });
+                }
             }
-
-            var result =
-                await SignInManager.ExternalSignInAsync(loginInfo, false);
-
-            switch (result)
+            catch (Exception e)
             {
-                case SignInStatus.Success: return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut: return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction(
-                        "SendCode",
-                        new
-                        {
-                            ReturnUrl = returnUrl,
-                            RememberMe = false
-                        });
-                case SignInStatus.Failure: goto default;
-                default:
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View(
-                        "ExternalLoginConfirmation",
-                        new ExternalLoginConfirmationViewModel
-                        {
-                            Email = loginInfo.Email
-                        });
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
             }
         }
 
@@ -122,60 +152,87 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             ExternalLoginConfirmationViewModel model,
             string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                return RedirectToAction("Index", "Manage");
-            }
-
-            if (ModelState.IsValid)
-            {
-                var info =
-                    await AuthenticationManager.GetExternalLoginInfoAsync();
-
-                if (info == null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    return View("ExternalLoginFailure");
+                    return RedirectToAction("Index", "Manage");
                 }
 
-                var user = new User
+                if (ModelState.IsValid)
                 {
-                    UserName = model.Email,
-                    Email = model.Email
-                };
+                    var info =
+                        await AuthenticationManager.GetExternalLoginInfoAsync();
 
-                var result = await UserManager.CreateAsync(user);
+                    if (info == null)
+                    {
+                        return View("ExternalLoginFailure");
+                    }
 
-                if (result.Succeeded)
-                {
-                    result =
-                        await UserManager.AddLoginAsync(user.Id, info.Login);
+                    var user = new User
+                    {
+                        UserName = model.Email,
+                        Email = model.Email
+                    };
+
+                    var result = await UserManager.CreateAsync(user);
 
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, false, false);
-                        return RedirectToLocal(returnUrl);
+                        result =
+                            await UserManager.AddLoginAsync(user.Id, info.Login);
+
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, false, false);
+                            return RedirectToLocal(returnUrl);
+                        }
                     }
+
+                    AddErrors(result);
                 }
 
-                AddErrors(result);
+                ViewBag.ReturnUrl = returnUrl;
+                return View(model);
             }
-
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }      
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ExternalLoginFailure()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         [AllowAnonymous]
@@ -184,43 +241,62 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public async Task<ActionResult> ForgotPassword(
             ForgotPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var user = await UserManager.FindByNameAsync(model.Email);
+
+                if (user == null
+                    || !await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    return View("ForgotPasswordConfirmation");
+                }
+
                 return View(model);
             }
-
-            var user = await UserManager.FindByNameAsync(model.Email);
-
-            if (user == null
-                || !await UserManager.IsEmailConfirmedAsync(user.Id))
+            catch (Exception e)
             {
-                return View("ForgotPasswordConfirmation");
-            }
-
-            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-            // Send an email with this link
-            // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-            // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-            // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-            // return RedirectToAction("ForgotPasswordConfirmation", "Account");
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ForgotPasswordConfirmation()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }       
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            try
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }     
         }
 
         [AllowAnonymous]
@@ -230,53 +306,78 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             LoginViewModel model,
             string returnUrl)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(
-                model.Email,
-                model.Password,
-                model.RememberMe,
-                false);
-
-            switch (result)
-            {
-                case SignInStatus.Success: return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut: return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction(
-                        "SendCode",
-                        new
-                        {
-                            ReturnUrl = returnUrl,
-                            model.RememberMe
-                        });
-                case SignInStatus.Failure: goto default;
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                var result = await SignInManager.PasswordSignInAsync(
+                    model.Email,
+                    model.Password,
+                    model.RememberMe,
+                    false);
+
+                switch (result)
+                {
+                    case SignInStatus.Success: return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut: return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction(
+                            "SendCode",
+                            new
+                            {
+                                ReturnUrl = returnUrl,
+                                model.RememberMe
+                            });
+                    case SignInStatus.Failure: goto default;
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
             }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }           
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(
-                DefaultAuthenticationTypes.ApplicationCookie);
+            try
+            {
+                AuthenticationManager.SignOut(
+                    DefaultAuthenticationTypes.ApplicationCookie);
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }     
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [AllowAnonymous]
@@ -284,43 +385,52 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var user = new User(model)
+                {
+                    Email = model.Email,
+                    UserName = model.Email
+                };
+
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, false, false);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                AddErrors(result);
                 return View(model);
             }
-
-            var user = new User(model)
+            catch (Exception e)
             {
-                Email = model.Email,
-                UserName = model.Email
-            };
-
-            var result = await UserManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
-            {
-                await SignInManager.SignInAsync(user, false, false);
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                return RedirectToAction("Index", "Home");
-            }
-
-            AddErrors(result);
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            try
+            {
+                return code == null ? View("Error") : View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [AllowAnonymous]
@@ -329,37 +439,55 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public async Task<ActionResult> ResetPassword(
             ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var user = await UserManager.FindByNameAsync(model.Email);
+
+                if (user == null)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                }
+
+                var result = await UserManager.ResetPasswordAsync(
+                    user.Id,
+                    model.Code,
+                    model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                }
+
+                AddErrors(result);
+                return View();
             }
-
-            var user = await UserManager.FindByNameAsync(model.Email);
-
-            if (user == null)
+            catch (Exception e)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-
-            var result = await UserManager.ResetPasswordAsync(
-                user.Id,
-                model.Code,
-                model.Password);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
-            }
-
-            AddErrors(result);
-            return View();
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPasswordConfirmation()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [AllowAnonymous]
@@ -368,31 +496,40 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             string returnUrl,
             bool rememberMe)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
-
-            if (userId == null)
+            try
             {
-                return View("Error");
-            }
+                var userId = await SignInManager.GetVerifiedUserIdAsync();
 
-            var userFactors =
-                await UserManager.GetValidTwoFactorProvidersAsync(userId);
-
-            var factorOptions = userFactors.Select(
-                    purpose => new SelectListItem
-                    {
-                        Text = purpose,
-                        Value = purpose
-                    })
-                .ToList();
-
-            return View(
-                new SendCodeViewModel
+                if (userId == null)
                 {
-                    Providers = factorOptions,
-                    ReturnUrl = returnUrl,
-                    RememberMe = rememberMe
-                });
+                    return View("Error");
+                }
+
+                var userFactors =
+                    await UserManager.GetValidTwoFactorProvidersAsync(userId);
+
+                var factorOptions = userFactors.Select(
+                        purpose => new SelectListItem
+                        {
+                            Text = purpose,
+                            Value = purpose
+                        })
+                    .ToList();
+
+                return View(
+                    new SendCodeViewModel
+                    {
+                        Providers = factorOptions,
+                        ReturnUrl = returnUrl,
+                        RememberMe = rememberMe
+                    });
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         [AllowAnonymous]
@@ -400,26 +537,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View();
-            }
-
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(
-                model.SelectedProvider))
-            {
-                return View("Error");
-            }
-
-            return RedirectToAction(
-                "VerifyCode",
-                new
+                if (!ModelState.IsValid)
                 {
-                    Provider = model.SelectedProvider,
-                    model.ReturnUrl,
-                    model.RememberMe
-                });
+                    return View();
+                }
+
+                if (!await SignInManager.SendTwoFactorCodeAsync(
+                    model.SelectedProvider))
+                {
+                    return View("Error");
+                }
+
+                return RedirectToAction(
+                    "VerifyCode",
+                    new
+                    {
+                        Provider = model.SelectedProvider,
+                        model.ReturnUrl,
+                        model.RememberMe
+                    });
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [AllowAnonymous]
@@ -429,19 +574,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             string returnUrl,
             bool rememberMe)
         {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
+            try
             {
-                return View("Error");
-            }
-
-            return View(
-                new VerifyCodeViewModel
+                if (!await SignInManager.HasBeenVerifiedAsync())
                 {
-                    Provider = provider,
-                    ReturnUrl = returnUrl,
-                    RememberMe = rememberMe
-                });
+                    return View("Error");
+                }
+
+                return View(
+                    new VerifyCodeViewModel
+                    {
+                        Provider = provider,
+                        ReturnUrl = returnUrl,
+                        RememberMe = rememberMe
+                    });
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }        
         }
 
         [AllowAnonymous]
@@ -449,32 +602,37 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(
-                model.Provider,
-                model.Code,
-                model.RememberMe,
-                model.RememberBrowser);
-
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut: return View("Lockout");
-                case SignInStatus.RequiresVerification: goto default;
-                case SignInStatus.Failure: goto default;
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
+                if (!ModelState.IsValid)
+                {
                     return View(model);
+                }
+
+                var result = await SignInManager.TwoFactorSignInAsync(
+                    model.Provider,
+                    model.Code,
+                    model.RememberMe,
+                    model.RememberBrowser);
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(model.ReturnUrl);
+                    case SignInStatus.LockedOut: return View("Lockout");
+                    case SignInStatus.RequiresVerification: goto default;
+                    case SignInStatus.Failure: goto default;
+                    default:
+                        ModelState.AddModelError("", "Invalid code.");
+                        return View(model);
+                }
             }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            } 
         }
 
         protected override void Dispose(bool disposing)
@@ -499,7 +657,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         #region Helpers
 
-        // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager => HttpContext
