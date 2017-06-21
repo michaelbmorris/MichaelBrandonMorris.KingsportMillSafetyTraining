@@ -10,9 +10,9 @@ using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
-    public class ApplicationUserManager : UserManager<ApplicationUser>
+    public class ApplicationUserManager : UserManager<User>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser> store)
+        public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }
@@ -34,11 +34,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             IOwinContext context)
         {
             var manager = new ApplicationUserManager(
-                new UserStore<ApplicationUser>(
+                new UserStore<User>(
                     context.Get<ApplicationDbContext>()));
 
             manager.UserValidator =
-                new UserValidator<ApplicationUser>(manager)
+                new UserValidator<User>(manager)
                 {
                     AllowOnlyAlphanumericUserNames = false,
                     RequireUniqueEmail = true
@@ -47,10 +47,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false
             };
 
             manager.UserLockoutEnabledByDefault = true;
@@ -59,14 +59,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
             manager.RegisterTwoFactorProvider(
                 "Phone Code",
-                new PhoneNumberTokenProvider<ApplicationUser>
+                new PhoneNumberTokenProvider<User>
                 {
                     MessageFormat = "Your security code is {0}"
                 });
 
             manager.RegisterTwoFactorProvider(
                 "Email Code",
-                new EmailTokenProvider<ApplicationUser>
+                new EmailTokenProvider<User>
                 {
                     Subject = "Security Code",
                     BodyFormat = "Your security code is {0}"
@@ -79,7 +79,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<ApplicationUser>(
+                    new DataProtectorTokenProvider<User>(
                         dataProtectionProvider.Create("ASP.NET Identity"));
             }
 

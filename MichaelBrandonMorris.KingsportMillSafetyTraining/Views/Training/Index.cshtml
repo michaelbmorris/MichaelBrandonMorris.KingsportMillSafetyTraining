@@ -22,26 +22,37 @@
                         @Html.DisplayFor(item.Title)
                     </h4>
                     <div class="row">
-                        <div class="col-md-6">
-                            <p>
-                                @Html.DisplayFor(item.Content)
-                            </p>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="@Url.Action("RenderImage", "Slides", new
-                                      {
-                                          id = item.Id
-                                      })"
-                                 alt="@item.ImageDescription"/>
-                        </div>
+                        @if (item.ImageBytes == null)
+                        {
+                            <div class="col-md-12">
+                                <p>
+                                    @Html.DisplayFor(item.Content)
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6">
+                                <p>
+                                    @Html.DisplayFor(item.Content)
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="@Url.Action("RenderImage", "Slides", new
+                                          {
+                                              id = item.Id
+                                          })"
+                                     alt="@item.ImageDescription"/>
+                            </div>
+                        }             
                     </div>
                     @if (item == Model.Last())
                     {
                         <br/>
-                        <button class="btn btn-default form-control"
-                                onclick="location.href = '@Url.Action("Quiz")';return false;">
-                            Go To Quiz
-                        </button>
+                        @Html.ActionLink("Go to Quiz", "Quiz", "Training", null, new
+                        {
+                            @class = "btn btn-primary form-control"
+                        })
                     }
                 </div>
             </div>

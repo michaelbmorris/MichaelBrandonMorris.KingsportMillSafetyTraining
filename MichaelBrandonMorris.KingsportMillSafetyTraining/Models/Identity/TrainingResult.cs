@@ -36,7 +36,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
             set;
         }
 
-        public virtual ApplicationUser User
+        public virtual User User
         {
             get;
             set;

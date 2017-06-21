@@ -67,10 +67,6 @@ td img {
     overflow: hidden;
 }
 
-.index {
-    padding-left: 1em;
-}
-
 .link {
     cursor: pointer;
 }
@@ -90,4 +86,29 @@ td.rowspan * {
 td a.btn {
     display: inline-block;
     width: 100%;
+}
+
+.image-quiz {
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.handle {
+    line-height: 20px;
+}
+
+ul li .btn {
+    margin-bottom: 8px;
+    width: 100%;
+}
+
+ul li:last-child .btn {
+    margin-bottom: 0;
+}
+
+:required {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='20px' width='20px'><text x='5' y='20' fill='red' font-size='20'>*</text></svg>");
+    background-repeat: no-repeat;
+    background-position: right top;
 }

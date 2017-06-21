@@ -199,8 +199,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered =
                     await AuthenticationManager.TwoFactorBrowserRememberedAsync(
-                        userId),
-                RoleTitle = UserManager.GetRole(userId).Result.Title
+                        userId)
             };
 
             return View(model);

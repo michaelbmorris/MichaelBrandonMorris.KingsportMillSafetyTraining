@@ -8,54 +8,36 @@
 
 @using (Html.BeginForm())
 {
+    <p class="bg-info">
+        Click and drag the arrows to change order.
+    </p>
     <table class="table table-condensed table-hover table-striped"
            id="sort">
-        <thead>
-        <tr>
-            <th>
-                Drag to Reorder
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Single().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Single().Description)
-            </th>
-        </tr>
-        </thead>
         <tbody>
-        @for (var i = 0; i < Model.Count; i++)
-        {
-            <tr>
-                <td class="index">
-                    &#8597;
-                    @Html.HiddenFor(model => Model[i].Id)
-                    @Html.HiddenFor(model => Model[i].Index, new
-                    {
-                        htmlAttributes = new
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <span class="glyphicon glyphicon-move handle"></span>
+                        @Html.HiddenFor(model => Model[i].Id)
+                        @Html.DisplayFor(m => Model[i].Title)
+                        @Html.HiddenFor(model => Model[i].Index, new
                         {
-                            name = string.Format("slides[{0}].Index", i), @readonly = true
-                        }
-                    })
-                </td>
-                <td>
-                    @Html.DisplayFor(m => Model[i].Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => Model[i].Description)
-                </td>
-            </tr>
-        }
+                            name = string.Format("slides[{0}].Index", i), @readonly = true, @class = "index"
+                        })
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 
-    <input class="btn btn-default"
+    <input class="btn btn-primary"
            type="submit"
            value="Save Order"/>
-    <button class="btn btn-default"
-            onclick="location.href = '@Url.Action("Index")';return false;">
-        Cancel
-    </button>
+    @Html.ActionLink("Cancel", "Index", null, new
+    {
+        @class = "btn btn-danger"
+    })
 }
 
 @section scripts
@@ -63,9 +45,10 @@
     <script>
         $(function() {
             $('#sort tbody').sortable({
+                handle: ".handle",
                 stop: function() {
                     $("#sort tbody tr").each(function(index, element) {
-                        var hiddenInput = $(element).children(".index").children().last();
+                        var hiddenInput = $(element).find(".index");
                         hiddenInput.val(index);
                     });
                 }

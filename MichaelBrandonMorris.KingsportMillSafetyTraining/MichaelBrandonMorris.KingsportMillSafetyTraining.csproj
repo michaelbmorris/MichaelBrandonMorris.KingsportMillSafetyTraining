@@ -219,7 +219,7 @@
     <Compile Include="Models\Data\Category.cs" />
     <Compile Include="Models\Data\ViewModels\CategoryViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Identity\ApplicationUser.cs" />
+    <Compile Include="Models\Identity\User.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\FactorViewModel.cs" />

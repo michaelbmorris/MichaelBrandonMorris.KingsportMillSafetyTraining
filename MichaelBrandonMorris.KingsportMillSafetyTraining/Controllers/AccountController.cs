@@ -137,7 +137,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View("ExternalLoginFailure");
                 }
 
-                var user = new ApplicationUser
+                var user = new User
                 {
                     UserName = model.Email,
                     Email = model.Email
@@ -289,7 +289,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
-            var user = new ApplicationUser(model)
+            var user = new User(model)
             {
                 Email = model.Email,
                 UserName = model.Email

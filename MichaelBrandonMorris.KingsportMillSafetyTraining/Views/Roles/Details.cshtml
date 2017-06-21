@@ -11,6 +11,19 @@
     @Html.ActionLink("Edit", "Edit", new
     {
         id = Model.Id
-    }) |
-    @Html.ActionLink("Back to List", "Index")
+    }, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Delete", "Delete", new
+    {
+        id = Model.Id
+    }, new
+    {
+        @class = "btn btn-danger"
+    })
+    @Html.ActionLink("View All Roles", "Index", null, new
+    {
+        @class = "btn btn-primary pull-right"
+    })
 </p>

@@ -1,4 +1,5 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Manage.IndexViewModel
+﻿@using Microsoft.AspNet.Identity
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Manage.IndexViewModel
 @{
     ViewBag.Title = "Manage";
     ViewBag.Subtitle = "Change your account settings";
@@ -6,18 +7,24 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") : Html.ActionLink("Create", "SetPassword"))
-            ]
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RoleTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RoleTitle)
-        </dd>
-    </dl>
+    <ul>
+        <li>
+            @(Model.HasPassword ? Html.ActionLink("Change Password", "ChangePassword", null, new
+              {
+                  @class = "btn btn-primary"
+              }) : Html.ActionLink("Set Password", "SetPassword", null, new
+              {
+                  @class = "btn btn-primary"
+              }))
+        </li>
+        <li>
+            @Html.ActionLink("View Training Results", "UserResults", "Results", new
+            {
+                id = User.Identity.GetUserId()
+            }, new
+            {
+                @class = "btn btn-primary"
+            })
+        </li>
+    </ul>
 </div>

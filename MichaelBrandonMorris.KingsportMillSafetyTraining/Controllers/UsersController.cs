@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -21,7 +22,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ApplicationUser user)
+        public ActionResult Create(User user)
         {
             if (!ModelState.IsValid)
             {
@@ -106,15 +107,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ApplicationUser user)
+        public ActionResult Edit(User user)
         {
             if (!ModelState.IsValid)
             {
                 return View(user);
             }
 
-            _db.Entry(user).State = EntityState.Modified;
-            _db.SaveChanges();
+            _db.Edit(user);
             return RedirectToAction("Index");
         }
 

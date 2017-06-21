@@ -27,6 +27,9 @@
                 @Html.DisplayNameFor(x => Model.Single().Title)
             </th>
             <th>
+                @Html.DisplayNameFor(x => Model.Single().ImageBytes)
+            </th>
+            <th>
                 @Html.DisplayNameFor(x => Model.Single().ShouldShowSlideInSlideshow)
             </th>
             <th>
@@ -59,7 +62,8 @@
             <tr>
                 @if (k == i)
                 {
-                    <td class="rowspan" rowspan="@rowCount">
+                    <td class="rowspan"
+                        rowspan="@rowCount">
                         @Html.DisplayFor(Model[k].CategoryTitle)
                         <br/>
                         @Html.ActionLink("Details", "Details", "Categories", new
@@ -69,7 +73,7 @@
                         {
                             @class = "btn btn-primary"
                         })
-                        <br />
+                        <br/>
                         @Html.ActionLink("Reorder Slides", "Reorder", new
                         {
                             categoryId = Model[k].CategoryId
@@ -81,6 +85,13 @@
                 }
                 <td>
                     @Html.DisplayFor(Model[k].Title)
+                </td>
+                <td>
+                    <img src="@Url.Action("RenderImage", new
+                              {
+                                  id = Model[k].Id
+                              })"
+                         alt="@Model[k].ImageDescription"/>
                 </td>
                 <td>
                     @Html.DisplayFor(Model[k].ShouldShowSlideInSlideshow)
@@ -113,8 +124,7 @@
                     @Html.ActionLink("Delete", "Delete", new
                     {
                         id = Model[k].Id
-                    },
-                    new
+                    }, new
                     {
                         @class = "btn btn-danger"
                     })

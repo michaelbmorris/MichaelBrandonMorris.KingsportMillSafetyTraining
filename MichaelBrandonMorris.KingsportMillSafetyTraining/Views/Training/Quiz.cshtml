@@ -24,12 +24,13 @@
             {
                 @Html.HiddenFor(x => Model[i].SelectedAnswerIndex)
             }
-            <div class="row"
+            <div class="@(Model[i].IsCorrect() ? "bg-success " : "")@(Model[i].IsIncorrect() ? "bg-danger " : "")row"
                  id="Question-@Model[i].Id">
                 <div class="col-md-4">
                     @if (Model[i].ShouldShowImageOnQuiz)
                     {
                         <img alt="@Model[i].ImageDescription"
+                             class="image-quiz"
                              src="@Url.Action("RenderImage", "Slides", new
                                   {
                                       id = Model[i].Id

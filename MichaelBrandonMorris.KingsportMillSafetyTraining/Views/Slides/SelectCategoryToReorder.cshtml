@@ -5,20 +5,35 @@
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
-@foreach (var item in Model)
-{
-    <button class="btn btn-default"
-            onclick="location.href = '@Url.Action("Reorder", new
-                                      {
-                                          categoryId = item.Id
-                                      })';return false;">
-        @item.Title
-    </button>
-}
+<p class="bg-info">
+    Choose a category to reorder slides for, or press "Reorder Categories" to change the order of the categories themselves.
+</p>
 
-<span>&nbsp;or&nbsp;</span>
-
-<button class="btn btn-default"
-        onclick="location.href = '@Url.Action("Reorder", "Categories")';return false;">
-    Reorder Categories
-</button>
+<div class="row">
+    <div class="col-md-10">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    @Html.ActionLink(item.Title, "Reorder", new
+                    {
+                        categoryId = item.Id
+                    }, new
+                    {
+                        @class = "btn btn-primary"
+                    })
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-2">
+        @Html.ActionLink("Reorder Categories", "Reorder", "Categories", null, new
+        {
+            @class = "btn btn-primary", style = "margin-bottom: 8px; width: 100%;"
+        })
+        @Html.ActionLink("Cancel", "Index", null, new
+        {
+            @class = "btn btn-danger", style = "width: 100%;"
+        })
+    </div>
+</div>

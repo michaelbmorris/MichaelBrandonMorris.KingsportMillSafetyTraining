@@ -90,6 +90,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             set;
         }
 
+        [Display(Name = "Image")]
         public byte[] ImageBytes
         {
             get;

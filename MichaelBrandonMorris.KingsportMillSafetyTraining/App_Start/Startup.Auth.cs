@@ -37,7 +37,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         OnValidateIdentity =
                             SecurityStampValidator
                                 .OnValidateIdentity<ApplicationUserManager,
-                                    ApplicationUser>(
+                                    User>(
                                     TimeSpan.FromMinutes(30),
                                     (manager, user) => user
                                         .GenerateUserIdentityAsync(manager))

@@ -14,13 +14,13 @@
         @Html.EditorForModel(Model)
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
-                <input class="btn btn-default"
+                <input class="btn btn-primary"
                        type="submit"
                        value="Create"/>
-                <button class="btn btn-default"
-                        onclick="location.href = '@Url.Action("Index")';return false;">
-                    Cancel
-                </button>
+                @Html.ActionLink("Cancel", "Index", null, new
+                {
+                    @class = "btn btn-danger"
+                })
             </div>
         </div>
     </div>

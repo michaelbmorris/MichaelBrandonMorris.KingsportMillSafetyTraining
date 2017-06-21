@@ -22,6 +22,14 @@
     <dd>
         @Html.DisplayFor(model => model.LastName)
     </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.BirthDate)
+    </dt>
+    
+    <dd>
+        @Html.DisplayFor(model => model.BirthDate)
+    </dd>
 
     <dt>
         @Html.DisplayNameFor(model => model.CompanyName)
@@ -29,6 +37,22 @@
 
     <dd>
         @Html.DisplayFor(model => model.CompanyName)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    
+    <dt>
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.PhoneNumber)
     </dd>
 
     <dt>
@@ -48,11 +72,11 @@
     </dd>
 
     <dt>
-        @Html.DisplayNameFor(model => model.TimeToComplete)
+        @Html.DisplayNameFor(model => model.TimeToCompleteString)
     </dt>
 
     <dd>
-        @Html.DisplayFor(model => model.TimeToComplete)
+        @Html.DisplayFor(model => model.TimeToCompleteString)
     </dd>
 
     <dt>
@@ -68,60 +92,48 @@
     </dt>
 
     <dd>
-        <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <th>
-                        Attempt #
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().QuestionsCorrect)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().TotalQuestions)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().Score)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.QuizResults.Single().TimeToComplete)
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    var i = 1;
-                }
-                @foreach (var quizResult in Model.QuizResults)
-                {
-                    <tr>
-                        <td>
-                            @i
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.QuestionsCorrect)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.TotalQuestions)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.Score)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelQuizResult => quizResult.TimeToComplete)
-                        </td>
-                    </tr>
-                    i++;
-                }
-            </tbody>
-        </table>
+        @Html.MvcGrid("QuizResultsGrid", new
+        {
+            id = Model.Id
+        })
     </dd>
 </dl>
 
-<p>
-    @Html.ActionLink("View User's Results", "UserResults", new
+<div class="row">
+    <div class="col-md-6">
+        @if (User.IsInRole("Administrator"))
+        {
+            @Html.ActionLink("View All User's Results", "UserResults", new
+            {
+                id = Model.UserId
+            }, new
+            {
+                @class = "btn btn-primary"
+            })       
+        }
+        else
+        {
+            @Html.ActionLink("View All Your Results", "UserResults", new
+            {
+                id = Model.UserId
+            }, new
+            {
+                @class = "btn btn-primary"
+            })
+        }
+    </div>
+
+    @if (User.IsInRole("Administrator"))
     {
-        id = Model.UserId
-    }) |
-    @Html.ActionLink("View All Users", "Index")
-</p>
+        <div class="col-md-6 text-right">
+            @Html.ActionLink("View All Results", "Index", null, new
+            {
+                @class = "btn btn-primary"
+            })
+            @Html.ActionLink("View All Users", "Index", "Users", null, new
+            {
+                @class = "btn btn-primary"
+            })
+        </div>  
+    }
+</div>

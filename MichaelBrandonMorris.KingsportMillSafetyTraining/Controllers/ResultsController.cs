@@ -21,11 +21,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             if (!User.IsInRole("Administrator")
-                && _db.IsUserTrainingResult(
+                && !_db.IsUserTrainingResult(
                     User.Identity.GetUserId(),
                     id.Value))
             {
-                return new HttpStatusCodeResult(
+                return this.CreateError(
                     HttpStatusCode.Forbidden,
                     "You do not have permission to view this.");
             }
@@ -34,10 +34,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult Index()
         {
+            if (!User.IsInRole("Administrator"))
+            {
+                return RedirectToAction(
+                    "UserResults",
+                    new
+                    {
+                        id = User.Identity.GetUserId()
+                    });
+            }
+
             var model = _db.GetTrainingResultsViewModel();
             return View(model);
         }
@@ -50,6 +59,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.BadRequest,
                     "Parameter missing.\nName: 'id'\nType: 'string'");
+            }
+
+            if (!User.IsInRole("Administrator")
+                && !User.Identity.GetUserId().Equals(id))
+            {
+                return this.CreateError(
+                    HttpStatusCode.Forbidden,
+                    "You do not have permission to view this.");
             }
 
             var model = _db.GetTrainingResultsViewModel(id);

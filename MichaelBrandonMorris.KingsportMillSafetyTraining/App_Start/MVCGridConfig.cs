@@ -5,6 +5,7 @@ using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Result;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
@@ -141,6 +142,47 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 EnableSorting = true,
                 HeaderText = "Title",
                 ValueExpression = (x, y) => x.Title
+            };
+
+        private static readonly GridColumn<QuizResult> QuizAttemptNumberColumn =
+            new GridColumn<QuizResult>
+            {
+                ColumnName = "AttemptNumber",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Attempt Number",
+                ValueExpression = (x, y) => x.AttemptNumber.ToString()
+            };
+
+        private static readonly GridColumn<QuizResult>
+            QuizQuestionsCorrectColumn = new GridColumn<QuizResult>
+            {
+                ColumnName = "QuestionsCorrect",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Questions Correct",
+                ValueExpression = (x, y) => x.QuestionsCorrect.ToString(),
+                ValueTemplate = "{Value} / {Model.TotalQuestions}"
+            };
+
+        private static readonly GridColumn<QuizResult> QuizScoreColumn =
+            new GridColumn<QuizResult>
+            {
+                ColumnName = "Score",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Score",
+                ValueExpression = (x, y) => x.Score
+            };
+
+        private static readonly GridColumn<QuizResult> QuizTimeToCompleteColumn
+            = new GridColumn<QuizResult>
+            {
+                ColumnName = "TimeToComplete",
+                EnableFiltering = true,
+                EnableSorting = true,
+                HeaderText = "Time to Complete",
+                ValueExpression = (x, y) => x.TimeToCompleteString
             };
 
         private static readonly GridColumn<RoleViewModel>
@@ -656,6 +698,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             var categoriesGrid = GetCategoriesGrid();
             var rolesGrid = GetRolesGrid();
             var slidesGrid = GetSlidesGrid();
+            var quizResultsGrid = GetQuizResultsGrid();
 
             MvcGridDefinitionTable.Add(
                 trainingResultsGrid.Title,
@@ -673,6 +716,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
             MvcGridDefinitionTable.Add(rolesGrid.Title, rolesGrid.Grid);
             MvcGridDefinitionTable.Add(slidesGrid.Title, slidesGrid.Grid);
+            MvcGridDefinitionTable.Add(
+                quizResultsGrid.Title,
+                quizResultsGrid.Grid);
         }
 
         private static (string Title, MvcGridBuilder<CategoryViewModel> Grid)
@@ -743,6 +789,59 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return propertyInfo.GetValue(o, null);
+        }
+
+        private static (string Title, MvcGridBuilder<QuizResult> Grid)
+            GetQuizResultsGrid()
+        {
+            const string title = "QuizResultsGrid";
+
+            var grid = new MvcGridBuilder<QuizResult>()
+                .WithAuthorizationType(AuthorizationType.Authorized)
+                .WithPageParameterNames("Id")
+                .AddColumns(
+                    columns =>
+                    {
+                        columns.Add(QuizAttemptNumberColumn);
+                        columns.Add(QuizQuestionsCorrectColumn);
+                        columns.Add(QuizScoreColumn);
+                        columns.Add(QuizTimeToCompleteColumn);
+                    })
+                .WithSorting(true, "AttemptNumber", SortDirection.Asc)
+                .WithRetrieveDataMethod(
+                    context =>
+                    {
+                        var sortColumnName =
+                            context.QueryOptions.SortColumnName;
+
+                        var id =
+                            context.QueryOptions.GetPageParameterString("id");
+
+                        id.TryParse(out int trainingResultId);
+                        var sortDirection = context.QueryOptions.SortDirection;
+                        var result = new QueryResult<QuizResult>();
+
+                        using (var db = new ApplicationDbContext())
+                        {
+                            var trainingResult =
+                                db.GetTrainingResult(trainingResultId);
+
+                            var query = trainingResult.GetQuizResults();
+
+                            if (!sortColumnName.IsNullOrWhiteSpace())
+                            {
+                                query = query.OrderBy(
+                                    x => GetPropertyValue(x, sortColumnName),
+                                    sortDirection);
+                            }
+
+                            result.Items = query.ToList();
+                        }
+
+                        return result;
+                    });
+
+            return (title, grid);
         }
 
         private static (string Title, MvcGridBuilder<RoleViewModel> Grid)

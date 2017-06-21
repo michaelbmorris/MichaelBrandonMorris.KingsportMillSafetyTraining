@@ -1,64 +1,46 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.Slide>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels.SlideViewModel>
 
 @{
     ViewBag.Title = "Reorder";
-    ViewBag.Subtitle = "Slides"
+    ViewBag.Subtitle = "Slides";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm())
 {
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-condensed table-hover table-striped"
-                   id="sort">
-                <thead>
+    <p>
+        You are reordering slides for category <strong>@Model.First().CategoryTitle</strong>.
+    </p>
+    <p class="bg-info">
+        Click and drag the arrows to change order.
+    </p>
+    <table class="table table-condensed table-hover table-striped"
+           id="sort">
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
                 <tr>
-                    <th>
-                        Drag to Reorder
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Single().Title)
-                    </th>
+                    <td>
+                        <span class="glyphicon glyphicon-move handle"></span>
+                        @Html.DisplayFor(x => Model[i].Title)
+                        @Html.HiddenFor(model => Model[i].Id)
+                        @Html.HiddenFor(model => Model[i].Index, new
+                        {
+                            name = string.Format("slides[{0}].Index", i), @readonly = true, @class = "index"
+                        })
+                    </td>
                 </tr>
-                </thead>
-                <tbody>
-                @for (var i = 0; i < Model.Count; i++)
-                {
-                    <tr>
-                        <td class="index">
-                            &#8597;
-                            @Html.HiddenFor(model => Model[i].Id)
-                            @Html.HiddenFor(model => Model[i].Index, new
-                            {
-                                htmlAttributes = new
-                                {
-                                    name = string.Format("slides[{0}].Index", i), @readonly = true
-                                }
-                            })
-                        </td>
-                        <td>
-                            @Html.DisplayFor(x => Model[i].Title)
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
-                <input class="btn btn-default"
-                       type="submit"
-                       value="Save Order"/>
-                <button class="btn btn-default"
-                        onclick="location.href = '@Url.Action("Index")';return false;">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
+            }
+        </tbody>
+    </table>
+
+    <input class="btn btn-primary"
+           type="submit"
+           value="Save Order"/>
+    @Html.ActionLink("Cancel", "Index", null, new
+    {
+        @class = "btn btn-danger"
+    })
 }
 
 @section scripts
@@ -66,9 +48,10 @@
     <script>
         $(function() {
             $('#sort tbody').sortable({
+                handle: ".handle",
                 stop: function() {
                     $("#sort tbody tr").each(function(index, element) {
-                        var hiddenInput = $(element).children(".index").children().last();
+                        var hiddenInput = $(element).find(".index");
                         hiddenInput.val(index);
                     });
                 }

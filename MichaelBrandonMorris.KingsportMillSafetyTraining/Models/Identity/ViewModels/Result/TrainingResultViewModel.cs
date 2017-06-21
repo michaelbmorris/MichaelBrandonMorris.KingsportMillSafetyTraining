@@ -20,10 +20,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             TimeToComplete = trainingResult.TimeToComplete;
 
             var user = trainingResult.User;
+            BirthDate = user.BirthDate;
             CompanyName = user.CompanyName;
             Email = user.Email;
             FirstName = user.FirstName;
             LastName = user.LastName;
+            PhoneNumber = user.PhoneNumber;
             UserId = user.Id;
         }
 
@@ -45,6 +47,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         }
 
         public string Email
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Birth Date")]
+        public DateTime BirthDate
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Phone Number")]
+        public string PhoneNumber
         {
             get;
             set;
@@ -83,13 +99,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             get;
             set;
         }
-
-        [DisplayName("Time to Complete")]
-        public TimeSpan TimeToComplete
+       
+        internal TimeSpan TimeToComplete
         {
             get;
             set;
         }
+
+        [DisplayName("Time to Complete")]
+        public string TimeToCompleteString =>
+            $"{TimeToComplete.TotalMinutes:#.##} Minutes";
 
         public string UserId
         {

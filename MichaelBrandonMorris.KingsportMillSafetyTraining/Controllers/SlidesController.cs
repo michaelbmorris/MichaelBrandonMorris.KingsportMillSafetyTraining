@@ -43,8 +43,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(slideViewModel);
             }
 
-            Debug.WriteLine(slideViewModel.Image == null);
-
             _db.CreateSlide(slideViewModel);
             return RedirectToAction("Index");
         }
@@ -54,14 +52,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var slide = _db.GetSlideViewModel(id.Value);
 
             if (slide == null)
             {
-                return HttpNotFound();
+                return this.CreateError(
+                    HttpStatusCode.NotFound,
+                    $"Slide with id '{id.Value}' not found.");
             }
 
             return View(slide);
@@ -88,14 +90,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slide = _db.GetSlide(id.Value);
+            var slide = _db.GetSlideViewModel(id.Value);
 
             if (slide == null)
             {
-                return HttpNotFound();
+                return this.CreateError(
+                    HttpStatusCode.NotFound,
+                    $"Slide with id '{id.Value}' not found.");
             }
 
             return View(slide);
@@ -106,14 +112,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
             var slideViewModel = _db.GetSlideViewModel(id.Value);
 
             if (slideViewModel == null)
             {
-                return HttpNotFound();
+                return this.CreateError(
+                    HttpStatusCode.NotFound,
+                    $"Slide with id '{id.Value}' not found.");
             }
 
             return View(slideViewModel);

@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.Slide
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels.SlideViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -14,6 +14,19 @@
     @Html.ActionLink("Edit", "Edit", new
     {
         id = Model.Id
-    }) |
-    @Html.ActionLink("Back to List", "Index")
+    }, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Delete", "Delete", new
+    {
+        id = Model.Id
+    }, new
+    {
+        @class = "btn btn-danger"
+    })
+    @Html.ActionLink("View All Slides", "Index", null, new
+    {
+        @class = "btn btn-primary pull-right"
+    })
 </p>

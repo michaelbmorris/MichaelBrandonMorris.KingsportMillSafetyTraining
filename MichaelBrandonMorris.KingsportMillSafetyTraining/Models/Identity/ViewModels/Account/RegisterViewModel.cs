@@ -16,6 +16,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         }
 
         [Display(Name = "Company Name")]
+        [Required]
         public string CompanyName
         {
             get;
@@ -34,9 +35,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             set;
         }
 
-        [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
+        [Required]
         public string Email
         {
             get;
@@ -61,6 +62,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
 
         [Display(Name = "Middle Name")]
         public string MiddleName
+        {
+            get;
+            set;
+        }
+
+        [Display(Name = "Phone Number")]
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number.")]
+        public string PhoneNumber
         {
             get;
             set;

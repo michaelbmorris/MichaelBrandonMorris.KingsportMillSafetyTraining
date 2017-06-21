@@ -69,9 +69,11 @@
         @class = "control-label col-md-2"
     })
     <div class="col-md-10">
-        <input class=""
-               name="Image"
-               type="file"/>
+        <label class="btn btn-primary">
+            <input id ="file-upload"name="Image" type="file" style="display: none;" />
+            Upload Image...
+        </label>
+        <span id="file-selected"></span>
         @Html.ValidationMessageFor(model => model.Image, "", new
         {
             @class = "text-danger"
@@ -173,12 +175,18 @@
         @class = "control-label col-md-2"
     })
     <div class="col-md-10">
-        <div id="answers-list">
-            @Html.EditorForMany(x => x.Answers)
-        </div>
-        <input class="btn btn-default"
-               id="add-answer"
-               type="button"
-               value="Add New Answer"/>
+        <div class="row">
+            <div class="col-md-10"
+                 id="answers-list">
+                @Html.EditorForMany(x => x.Answers)
+            </div>
+            <div class="col-md-2 text-right">
+                <button class="btn btn-primary"
+                        id="add-answer"
+                        type="button">
+                    Add New Answer
+                </button>
+            </div>
+        </div>       
     </div>
 </div>

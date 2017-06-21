@@ -8,7 +8,7 @@ using Microsoft.Owin.Security;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     public class ApplicationSignInManager
-        : SignInManager<ApplicationUser, string>
+        : SignInManager<User, string>
     {
         public ApplicationSignInManager(
             ApplicationUserManager userManager,
@@ -27,7 +27,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(
-            ApplicationUser user)
+            User user)
         {
             return user.GenerateUserIdentityAsync(
                 (ApplicationUserManager) UserManager);

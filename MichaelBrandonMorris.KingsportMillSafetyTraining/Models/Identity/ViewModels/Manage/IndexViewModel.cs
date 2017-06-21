@@ -35,11 +35,5 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             get;
             set;
         }
-
-        public string RoleTitle
-        {
-            get;
-            set;
-        }
     }
 }

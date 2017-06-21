@@ -17,7 +17,7 @@ using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
             : base("DefaultConnection", false)
@@ -264,6 +264,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetSlideViewModels(categoryId));
         }
 
+        public TrainingResult GetTrainingResult(int id)
+        {
+            return DoTransaction(() => _GetTrainingResult(id));
+        }
+
         public TrainingResultsViewModel GetTrainingResultsViewModel(
             string userId = null)
         {
@@ -281,7 +286,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetTrainingResultViewModels(userId));
         }
 
-        public ApplicationUser GetUser(string id)
+        public User GetUser(string id)
         {
             return DoTransaction(() => Users.Find(id));
         }
@@ -396,6 +401,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             trainingResult.QuizResults.Add(
                 new QuizResult
                 {
+                    AttemptNumber = trainingResult.QuizResults.Count + 1,
                     QuestionsCorrect = questionsCorrect,
                     TimeToComplete = timeToComplete,
                     TotalQuestions = totalQuestions
@@ -405,6 +411,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private void _AddTrainingResult(string userId)
         {
             var user = Users.Find(userId);
+
+            if (user.TrainingResults.LastOrDefault() != null 
+                && user.TrainingResults.Last().CompletionDateTime == null)
+            {
+                    return;
+            }
 
             user.TrainingResults.Add(
                 new TrainingResult
@@ -636,6 +648,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return slides.AsViewModels();
         }
 
+        private TrainingResult _GetTrainingResult(int id)
+        {
+            var trainingResult = TrainingResults.Find(id);
+
+            if (trainingResult == null)
+            {
+                throw new KeyNotFoundException(
+                    $"Training result with id '{id} not found.");
+            }
+
+            return trainingResult;
+        }
+
         private TrainingResultsViewModel _GetTrainingResultsViewModel(
             string userId = null)
         {
@@ -857,9 +882,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 wherePredicate);
         }
 
-        private IList<ApplicationUser> GetUsers(
-            Func<ApplicationUser, object> orderByPredicate = null,
-            Func<ApplicationUser, bool> wherePredicate = null)
+        private IList<User> GetUsers(
+            Func<User, object> orderByPredicate = null,
+            Func<User, bool> wherePredicate = null)
         {
             return Users.OrderByWhere(orderByPredicate, wherePredicate);
         }
@@ -924,8 +949,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return new TrainingResultViewModel(trainingResult);
         }
 
-        public static IList<UserViewModel> AsViewModels(
-            this IList<ApplicationUser> users)
+        public static IList<UserViewModel> AsViewModels(this IList<User> users)
         {
             return users.Select(x => new UserViewModel(x));
         }
@@ -963,6 +987,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 wherePredicate);
         }
 
+        public static IList<QuizResult> GetQuizResults(
+            this TrainingResult trainingResult)
+        {
+            return trainingResult.QuizResults.ToList();
+        }
+
         public static IList<Role> GetRoles(this Category category)
         {
             return category.Roles;
@@ -979,7 +1009,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         public static IList<TrainingResult> GetTrainingResults(
-            this ApplicationUser user,
+            this User user,
             Func<TrainingResult, object> orderByPredicate = null,
             Func<TrainingResult, bool> wherePredicate = null)
         {
@@ -989,7 +1019,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         public static IList<TrainingResult> GetTrainingResultsDescending(
-            this ApplicationUser user,
+            this User user,
             Func<TrainingResult, object> orderByPredicate = null,
             Func<TrainingResult, bool> wherePredicate = null)
         {

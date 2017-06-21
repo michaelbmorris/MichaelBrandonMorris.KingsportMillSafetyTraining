@@ -7,61 +7,44 @@
 }
 
 <p class="bg-info">
-    On the role selection page, roles will be selected in the order below, with the last role being the default.
+    On the role selection page, the role questions will be shown in the order below.<br />
+    If the user answers "Yes" to any of the questions, they will be placed in that role.<br />
+    The last role's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that role.<br />
+    <br/>
+    Click and drag the arrows to change order.
 </p>
 
 @using (Html.BeginForm())
 {
     <table class="table table-condensed table-hover table-striped"
            id="sort">
-        <thead>
-        <tr>
-            <th>
-                Drag to Reorder
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Single().Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Single().Description)
-            </th>
-        </tr>
-        </thead>
         <tbody>
         @for (var i = 0; i < Model.Count; i++)
         {
             <tr>
-                @* ReSharper disable once UnknownCssClass
-                        The index class is used by the sorting function. *@
-                <td class="index">
-                    &#8597;
+                <td>
+                    <span class="glyphicon glyphicon-move handle"></span>
+                    @Html.DisplayFor(m => Model[i].Title)
                     @Html.HiddenFor(model => Model[i].Id)
                     @Html.HiddenFor(model => Model[i].Index, new
                     {
-                        htmlAttributes = new
-                        {
-                            name = $"slides[{i}].Index", @readonly = true
-                        }
+                        name = string.Format("slides[{0}].Index", i),
+                        @readonly = true,
+                        @class = "index"
                     })
-                </td>
-                <td>
-                    @Html.DisplayFor(m => Model[i].Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => Model[i].Description)
                 </td>
             </tr>
         }
         </tbody>
     </table>
 
-    <input class="btn btn-default"
+    <input class="btn btn-primary"
            type="submit"
            value="Save Order"/>
-    <button class="btn btn-default"
-            onclick="location.href = '@Url.Action("Index")';return false;">
-        Cancel
-    </button>
+    @Html.ActionLink("Cancel", "Index", null, new
+{
+    @class = "btn btn-danger"
+})
 }
 
 @section Scripts
@@ -69,9 +52,10 @@
     <script>
         $(function() {
             $('#sort tbody').sortable({
+                handle: ".hanle",
                 stop: function() {
                     $("#sort tbody tr").each(function(index, element) {
-                        var hiddenInput = $(element).children(".index").children().last();
+                        var hiddenInput = $(element).find(".index");
                         hiddenInput.val(index);
                     });
                 }
