@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Net;
+using System.Web.Mvc;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -6,21 +8,44 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     {
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }     
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }           
         }
 
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }    
         }
     }
 }

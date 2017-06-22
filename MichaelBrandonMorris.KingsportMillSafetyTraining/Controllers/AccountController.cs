@@ -395,6 +395,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var user = new User(model)
                 {
                     Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
                     UserName = model.Email
                 };
 

@@ -20,7 +20,7 @@
         <li>
             @Html.ActionLink("View Training Results", "UserResults", "Results", new
             {
-                id = User.Identity.GetUserId()
+                id = User.GetId()
             }, new
             {
                 @class = "btn btn-primary"

@@ -5,13 +5,13 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Result
 {
-    public class TrainingResultsViewModel
+    public class UserTrainingResultsViewModel
     {
-        public TrainingResultsViewModel()
+        public UserTrainingResultsViewModel()
         {
         }
 
-        public TrainingResultsViewModel(
+        public UserTrainingResultsViewModel(
             UserViewModel user,
             IList<TrainingResultViewModel> trainingResults)
         {

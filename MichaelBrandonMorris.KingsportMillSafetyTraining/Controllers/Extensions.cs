@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -42,6 +44,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             HttpContext.Current.Session["Error"] = null;
             return ((HttpStatusCode, string)) error;
+        }
+
+        internal static string GetId(this IPrincipal principal)
+        {
+            return principal.Identity.GetUserId();
         }
     }
 }

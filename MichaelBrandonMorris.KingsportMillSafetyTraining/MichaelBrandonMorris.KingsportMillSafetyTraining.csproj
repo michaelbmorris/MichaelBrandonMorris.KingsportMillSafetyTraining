@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\MichaelBrandonMorris.KingsportMillSafetyTraining.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -227,7 +228,7 @@
     <Compile Include="Models\Identity\ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="Models\Identity\ViewModels\Result\TrainingResultsViewModel.cs" />
+    <Compile Include="Models\Identity\ViewModels\Result\UserTrainingResultsViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\Result\TrainingResultViewModel.cs" />
     <Compile Include="Models\Identity\ViewModels\User\UserViewModel.cs" />
     <Compile Include="Models\ListQuantityAttribute.cs" />

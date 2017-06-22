@@ -7,11 +7,21 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     The controller for categories. Accessible only to administrators.
+    /// </summary>
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        /// <summary>
+        ///     Gets the view to assign roles to the specified category. If no 
+        ///     category is specified, gets the assign roles model for all 
+        ///     categories.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult AssignRoles(int? id)
         {
@@ -28,6 +38,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Posts the results of assigning roles to categories. Unpairs all 
+        ///     categories and roles, and then pairs the assigned categories 
+        ///     and roles.
+        /// </summary>
+        /// <param name="categoryRoles"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AssignRoles(IList<int> categoryRoles)
         {
@@ -58,6 +75,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Gets the view to create a new category.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Create()
         {
@@ -73,6 +94,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Posts the new category. If the new category is valid, adds it 
+        ///     to the database.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category category)
@@ -95,6 +122,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Gets the view to delete the specified category. If no category 
+        ///     is specified, returns HTTP Bad Request. If the specified 
+        ///     category is not found, returns HTTP Not Found.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -132,6 +166,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Posts the delete confirmation for the specified category. If no 
+        ///     category is specified, returns HTTP Bad Request. If the 
+        ///     specified category is not found, returns HTTP Not Found.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,6 +213,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Returns the detailed view for the specified category. If no 
+        ///     category is specified, returns HTTP Bad Request. If the 
+        ///     specified category is not found, returns HTTP Not Found.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -302,6 +350,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Disposes of the database context when the controller is 
+        ///     disposed.
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

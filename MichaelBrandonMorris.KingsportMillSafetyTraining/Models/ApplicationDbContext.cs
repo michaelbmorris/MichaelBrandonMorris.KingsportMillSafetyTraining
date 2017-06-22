@@ -17,8 +17,15 @@ using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    /// <summary>
+    ///     The database interface for the application.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<User>
     {
+        /// <summary>
+        ///     Creates a new <see cref="ApplicationDbContext"/> with a 
+        ///     specified name.
+        /// </summary>
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
@@ -61,7 +68,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     The roles table.
+        ///     The (training) roles table.
         /// </summary>
         public DbSet<Role> TrainingRoles
         {
@@ -89,6 +96,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return new ApplicationDbContext();
         }
 
+        /// <summary>
+        ///     Adds a new <see cref="QuizResult"/> to the specified 
+        ///     <see cref="TrainingResult"/>.
+        /// </summary>
+        /// <param name="trainingResultId"></param>
+        /// <param name="questionsCorrect"></param>
+        /// <param name="totalQuestions"></param>
         public void AddQuizResult(
             int trainingResultId,
             int questionsCorrect,
@@ -101,6 +115,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     totalQuestions));
         }
 
+        /// <summary>
+        ///     Adds a new <see cref="TrainingResult"/> to the specified 
+        ///     <see cref="User"/>.
+        /// </summary>
+        /// <param name="userId"></param>
         public void AddTrainingResult(string userId)
         {
             DoTransaction(() => _AddTrainingResult(userId));
@@ -126,26 +145,50 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             DoTransaction(() => _CreateRole(role));
         }
 
+        /// <summary>
+        ///     Adds the specified <see cref="Slide"/> to <see cref="Slides"/>.
+        /// </summary>
+        /// <param name="slide"></param>
         public void CreateSlide(Slide slide)
         {
             DoTransaction(() => _CreateSlide(slide));
         }
 
+        /// <summary>
+        ///     Interprets the specified <see cref="SlideViewModel"/> as a 
+        ///     <see cref="Slide"/> and adds it to <see cref="Slides"/>.
+        /// </summary>
+        /// <param name="slideViewModel"></param>
         public void CreateSlide(SlideViewModel slideViewModel)
         {
             DoTransaction(() => _CreateSlide(slideViewModel));
         }
 
+        /// <summary>
+        ///     Removes the specified <see cref="Category"/> from 
+        ///     <see cref="Categories"/>.
+        /// </summary>
+        /// <param name="category"></param>
         public void DeleteCategory(Category category)
         {
             DoTransaction(() => _DeleteCategory(category));
         }
 
+        /// <summary>
+        ///     Removes the specified <see cref="Role"/> from 
+        ///     <see cref="TrainingRoles"/>.
+        /// </summary>
+        /// <param name="role"></param>
         public void DeleteRole(Role role)
         {
             DoTransaction(() => _DeleteRole(role));
         }
 
+        /// <summary>
+        ///     Removes the specified <see cref="Slide"/> from 
+        ///     <see cref="Slides"/>.
+        /// </summary>
+        /// <param name="slide"></param>
         public void DeleteSlide(Slide slide)
         {
             DoTransaction(() => _DeleteSlide(slide));
@@ -269,15 +312,52 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => _GetTrainingResult(id));
         }
 
-        public TrainingResultsViewModel GetTrainingResultsViewModel(
+        //TODO
+        public UserTrainingResultsViewModel GetUserTrainingResultsViewModel(
             string userId = null)
         {
-            return DoTransaction(() => _GetTrainingResultsViewModel(userId));
+            return DoTransaction(
+                () =>
+                {
+                    if (userId == null)
+                    {
+                        
+                    }
+
+                    var user = Users.Find(userId);
+
+                    return new UserTrainingResultsViewModel(
+                        new UserViewModel(user),
+                        user.GetTrainingResultsDescending(x => x.CompletionDateTime)
+                            .AsViewModels());
+                });
         }
 
+        /// <summary>
+        ///     Gets the specified <see cref="TrainingResult"/> as a 
+        ///     <see cref="TrainingResultViewModel"/>.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException">
+        ///     Thrown if a <see cref="TrainingResult"/> with the specified id 
+        ///     is not found.
+        /// </exception>
         public TrainingResultViewModel GetTrainingResultViewModel(int id)
         {
-            return DoTransaction(() => _GetTrainingResultViewModel(id));
+            return DoTransaction(
+                () =>
+                {
+                    try
+                    {
+                        return TrainingResults.Find(id).AsViewModel();
+                    }
+                    catch (ArgumentNullException)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Training Result with Id {id} not found.");
+                    }
+                });
         }
 
         public IList<TrainingResultViewModel> GetTrainingResultViewModels(
@@ -657,39 +737,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         private TrainingResult _GetTrainingResult(int id)
         {
-            var trainingResult = TrainingResults.Find(id);
-
-            if (trainingResult == null)
-            {
-                throw new KeyNotFoundException(
-                    $"Training result with id '{id} not found.");
-            }
-
-            return trainingResult;
-        }
-
-        private TrainingResultsViewModel _GetTrainingResultsViewModel(
-            string userId = null)
-        {
-            if (userId == null)
-            {
-                return new TrainingResultsViewModel(
-                    null,
-                    GetTrainingResultsDescending(x => x.CompletionDateTime)
-                        .AsViewModels());
-            }
-
-            var user = Users.Find(userId);
-
-            return new TrainingResultsViewModel(
-                new UserViewModel(user),
-                user.GetTrainingResultsDescending(x => x.CompletionDateTime)
-                    .AsViewModels());
-        }
-
-        private TrainingResultViewModel _GetTrainingResultViewModel(int id)
-        {
-            return TrainingResults.Find(id).AsViewModel();
+            return TrainingResults.Find(id);
         }
 
         private IList<TrainingResultViewModel> _GetTrainingResultViewModels(
@@ -723,14 +771,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             if (category == null)
             {
-                throw new Exception();
+                throw new KeyNotFoundException();
             }
 
             var role = TrainingRoles.Find(roleId);
 
             if (role == null)
             {
-                throw new Exception();
+                throw new KeyNotFoundException();
             }
 
             role.Categories.Add(category);
@@ -855,10 +903,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     SaveChanges();
                     transaction.Commit();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     transaction.Rollback();
-                    Console.WriteLine(e);
                     throw;
                 }
             }

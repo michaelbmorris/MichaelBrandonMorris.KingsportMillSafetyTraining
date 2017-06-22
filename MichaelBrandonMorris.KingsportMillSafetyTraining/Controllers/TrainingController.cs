@@ -26,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectRole");
             }
 
-            _db.SetUserLatestTrainingStartDateTime(User.Identity.GetUserId());
+            _db.SetUserLatestTrainingStartDateTime(User.GetId());
             var model = _db.GetSlideshowViewModel(role);
             return View(model);
         }
@@ -37,8 +37,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var role = GetCurrentUserRole();
             var model = _db.GetQuizViewModel(role);
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
-            _db.AddTrainingResult(User.Identity.GetUserId());
-            _db.SetUserLatestQuizStartDateTime(User.Identity.GetUserId());
+            _db.AddTrainingResult(User.GetId());
+            _db.SetUserLatestQuizStartDateTime(User.GetId());
             return View(model);
         }
 
@@ -55,7 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             model = quizViewModel;
-            var user = _db.GetUser(User.Identity.GetUserId());
+            var user = _db.GetUser(User.GetId());
             var trainingResult = user.TrainingResults.Last();
 
             _db.AddQuizResult(
@@ -65,7 +65,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             if (!model.All(x => x.IsCorrect()))
             {
-                _db.SetUserLatestQuizStartDateTime(User.Identity.GetUserId());
+                _db.SetUserLatestQuizStartDateTime(User.GetId());
                 return View(model);
             }
 
@@ -103,7 +103,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult SelectRole(int? roleId)
         {
             Debug.WriteLine(roleId);
-            _db.SetUserRole(User.Identity.GetUserId(), roleId);
+            _db.SetUserRole(User.GetId(), roleId);
             return RedirectToAction("Index");
         }
 
@@ -119,7 +119,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         private Role GetCurrentUserRole()
         {
-            var user = _db.GetUser(User.Identity.GetUserId());
+            var user = _db.GetUser(User.GetId());
 
             if (user == null)
             {
