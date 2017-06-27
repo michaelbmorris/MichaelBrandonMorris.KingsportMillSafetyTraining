@@ -55,13 +55,16 @@
     </dd>
 </dl>
 
-<a class="btn btn-primary"
-   href="@Url.Action("Details", "Users", new
-         {
-             id = Model.User.Id
-         })">
-    View User Details
-</a>
+@if (User.IsInRole("Administrator"))
+{
+    <a class="btn btn-primary"
+       href="@Url.Action("Details", "Users", new
+             {
+                 id = Model.User.Id
+             })">
+        View User Details
+    </a>
+}
 
 @Html.MvcGrid("UserTrainingResultsGrid", new
 {

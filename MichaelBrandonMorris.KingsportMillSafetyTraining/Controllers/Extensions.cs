@@ -45,10 +45,5 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             HttpContext.Current.Session["Error"] = null;
             return ((HttpStatusCode, string)) error;
         }
-
-        internal static string GetId(this IPrincipal principal)
-        {
-            return principal.Identity.GetUserId();
-        }
     }
 }

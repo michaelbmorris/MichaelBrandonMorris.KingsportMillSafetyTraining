@@ -87,6 +87,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         private static Func<Slide, bool> ShouldShowSlideOnQuiz => x =>
             x.ShouldShowSlideInSlideshow && x.ShouldShowQuestionOnQuiz;
 
+        private static Func<TrainingResult, object> OrderByCompletionDateTime =>
+            x => x.CompletionDateTime;
+
         /// <summary>
         ///     Creates a new <see cref="ApplicationDbContext" />.
         /// </summary>

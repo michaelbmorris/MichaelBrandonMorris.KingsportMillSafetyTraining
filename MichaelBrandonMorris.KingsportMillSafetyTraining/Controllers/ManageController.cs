@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Manage;
 using Microsoft.AspNet.Identity;

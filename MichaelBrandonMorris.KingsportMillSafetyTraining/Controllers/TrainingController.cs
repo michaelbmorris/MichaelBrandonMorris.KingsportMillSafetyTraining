@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
