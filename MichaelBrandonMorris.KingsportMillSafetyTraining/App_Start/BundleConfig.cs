@@ -2,8 +2,16 @@
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    /// <summary>
+    ///     Manages the <see cref="BundleCollection"/> for the application.
+    /// </summary>
     public class BundleConfig
     {
+        /// <summary>
+        ///     Adds the application's <see cref="Bundle"/>s to the 
+        ///     <see cref="BundleCollection"/>.
+        /// </summary>
+        /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(

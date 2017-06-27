@@ -20,7 +20,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             TimeToComplete = trainingResult.TimeToComplete;
 
             var user = trainingResult.User;
-            BirthDate = user.BirthDate;
             CompanyName = user.CompanyName;
             Email = user.Email;
             FirstName = user.FirstName;

@@ -14,7 +14,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
 
         public UserViewModel(Identity.User user)
         {
-            BirthDate = user.BirthDate;
             CompanyName = user.CompanyName;
             Email = user.Email;
             FirstName = user.FirstName;
@@ -33,14 +32,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             LastTrainingResultDateTime = lastTrainingResult.CompletionDateTime;
 
             LastTrainingResultId = lastTrainingResult.Id;
-        }
-
-        [DisplayName("Birth Date")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime BirthDate
-        {
-            get;
-            set;
         }
 
         [DisplayName("Company")]

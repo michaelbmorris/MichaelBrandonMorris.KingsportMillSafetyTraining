@@ -10,13 +10,27 @@ using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    /// <summary>
+    ///     The user manager for the application.
+    /// </summary>
     public class ApplicationUserManager : UserManager<User>
     {
+        /// <summary>
+        ///     Creates a new instance of a 
+        ///     <see cref="ApplicationUserManager"/> with the specified 
+        ///     <see cref="IUserStore{User}"/>.
+        /// </summary>
+        /// <param name="store"></param>
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }
 
+        /// <summary>
+        ///     Gets the <see cref="Role"/> of the specified <see cref="User"/>.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<Role> GetRole(string userId)
         {
             var user = await FindByIdAsync(userId);
@@ -29,6 +43,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             return user.Role;
         }
 
+        /// <summary>
+        ///     Creates a new <see cref="ApplicationUserManager"/>.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static ApplicationUserManager Create(
             IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)

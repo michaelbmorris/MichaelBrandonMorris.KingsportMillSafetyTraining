@@ -532,16 +532,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                             $"{x.TimeToComplete.TotalMinutes:#.##} Minutes"
                 };
 
-        private static readonly GridColumn<UserViewModel> UserBirthDateColumn =
-            new GridColumn<UserViewModel>
-            {
-                ColumnName = "BirthDate",
-                EnableFiltering = true,
-                EnableSorting = true,
-                HeaderText = "Birth Date",
-                ValueExpression = (x, y) => x.BirthDate.ToString("M/d/yy")
-            };
-
         private static readonly GridColumn<UserViewModel> UserCompanyNameColumn
             = new GridColumn<UserViewModel>
             {
@@ -1043,7 +1033,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         columns.Add(UserCompanyNameColumn);
                         columns.Add(UserEmailColumn);
                         columns.Add(UserPhoneNumberColumn);
-                        columns.Add(UserBirthDateColumn);
                         columns.Add(UserLastTrainingDateTimeColumn);
                         columns.Add(UserEditColumn);
                         columns.Add(UserDetailsColumn);

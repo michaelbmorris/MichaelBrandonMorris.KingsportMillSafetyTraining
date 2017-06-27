@@ -19,18 +19,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
 
         public User(RegisterViewModel model)
         {
-            BirthDate = model.BirthDate;
             CompanyName = model.CompanyName;
             FirstName = model.FirstName;
             LastName = model.LastName;
             MiddleName = model.MiddleName;
-        }
-
-        [DisplayName("Birth Date")]
-        public DateTime BirthDate
-        {
-            get;
-            set;
         }
 
         [DisplayName("Company")]

@@ -1,20 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.Account
 {
     public class RegisterViewModel
     {
-        [DataType(DataType.Date)]
-        [Display(Name = "Birth Date")]
-        [Required]
-        public DateTime BirthDate
-        {
-            get;
-            set;
-        }
-
         [Display(Name = "Company Name")]
         [Required]
         public string CompanyName
