@@ -2,22 +2,14 @@
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.Result;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
-    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.Identity.ViewModels.Result.
-        TrainingResultViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel>;
 using Grid =
-    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.Identity.ViewModels.Result.
-        TrainingResultViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel>;
 using RetrieveDataMethod =
     System.Func<MichaelBrandonMorris.MvcGrid.Models.GridContext,
-        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.
-            KingsportMillSafetyTraining.Models.Identity.ViewModels.Result.
-            TrainingResultViewModel>>;
+        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel>>;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
@@ -102,7 +94,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var id = context.QueryOptions.GetPageParameterString("id");
             var result = new QueryResult<TrainingResultViewModel>();
 
-            using (var db = new ApplicationDbContext())
+            using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 var query = db.GetTrainingResultsDescending(id).AsViewModels();
 

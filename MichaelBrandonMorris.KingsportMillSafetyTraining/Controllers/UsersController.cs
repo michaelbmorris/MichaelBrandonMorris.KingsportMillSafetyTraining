@@ -6,15 +6,13 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
         [HttpGet]
         public ActionResult Create()

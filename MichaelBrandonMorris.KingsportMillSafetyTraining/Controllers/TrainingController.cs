@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -18,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
         ///     Gets the index view. Checks if the current <see cref="User" />
@@ -30,16 +30,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var role = GetCurrentUserRole();
-
-            if (role == null)
+            try
             {
-                return RedirectToAction("SelectRole");
-            }
+                var role = GetCurrentUserRole();
 
-            _db.SetUserLatestTrainingStartDateTime(User.GetId());
-            var model = role.GetSlides(OrderCategoriesByIndex, orderSlidesBy: OrderSlidesByIndex).AsViewModels();
-            return View(model);
+                if (role == null)
+                {
+                    return RedirectToAction("SelectRole");
+                }
+
+                _db.SetUserLatestTrainingStartDateTime(User.GetId());
+                var model = role.GetSlides(OrderCategoriesByIndex, orderSlidesBy: OrderSlidesByIndex).AsViewModels();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         private static Func<Slide, object> OrderSlidesByIndex => slide => slide

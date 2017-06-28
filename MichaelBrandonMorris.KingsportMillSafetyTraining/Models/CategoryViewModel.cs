@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {

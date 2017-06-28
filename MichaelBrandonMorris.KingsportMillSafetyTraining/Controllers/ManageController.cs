@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.Manage;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

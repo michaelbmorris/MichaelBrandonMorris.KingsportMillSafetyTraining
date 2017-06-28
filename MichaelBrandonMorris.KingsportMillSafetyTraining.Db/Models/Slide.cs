@@ -2,35 +2,36 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Slides are the basic content element of the safety training program.
-    ///     They have text content, an image, and a question with multiple
-    ///     choice answers about the content or image. They are assigned to a
-    ///     category.
+    /// Class Slide.
     /// </summary>
+    /// <seealso cref="IEquatable{T}" />
+    /// TODO Edit XML Comment Template for Slide
     public class Slide : IEquatable<Slide>
     {
         /// <summary>
-        ///     Tracks the current index being used by slides.
+        /// The current index
         /// </summary>
+        /// TODO Edit XML Comment Template for CurrentIndex
         public static int CurrentIndex;
 
         /// <summary>
-        ///     Creates a new <see cref="Slide" /> with the next 
-        ///     <see cref="Index" />.
+        /// Initializes a new instance of the <see cref="Slide"/> class.
         /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public Slide()
         {
             Index = ++CurrentIndex;
         }
 
         /// <summary>
-        ///     The slide's children answers
+        /// Gets or sets the answers.
         /// </summary>
+        /// <value>The answers.</value>
+        /// TODO Edit XML Comment Template for Answers
         public virtual IList<Answer> Answers
         {
             get;
@@ -38,8 +39,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         } = new List<Answer>();
 
         /// <summary>
-        ///     The slide's parent category
+        /// Gets or sets the category.
         /// </summary>
+        /// <value>The category.</value>
+        /// TODO Edit XML Comment Template for Category
         public virtual Category Category
         {
             get;
@@ -47,8 +50,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's text content
+        /// Gets or sets the content.
         /// </summary>
+        /// <value>The content.</value>
+        /// TODO Edit XML Comment Template for Content
         [Required]
         public string Content
         {
@@ -57,8 +62,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The index of the slide's correct answer
+        /// Gets or sets the index of the correct answer.
         /// </summary>
+        /// <value>The index of the correct answer.</value>
+        /// TODO Edit XML Comment Template for CorrectAnswerIndex
         [Display(Name = "Correct Answer Index")]
         public int CorrectAnswerIndex
         {
@@ -67,8 +74,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's ID, generated automatically by the database
+        /// Gets or sets the identifier.
         /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         [Key]
         [Column(Order = 0)]
         public int Id
@@ -78,8 +87,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's image, stored as an array of bytes
+        /// Gets or sets the image bytes.
         /// </summary>
+        /// <value>The image bytes.</value>
+        /// TODO Edit XML Comment Template for ImageBytes
         [Display(Name = "Image")]
         public byte[] ImageBytes
         {
@@ -88,8 +99,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's image's description, used for alternate text
+        /// Gets or sets the image description.
         /// </summary>
+        /// <value>The image description.</value>
+        /// TODO Edit XML Comment Template for ImageDescription
         [Display(Name = "Image Description")]
         public string ImageDescription
         {
@@ -98,8 +111,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's index, which should be unique within the category
+        /// Gets or sets the index.
         /// </summary>
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
         public int Index
         {
             get;
@@ -107,8 +122,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's question
+        /// Gets or sets the question.
         /// </summary>
+        /// <value>The question.</value>
+        /// TODO Edit XML Comment Template for Question
         public string Question
         {
             get;
@@ -116,11 +133,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Whether or not the slide's image should be displayed on the
-        ///     quiz. Value is irrelevant if
-        ///     <see cref="ShouldShowQuestionOnQuiz" /> is false or
-        ///     <see cref="ShouldShowSlideInSlideshow" /> is false.
+        /// Gets or sets a value indicating whether [should show image on quiz].
         /// </summary>
+        /// <value><c>true</c> if [should show image on quiz]; otherwise, <c>false</c>.</value>
+        /// TODO Edit XML Comment Template for ShouldShowImageOnQuiz
         [Display(Name = "Show Image on Quiz?")]
         [Required]
         public bool ShouldShowImageOnQuiz
@@ -130,10 +146,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Whether or not the slide's question should be displayed on the
-        ///     quiz. Value is irrelevant if
-        ///     <see cref="ShouldShowSlideInSlideshow" /> is false
+        /// Gets or sets a value indicating whether [should show question on quiz].
         /// </summary>
+        /// <value><c>true</c> if [should show question on quiz]; otherwise, <c>false</c>.</value>
+        /// TODO Edit XML Comment Template for ShouldShowQuestionOnQuiz
         [Display(Name = "Show Question on Quiz?")]
         [Required]
         public bool ShouldShowQuestionOnQuiz
@@ -143,8 +159,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Whether or not the slide should be displayed in the slideshow
+        /// Gets or sets a value indicating whether [should show slide in slideshow].
         /// </summary>
+        /// <value><c>true</c> if [should show slide in slideshow]; otherwise, <c>false</c>.</value>
+        /// TODO Edit XML Comment Template for ShouldShowSlideInSlideshow
         [Display(Name = "Show Slide in Slideshow?")]
         [Required]
         public bool ShouldShowSlideInSlideshow
@@ -154,8 +172,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     The slide's title
+        /// Gets or sets the title.
         /// </summary>
+        /// <value>The title.</value>
+        /// TODO Edit XML Comment Template for Title
         [Required]
         public string Title
         {
@@ -164,11 +184,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Checks for equality with another slide. If the slides have the
-        ///     same reference or ID, they are equal.
+        /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        /// <param name="other">The slide to compare this slide to.</param>
-        /// <returns></returns>
+        /// <param name="other">An object to compare with this object.</param>
+        /// <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+        /// TODO Edit XML Comment Template for Equals
         public bool Equals(Slide other)
         {
             if (ReferenceEquals(null, other))
@@ -185,12 +205,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Checks for slide equality. First checks for identical slide
-        ///     references, and then for identical IDs (primary key).
+        /// Implements the == operator.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>The result of the operator.</returns>
+        /// TODO Edit XML Comment Template for ==
         public static bool operator ==(Slide x, Slide y)
         {
             if (ReferenceEquals(x, y))
@@ -208,24 +228,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Checks for slide inequality. Implemented in terms of the
-        ///     equality operator.
+        /// Implements the != operator.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns></returns>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>The result of the operator.</returns>
+        /// TODO Edit XML Comment Template for !=
         public static bool operator !=(Slide x, Slide y)
         {
             return !(x == y);
         }
 
         /// <summary>
-        ///     Checks for equality with another object. If this slide and the
-        ///     object have the same reference, or the object is a slide and
-        ///     passes <see cref="Equals(Slide)" />, they are equal.
+        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">The object to compare with the current object.</param>
+        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// TODO Edit XML Comment Template for Equals
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -241,6 +260,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             return obj.GetType() == GetType() && Equals((Slide) obj);
         }
 
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        /// <exception cref="System.NotImplementedException"></exception>
+        /// TODO Edit XML Comment Template for GetHashCode
         public override int GetHashCode()
         {
             throw new NotImplementedException();

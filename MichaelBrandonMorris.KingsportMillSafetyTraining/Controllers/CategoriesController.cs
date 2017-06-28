@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -15,11 +14,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+
+        private static Func<Category, object> OrderByIndex => category =>
+            category.Index;
 
         /// <summary>
-        ///     Gets the view to assign roles to the specified category. If no 
-        ///     category is specified, gets the assign roles model for all 
+        ///     Gets the view to assign roles to the specified category. If no
+        ///     category is specified, gets the assign roles model for all
         ///     categories.
         /// </summary>
         /// <param name="id"></param>
@@ -29,16 +31,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                AssignRolesViewModel model;
-
-                if (id == null)
-                {
-                    model = new AssignRolesViewModel(_db.GetCategories(), _db.GetRoles().AsViewModels());
-                }
-                else
-                {                  
-                    model = new AssignRolesViewModel(_db.GetCategory(id.Value), _db.GetRoles().AsViewModels());
-                }
+                var model = id == null
+                    ? new AssignRolesViewModel(
+                        _db.GetCategories(),
+                        _db.GetRoles().AsViewModels())
+                    : new AssignRolesViewModel(
+                        _db.GetCategory(id.Value),
+                        _db.GetRoles().AsViewModels());
 
                 return View(model);
             }
@@ -51,8 +50,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the results of assigning roles to categories. Unpairs all 
-        ///     categories and roles, and then pairs the assigned categories 
+        ///     Posts the results of assigning roles to categories. Unpairs all
+        ///     categories and roles, and then pairs the assigned categories
         ///     and roles.
         /// </summary>
         /// <param name="categoryRoles"></param>
@@ -107,7 +106,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the new category. If the new category is valid, adds it 
+        ///     Posts the new category. If the new category is valid, adds it
         ///     to the database.
         /// </summary>
         /// <param name="category"></param>
@@ -135,8 +134,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Gets the view to delete the specified category. If no category 
-        ///     is specified, returns HTTP Bad Request. If the specified 
+        ///     Gets the view to delete the specified category. If no category
+        ///     is specified, returns HTTP Bad Request. If the specified
         ///     category is not found, returns HTTP Not Found.
         /// </summary>
         /// <param name="id"></param>
@@ -179,8 +178,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the delete confirmation for the specified category. If no 
-        ///     category is specified, returns HTTP Bad Request. If the 
+        ///     Posts the delete confirmation for the specified category. If no
+        ///     category is specified, returns HTTP Bad Request. If the
         ///     specified category is not found, returns HTTP Not Found.
         /// </summary>
         /// <param name="id"></param>
@@ -226,8 +225,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Returns the detailed view for the specified category. If no 
-        ///     category is specified, returns HTTP Bad Request. If the 
+        ///     Returns the detailed view for the specified category. If no
+        ///     category is specified, returns HTTP Bad Request. If the
         ///     specified category is not found, returns HTTP Not Found.
         /// </summary>
         /// <param name="id"></param>
@@ -330,9 +329,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        private static Func<Category, object> OrderByIndex => category =>
-            category.Index;
-
         [HttpGet]
         public ActionResult Reorder()
         {
@@ -366,7 +362,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Disposes of the database context when the controller is 
+        ///     Disposes of the database context when the controller is
         ///     disposed.
         /// </summary>
         /// <param name="disposing"></param>

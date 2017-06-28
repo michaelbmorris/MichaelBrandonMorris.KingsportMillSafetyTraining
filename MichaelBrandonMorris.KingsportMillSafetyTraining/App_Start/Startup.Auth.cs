@@ -13,7 +13,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(KingsportMillSafetyTrainingDbContext.Create);
 
             app.CreatePerOwinContext<ApplicationUserManager>(
                 ApplicationUserManager.Create);

@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Roles are assigned categories and are assigned to users.
+    /// Class Role.
     /// </summary>
+    /// TODO Edit XML Comment Template for Role
     public class Role
     {
         /// <summary>
-        ///     The role's categories
+        /// Gets or sets the categories.
         /// </summary>
+        /// <value>The categories.</value>
+        /// TODO Edit XML Comment Template for Categories
         public virtual IList<Category> Categories
         {
             get;
@@ -17,8 +20,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         } = new List<Category>();
 
         /// <summary>
-        ///     The role's description
+        /// Gets or sets the description.
         /// </summary>
+        /// <value>The description.</value>
+        /// TODO Edit XML Comment Template for Description
         public string Description
         {
             get;
@@ -26,8 +31,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The role's ID, generated automatically by the database
+        /// Gets or sets the identifier.
         /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
@@ -35,8 +42,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The role's index, used to determine role order and the default role
+        /// Gets or sets the index.
         /// </summary>
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
         public int Index
         {
             get;
@@ -44,9 +53,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The role's question, asked to users to determine if they belong to
-        ///     this role.
+        /// Gets or sets the question.
         /// </summary>
+        /// <value>The question.</value>
+        /// TODO Edit XML Comment Template for Question
         public string Question
         {
             get;
@@ -54,8 +64,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The role's title
+        /// Gets or sets the title.
         /// </summary>
+        /// <value>The title.</value>
+        /// TODO Edit XML Comment Template for Title
         public string Title
         {
             get;

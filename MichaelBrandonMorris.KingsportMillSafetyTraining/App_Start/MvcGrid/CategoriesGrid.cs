@@ -2,7 +2,6 @@
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
     MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>;
@@ -103,7 +102,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var sortDirection = context.QueryOptions.SortDirection;
             var result = new QueryResult<CategoryViewModel>();
 
-            using (var db = new ApplicationDbContext())
+            using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 var role = db.GetRole(roleId);
 

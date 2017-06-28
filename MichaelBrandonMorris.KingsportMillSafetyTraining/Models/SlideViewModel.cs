@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
-    ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.
+    Models
 {
     public class SlideViewModel
     {

@@ -1,30 +1,33 @@
 ﻿using System.Collections.Generic;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Categories have a list of slides and are assigned to roles.
+    /// Class Category.
     /// </summary>
+    /// TODO Edit XML Comment Template for Category
     public class Category
     {
         /// <summary>
-        ///     Tracks the current index being used by categories.
+        /// The current index
         /// </summary>
+        /// TODO Edit XML Comment Template for CurrentIndex
         public static int CurrentIndex;
 
         /// <summary>
-        ///     Creates a new <see cref="Category" /> with the next
-        ///     <see cref="Index" />.
+        /// Initializes a new instance of the <see cref="Category"/> class.
         /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public Category()
         {
             Index = ++CurrentIndex;
         }
 
         /// <summary>
-        ///     The category's description
+        /// Gets or sets the description.
         /// </summary>
+        /// <value>The description.</value>
+        /// TODO Edit XML Comment Template for Description
         public string Description
         {
             get;
@@ -32,8 +35,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The category's ID, generated automatically by the database
+        /// Gets or sets the identifier.
         /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
@@ -41,8 +46,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     Determines the ordering of this category.
+        /// Gets or sets the index.
         /// </summary>
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
         public int Index
         {
             get;
@@ -50,8 +57,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The category's roles
+        /// Gets or sets the roles.
         /// </summary>
+        /// <value>The roles.</value>
+        /// TODO Edit XML Comment Template for Roles
         public virtual IList<Role> Roles
         {
             get;
@@ -59,8 +68,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         } = new List<Role>();
 
         /// <summary>
-        ///     The category's slides
+        /// Gets or sets the slides.
         /// </summary>
+        /// <value>The slides.</value>
+        /// TODO Edit XML Comment Template for Slides
         public virtual IList<Slide> Slides
         {
             get;
@@ -68,8 +79,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         } = new List<Slide>();
 
         /// <summary>
-        ///     The category's title
+        /// Gets or sets the title.
         /// </summary>
+        /// <value>The title.</value>
+        /// TODO Edit XML Comment Template for Title
         public string Title
         {
             get;

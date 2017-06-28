@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -16,7 +15,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class ResultsController : Controller
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
         ///     Shows the details of the specified training result. If no 

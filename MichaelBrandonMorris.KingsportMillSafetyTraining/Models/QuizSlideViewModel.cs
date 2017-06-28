@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
@@ -60,7 +59,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
-        [Required(ErrorMessage = "Please select an answer.")]
+        [Required(ErrorMessage = "You must select an answer.")]
         public int SelectedAnswerIndex
         {
             get;

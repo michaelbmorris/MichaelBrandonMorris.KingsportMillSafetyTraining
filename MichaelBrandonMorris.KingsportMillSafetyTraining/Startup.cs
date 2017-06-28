@@ -1,6 +1,5 @@
 ﻿using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -23,7 +22,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
         private static void UpdateCurrentIndices()
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 db.UpdateCurrentAnswerIndex();
                 db.UpdateCurrentCategoryIndex();
@@ -33,7 +32,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
         private void CreateRoles()
         {
-            using (var db = new ApplicationDbContext())
+            using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 var roleManager =
                     new RoleManager<IdentityRole>(

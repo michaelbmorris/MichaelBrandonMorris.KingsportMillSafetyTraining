@@ -1,30 +1,33 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Answers are assigned to slides
+    /// Class Answer.
     /// </summary>
+    /// TODO Edit XML Comment Template for Answer
     public class Answer
     {
         /// <summary>
-        ///     Tracks the current index being used by answers.
+        /// The current index
         /// </summary>
+        /// TODO Edit XML Comment Template for CurrentIndex
         public static int CurrentIndex;
 
         /// <summary>
-        ///     Creates a new <see cref="Answer" /> with the next
-        ///     <see cref="Index" />.
+        /// Initializes a new instance of the <see cref="Answer"/> class.
         /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public Answer()
         {
             Index = ++CurrentIndex;
         }
 
         /// <summary>
-        ///     The answer's ID, generated automatically by the database.
+        /// Gets or sets the identifier.
         /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
@@ -32,8 +35,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The answer's index, assigned by its parent slide
+        /// Gets or sets the index.
         /// </summary>
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
         public int Index
         {
             get;
@@ -41,8 +46,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The answer's parent slide
+        /// Gets or sets the slide.
         /// </summary>
+        /// <value>The slide.</value>
+        /// TODO Edit XML Comment Template for Slide
         public virtual Slide Slide
         {
             get;
@@ -50,8 +57,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
         }
 
         /// <summary>
-        ///     The answer's title/text
+        /// Gets or sets the title.
         /// </summary>
+        /// <value>The title.</value>
+        /// TODO Edit XML Comment Template for Title
         [Required]
         public string Title
         {

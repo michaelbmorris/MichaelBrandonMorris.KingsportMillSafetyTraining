@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Represents a completion of the training program for a user. 
-    ///     Training is completed when the user has earned a 100% score on the 
-    ///     quiz.
+    /// Class TrainingResult.
     /// </summary>
+    /// TODO Edit XML Comment Template for TrainingResult
     public class TrainingResult
     {
         /// <summary>
-        ///     When the training 
+        /// Gets or sets the completion date time.
         /// </summary>
+        /// <value>The completion date time.</value>
+        /// TODO Edit XML Comment Template for CompletionDateTime
         public DateTime? CompletionDateTime
         {
             get;
@@ -22,8 +21,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         }
 
         /// <summary>
-        ///     The unique identifier for the <see cref="TrainingResult"/>.
+        /// Gets or sets the identifier.
         /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
@@ -31,9 +32,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         }
 
         /// <summary>
-        ///     The list of <see cref="QuizResult"/>s belonging to the 
-        ///     <see cref="TrainingResult"/>.
+        /// Gets or sets the quiz results.
         /// </summary>
+        /// <value>The quiz results.</value>
+        /// TODO Edit XML Comment Template for QuizResults
         public virtual IList<QuizResult> QuizResults
         {
             get;
@@ -41,9 +43,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         } = new List<QuizResult>();
 
         /// <summary>
-        ///     The <see cref="Role"/> the <see cref="TrainingResult"/> 
-        ///     was completed for.
+        /// Gets or sets the role.
         /// </summary>
+        /// <value>The role.</value>
+        /// TODO Edit XML Comment Template for Role
         public virtual Role Role
         {
             get;
@@ -51,9 +54,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         }
 
         /// <summary>
-        ///     How long the <see cref="User"/> spent in training before 
-        ///     completing this <see cref="TrainingResult"/>.
+        /// Gets or sets the time to complete.
         /// </summary>
+        /// <value>The time to complete.</value>
+        /// TODO Edit XML Comment Template for TimeToComplete
         public TimeSpan TimeToComplete
         {
             get;
@@ -61,8 +65,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
         }
 
         /// <summary>
-        ///     The user who completed the <see cref="TrainingResult"/>.
+        /// Gets or sets the user.
         /// </summary>
+        /// <value>The user.</value>
+        /// TODO Edit XML Comment Template for User
         public virtual User User
         {
             get;

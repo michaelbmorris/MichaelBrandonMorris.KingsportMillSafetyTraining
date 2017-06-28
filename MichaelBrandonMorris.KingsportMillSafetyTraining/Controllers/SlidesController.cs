@@ -6,8 +6,6 @@ using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using System;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -20,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     public class SlidesController : Controller
     {
         private const string JpgType = "image/jpg";
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>Gets the add answer view.</summary>
         /// <returns>The add answer view.</returns>

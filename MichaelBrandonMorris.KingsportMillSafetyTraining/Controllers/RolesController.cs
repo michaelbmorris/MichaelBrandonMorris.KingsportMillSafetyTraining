@@ -4,16 +4,15 @@ using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class RolesController : Controller
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
         [HttpGet]
         public ActionResult AssignCategories(int? id)

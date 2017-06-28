@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -57,7 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
             var manager = new ApplicationUserManager(
                 new UserStore<User>(
-                    context.Get<ApplicationDbContext>()));
+                    context.Get<KingsportMillSafetyTrainingDbContext>()));
 
             manager.UserValidator =
                 new UserValidator<User>(manager)

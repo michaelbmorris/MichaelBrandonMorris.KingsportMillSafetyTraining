@@ -3,15 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
+    /// <summary>
+    ///     Class User.
+    /// </summary>
+    /// <seealso cref="IdentityUser" />
+    /// TODO Edit XML Comment Template for User
     public class User : IdentityUser
     {
+        /// <summary>
+        ///     Gets or sets the name of the company.
+        /// </summary>
+        /// <value>The name of the company.</value>
+        /// TODO Edit XML Comment Template for CompanyName
         [DisplayName("Company")]
         public string CompanyName
         {
@@ -19,6 +27,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the first name.
+        /// </summary>
+        /// <value>The first name.</value>
+        /// TODO Edit XML Comment Template for FirstName
         [DisplayName("First Name")]
         public string FirstName
         {
@@ -26,6 +39,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the last name.
+        /// </summary>
+        /// <value>The last name.</value>
+        /// TODO Edit XML Comment Template for LastName
         [DisplayName("Last Name")]
         public string LastName
         {
@@ -33,6 +51,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the latest quiz start date time.
+        /// </summary>
+        /// <value>The latest quiz start date time.</value>
+        /// TODO Edit XML Comment Template for LatestQuizStartDateTime
         [DisplayName("Latest Quiz Started On")]
         public DateTime? LatestQuizStartDateTime
         {
@@ -40,6 +63,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the latest training start date time.
+        /// </summary>
+        /// <value>The latest training start date time.</value>
+        /// TODO Edit XML Comment Template for LatestTrainingStartDateTime
         [DisplayName("Latest Training Started On")]
         public DateTime? LatestTrainingStartDateTime
         {
@@ -47,6 +75,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the name of the middle.
+        /// </summary>
+        /// <value>The name of the middle.</value>
+        /// TODO Edit XML Comment Template for MiddleName
         [DisplayName("Middle Name")]
         public string MiddleName
         {
@@ -55,18 +88,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
 
+        /// <summary>
+        ///     PhoneNumber for the user
+        /// </summary>
+        /// <value>The phone number.</value>
+        /// TODO Edit XML Comment Template for PhoneNumber
         public new string PhoneNumber
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the role.
+        /// </summary>
+        /// <value>The role.</value>
+        /// TODO Edit XML Comment Template for Role
         public virtual Role Role
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the training results.
+        /// </summary>
+        /// <value>The training results.</value>
+        /// TODO Edit XML Comment Template for TrainingResults
         [DisplayName("Training Results")]
         public virtual IList<TrainingResult> TrainingResults
         {
@@ -74,6 +122,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         } = new List<TrainingResult>();
 
+        /// <summary>
+        ///     generate user identity as an asynchronous operation.
+        /// </summary>
+        /// <param name="manager">The manager.</param>
+        /// <returns>Task&lt;ClaimsIdentity&gt;.</returns>
+        /// TODO Edit XML Comment Template for GenerateUserIdentityAsync
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
             UserManager<User> manager)
         {
