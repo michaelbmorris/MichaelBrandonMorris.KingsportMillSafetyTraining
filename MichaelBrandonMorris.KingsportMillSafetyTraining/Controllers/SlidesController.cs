@@ -131,22 +131,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(SlideViewModel slideViewModel)
+        public ActionResult Edit(SlideViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(slideViewModel);
+                return View(model);
             }
 
-            Debug.WriteLine(slideViewModel.Image == null);
-            _db.Edit(slideViewModel);
+            _db.Edit(model);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_db.GetSlideViewModels());
+            var model = _db.GetSlideViewModels();
+            return View(model);
         }
 
         [AllowAnonymous]
