@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
-    ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
     internal enum QuestionState
     {

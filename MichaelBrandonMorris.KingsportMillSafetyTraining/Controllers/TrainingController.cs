@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -38,9 +38,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             _db.SetUserLatestTrainingStartDateTime(User.GetId());
-            var model = _db.GetSlideshowViewModel(role);
+            var model = role.GetSlides(OrderCategoriesByIndex, orderSlidesBy: OrderSlidesByIndex).AsViewModels();
             return View(model);
         }
+
+        private static Func<Slide, object> OrderSlidesByIndex => slide => slide
+            .Index;
+
+        private static Func<Category, object> OrderCategoriesByIndex => category
+            => category.Index;
 
         /// <summary>
         ///     Gets the quiz view.
@@ -50,7 +56,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Quiz()
         {
             var role = GetCurrentUserRole();
-            var model = _db.GetQuizViewModel(role);
+            var model = role.GetSlides(slidesWhere: slide => slide.ShouldShowSlideInSlideshow && slide.ShouldShowQuestionOnQuiz).AsQuizSlideViewModels().Shuffle();
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
             _db.AddTrainingResult(User.GetId());
             _db.SetUserLatestQuizStartDateTime(User.GetId());
@@ -124,7 +130,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectRole()
         {
-            var model = _db.GetRoleViewModels(x => x.Index);
+            var model = _db.GetRoles(x => x.Index).AsViewModels();
             model = model.Take(model.Count - 1);
             return View(model);
         }

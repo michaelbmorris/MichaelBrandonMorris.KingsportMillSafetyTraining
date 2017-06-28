@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {

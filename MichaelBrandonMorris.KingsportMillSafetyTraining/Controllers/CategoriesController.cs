@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -27,7 +29,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = _db.GetAssignRolesViewModel(id.Value);
+                AssignRolesViewModel model;
+
+                if (id == null)
+                {
+                    model = new AssignRolesViewModel(_db.GetCategories(), _db.GetRoles().AsViewModels());
+                }
+                else
+                {                  
+                    model = new AssignRolesViewModel(_db.GetCategory(id.Value), _db.GetRoles().AsViewModels());
+                }
+
                 return View(model);
             }
             catch (Exception e)
@@ -231,7 +243,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = _db.GetCategoryViewModel(id.Value);
+                var model = _db.GetCategory(id.Value).AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -261,7 +273,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = _db.GetCategoryViewModel(id.Value);
+                var model = _db.GetCategory(id.Value).AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -307,7 +319,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = _db.GetCategoryViewModels(x => x.Index);
+                var model = _db.GetCategories(x => x.Index).AsViewModels();
                 return View(model);
             }
             catch (Exception e)
@@ -318,12 +330,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        private static Func<Category, object> OrderByIndex => category =>
+            category.Index;
+
         [HttpGet]
         public ActionResult Reorder()
         {
             try
             {
-                var model = _db.GetCategoryViewModels(x => x.Index);
+                var model = _db.GetCategories(OrderByIndex).AsViewModels();
                 return View(model);
             }
             catch (Exception e)

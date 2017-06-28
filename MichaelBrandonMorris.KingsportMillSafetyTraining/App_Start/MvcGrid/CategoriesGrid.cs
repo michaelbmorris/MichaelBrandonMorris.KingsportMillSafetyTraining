@@ -1,18 +1,16 @@
 ﻿using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
-    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.Data.ViewModels.CategoryViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>;
 using Grid =
-    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.Data.ViewModels.CategoryViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>;
 using RetrieveDataMethod =
     System.Func<MichaelBrandonMorris.MvcGrid.Models.GridContext,
-        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.
-            KingsportMillSafetyTraining.Models.Data.ViewModels.CategoryViewModel
+        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
         >>;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
@@ -110,7 +108,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 var role = db.GetRole(roleId);
 
                 var query = role == null
-                    ? db.GetCategoryViewModels()
+                    ? db.GetCategories().AsViewModels()
                     : role.GetCategories().AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())

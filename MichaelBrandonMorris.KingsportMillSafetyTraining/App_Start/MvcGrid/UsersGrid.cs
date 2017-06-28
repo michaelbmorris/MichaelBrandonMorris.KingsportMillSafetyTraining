@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     ViewModels.User;

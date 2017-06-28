@@ -4,27 +4,14 @@ using System.ComponentModel;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.Account;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     public class User : IdentityUser
     {
-        public User()
-        {
-        }
-
-        public User(RegisterViewModel model)
-        {
-            CompanyName = model.CompanyName;
-            FirstName = model.FirstName;
-            LastName = model.LastName;
-            MiddleName = model.MiddleName;
-        }
-
         [DisplayName("Company")]
         public string CompanyName
         {

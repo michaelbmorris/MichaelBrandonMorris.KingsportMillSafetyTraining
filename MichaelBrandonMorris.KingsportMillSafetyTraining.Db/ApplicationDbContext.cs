@@ -4,23 +4,18 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
-using MichaelBrandonMorris.Extensions.OtherExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.Result;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
-    ViewModels.User;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MoreLinq;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 {
     /// <summary>
     ///     The database interface for the application.
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public sealed class ApplicationDbContext : IdentityDbContext<User>
     {
         /// <summary>
         ///     Creates a new <see cref="ApplicationDbContext" /> with a
@@ -29,12 +24,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public ApplicationDbContext()
             : base("DefaultConnection", false)
         {
+            Answers = Set<Answer>();
+            Categories = Set<Category>();
+            Slides = Set<Slide>();
+            TrainingResults = Set<TrainingResult>();
+            TrainingRoles = Set<Role>();
         }
 
         /// <summary>
         ///     The answers table.
         /// </summary>
-        public DbSet<Answer> Answers
+        internal DbSet<Answer> Answers
         {
             get;
             set;
@@ -43,7 +43,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The categories table.
         /// </summary>
-        public DbSet<Category> Categories
+        internal DbSet<Category> Categories
         {
             get;
             set;
@@ -52,7 +52,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The slides table.
         /// </summary>
-        public DbSet<Slide> Slides
+        internal DbSet<Slide> Slides
         {
             get;
             set;
@@ -61,7 +61,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The training results table.
         /// </summary>
-        public DbSet<TrainingResult> TrainingResults
+        internal DbSet<TrainingResult> TrainingResults
         {
             get;
             set;
@@ -70,7 +70,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The (training) roles table.
         /// </summary>
-        public DbSet<Role> TrainingRoles
+        internal DbSet<Role> TrainingRoles
         {
             get;
             set;
@@ -210,23 +210,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        /// <summary>
-        ///     Interprets the specified <see cref="SlideViewModel" /> as a
-        ///     <see cref="Slide" /> and adds it to <see cref="Slides" />.
-        /// </summary>
-        /// <param name="slideViewModel"></param>
-        public void CreateSlide(SlideViewModel slideViewModel)
+        public void CreateSlide(Slide slide, int categoryId)
         {
             DoTransaction(
                 () =>
                 {
-                    Slides.Add(
-                        new Slide(slideViewModel)
-                        {
-                            Answers = slideViewModel.Answers,
-                            Category =
-                                Categories.Find(slideViewModel.CategoryId)
-                        });
+                    slide.Category = Categories.Find(categoryId);
+                    Slides.Add(slide);
                 });
         }
 
@@ -304,51 +294,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        /// <summary>
-        ///     Takes a <see cref="SlideViewModel" /> and updates the
-        ///     corresponding <see cref="Slide" /> in the database. If the
-        ///     <see cref="Slide" /> is not found, throws a
-        ///     <see cref="KeyNotFoundException" />.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <exception cref="KeyNotFoundException"></exception>
-        public void Edit(SlideViewModel model)
+        public void Edit(Slide slide, int categoryId)
         {
             DoTransaction(
                 () =>
                 {
-                    var slide = Slides.Find(model.Id);
+                    var entry = Entry(slide);
+                    entry.State = EntityState.Modified;
 
-                    if (slide == null)
-                    {
-                        throw new KeyNotFoundException(
-                            "Slide with id '{model.Id}' not found.");
-                    }
-
-                    slide.Category = Categories.Find(model.CategoryId);
-                    slide.Title = model.Title;
-                    slide.Content = model.Content;
-
-                    if (model.Image != null)
-                    {
-                        slide.ImageBytes = model.Image.ToBytes();
-                    }
-
-                    slide.ImageDescription = model.ImageDescription;
-                    slide.ShouldShowSlideInSlideshow =
-                        model.ShouldShowSlideInSlideshow;
-
-                    slide.ShouldShowQuestionOnQuiz =
-                        model.ShouldShowQuestionOnQuiz;
-
-                    slide.ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz;
-                    slide.Question = model.Question;
-                    slide.CorrectAnswerIndex = model.CorrectAnswerIndex;
-
-                    foreach (var answer in model.Answers)
+                    foreach (var answer in slide.Answers)
                     {
                         var originalAnswer =
-                            slide.Answers.SingleOrDefault(
+                            entry.Entity.Answers.SingleOrDefault(
                                 x => x.Id == answer.Id && x.Id != 0);
 
                         if (originalAnswer != null)
@@ -363,9 +320,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                         }
                     }
 
-                    foreach (var answer in slide.Answers(x => x.Id != 0))
+                    foreach (var answer in entry.Entity.Answers(x => x.Id != 0))
                     {
-                        if (model.Answers.All(x => x.Id != answer.Id))
+                        if (slide.Answers.All(x => x.Id != answer.Id))
                         {
                             Answers.Remove(answer);
                         }
@@ -401,95 +358,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        /// <summary>
-        ///     Gets the <see cref="AssignCategoriesViewModel" /> for all
-        ///     <see cref="Role" />s.
-        /// </summary>
-        /// <returns>The <see cref="AssignCategoriesViewModel" />.</returns>
-        public AssignCategoriesViewModel GetAssignCategoriesViewModel()
+        public IList<Category> GetCategories(
+            Func<Category, object> orderByPredicate = null,
+            Func<Category, bool> wherePredicate = null)
         {
-            return DoTransaction(
-                () => new AssignCategoriesViewModel(
-                    GetRoles(OrderByRoleName),
-                    GetCategories().AsViewModels()));
-        }
-
-        /// <summary>
-        ///     Gets the <see cref="AssignCategoriesViewModel" /> for the
-        ///     specified <see cref="Role" />.
-        /// </summary>
-        /// <param name="roleId">The role identifier.</param>
-        /// <returns></returns>
-        public AssignCategoriesViewModel GetAssignCategoriesViewModel(
-            int roleId)
-        {
-            return DoTransaction(
-                () =>
-                {
-                    var role = TrainingRoles.Find(roleId);
-
-                    if (role == null)
-                    {
-                        throw new KeyNotFoundException(
-                            $"Role with id '{roleId}' not found.");
-                    }
-
-                    return new AssignCategoriesViewModel(
-                        new List<Role>
-                        {
-                            TrainingRoles.Find(roleId)
-                        },
-                        GetCategories().AsViewModels());
-                });
-        }
-
-        /// <summary>
-        ///     Gets the <see cref="AssignRolesViewModel" />.
-        /// </summary>
-        /// <returns></returns>
-        public AssignRolesViewModel GetAssignRolesViewModel()
-        {
-            return DoTransaction(
-                () => new AssignRolesViewModel(
-                    GetCategories(),
-                    GetRoles().AsViewModels()));
-        }
-
-        /// <summary>
-        ///     Gets the <see cref="AssignRolesViewModel" /> for the specified
-        ///     <see cref="Category" />.
-        /// </summary>
-        /// <param name="categoryId">
-        ///     The <see cref="Category" /> identifier.
-        /// </param>
-        /// <returns>
-        ///     The <see cref="AssignRolesViewModel" /> for the specified
-        ///     <see cref="Category" />.
-        /// </returns>
-        /// <exception cref="KeyNotFoundException">
-        ///     Thrown when the specified <see cref="Category" /> is not found
-        ///     in the database.
-        /// </exception>
-        public AssignRolesViewModel GetAssignRolesViewModel(int categoryId)
-        {
-            return DoTransaction(
-                () =>
-                {
-                    var category = Categories.Find(categoryId);
-
-                    if (category == null)
-                    {
-                        throw new KeyNotFoundException(
-                            $"Category with id '{categoryId}' not found.");
-                    }
-
-                    return new AssignRolesViewModel(
-                        new List<Category>
-                        {
-                            category
-                        },
-                        GetRoles().AsViewModels());
-                });
+            return Categories.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
         /// <summary>
@@ -503,86 +376,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Gets the specified <see cref="Category" /> as a
-        ///     <see cref="CategoryViewModel" />.
-        /// </summary>
-        /// <param name="id">The <see cref="Category" /> identifier.</param>
-        /// <returns>
-        ///     The specified <see cref="Category" /> as a
-        ///     <see cref="CategoryViewModel" />.
-        /// </returns>
-        /// <exception cref="KeyNotFoundException">
-        ///     Thrown when the specified <see cref="Category" /> is not found
-        ///     in the database.
-        /// </exception>
-        public CategoryViewModel GetCategoryViewModel(int id)
-        {
-            return DoTransaction(
-                () =>
-                {
-                    try
-                    {
-                        return Categories.Find(id).AsViewModel();
-                    }
-                    catch (ArgumentNullException)
-                    {
-                        throw new KeyNotFoundException(
-                            $"Category with Id {id} not found.");
-                    }
-                });
-        }
-
-        /// <summary>
-        ///     Gets each <see cref="Category" /> as a
-        ///     <see cref="CategoryViewModel" /> in a <see cref="IList{T}" />
-        ///     with the specified order and filter.
-        /// </summary>
-        /// <param name="orderByPredicate">The order for the list.</param>
-        /// <param name="wherePredicate">The filter for the list.</param>
-        /// <returns>The <see cref="IList{T}" />.</returns>
-        public IList<CategoryViewModel> GetCategoryViewModels(
-            Func<Category, object> orderByPredicate = null,
-            Func<Category, bool> wherePredicate = null)
-        {
-            return DoTransaction(
-                () => GetCategories(orderByPredicate, wherePredicate)
-                    .AsViewModels());
-        }
-
-        /// <summary>
-        ///     Gets a new <see cref="SlideViewModel" />.
-        /// </summary>
-        /// <returns>The new <see cref="SlideViewModel" />.</returns>
-        public SlideViewModel GetNewSlideViewModel()
-        {
-            return DoTransaction(
-                () => new SlideViewModel(null, GetCategories()));
-        }
-
-        /// <summary>
-        ///     Gets each <see cref="QuizSlideViewModel" /> for the specified
-        ///     <see cref="Role" /> as an <see cref="IList{T}" />.
-        /// </summary>
-        /// <param name="role">The <see cref="Role" />.</param>
-        /// <returns>
-        ///     Each <see cref="QuizSlideViewModel" /> for the specified role as
-        ///     an <see cref="IList{T}" />.
-        /// </returns>
-        public IList<QuizSlideViewModel> GetQuizViewModel(Role role)
-        {
-            return DoTransaction(
-                () =>
-                {
-                    var categories = role.GetCategories();
-                    var slides =
-                        categories.GetSlides(
-                            wherePredicate: WhereShouldShowSlideOnQuiz);
-                    return slides.AsQuizSlideViewModels().Shuffle();
-                });
-        }
-
-        /// <summary>
-        /// Gets the specified role.
+        ///     Gets the specified role.
         /// </summary>
         /// <param name="id">The role identifier.</param>
         /// <returns></returns>
@@ -592,7 +386,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Returns the only role that satisfies a specified condition, and throws an exception if more than one such role exists.
+        ///     Returns the only role that satisfies a specified condition, and throws an exception if more than one such role
+        ///     exists.
         /// </summary>
         /// <param name="predicate">A function to test a role for a condition.</param>
         /// <returns>The single role that satisfies a condition.</returns>
@@ -601,93 +396,47 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => TrainingRoles.Single(predicate));
         }
 
-        /// <summary>
-        ///     Gets the specified <see cref="Role"/> as a <see cref="RoleViewModel"/>.
-        /// </summary>
-        /// <param name="id">The <see cref="Role"/> identifier.</param>
-        /// <returns>The specified <see cref="Role"/> as a <see cref="RoleViewModel"/>.</returns>
-        public RoleViewModel GetRoleViewModel(int id)
+        public IList<Role> GetRoles(
+            Func<Role, object> orderByPredicate = null,
+            Func<Role, bool> wherePredicate = null)
         {
-            return DoTransaction(
-                () =>
-                {
-                    var role = TrainingRoles.Find(id);
-                    return new RoleViewModel(role);
-                });
+            return TrainingRoles.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
         /// <summary>
-        /// Gets each <see cref="Role"/> in the database as a <see cref="RoleViewModel"/>.
+        ///     Gets the specified <see cref="Slide" />.
         /// </summary>
-        /// <param name="orderBy">A function to order the roles.</param>
-        /// <param name="where">A function to filter the roles.</param>
-        /// <returns>Each <see cref="Role"/> in the database as a <see cref="RoleViewModel"/>.</returns>
-        public IList<RoleViewModel> GetRoleViewModels(
-            Func<Role, object> orderBy = null,
-            Func<Role, bool> where = null)
-        {
-            return DoTransaction(() => GetRoles(orderBy, where).AsViewModels());
-        }
-
-        /// <summary>
-        /// Gets the specified <see cref="Slide"/>.
-        /// </summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>The specified <see cref="Slide"/>.</returns>
+        /// <param name="id">The <see cref="Slide" /> identifier.</param>
+        /// <returns>The specified <see cref="Slide" />.</returns>
         public Slide GetSlide(int id)
         {
             return DoTransaction(() => Slides.Find(id));
         }
 
-
-        public IList<SlideViewModel> GetSlideshowViewModel(Role role)
+        public IList<Slide> GetSlides(
+            Func<Slide, object> orderBy = null,
+            Func<Slide, bool> where = null)
         {
-            return DoTransaction(
-                () =>
-                {
-                    var categories = role.GetCategories(OrderByCategoryIndex);
-                    var slides = categories.GetSlides(
-                        OrderBySlideIndex,
-                        WhereShouldShowSlideInSlideshow);
-                    return slides.AsViewModels();
-                });
+            return Slides.OrderByWhere(orderBy, where);
         }
 
-        public SlideViewModel GetSlideViewModel(int id)
-        {
-            return DoTransaction(
-                () =>
-                {
-                    var slide = Slides.Find(id);
-                    return slide.AsViewModel(GetCategories());
-                });
-        }
-
-        public IList<SlideViewModel> GetSlideViewModels(int categoryId)
+        public IList<Slide> GetSlides(int categoryId,
+            Func<Slide, object> orderBy = null,
+            Func<Slide, bool> where = null)
         {
             return DoTransaction(
                 () =>
                 {
                     var category = Categories.Find(categoryId);
 
-                    var slides = category?.GetSlides(OrderBySlideIndex)
-                                 ?? throw new KeyNotFoundException(
-                                     GetNotFoundMessage<Category>(categoryId));
+                    if (category == null)
+                    {
+                        throw new KeyNotFoundException(
+                            GetNotFoundMessage<Category>(categoryId));
+                    }
 
-                    return slides.AsViewModels();
+                    return category.Slides.OrderByWhere(orderBy, where);
                 });
-        }
-
-        public IList<SlideViewModel> GetSlideViewModels(
-            Func<Category, object> orderCategoriesBy = null,
-            Func<Category, bool> categoriesWhere = null,
-            Func<Slide, object> orderSlidesBy = null,
-            Func<Slide, bool> slidesWhere = null)
-        {
-            return DoTransaction(
-                () => GetCategories(orderCategoriesBy, categoriesWhere)
-                    .GetSlides(orderSlidesBy, slidesWhere)
-                    .AsViewModels());
         }
 
         public TrainingResult GetTrainingResult(int id)
@@ -695,49 +444,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => TrainingResults.Find(id));
         }
 
-        /// <summary>
-        ///     Gets the specified <see cref="TrainingResult" /> as a
-        ///     <see cref="TrainingResultViewModel" />.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="KeyNotFoundException">
-        ///     Thrown if a <see cref="TrainingResult" /> with the specified id
-        ///     is not found.
-        /// </exception>
-        public TrainingResultViewModel GetTrainingResultViewModel(int id)
+        public IList<TrainingResult> GetTrainingResultsDescending(
+            Func<TrainingResult, object> orderByPredicate = null,
+            Func<TrainingResult, bool> wherePredicate = null)
         {
-            return DoTransaction(
-                () =>
-                {
-                    try
-                    {
-                        return TrainingResults.Find(id).AsViewModel();
-                    }
-                    catch (ArgumentNullException)
-                    {
-                        throw new KeyNotFoundException(
-                            $"Training Result with Id {id} not found.");
-                    }
-                });
+            return TrainingResults.OrderByDescendingWhere(
+                orderByPredicate,
+                wherePredicate);
         }
 
-        public IList<TrainingResultViewModel> GetTrainingResultViewModels(
-            string userId = null)
+        public IList<TrainingResult> GetTrainingResultsDescending(
+            string userId,
+            Func<TrainingResult, object> orderByPredicate = null,
+            Func<TrainingResult, bool> wherePredicate = null)
         {
             return DoTransaction(
                 () =>
                 {
-                    if (userId == null)
-                    {
-                        return GetTrainingResultsDescending(
-                                x => x.CompletionDateTime)
-                            .AsViewModels();
-                    }
-
-                    return Users.Find(userId)
-                        .GetTrainingResultsDescending(x => x.CompletionDateTime)
-                        .AsViewModels();
+                    var user = Users.Find(userId);
+                    return user.GetTrainingResultsDescending(
+                        orderByPredicate,
+                        wherePredicate);
                 });
         }
 
@@ -746,30 +473,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return DoTransaction(() => Users.Find(id));
         }
 
-        //TODO
-        public UserTrainingResultsViewModel GetUserTrainingResultsViewModel(
-            string userId = null)
+        public IList<User> GetUsers(
+            Func<User, object> orderByPredicate = null,
+            Func<User, bool> wherePredicate = null)
         {
-            return DoTransaction(
-                () =>
-                {
-                    if (userId == null)
-                    {
-                    }
-
-                    var user = Users.Find(userId);
-
-                    return new UserTrainingResultsViewModel(
-                        new UserViewModel(user),
-                        user.GetTrainingResultsDescending(
-                                OrderByCompletionDateTime)
-                            .AsViewModels());
-                });
-        }
-
-        public IList<UserViewModel> GetUserViewModels()
-        {
-            return DoTransaction(() => GetUsers().AsViewModels());
+            return Users.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
         public bool IsUserTrainingResult(string userId, int trainingResultId)
@@ -840,7 +548,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
                         if (slideToEdit == null)
                         {
-                            throw new KeyNotFoundException(GetNotFoundMessage<Slide>(slide.Id));
+                            throw new KeyNotFoundException(
+                                GetNotFoundMessage<Slide>(slide.Id));
                         }
 
                         slideToEdit.Index = slide.Index;
@@ -873,9 +582,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Sets the specified <see cref="User"/>'s latest quiz start datetime to the current datetime.
+        ///     Sets the specified <see cref="User" />'s latest quiz start datetime to the current datetime.
         /// </summary>
-        /// <param name="userId">The <see cref="User"/> identifier.</param>
+        /// <param name="userId">The <see cref="User" /> identifier.</param>
         public void SetUserLatestQuizStartDateTime(string userId)
         {
             DoTransaction(
@@ -887,9 +596,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Sets the specified <see cref="User"/>'s latest training start datetime to the current datetime.
+        ///     Sets the specified <see cref="User" />'s latest training start datetime to the current datetime.
         /// </summary>
-        /// <param name="userId">The <see cref="User"/> identifier.</param>
+        /// <param name="userId">The <see cref="User" /> identifier.</param>
         public void SetUserLatestTrainingStartDateTime(string userId)
         {
             DoTransaction(
@@ -901,7 +610,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        /// Sets the <see cref="Role"/> of the specified <see cref="User"/> to the specified role.
+        ///     Sets the <see cref="Role" /> of the specified <see cref="User" /> to the specified role.
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="roleId"></param>
@@ -985,14 +694,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        private static string GetNotFoundMessage<T>(int id)
+        internal void DoTransaction(Action action)
         {
-            return $"{typeof(T)} with id '{id}' not found.";
-        }
-
-        private void DoTransaction(Action action)
-        {
-            using (var transaction = Database.BeginTransaction())
+            using (var transaction =
+                Database.CurrentTransaction ?? Database.BeginTransaction())
             {
                 try
                 {
@@ -1012,11 +717,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
-        private T DoTransaction<T>(Func<T> func)
+        internal T DoTransaction<T>(Func<T> func)
         {
             T t;
 
-            using (var transaction = Database.BeginTransaction())
+            using (var transaction =
+                Database.CurrentTransaction ?? Database.BeginTransaction())
             {
                 try
                 {
@@ -1034,34 +740,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return t;
         }
 
-        private IList<Category> GetCategories(
-            Func<Category, object> orderByPredicate = null,
-            Func<Category, bool> wherePredicate = null)
+        private static string GetNotFoundMessage<T>(int id)
         {
-            return Categories.OrderByWhere(orderByPredicate, wherePredicate);
-        }
-
-        private IList<Role> GetRoles(
-            Func<Role, object> orderByPredicate = null,
-            Func<Role, bool> wherePredicate = null)
-        {
-            return TrainingRoles.OrderByWhere(orderByPredicate, wherePredicate);
-        }
-
-        private IList<TrainingResult> GetTrainingResultsDescending(
-            Func<TrainingResult, object> orderByPredicate = null,
-            Func<TrainingResult, bool> wherePredicate = null)
-        {
-            return TrainingResults.OrderByDescendingWhere(
-                orderByPredicate,
-                wherePredicate);
-        }
-
-        private IList<User> GetUsers(
-            Func<User, object> orderByPredicate = null,
-            Func<User, bool> wherePredicate = null)
-        {
-            return Users.OrderByWhere(orderByPredicate, wherePredicate);
+            return $"{typeof(T)} with id '{id}' not found.";
         }
     }
 
@@ -1073,83 +754,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Func<Answer, bool> wherePredicate = null)
         {
             return slide.Answers.OrderByWhere(orderByPredicate, wherePredicate);
-        }
-
-        public static IList<QuizSlideViewModel> AsQuizSlideViewModels(
-            this IList<Slide> slides)
-        {
-            return slides.Select(x => new QuizSlideViewModel(x));
-        }
-
-        public static SlideViewModel AsViewModel(
-            this Slide slide,
-            IList<Category> categories = null)
-        {
-            if (slide == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return new SlideViewModel(slide, categories);
-        }
-
-        public static RoleViewModel AsViewModel(this Role role)
-        {
-            if (role == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return new RoleViewModel(role);
-        }
-
-        public static CategoryViewModel AsViewModel(this Category category)
-        {
-            if (category == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return new CategoryViewModel(category);
-        }
-
-        public static TrainingResultViewModel AsViewModel(
-            this TrainingResult trainingResult)
-        {
-            if (trainingResult == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return new TrainingResultViewModel(trainingResult);
-        }
-
-        public static IList<UserViewModel> AsViewModels(this IList<User> users)
-        {
-            return users.Select(x => new UserViewModel(x));
-        }
-
-        public static IList<SlideViewModel> AsViewModels(
-            this IList<Slide> slides)
-        {
-            return slides.Select(x => new SlideViewModel(x));
-        }
-
-        public static IList<RoleViewModel> AsViewModels(this IList<Role> roles)
-        {
-            return roles.Select(x => new RoleViewModel(x));
-        }
-
-        public static IList<CategoryViewModel> AsViewModels(
-            this IList<Category> categories)
-        {
-            return categories.Select(x => new CategoryViewModel(x));
-        }
-
-        public static IList<TrainingResultViewModel> AsViewModels(
-            this IList<TrainingResult> trainingResults)
-        {
-            return trainingResults.Select(x => new TrainingResultViewModel(x));
         }
 
         public static IList<Category> GetCategories(
@@ -1196,13 +800,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
         public static IList<Slide> GetSlides(
             this Role role,
-            Func<Category, object> orderCategoriesBy,
-            Func<Category, bool> whereCategories,
-            Func<Slide, object> orderSlidesBy,
-            Func<Slide, bool> whereSlides)
+            Func<Category, object> orderCategoriesBy = null,
+            Func<Category, bool> categoriesWhere = null,
+            Func<Slide, object> orderSlidesBy = null,
+            Func<Slide, bool> slidesWhere = null)
         {
-            return role.GetCategories(orderCategoriesBy, whereCategories)
-                .GetSlides(orderSlidesBy, whereSlides);
+            using (var db = new ApplicationDbContext())
+            {
+                return db.DoTransaction(
+                    () => role.GetCategories(orderCategoriesBy, categoriesWhere)
+                        .GetSlides(orderSlidesBy, slidesWhere));
+            }
         }
 
         public static IList<TrainingResult> GetTrainingResults(

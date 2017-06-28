@@ -1,4 +1,5 @@
 ﻿using MichaelBrandonMorris.KingsportMillSafetyTraining;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.Result;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -43,7 +45,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "You do not have permission to view this.");
                 }
 
-                var model = _db.GetTrainingResultViewModel(id.Value);
+                var model = _db.GetTrainingResult(id.Value).AsViewModel();
                 return View(model);
             }
             catch (UnauthorizedAccessException e)
@@ -85,7 +87,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            var model = _db.GetUserTrainingResultsViewModel();
+            var model = _db.GetTrainingResultsDescending().AsViewModels();
             return View(model);
         }
 
@@ -115,7 +117,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "You do not have permission to view this.");
                 }
 
-                var model = _db.GetUserTrainingResultsViewModel(id);
+                var model = new UserTrainingResultsViewModel(_db.GetUser(id).AsViewModel(), _db.GetTrainingResultsDescending().AsViewModels());
                 return View(model);
             }
             catch (UnauthorizedAccessException e)

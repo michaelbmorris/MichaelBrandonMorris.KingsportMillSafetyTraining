@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 using MichaelBrandonMorris.MvcGrid.Models;
@@ -118,7 +119,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 var category = db.GetCategory(categoryId);
 
                 var query = category == null
-                    ? db.GetRoleViewModels()
+                    ? db.GetRoles().AsViewModels()
                     : category.GetRoles().AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())

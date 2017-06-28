@@ -2,9 +2,13 @@
 using System.Diagnostics;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.OtherExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
+using System;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -33,12 +37,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
+        private static Func<Category, object> OrderCategoryByIndex => category
+            => category.Index;
+
+        private static Func<Category, object> OrderCategoryByTitle => category
+            => category.Title;
+
         /// <summary>Gets the create view.</summary>
         /// <returns>The create view.</returns>
         [HttpGet]
         public ActionResult Create()
         {
-            var model = _db.GetNewSlideViewModel();
+            var model = new SlideViewModel(
+                null,
+                _db.GetCategories(OrderCategoryByTitle));
+
             return View(model);
         }
 
@@ -54,7 +67,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(slideViewModel);
             }
 
-            _db.CreateSlide(slideViewModel);
+            var slide = new Slide
+            {
+                Answers = slideViewModel.Answers,
+                Content = slideViewModel.Content,
+                CorrectAnswerIndex = slideViewModel.CorrectAnswerIndex,
+                ImageBytes = slideViewModel.Image?.ToBytes(),
+                ImageDescription = slideViewModel.ImageDescription,
+                Question = slideViewModel.Question,
+                ShouldShowImageOnQuiz = slideViewModel.ShouldShowImageOnQuiz,
+                ShouldShowQuestionOnQuiz = slideViewModel.ShouldShowQuestionOnQuiz,
+                ShouldShowSlideInSlideshow = slideViewModel.ShouldShowSlideInSlideshow,
+                Title = slideViewModel.Title
+            };
+
+            _db.CreateSlide(slide, slideViewModel.CategoryId);
             return RedirectToAction("Index");
         }
 
@@ -71,7 +98,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slide = _db.GetSlideViewModel(id.Value);
+            var slide = _db.GetSlide(id.Value).AsViewModel();
 
             if (slide == null)
             {
@@ -115,7 +142,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slide = _db.GetSlideViewModel(id.Value);
+            var slide = _db.GetSlide(id.Value).AsViewModel();
 
             if (slide == null)
             {
@@ -140,16 +167,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slideViewModel = _db.GetSlideViewModel(id.Value);
+            var model = _db.GetSlide(id.Value).AsViewModel();
 
-            if (slideViewModel == null)
+            if (model == null)
             {
                 return this.CreateError(
                     HttpStatusCode.NotFound,
                     $"Slide with id '{id.Value}' not found.");
             }
 
-            return View(slideViewModel);
+            return View(model);
         }
 
         /// <summary>Posts the edit view for the specified <see cref="SlideViewModel"/>.</summary>
@@ -164,7 +191,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
-            _db.Edit(model);
+            var slide = new Slide
+            {
+                Answers = model.Answers,
+                Content = model.Content,
+                CorrectAnswerIndex = model.CorrectAnswerIndex,
+                ImageBytes = model.Image?.ToBytes(),
+                ImageDescription = model.ImageDescription,
+                Question = model.Question,
+                ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
+                ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
+                ShouldShowSlideInSlideshow = model.ShouldShowSlideInSlideshow,
+                Title = model.Title
+            };
+
+            _db.Edit(slide, model.CategoryId);
             return RedirectToAction("Index");
         }
 
@@ -173,7 +214,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetSlideViewModels();
+            var model = _db.GetSlides().AsViewModels();
             return View(model);
         }
 
@@ -207,7 +248,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectCategoryToReorder");
             }
 
-            var model = _db.GetSlideViewModels(categoryId.Value);
+            var model = _db.GetSlides(categoryId.Value).AsViewModels();
             return View(model);
         }
 
@@ -224,7 +265,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectCategoryToReorder()
         {
-            var model = _db.GetCategoryViewModels();
+            var model = _db.GetCategories().AsViewModels();
             return View(model);
         }
 
@@ -232,7 +273,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult ViewSlide(int id)
         {
-            var model = _db.GetSlideViewModel(id);
+            var model = _db.GetSlide(id).AsViewModel();
             return View(model);
         }
 

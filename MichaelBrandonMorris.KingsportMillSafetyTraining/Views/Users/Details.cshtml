@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.User
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User
 
 @{
     ViewBag.Title = "Details";
@@ -40,14 +40,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MobilePhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MobilePhoneNumber)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.LatestTrainingStartDateTime)
         </dt>
 
@@ -61,14 +53,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.LatestQuizStartDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkPhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkPhoneNumber)
         </dd>
 
         <dt>

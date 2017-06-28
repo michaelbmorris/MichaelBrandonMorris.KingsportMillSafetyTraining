@@ -1,5 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
-@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels.QuizSlideViewModel>
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
 
 @{
     ViewBag.Title = "Quiz";
@@ -24,7 +24,7 @@
             {
                 @Html.HiddenFor(x => Model[i].SelectedAnswerIndex)
             }
-            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger" : "")row"
+            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger " : "")row"
                  id="Question-@Model[i].Id">
                 <div class="col-md-4">
                     @if (Model[i].ShouldShowImageOnQuiz)
@@ -77,7 +77,7 @@
                                                     <label class="incorrect">
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            @class = "AnswerFor-" + Model[i].Id, disabled = "disabled"
+                                                            @class = "AnswerFor-" + Model[i].Id, @readonly = "readonly"
                                                         })
                                                         @Html.DisplayFor(x => answer.Title)
                                                     </label>
@@ -91,7 +91,7 @@
                                                     <label>
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            @class = "AnswerFor-" + Model[i].Id, disabled = "disabled"
+                                                            @class = "AnswerFor-" + Model[i].Id, @readonly = "readonly"
                                                         })
                                                         @answer.Title
                                                     </label>
@@ -108,7 +108,7 @@
                                                     <label class="correct">
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            disabled = "disabled"
+                                                            @readonly = "readonly"
                                                         })
                                                         @answer.Title
                                                     </label>
@@ -122,7 +122,7 @@
                                                     <label>
                                                         @Html.RadioButtonFor(x => Model[i].SelectedAnswerIndex, answer.Index, new
                                                         {
-                                                            disabled = "disabled"
+                                                            @readonly = "readonly"
                                                         })
                                                         @answer.Title
                                                     </label>
@@ -169,8 +169,11 @@
             var url = "@Url.Action("ViewSlide", "Slides", new { id = "_ID_"})";
             
             window.open(url.replace("_ID_", slideId));
+            $(".AnswerFor-" + slideId).prop("readonly", false);
             $(".AnswerFor-" + slideId).prop("disabled", false);
             return false;
         }
+
+        $(':radio[readonly]:not(:checked)').attr('disabled', true);
     </script>
 }

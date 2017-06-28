@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data
 {

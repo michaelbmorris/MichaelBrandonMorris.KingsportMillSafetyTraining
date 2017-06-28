@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -15,7 +18,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult AssignCategories(int? id)
         {
-            var model = _db.GetAssignCategoriesViewModel(id.Value);
+            AssignCategoriesViewModel model;
+            if (id == null)
+            {
+                model = new AssignCategoriesViewModel(_db.GetRoles(), _db.GetCategories().AsViewModels());
+            }
+            else
+            {
+                model = new AssignCategoriesViewModel(_db.GetRole(id.Value), _db.GetCategories().AsViewModels());
+            }
             return View(model);
         }
 
@@ -102,7 +113,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var model = _db.GetRoleViewModel(id.Value);
+            var model = _db.GetRole(id.Value).AsViewModel();
 
             if (model == null)
             {
@@ -144,17 +155,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        private static Func<Role, object> OrderByIndex => role => role.Index;
+
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetRoleViewModels(x => x.Index);
+            var model = _db.GetRoles(OrderByIndex).AsViewModels();
             return View(model);
         }
 
         [HttpGet]
         public ActionResult Reorder()
         {
-            var model = _db.GetRoleViewModels(x => x.Index);
+            var model = _db.GetRoles(OrderByIndex).AsViewModels();
             return View(model);
         }
 

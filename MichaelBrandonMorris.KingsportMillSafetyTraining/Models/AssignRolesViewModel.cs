@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
-    ViewModels
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
     public class AssignRolesViewModel
     {
@@ -14,6 +15,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.
             IList<RoleViewModel> roleViewModels)
         {
             Categories = categories;
+            RoleViewModels = roleViewModels;
+        }
+
+        public AssignRolesViewModel(
+            Category category,
+            IList<RoleViewModel> roleViewModels)
+        {
+            Categories = new List<Category>
+            {
+                category
+            };
+
             RoleViewModels = roleViewModels;
         }
 

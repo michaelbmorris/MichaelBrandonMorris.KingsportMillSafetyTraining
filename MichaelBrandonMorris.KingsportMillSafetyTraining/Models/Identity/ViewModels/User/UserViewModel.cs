@@ -12,7 +12,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         {
         }
 
-        public UserViewModel(Identity.User user)
+        public UserViewModel(Db.Models.User user)
         {
             CompanyName = user.CompanyName;
             Email = user.Email;

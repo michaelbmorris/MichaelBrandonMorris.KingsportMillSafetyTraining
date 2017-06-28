@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.ViewModels.User;
@@ -121,7 +123,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetUserViewModels();
+            var model = _db.GetUsers().AsViewModels();
             return View(model);
         }
 
