@@ -15,7 +15,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult AssignCategories(int? id)
         {
-            var model = _db.GetAssignCategoriesViewModel(id);
+            var model = _db.GetAssignCategoriesViewModel(id.Value);
             return View(model);
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
@@ -8,15 +7,26 @@ using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
-using Microsoft.AspNet.Identity;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     The controller for training. Requires authorization.
+    /// </summary>
+    /// <seealso cref="Controller" />
     [Authorize]
     public class TrainingController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        /// <summary>
+        ///     Gets the index view. Checks if the current <see cref="User" />
+        ///     has an assigned <see cref="Role" />, and redirects to selection
+        ///     if not. Otherwise, displays the appropriate training for the
+        ///     role.
+        /// </summary>
+        /// <returns>The index view.</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -32,6 +42,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Gets the quiz view.
+        /// </summary>
+        /// <returns>The quiz view.</returns>
         [HttpGet]
         public ActionResult Quiz()
         {
@@ -43,6 +57,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Posts the quiz view. Grades the quiz results, and returns to the
+        ///     quiz view if there is an incorrect question. If all questions
+        ///     are correct, redirects to the training result.
+        /// </summary>
+        /// <param name="model">
+        ///     Each <see cref="QuizSlideViewModel" /> in an
+        ///     <see cref="IList{T}" />.
+        /// </param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         [HttpPost]
         public ActionResult Quiz(IList<QuizSlideViewModel> model)
         {
@@ -92,6 +117,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
+        /// <summary>
+        ///     Gets the select role view.
+        /// </summary>
+        /// <returns>The select role view.</returns>
         [HttpGet]
         public ActionResult SelectRole()
         {
@@ -100,14 +129,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Posts the select role view.
+        /// </summary>
+        /// <param name="roleId">The role identifier.</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SelectRole(int? roleId)
         {
-            Debug.WriteLine(roleId);
             _db.SetUserRole(User.GetId(), roleId);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases managed
+        ///     resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources; false to
+        ///     release only unmanaged resources.
+        /// </param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

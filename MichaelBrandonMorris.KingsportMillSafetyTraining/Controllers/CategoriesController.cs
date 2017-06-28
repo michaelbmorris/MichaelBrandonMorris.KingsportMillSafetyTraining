@@ -27,7 +27,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = _db.GetAssignRolesViewModel(id);
+                var model = _db.GetAssignRolesViewModel(id.Value);
                 return View(model);
             }
             catch (Exception e)

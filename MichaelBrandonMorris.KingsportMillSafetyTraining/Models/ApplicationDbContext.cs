@@ -103,13 +103,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
 
         /// <summary>
-        ///     Adds a new <see cref="QuizResult" /> to the specified <see cref="TrainingResult" />.
+        ///     Adds a new <see cref="QuizResult" /> to the specified
+        ///     <see cref="TrainingResult" />.
         /// </summary>
         /// <param name="trainingResultId">The training result identifier.</param>
         /// <param name="questionsCorrect">The number of questions correct.</param>
         /// <param name="totalQuestions">The total number of questions.</param>
-        /// <exception cref="KeyNotFoundException">Thrown when the training result is not found in the database.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the user does not have a latest quiz start time.</exception>
+        /// <exception cref="KeyNotFoundException">
+        ///     Thrown when the training
+        ///     result is not found in the database.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Thrown when the user
+        ///     does not have a latest quiz start time.
+        /// </exception>
         public void AddQuizResult(
             int trainingResultId,
             int questionsCorrect,
@@ -330,8 +337,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     slide.ImageDescription = model.ImageDescription;
                     slide.ShouldShowSlideInSlideshow =
                         model.ShouldShowSlideInSlideshow;
+
                     slide.ShouldShowQuestionOnQuiz =
                         model.ShouldShowQuestionOnQuiz;
+
                     slide.ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz;
                     slide.Question = model.Question;
                     slide.CorrectAnswerIndex = model.CorrectAnswerIndex;
@@ -369,7 +378,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Edits the specified training result.
         /// </summary>
         /// <param name="trainingResult">The training result to edit.</param>
-        /// <exception cref="KeyNotFoundException">Thrown when the training result is not found in the database.</exception>
+        /// <exception cref="KeyNotFoundException">
+        ///     Thrown when the training
+        ///     result is not found in the database.
+        /// </exception>
         public void Edit(TrainingResult trainingResult)
         {
             DoTransaction(
@@ -390,7 +402,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Gets the <see cref="AssignCategoriesViewModel" /> for all <see cref="Role" />s.
+        ///     Gets the <see cref="AssignCategoriesViewModel" /> for all
+        ///     <see cref="Role" />s.
         /// </summary>
         /// <returns>The <see cref="AssignCategoriesViewModel" />.</returns>
         public AssignCategoriesViewModel GetAssignCategoriesViewModel()
@@ -402,7 +415,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Gets the <see cref="AssignCategoriesViewModel" /> for the specified <see cref="Role" />.
+        ///     Gets the <see cref="AssignCategoriesViewModel" /> for the
+        ///     specified <see cref="Role" />.
         /// </summary>
         /// <param name="roleId">The role identifier.</param>
         /// <returns></returns>
@@ -429,29 +443,78 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        public AssignRolesViewModel GetAssignRolesViewModel(int? id = null)
+        /// <summary>
+        ///     Gets the <see cref="AssignRolesViewModel" />.
+        /// </summary>
+        /// <returns></returns>
+        public AssignRolesViewModel GetAssignRolesViewModel()
+        {
+            return DoTransaction(
+                () => new AssignRolesViewModel(
+                    GetCategories(),
+                    GetRoles().AsViewModels()));
+        }
+
+        /// <summary>
+        ///     Gets the <see cref="AssignRolesViewModel" /> for the specified
+        ///     <see cref="Category" />.
+        /// </summary>
+        /// <param name="categoryId">
+        ///     The <see cref="Category" /> identifier.
+        /// </param>
+        /// <returns>
+        ///     The <see cref="AssignRolesViewModel" /> for the specified
+        ///     <see cref="Category" />.
+        /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        ///     Thrown when the specified <see cref="Category" /> is not found
+        ///     in the database.
+        /// </exception>
+        public AssignRolesViewModel GetAssignRolesViewModel(int categoryId)
         {
             return DoTransaction(
                 () =>
                 {
-                    var categories = id == null
-                        ? GetCategories()
-                        : new List<Category>
-                        {
-                            Categories.Find(id.Value)
-                        };
+                    var category = Categories.Find(categoryId);
+
+                    if (category == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Category with id '{categoryId}' not found.");
+                    }
 
                     return new AssignRolesViewModel(
-                        categories,
+                        new List<Category>
+                        {
+                            category
+                        },
                         GetRoles().AsViewModels());
                 });
         }
 
+        /// <summary>
+        ///     Gets the specified <see cref="Category" />.
+        /// </summary>
+        /// <param name="id">The <see cref="Category" /> identifier.</param>
+        /// <returns>The specified <see cref="Category" />.</returns>
         public Category GetCategory(int id)
         {
             return DoTransaction(() => Categories.Find(id));
         }
 
+        /// <summary>
+        ///     Gets the specified <see cref="Category" /> as a
+        ///     <see cref="CategoryViewModel" />.
+        /// </summary>
+        /// <param name="id">The <see cref="Category" /> identifier.</param>
+        /// <returns>
+        ///     The specified <see cref="Category" /> as a
+        ///     <see cref="CategoryViewModel" />.
+        /// </returns>
+        /// <exception cref="KeyNotFoundException">
+        ///     Thrown when the specified <see cref="Category" /> is not found
+        ///     in the database.
+        /// </exception>
         public CategoryViewModel GetCategoryViewModel(int id)
         {
             return DoTransaction(
@@ -469,6 +532,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        ///     Gets each <see cref="Category" /> as a
+        ///     <see cref="CategoryViewModel" /> in a <see cref="IList{T}" />
+        ///     with the specified order and filter.
+        /// </summary>
+        /// <param name="orderByPredicate">The order for the list.</param>
+        /// <param name="wherePredicate">The filter for the list.</param>
+        /// <returns>The <see cref="IList{T}" />.</returns>
         public IList<CategoryViewModel> GetCategoryViewModels(
             Func<Category, object> orderByPredicate = null,
             Func<Category, bool> wherePredicate = null)
@@ -478,6 +549,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                     .AsViewModels());
         }
 
+        /// <summary>
+        ///     Gets a new <see cref="SlideViewModel" />.
+        /// </summary>
+        /// <returns>The new <see cref="SlideViewModel" />.</returns>
         public SlideViewModel GetNewSlideViewModel()
         {
             return DoTransaction(
@@ -485,11 +560,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Uses a transaction to get the
-        ///     <see cref="IList{QuizSlideViewModel}" /> for the specified role.
+        ///     Gets each <see cref="QuizSlideViewModel" /> for the specified
+        ///     <see cref="Role" /> as an <see cref="IList{T}" />.
         /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
+        /// <param name="role">The <see cref="Role" />.</param>
+        /// <returns>
+        ///     Each <see cref="QuizSlideViewModel" /> for the specified role as
+        ///     an <see cref="IList{T}" />.
+        /// </returns>
         public IList<QuizSlideViewModel> GetQuizViewModel(Role role)
         {
             return DoTransaction(
@@ -503,16 +581,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        /// Gets the specified role.
+        /// </summary>
+        /// <param name="id">The role identifier.</param>
+        /// <returns></returns>
         public Role GetRole(int id)
         {
             return DoTransaction(() => TrainingRoles.Find(id));
         }
 
+        /// <summary>
+        ///     Returns the only role that satisfies a specified condition, and throws an exception if more than one such role exists.
+        /// </summary>
+        /// <param name="predicate">A function to test a role for a condition.</param>
+        /// <returns>The single role that satisfies a condition.</returns>
         public Role GetRole(Func<Role, bool> predicate)
         {
             return DoTransaction(() => TrainingRoles.Single(predicate));
         }
 
+        /// <summary>
+        ///     Gets the specified <see cref="Role"/> as a <see cref="RoleViewModel"/>.
+        /// </summary>
+        /// <param name="id">The <see cref="Role"/> identifier.</param>
+        /// <returns>The specified <see cref="Role"/> as a <see cref="RoleViewModel"/>.</returns>
         public RoleViewModel GetRoleViewModel(int id)
         {
             return DoTransaction(
@@ -523,25 +616,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        /// Gets each <see cref="Role"/> in the database as a <see cref="RoleViewModel"/>.
+        /// </summary>
+        /// <param name="orderBy">A function to order the roles.</param>
+        /// <param name="where">A function to filter the roles.</param>
+        /// <returns>Each <see cref="Role"/> in the database as a <see cref="RoleViewModel"/>.</returns>
         public IList<RoleViewModel> GetRoleViewModels(
-            Func<Role, object> orderByPredicate = null)
+            Func<Role, object> orderBy = null,
+            Func<Role, bool> where = null)
         {
-            return DoTransaction(
-                () =>
-                {
-                    IList<Role> roles =
-                        orderByPredicate == null
-                            ? TrainingRoles.ToList()
-                            : TrainingRoles.OrderBy(orderByPredicate).ToList();
-
-                    return roles.Select(role => new RoleViewModel(role));
-                });
+            return DoTransaction(() => GetRoles(orderBy, where).AsViewModels());
         }
 
+        /// <summary>
+        /// Gets the specified <see cref="Slide"/>.
+        /// </summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>The specified <see cref="Slide"/>.</returns>
         public Slide GetSlide(int id)
         {
             return DoTransaction(() => Slides.Find(id));
         }
+
 
         public IList<SlideViewModel> GetSlideshowViewModel(Role role)
         {
@@ -566,39 +663,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
-        /// <summary>
-        ///     Gets slides as view models. If a category id is specified, gets
-        ///     the view models for slides from that category. If the category
-        ///     does not exist, throws a <see cref="KeyNotFoundException" />. If
-        ///     no category id is specified, gets all the slides in the
-        ///     database as view models.
-        /// </summary>
-        /// <param name="categoryId"></param>
-        /// <returns></returns>
-        /// <exception cref="KeyNotFoundException"></exception>
-        public IList<SlideViewModel> GetSlideViewModels(int? categoryId = null)
+        public IList<SlideViewModel> GetSlideViewModels(int categoryId)
         {
             return DoTransaction(
                 () =>
                 {
-                    IList<Slide> slides;
+                    var category = Categories.Find(categoryId);
 
-                    if (categoryId == null)
-                    {
-                        var categories = GetCategories(OrderByCategoryIndex);
-                        slides = categories.GetSlides(OrderBySlideIndex);
-                    }
-                    else
-                    {
-                        var category = Categories.Find(categoryId);
-
-                        slides = category?.GetSlides(OrderBySlideIndex)
+                    var slides = category?.GetSlides(OrderBySlideIndex)
                                  ?? throw new KeyNotFoundException(
-                                     $"Category with id '{categoryId}' not found.");
-                    }
+                                     GetNotFoundMessage<Category>(categoryId));
 
                     return slides.AsViewModels();
                 });
+        }
+
+        public IList<SlideViewModel> GetSlideViewModels(
+            Func<Category, object> orderCategoriesBy = null,
+            Func<Category, bool> categoriesWhere = null,
+            Func<Slide, object> orderSlidesBy = null,
+            Func<Slide, bool> slidesWhere = null)
+        {
+            return DoTransaction(
+                () => GetCategories(orderCategoriesBy, categoriesWhere)
+                    .GetSlides(orderSlidesBy, slidesWhere)
+                    .AsViewModels());
         }
 
         public TrainingResult GetTrainingResult(int id)
@@ -751,8 +840,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
                         if (slideToEdit == null)
                         {
-                            throw new KeyNotFoundException(
-                                $"Slide with id '{slide.Id}' not found.");
+                            throw new KeyNotFoundException(GetNotFoundMessage<Slide>(slide.Id));
                         }
 
                         slideToEdit.Index = slide.Index;
@@ -760,6 +848,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        ///     Changes the indices of the roles in the database to match the specified roles.
+        /// </summary>
+        /// <param name="roles">The roles.</param>
         public void Reorder(IList<Role> roles)
         {
             DoTransaction(
@@ -772,7 +864,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                         if (roleToEdit == null)
                         {
                             throw new KeyNotFoundException(
-                                "Role with id '{role.Id}' not found.");
+                                GetNotFoundMessage<Role>(role.Id));
                         }
 
                         roleToEdit.Index = role.Index;
@@ -780,6 +872,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        ///     Sets the specified <see cref="User"/>'s latest quiz start datetime to the current datetime.
+        /// </summary>
+        /// <param name="userId">The <see cref="User"/> identifier.</param>
         public void SetUserLatestQuizStartDateTime(string userId)
         {
             DoTransaction(
@@ -790,6 +886,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        ///     Sets the specified <see cref="User"/>'s latest training start datetime to the current datetime.
+        /// </summary>
+        /// <param name="userId">The <see cref="User"/> identifier.</param>
         public void SetUserLatestTrainingStartDateTime(string userId)
         {
             DoTransaction(
@@ -800,6 +900,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        /// Sets the <see cref="Role"/> of the specified <see cref="User"/> to the specified role.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="roleId"></param>
         public void SetUserRole(string userId, int? roleId)
         {
             DoTransaction(
@@ -813,6 +918,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 });
         }
 
+        /// <summary>
+        ///     Unpairs all categories and roles.
+        /// </summary>
         public void UnpairCategoriesAndRoles()
         {
             DoTransaction(
@@ -875,6 +983,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                         ? 0
                         : Categories.Max(x => x.Index);
                 });
+        }
+
+        private static string GetNotFoundMessage<T>(int id)
+        {
+            return $"{typeof(T)} with id '{id}' not found.";
         }
 
         private void DoTransaction(Action action)

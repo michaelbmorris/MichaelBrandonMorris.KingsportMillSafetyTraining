@@ -8,12 +8,18 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Data.ViewModels;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     The slides controller. Requires authorization and authentication as an administrator.
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     [Authorize(Roles = "Administrator")]
     public class SlidesController : Controller
     {
         private const string JpgType = "image/jpg";
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
+        /// <summary>Gets the add answer view.</summary>
+        /// <returns>The add answer view.</returns>
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AddAnswer()
         {
@@ -27,6 +33,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
+        /// <summary>Gets the create view.</summary>
+        /// <returns>The create view.</returns>
         [HttpGet]
         public ActionResult Create()
         {
@@ -34,6 +42,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>Posts the create view.</summary>
+        /// <param name="slideViewModel">The slide view model.</param>
+        /// <returns>Redirects to <see cref="Index"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(SlideViewModel slideViewModel)
@@ -47,6 +58,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>Gets the delete view for the specified <see cref="Slide"/>.</summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>The delete view for the specified <see cref="Slide"/>.</returns>
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -69,6 +83,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(slide);
         }
 
+        /// <summary>Posts the delete view for the specified <see cref="Slide"/>.</summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>Redirects to <see cref="Index"/>.</returns>
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,6 +102,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>Gets the details view for the specified <see cref="Slide"/>.</summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>The details view for the specified <see cref="Slide"/>.</returns>
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -107,6 +127,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(slide);
         }
 
+        /// <summary>Gets the edit view for the specified <see cref="Slide"/>.</summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>The edit view for the specified <see cref="Slide"/>.</returns>
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -129,6 +152,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(slideViewModel);
         }
 
+        /// <summary>Posts the edit view for the specified <see cref="SlideViewModel"/>.</summary>
+        /// <param name="model">The <see cref="SlideViewModel"/>.</param>
+        /// <returns>Redirects to <see cref="Index"/>.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SlideViewModel model)
@@ -142,6 +168,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>Gets the index view.</summary>
+        /// <returns>The index view.</returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -149,6 +177,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>Gets the image for the specified <see cref="Slide"/>.</summary>
+        /// <param name="id">The <see cref="Slide"/> identifier.</param>
+        /// <returns>The image for the specified <see cref="Slide"/>.</returns>
         [AllowAnonymous]
         [HttpGet]
         public ActionResult RenderImage(int id)
@@ -165,6 +196,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 : File(slide.ImageBytes, JpgType);
         }
 
+        /// <summary>Gets the reorder view for the specified <see cref="Category"/>.</summary>
+        /// <param name="categoryId">The <see cref="Category"/> identifier.</param>
+        /// <returns>The reorder view for the specified <see cref="Category"/>.</returns>
         [HttpGet]
         public ActionResult Reorder(int? categoryId)
         {
@@ -173,10 +207,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectCategoryToReorder");
             }
 
-            var model = _db.GetSlideViewModels(categoryId);
+            var model = _db.GetSlideViewModels(categoryId.Value);
             return View(model);
         }
 
+        /// <summary>Posts the reorder view for the specified slides.</summary>
+        /// <param name="slides">The slides.</param>
+        /// <returns>Redirects to <see cref="Index"/>.</returns>
         [HttpPost]
         public ActionResult Reorder(IList<Slide> slides)
         {
