@@ -5,19 +5,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers
 {
+    /// <summary>
+    ///     Class HomeControllerTest.
+    /// </summary>
+    /// TODO Edit XML Comment Template for HomeControllerTest
     [TestClass]
     public class HomeControllerTest
     {
+        /// <summary>
+        ///     Abouts this instance.
+        /// </summary>
+        /// TODO Edit XML Comment Template for About
         [TestMethod]
         public void About()
         {
-            // Arrange
             var controller = new HomeController();
-
-            // Act
             var result = controller.About() as ViewResult;
-
-            // Assert
             Debug.Assert(result != null, "result != null");
 
             Assert.AreEqual(
@@ -25,29 +28,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers
                 result.ViewBag.Message);
         }
 
+        /// <summary>
+        ///     Contacts this instance.
+        /// </summary>
+        /// TODO Edit XML Comment Template for Contact
         [TestMethod]
         public void Contact()
         {
-            // Arrange
             var controller = new HomeController();
-
-            // Act
             var result = controller.Contact() as ViewResult;
-
-            // Assert
             Assert.IsNotNull(result);
         }
 
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// TODO Edit XML Comment Template for Index
         [TestMethod]
         public void Index()
         {
-            // Arrange
             var controller = new HomeController();
-
-            // Act
             var result = controller.Index() as ViewResult;
-
-            // Assert
             Assert.IsNotNull(result);
         }
     }

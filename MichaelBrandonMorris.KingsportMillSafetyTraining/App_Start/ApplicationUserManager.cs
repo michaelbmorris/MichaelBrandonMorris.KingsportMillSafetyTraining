@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -11,44 +10,23 @@ using Microsoft.Owin;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     /// <summary>
-    ///     The user manager for the application.
+    ///     Class ApplicationUserManager.
     /// </summary>
+    /// <seealso cref="UserManager{TUser}" />
+    /// <seealso cref="User" />
+    /// TODO Edit XML Comment Template for ApplicationUserManager
     public class ApplicationUserManager : UserManager<User>
     {
         /// <summary>
-        ///     Creates a new instance of a 
-        ///     <see cref="ApplicationUserManager"/> with the specified 
-        ///     <see cref="IUserStore{User}"/>.
+        ///     Constructor
         /// </summary>
-        /// <param name="store"></param>
+        /// <param name="store">The store.</param>
+        /// TODO Edit XML Comment Template for #ctor
         public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }
 
-        /// <summary>
-        ///     Gets the <see cref="Role"/> of the specified <see cref="User"/>.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public async Task<Role> GetRole(string userId)
-        {
-            var user = await FindByIdAsync(userId);
-
-            if (user.Role == null)
-            {
-                throw new Exception();
-            }
-
-            return user.Role;
-        }
-
-        /// <summary>
-        ///     Creates a new <see cref="ApplicationUserManager"/>.
-        /// </summary>
-        /// <param name="options"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
         public static ApplicationUserManager Create(
             IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)
@@ -57,12 +35,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 new UserStore<User>(
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 
-            manager.UserValidator =
-                new UserValidator<User>(manager)
-                {
-                    AllowOnlyAlphanumericUserNames = false,
-                    RequireUniqueEmail = true
-                };
+            manager.UserValidator = new UserValidator<User>(manager)
+            {
+                AllowOnlyAlphanumericUserNames = false,
+                RequireUniqueEmail = true
+            };
 
             manager.PasswordValidator = new PasswordValidator
             {
@@ -104,6 +81,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return manager;
+        }
+
+        /// <summary>
+        ///     Gets the role.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns>Task&lt;Role&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        /// TODO Edit XML Comment Template for GetRole
+        public async Task<Role> GetRole(string userId)
+        {
+            var user = await FindByIdAsync(userId);
+
+            if (user.Role == null)
+            {
+                throw new Exception();
+            }
+
+            return user.Role;
         }
     }
 }

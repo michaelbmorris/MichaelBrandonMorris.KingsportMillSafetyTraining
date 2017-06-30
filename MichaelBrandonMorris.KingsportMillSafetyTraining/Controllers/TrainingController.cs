@@ -12,21 +12,43 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    ///     The controller for training. Requires authorization.
+    ///     Class TrainingController.
     /// </summary>
-    /// <seealso cref="Controller" />
+    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// TODO Edit XML Comment Template for TrainingController
     [Authorize]
     public class TrainingController : Controller
     {
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+        /// <summary>
+        ///     Gets the index of the order categories by.
+        /// </summary>
+        /// <value>The index of the order categories by.</value>
+        /// TODO Edit XML Comment Template for OrderCategoriesByIndex
+        private static Func<Category, object> OrderCategoriesByIndex => category
+            => category.Index;
 
         /// <summary>
-        ///     Gets the index view. Checks if the current <see cref="User" />
-        ///     has an assigned <see cref="Role" />, and redirects to selection
-        ///     if not. Otherwise, displays the appropriate training for the
-        ///     role.
+        ///     Gets the index of the order slides by.
         /// </summary>
-        /// <returns>The index view.</returns>
+        /// <value>The index of the order slides by.</value>
+        /// TODO Edit XML Comment Template for OrderSlidesByIndex
+        private static Func<Slide, object> OrderSlidesByIndex => slide => slide
+            .Index;
+
+        /// <summary>
+        ///     The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
+
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public ActionResult Index()
         {
@@ -39,8 +61,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return RedirectToAction("SelectRole");
                 }
 
-                _db.SetUserLatestTrainingStartDateTime(User.GetId());
-                var model = role.GetSlides(OrderCategoriesByIndex, orderSlidesBy: OrderSlidesByIndex).AsViewModels();
+                Db.SetUserLatestTrainingStartDateTime(User.GetId());
+                var model = role.GetSlides(
+                        OrderCategoriesByIndex,
+                        orderSlidesBy: OrderSlidesByIndex)
+                    .AsViewModels();
                 return View(model);
             }
             catch (Exception e)
@@ -51,38 +76,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        private static Func<Slide, object> OrderSlidesByIndex => slide => slide
-            .Index;
-
-        private static Func<Category, object> OrderCategoriesByIndex => category
-            => category.Index;
-
         /// <summary>
-        ///     Gets the quiz view.
+        ///     Quizs this instance.
         /// </summary>
-        /// <returns>The quiz view.</returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Quiz
         [HttpGet]
         public ActionResult Quiz()
         {
             var role = GetCurrentUserRole();
-            var model = role.GetSlides(slidesWhere: slide => slide.ShouldShowSlideInSlideshow && slide.ShouldShowQuestionOnQuiz).AsQuizSlideViewModels().Shuffle();
+            var model = role
+                .GetSlides(
+                    slidesWhere: slide => slide.ShouldShowSlideInSlideshow
+                                          && slide.ShouldShowQuestionOnQuiz)
+                .AsQuizSlideViewModels()
+                .Shuffle();
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
-            _db.AddTrainingResult(User.GetId());
-            _db.SetUserLatestQuizStartDateTime(User.GetId());
+            Db.AddTrainingResult(User.GetId());
+            Db.SetUserLatestQuizStartDateTime(User.GetId());
             return View(model);
         }
 
         /// <summary>
-        ///     Posts the quiz view. Grades the quiz results, and returns to the
-        ///     quiz view if there is an incorrect question. If all questions
-        ///     are correct, redirects to the training result.
+        ///     Quizs the specified model.
         /// </summary>
-        /// <param name="model">
-        ///     Each <see cref="QuizSlideViewModel" /> in an
-        ///     <see cref="IList{T}" />.
-        /// </param>
-        /// <returns></returns>
+        /// <param name="model">The model.</param>
+        /// <returns>ActionResult.</returns>
         /// <exception cref="Exception"></exception>
+        /// TODO Edit XML Comment Template for Quiz
         [HttpPost]
         public ActionResult Quiz(IList<QuizSlideViewModel> model)
         {
@@ -96,17 +117,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             model = quizViewModel;
-            var user = _db.GetUser(User.GetId());
+            var user = Db.GetUser(User.GetId());
             var trainingResult = user.TrainingResults.Last();
 
-            _db.AddQuizResult(
+            Db.AddQuizResult(
                 trainingResult.Id,
                 model.Count(x => x.IsCorrect()),
                 model.Count);
 
             if (!model.All(x => x.IsCorrect()))
             {
-                _db.SetUserLatestQuizStartDateTime(User.GetId());
+                Db.SetUserLatestQuizStartDateTime(User.GetId());
                 return View(model);
             }
 
@@ -121,7 +142,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 trainingResult.CompletionDateTime.Value
                 - user.LatestTrainingStartDateTime.Value;
 
-            _db.Edit(trainingResult);
+            Db.Edit(trainingResult);
 
             return RedirectToAction(
                 "Details",
@@ -133,50 +154,59 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Gets the select role view.
+        ///     Selects the role.
         /// </summary>
-        /// <returns>The select role view.</returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for SelectRole
         [HttpGet]
         public ActionResult SelectRole()
         {
-            var model = _db.GetRoles(x => x.Index).AsViewModels();
+            var model = Db.GetRoles(x => x.Index).AsViewModels();
             model = model.Take(model.Count - 1);
             return View(model);
         }
 
         /// <summary>
-        ///     Posts the select role view.
+        ///     Selects the role.
         /// </summary>
         /// <param name="roleId">The role identifier.</param>
-        /// <returns></returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for SelectRole
         [HttpPost]
         public ActionResult SelectRole(int? roleId)
         {
-            _db.SetUserRole(User.GetId(), roleId);
+            Db.SetUserRole(User.GetId(), roleId);
             return RedirectToAction("Index");
         }
 
         /// <summary>
-        ///     Releases unmanaged resources and optionally releases managed
-        ///     resources.
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
         /// </summary>
         /// <param name="disposing">
-        ///     true to release both managed and unmanaged resources; false to
-        ///     release only unmanaged resources.
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
         /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        ///     Gets the current user role.
+        /// </summary>
+        /// <returns>Role.</returns>
+        /// <exception cref="Exception"></exception>
+        /// TODO Edit XML Comment Template for GetCurrentUserRole
         private Role GetCurrentUserRole()
         {
-            var user = _db.GetUser(User.GetId());
+            var user = Db.GetUser(User.GetId());
 
             if (user == null)
             {

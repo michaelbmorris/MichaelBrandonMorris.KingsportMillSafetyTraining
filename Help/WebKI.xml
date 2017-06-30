@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
   <HelpKINode Title="About method">
-    <HelpKINode Title="About Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.About.htm" />
     <HelpKINode Title="About Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.About.htm" />
+    <HelpKINode Title="About Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.About.htm" />
   </HelpKINode>
   <HelpKINode Title="AccountController class">
     <HelpKINode Title="AccountController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm" />
@@ -17,18 +17,10 @@
   <HelpKINode Title="AccountController.AccountController constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.-ctor.htm" />
   <HelpKINode Title="AccountController.AddErrors method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.AddErrors.htm" />
   <HelpKINode Title="AccountController.AuthenticationManager property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.AuthenticationManager.htm" />
-  <HelpKINode Title="AccountController.ChallengeResult class">
-    <HelpKINode Title="AccountController.ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="AccountController.ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="about AccountController.ChallengeResult class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-  </HelpKINode>
   <HelpKINode Title="AccountController.ConfirmEmail method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ConfirmEmail.htm" />
   <HelpKINode Title="AccountController.Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="AccountController.ExternalLogin method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLogin.htm" />
   <HelpKINode Title="AccountController.ExternalLoginCallback method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLoginCallback.htm" />
@@ -46,7 +38,6 @@
   <HelpKINode Title="AccountController.SignInManager property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SignInManager.htm" />
   <HelpKINode Title="AccountController.UserManager property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.UserManager.htm" />
   <HelpKINode Title="AccountController.VerifyCode method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.VerifyCode.htm" />
-  <HelpKINode Title="AccountController.XsrfKey field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.XsrfKey.htm" />
   <HelpKINode Title="AccountController._signInManager field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._signInManager.htm" />
   <HelpKINode Title="AccountController._userManager field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._userManager.htm" />
   <HelpKINode Title="AddAnswer method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.AddAnswer.htm" />
@@ -104,8 +95,8 @@
   <HelpKINode Title="ApplicationSignInManager.ApplicationSignInManager constructor" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.-ctor.htm" />
   <HelpKINode Title="ApplicationSignInManager.Create method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.Create.htm" />
   <HelpKINode Title="ApplicationSignInManager.CreateUserIdentityAsync method">
-    <HelpKINode Title="CreateUserIdentityAsync Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm" />
     <HelpKINode Title="CreateUserIdentityAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm" />
+    <HelpKINode Title="CreateUserIdentityAsync Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm" />
   </HelpKINode>
   <HelpKINode Title="ApplicationUserManager class">
     <HelpKINode Title="ApplicationUserManager Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm" />
@@ -165,26 +156,24 @@
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm" />
   </HelpKINode>
   <HelpKINode Title="BundleConfig.RegisterBundles method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.RegisterBundles.htm" />
-  <HelpKINode Title="CantorInverse method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorInverse.htm" />
-  <HelpKINode Title="CantorPair method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorPair.htm" />
   <HelpKINode Title="Categories property">
-    <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Categories.htm" />
-    <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Categories.htm" />
     <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.Categories.htm" />
     <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Categories.htm" />
+    <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Categories.htm" />
     <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Categories.htm" />
+    <HelpKINode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Categories.htm" />
   </HelpKINode>
   <HelpKINode Title="CategoriesController class">
     <HelpKINode Title="CategoriesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="CategoriesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="about CategoriesController class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
-    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
   </HelpKINode>
   <HelpKINode Title="CategoriesController.AssignRoles method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.AssignRoles.htm" />
   <HelpKINode Title="CategoriesController.Create method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm" />
+  <HelpKINode Title="CategoriesController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Db.htm" />
   <HelpKINode Title="CategoriesController.Delete method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Delete.htm" />
   <HelpKINode Title="CategoriesController.DeleteConfirmed method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.DeleteConfirmed.htm" />
   <HelpKINode Title="CategoriesController.Details method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Details.htm" />
@@ -196,7 +185,6 @@
   <HelpKINode Title="CategoriesController.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Index.htm" />
   <HelpKINode Title="CategoriesController.OrderByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.OrderByIndex.htm" />
   <HelpKINode Title="CategoriesController.Reorder method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm" />
-  <HelpKINode Title="CategoriesController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController._db.htm" />
   <HelpKINode Title="CategoriesCount property">
     <HelpKINode Title="CategoriesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.CategoriesCount.htm" />
     <HelpKINode Title="CategoriesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.CategoriesCount.htm" />
@@ -261,16 +249,24 @@
   <HelpKINode Title="CategoryViewModel.Title property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Title.htm" />
   <HelpKINode Title="CategoryViewModels property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.CategoryViewModels.htm" />
   <HelpKINode Title="ChallengeResult class">
-    <HelpKINode Title="constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.-ctor.htm" />
+    <HelpKINode Title="ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="about ChallengeResult class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.-ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
   </HelpKINode>
-  <HelpKINode Title="ChallengeResult.ChallengeResult constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.-ctor.htm" />
+  <HelpKINode Title="ChallengeResult.ChallengeResult constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.-ctor.htm" />
   <HelpKINode Title="ChallengeResult.ExecuteResult method">
-    <HelpKINode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm" />
-    <HelpKINode Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm" />
+    <HelpKINode Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm" />
+    <HelpKINode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm" />
   </HelpKINode>
-  <HelpKINode Title="ChallengeResult.LoginProvider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.LoginProvider.htm" />
-  <HelpKINode Title="ChallengeResult.RedirectUri property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.RedirectUri.htm" />
-  <HelpKINode Title="ChallengeResult.UserId property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.UserId.htm" />
+  <HelpKINode Title="ChallengeResult.LoginProvider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.LoginProvider.htm" />
+  <HelpKINode Title="ChallengeResult.RedirectUri property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.RedirectUri.htm" />
+  <HelpKINode Title="ChallengeResult.UserId property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.UserId.htm" />
+  <HelpKINode Title="ChallengeResult.XsrfKey field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.XsrfKey.htm" />
   <HelpKINode Title="ChangePassword method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword.htm" />
   <HelpKINode Title="ChangePasswordSuccess enumeration member" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageMessageId.htm" />
   <HelpKINode Title="ChangePasswordSuccess field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageMessageId.ChangePasswordSuccess.htm" />
@@ -286,25 +282,23 @@
   <HelpKINode Title="ChangePasswordViewModel.NewPassword property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.NewPassword.htm" />
   <HelpKINode Title="ChangePasswordViewModel.OldPassword property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.OldPassword.htm" />
   <HelpKINode Title="Code property">
-    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Code.htm" />
-    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.Code.htm" />
-    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.Code.htm" />
     <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.Code.htm" />
+    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.Code.htm" />
+    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.Code.htm" />
+    <HelpKINode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Code.htm" />
   </HelpKINode>
   <HelpKINode Title="CodeName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.CodeName.htm" />
   <HelpKINode Title="CodeNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.CodeNumber.htm" />
   <HelpKINode Title="CompanyName property">
     <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.CompanyName.htm" />
     <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.CompanyName.htm" />
-    <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompanyName.htm" />
     <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.CompanyName.htm" />
-    <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.CompanyName.htm" />
     <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.CompanyName.htm" />
+    <HelpKINode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.CompanyName.htm" />
   </HelpKINode>
   <HelpKINode Title="CompletionDateTime property">
-    <HelpKINode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.CompletionDateTime.htm" />
     <HelpKINode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.CompletionDateTime.htm" />
-    <HelpKINode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompletionDateTime.htm" />
+    <HelpKINode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.CompletionDateTime.htm" />
   </HelpKINode>
   <HelpKINode Title="Configuration class">
     <HelpKINode Title="Configuration Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm" />
@@ -318,8 +312,8 @@
   <HelpKINode Title="Configuration method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.Configuration.htm" />
   <HelpKINode Title="Configuration.Configuration constructor" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.-ctor.htm" />
   <HelpKINode Title="Configuration.Seed method">
-    <HelpKINode Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
     <HelpKINode Title="Seed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
+    <HelpKINode Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
   </HelpKINode>
   <HelpKINode Title="ConfigureAuth method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.ConfigureAuth.htm" />
   <HelpKINode Title="ConfigureTwoFactorViewModel class">
@@ -334,14 +328,14 @@
   <HelpKINode Title="ConfigureTwoFactorViewModel.SelectedProvider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.SelectedProvider.htm" />
   <HelpKINode Title="ConfirmEmail method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ConfirmEmail.htm" />
   <HelpKINode Title="ConfirmPassword property">
-    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.ConfirmPassword.htm" />
-    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.ConfirmPassword.htm" />
-    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.ConfirmPassword.htm" />
     <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.ConfirmPassword.htm" />
+    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.ConfirmPassword.htm" />
+    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.ConfirmPassword.htm" />
+    <HelpKINode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.ConfirmPassword.htm" />
   </HelpKINode>
   <HelpKINode Title="Contact method">
-    <HelpKINode Title="Contact Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Contact.htm" />
     <HelpKINode Title="Contact Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.Contact.htm" />
+    <HelpKINode Title="Contact Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Contact.htm" />
   </HelpKINode>
   <HelpKINode Title="Content property">
     <HelpKINode Title="Content Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Content.htm" />
@@ -350,18 +344,18 @@
   <HelpKINode Title="Correct enumeration member" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuestionState.htm" />
   <HelpKINode Title="Correct field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuestionState.Correct.htm" />
   <HelpKINode Title="CorrectAnswerIndex property">
-    <HelpKINode Title="CorrectAnswerIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.CorrectAnswerIndex.htm" />
     <HelpKINode Title="CorrectAnswerIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.CorrectAnswerIndex.htm" />
+    <HelpKINode Title="CorrectAnswerIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.CorrectAnswerIndex.htm" />
     <HelpKINode Title="CorrectAnswerIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.CorrectAnswerIndex.htm" />
   </HelpKINode>
   <HelpKINode Title="Create method">
-    <HelpKINode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.Create.htm" />
-    <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm" />
+    <HelpKINode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.Create.htm" />
     <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create.htm" />
+    <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm" />
+    <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm" />
+    <HelpKINode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.Create.htm" />
     <HelpKINode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Create.htm" />
     <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create.htm" />
-    <HelpKINode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.Create.htm" />
-    <HelpKINode Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm" />
   </HelpKINode>
   <HelpKINode Title="CreateCategory method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.CreateCategory.htm" />
   <HelpKINode Title="CreateError method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.CreateError.htm" />
@@ -373,98 +367,105 @@
     <HelpKINode Title="CreateUserIdentityAsync Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm" />
   </HelpKINode>
   <HelpKINode Title="CurrentIndex field">
+    <HelpKINode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.CurrentIndex.htm" />
     <HelpKINode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.CurrentIndex.htm" />
     <HelpKINode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.CurrentIndex.htm" />
-    <HelpKINode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.CurrentIndex.htm" />
   </HelpKINode>
   <HelpKINode Title="CurrentLogins property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.CurrentLogins.htm" />
+  <HelpKINode Title="Db property">
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Db.htm" />
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Db.htm" />
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Db.htm" />
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Db.htm" />
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Db.htm" />
+    <HelpKINode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Db.htm" />
+  </HelpKINode>
   <HelpKINode Title="Delete method">
     <HelpKINode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Delete.htm" />
-    <HelpKINode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Delete.htm" />
     <HelpKINode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Delete.htm" />
+    <HelpKINode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Delete.htm" />
     <HelpKINode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Delete.htm" />
   </HelpKINode>
   <HelpKINode Title="Delete property">
-    <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Delete.htm" />
-    <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Delete.htm" />
     <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Delete.htm" />
     <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Delete.htm" />
+    <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Delete.htm" />
+    <HelpKINode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Delete.htm" />
   </HelpKINode>
   <HelpKINode Title="DeleteCategory method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteCategory.htm" />
   <HelpKINode Title="DeleteConfirmed method">
-    <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.DeleteConfirmed.htm" />
     <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.DeleteConfirmed.htm" />
-    <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.DeleteConfirmed.htm" />
     <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.DeleteConfirmed.htm" />
+    <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.DeleteConfirmed.htm" />
+    <HelpKINode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.DeleteConfirmed.htm" />
   </HelpKINode>
   <HelpKINode Title="DeleteRole method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteRole.htm" />
   <HelpKINode Title="DeleteSlide method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteSlide.htm" />
   <HelpKINode Title="DeleteValueTemplate field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.DeleteValueTemplate.htm" />
   <HelpKINode Title="Description property">
-    <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Description.htm" />
-    <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Description.htm" />
     <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Description.htm" />
+    <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Description.htm" />
     <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Description.htm" />
+    <HelpKINode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Description.htm" />
   </HelpKINode>
   <HelpKINode Title="Details method">
-    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Details.htm" />
-    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Details.htm" />
     <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Details.htm" />
-    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Details.htm" />
     <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Details.htm" />
+    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Details.htm" />
+    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Details.htm" />
+    <HelpKINode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Details.htm" />
   </HelpKINode>
   <HelpKINode Title="Details property">
-    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.Details.htm" />
+    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Details.htm" />
+    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Details.htm" />
     <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Details.htm" />
     <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Details.htm" />
-    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Details.htm" />
-    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Details.htm" />
+    <HelpKINode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.Details.htm" />
   </HelpKINode>
   <HelpKINode Title="DetailsValueTemplate field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.DetailsValueTemplate.htm" />
   <HelpKINode Title="DisableTwoFactorAuthentication method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.DisableTwoFactorAuthentication.htm" />
   <HelpKINode Title="Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
-    <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="Edit method">
+    <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit-.htm" />
+    <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm" />
     <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit.htm" />
     <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit.htm" />
     <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit.htm" />
-    <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm" />
-    <HelpKINode Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit-.htm" />
   </HelpKINode>
   <HelpKINode Title="Edit property">
+    <HelpKINode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Edit.htm" />
     <HelpKINode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Edit.htm" />
     <HelpKINode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Edit.htm" />
-    <HelpKINode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Edit.htm" />
     <HelpKINode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Edit.htm" />
   </HelpKINode>
   <HelpKINode Title="EditValueTemplate field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.EditValueTemplate.htm" />
   <HelpKINode Title="Email property">
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.Email.htm" />
-    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.Email.htm" />
     <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.Email.htm" />
     <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.Email.htm" />
+    <HelpKINode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.Email.htm" />
   </HelpKINode>
   <HelpKINode Title="EmailService class">
     <HelpKINode Title="EmailService Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm" />
@@ -501,30 +502,30 @@
   <HelpKINode Title="ErrorViewModel.CodeNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.CodeNumber.htm" />
   <HelpKINode Title="ErrorViewModel.Message property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.Message.htm" />
   <HelpKINode Title="ExecuteResult method">
-    <HelpKINode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm" />
-    <HelpKINode Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm" />
+    <HelpKINode Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm" />
+    <HelpKINode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm" />
   </HelpKINode>
   <HelpKINode Title="Extensions class">
     <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
-    <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
-    <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
-    <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
-    <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
+    <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
+    <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
     <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
+    <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
     <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
+    <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="about Extensions class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
     <HelpKINode Title="about Extensions class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
     <HelpKINode Title="about Extensions class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="about Extensions class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
-    <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
-    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
-    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
   </HelpKINode>
   <HelpKINode Title="Extensions.Answers method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.Answers.htm" />
   <HelpKINode Title="Extensions.AsQuizSlideViewModels method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsQuizSlideViewModels.htm" />
@@ -580,12 +581,11 @@
   </HelpKINode>
   <HelpKINode Title="FilterConfig.RegisterGlobalFilters method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.RegisterGlobalFilters.htm" />
   <HelpKINode Title="FirstName property">
-    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.FirstName.htm" />
-    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.FirstName.htm" />
-    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.FirstName.htm" />
-    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.FirstName.htm" />
     <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.FirstName.htm" />
     <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.FirstName.htm" />
+    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.FirstName.htm" />
+    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.FirstName.htm" />
+    <HelpKINode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.FirstName.htm" />
   </HelpKINode>
   <HelpKINode Title="ForgotPassword method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPassword.htm" />
   <HelpKINode Title="ForgotPasswordConfirmation method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPasswordConfirmation.htm" />
@@ -622,8 +622,8 @@
   <HelpKINode Title="GetQuizResults method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetQuizResults.htm" />
   <HelpKINode Title="GetQuizResultsGrid method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.GetQuizResultsGrid.htm" />
   <HelpKINode Title="GetRole method">
-    <HelpKINode Title="GetRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole.htm" />
     <HelpKINode Title="GetRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.GetRole.htm" />
+    <HelpKINode Title="GetRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole.htm" />
   </HelpKINode>
   <HelpKINode Title="GetRoles method">
     <HelpKINode Title="GetRoles Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetRoles.htm" />
@@ -633,8 +633,8 @@
   <HelpKINode Title="GetSignInManager method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.GetSignInManager.htm" />
   <HelpKINode Title="GetSlide method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlide.htm" />
   <HelpKINode Title="GetSlides method">
-    <HelpKINode Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides.htm" />
     <HelpKINode Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides.htm" />
+    <HelpKINode Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides.htm" />
   </HelpKINode>
   <HelpKINode Title="GetSlidesGrid method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.GetSlidesGrid.htm" />
   <HelpKINode Title="GetTrainingResult method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResult.htm" />
@@ -649,15 +649,6 @@
   <HelpKINode Title="GetUsersGrid method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.GetUsersGrid.htm" />
   <HelpKINode Title="HasPassword method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.HasPassword.htm" />
   <HelpKINode Title="HasPassword property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.HasPassword.htm" />
-  <HelpKINode Title="Helpers class">
-    <HelpKINode Title="Helpers Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-    <HelpKINode Title="Helpers Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-    <HelpKINode Title="about Helpers class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-    <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-    <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-  </HelpKINode>
-  <HelpKINode Title="Helpers.CantorInverse method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorInverse.htm" />
-  <HelpKINode Title="Helpers.CantorPair method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorPair.htm" />
   <HelpKINode Title="HomeController class">
     <HelpKINode Title="HomeController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm" />
     <HelpKINode Title="HomeController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm" />
@@ -680,25 +671,24 @@
   <HelpKINode Title="HomeControllerTest.Contact method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Contact.htm" />
   <HelpKINode Title="HomeControllerTest.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Index.htm" />
   <HelpKINode Title="Id property">
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Id.htm" />
     <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.Id.htm" />
     <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.Id.htm" />
     <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Id.htm" />
-    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Id.htm" />
+    <HelpKINode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Id.htm" />
   </HelpKINode>
   <HelpKINode Title="Image property">
-    <HelpKINode Title="Image Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Image.htm" />
     <HelpKINode Title="Image Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Image.htm" />
+    <HelpKINode Title="Image Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Image.htm" />
   </HelpKINode>
   <HelpKINode Title="ImageBytes property">
-    <HelpKINode Title="ImageBytes Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ImageBytes.htm" />
     <HelpKINode Title="ImageBytes Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.ImageBytes.htm" />
+    <HelpKINode Title="ImageBytes Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ImageBytes.htm" />
   </HelpKINode>
   <HelpKINode Title="ImageDescription property">
     <HelpKINode Title="ImageDescription Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ImageDescription.htm" />
@@ -709,27 +699,27 @@
   <HelpKINode Title="Incorrect field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuestionState.Incorrect.htm" />
   <HelpKINode Title="Index field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Index.htm" />
   <HelpKINode Title="Index method">
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Index.htm" />
-    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Index.htm" />
     <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Index.htm" />
+    <HelpKINode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Index.htm" />
   </HelpKINode>
   <HelpKINode Title="Index property">
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Index.htm" />
-    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Index.htm" />
     <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Index.htm" />
     <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Index.htm" />
+    <HelpKINode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Index.htm" />
   </HelpKINode>
   <HelpKINode Title="IndexViewModel class">
     <HelpKINode Title="IndexViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm" />
@@ -750,8 +740,8 @@
   <HelpKINode Title="IsUnanswered method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.IsUnanswered.htm" />
   <HelpKINode Title="IsUserTrainingResult method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.IsUserTrainingResult.htm" />
   <HelpKINode Title="IsValid method">
-    <HelpKINode Title="IsValid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm" />
     <HelpKINode Title="IsValid Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm" />
+    <HelpKINode Title="IsValid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm" />
   </HelpKINode>
   <HelpKINode Title="JpgType field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.JpgType.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext class">
@@ -789,7 +779,7 @@
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.GetUsers method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetUsers.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.IsUserTrainingResult method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.IsUserTrainingResult.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.KingsportMillSafetyTrainingDbContext constructor" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.-ctor.htm" />
-  <HelpKINode Title="KingsportMillSafetyTrainingDbContext.PairCategoryAndRole method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
+  <HelpKINode Title="KingsportMillSafetyTrainingDbContext.PairCategoryAndRole method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.Reorder method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.SetUserLatestQuizStartDateTime method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.SetUserLatestQuizStartDateTime.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.SetUserLatestTrainingStartDateTime method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.SetUserLatestTrainingStartDateTime.htm" />
@@ -802,12 +792,11 @@
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.UpdateCurrentCategoryIndex method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.UpdateCurrentCategoryIndex.htm" />
   <HelpKINode Title="KingsportMillSafetyTrainingDbContext.UpdateCurrentSlideIndex method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.UpdateCurrentSlideIndex.htm" />
   <HelpKINode Title="LastName property">
+    <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.LastName.htm" />
+    <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.LastName.htm" />
     <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.LastName.htm" />
     <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.LastName.htm" />
-    <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.LastName.htm" />
-    <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.LastName.htm" />
     <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.LastName.htm" />
-    <HelpKINode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.LastName.htm" />
   </HelpKINode>
   <HelpKINode Title="LastTrainingDateTime property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.LastTrainingDateTime.htm" />
   <HelpKINode Title="LastTrainingResultDateTime property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.LastTrainingResultDateTime.htm" />
@@ -833,7 +822,7 @@
   <HelpKINode Title="ListQuantityAttribute.MaxElements property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.MaxElements.htm" />
   <HelpKINode Title="ListQuantityAttribute.MinElements property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.MinElements.htm" />
   <HelpKINode Title="Login method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Login.htm" />
-  <HelpKINode Title="LoginProvider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.LoginProvider.htm" />
+  <HelpKINode Title="LoginProvider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.LoginProvider.htm" />
   <HelpKINode Title="Logins property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.Logins.htm" />
   <HelpKINode Title="LoginViewModel class">
     <HelpKINode Title="LoginViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm" />
@@ -863,8 +852,8 @@
   <HelpKINode Title="ManageController.ChangePassword method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword.htm" />
   <HelpKINode Title="ManageController.DisableTwoFactorAuthentication method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.DisableTwoFactorAuthentication.htm" />
   <HelpKINode Title="ManageController.Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="ManageController.EnableTwoFactorAuthentication method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.EnableTwoFactorAuthentication.htm" />
   <HelpKINode Title="ManageController.GetSignInManager method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.GetSignInManager.htm" />
@@ -924,10 +913,6 @@
     <HelpKINode Title="AccountController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm" />
     <HelpKINode Title="AccountController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm" />
   </HelpKINode>
-  <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult class">
-    <HelpKINode Title="AccountController.ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-    <HelpKINode Title="AccountController.ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-  </HelpKINode>
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController class">
     <HelpKINode Title="CategoriesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
     <HelpKINode Title="CategoriesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
@@ -939,6 +924,11 @@
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions class">
     <HelpKINode Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
     <HelpKINode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.htm" />
+  <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult class">
+    <HelpKINode Title="ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+    <HelpKINode Title="ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
   </HelpKINode>
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController class">
     <HelpKINode Title="HomeController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm" />
@@ -1019,10 +1009,6 @@
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig class">
     <HelpKINode Title="FilterConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm" />
     <HelpKINode Title="FilterConfig Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm" />
-  </HelpKINode>
-  <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers class">
-    <HelpKINode Title="Helpers Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-    <HelpKINode Title="Helpers Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
   </HelpKINode>
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.htm" />
   <HelpKINode Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel class">
@@ -1236,8 +1222,8 @@
   <HelpKINode Title="OrderBy(Of T) method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.OrderBy--1.htm" />
   <HelpKINode Title="OrderBy&lt;T&gt; method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.OrderBy--1.htm" />
   <HelpKINode Title="OrderByIndex property">
-    <HelpKINode Title="OrderByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.OrderByIndex.htm" />
     <HelpKINode Title="OrderByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.OrderByIndex.htm" />
+    <HelpKINode Title="OrderByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.OrderByIndex.htm" />
   </HelpKINode>
   <HelpKINode Title="OrderCategoriesByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.OrderCategoriesByIndex.htm" />
   <HelpKINode Title="OrderCategoryByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.OrderCategoryByIndex.htm" />
@@ -1245,20 +1231,19 @@
   <HelpKINode Title="OrderSlidesByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.OrderSlidesByIndex.htm" />
   <HelpKINode Title="OtherLogins property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.OtherLogins.htm" />
   <HelpKINode Title="OwinContext property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.OwinContext.htm" />
-  <HelpKINode Title="PairCategoryAndRole method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
+  <HelpKINode Title="PairCategoryAndRole method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
   <HelpKINode Title="Password property">
-    <HelpKINode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.Password.htm" />
-    <HelpKINode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Password.htm" />
     <HelpKINode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.Password.htm" />
+    <HelpKINode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Password.htm" />
+    <HelpKINode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.Password.htm" />
   </HelpKINode>
   <HelpKINode Title="PhoneNumber property">
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.PhoneNumber.htm" />
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.PhoneNumber.htm" />
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.PhoneNumber.htm" />
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.PhoneNumber.htm" />
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.PhoneNumber.htm" />
-    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.PhoneNumber.htm" />
     <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.PhoneNumber.htm" />
+    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.PhoneNumber.htm" />
+    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.PhoneNumber.htm" />
+    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.PhoneNumber.htm" />
+    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.PhoneNumber.htm" />
+    <HelpKINode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.PhoneNumber.htm" />
   </HelpKINode>
   <HelpKINode Title="Provider property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.Provider.htm" />
   <HelpKINode Title="Providers property">
@@ -1267,11 +1252,11 @@
   </HelpKINode>
   <HelpKINode Title="Purpose property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.Purpose.htm" />
   <HelpKINode Title="Question property">
-    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Question.htm" />
-    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Question.htm" />
-    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Question.htm" />
     <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Question.htm" />
+    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Question.htm" />
+    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Question.htm" />
     <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Question.htm" />
+    <HelpKINode Title="Question Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Question.htm" />
   </HelpKINode>
   <HelpKINode Title="QuestionsCorrect property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.QuestionsCorrect.htm" />
   <HelpKINode Title="QuestionState enumeration" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuestionState.htm" />
@@ -1294,10 +1279,7 @@
   </HelpKINode>
   <HelpKINode Title="QuizResult.Score property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.Score.htm" />
   <HelpKINode Title="QuizResult.TimeToCompleteString property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.TimeToCompleteString.htm" />
-  <HelpKINode Title="QuizResults property">
-    <HelpKINode Title="QuizResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.QuizResults.htm" />
-    <HelpKINode Title="QuizResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.QuizResults.htm" />
-  </HelpKINode>
+  <HelpKINode Title="QuizResults property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.QuizResults.htm" />
   <HelpKINode Title="QuizResultsGrid class">
     <HelpKINode Title="QuizResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm" />
     <HelpKINode Title="QuizResultsGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm" />
@@ -1335,7 +1317,7 @@
   <HelpKINode Title="QuizSlideViewModel.SelectedAnswerIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.SelectedAnswerIndex.htm" />
   <HelpKINode Title="QuizSlideViewModel.ShouldShowImageOnQuiz property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.ShouldShowImageOnQuiz.htm" />
   <HelpKINode Title="RedirectToLocal method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.RedirectToLocal.htm" />
-  <HelpKINode Title="RedirectUri property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.RedirectUri.htm" />
+  <HelpKINode Title="RedirectUri property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.RedirectUri.htm" />
   <HelpKINode Title="Register method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Register.htm" />
   <HelpKINode Title="RegisterBundles method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.RegisterBundles.htm" />
   <HelpKINode Title="RegisterGlobalFilters method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.RegisterGlobalFilters.htm" />
@@ -1359,9 +1341,9 @@
   <HelpKINode Title="RegisterViewModel.PhoneNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.PhoneNumber.htm" />
   <HelpKINode Title="RememberBrowser property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.RememberBrowser.htm" />
   <HelpKINode Title="RememberMe property">
-    <HelpKINode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.RememberMe.htm" />
     <HelpKINode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.RememberMe.htm" />
     <HelpKINode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.RememberMe.htm" />
+    <HelpKINode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.RememberMe.htm" />
   </HelpKINode>
   <HelpKINode Title="RemoveLogin method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.RemoveLogin.htm" />
   <HelpKINode Title="RemoveLoginSuccess enumeration member" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageMessageId.htm" />
@@ -1371,10 +1353,10 @@
   <HelpKINode Title="RemovePhoneSuccess field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageMessageId.RemovePhoneSuccess.htm" />
   <HelpKINode Title="RenderImage method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.RenderImage.htm" />
   <HelpKINode Title="Reorder method">
-    <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm" />
+    <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm" />
     <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder.htm" />
     <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm" />
-    <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm" />
+    <HelpKINode Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm" />
   </HelpKINode>
   <HelpKINode Title="ResetPassword method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPassword.htm" />
   <HelpKINode Title="ResetPasswordConfirmation method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPasswordConfirmation.htm" />
@@ -1396,25 +1378,24 @@
     <HelpKINode Title="ResultsController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
     <HelpKINode Title="about ResultsController class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
-    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
   </HelpKINode>
+  <HelpKINode Title="ResultsController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Db.htm" />
   <HelpKINode Title="ResultsController.Details method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Details.htm" />
   <HelpKINode Title="ResultsController.Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="ResultsController.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Index.htm" />
   <HelpKINode Title="ResultsController.UserResults method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.UserResults.htm" />
-  <HelpKINode Title="ResultsController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController._db.htm" />
   <HelpKINode Title="RetrieveDataMethod property">
-    <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.RetrieveDataMethod.htm" />
     <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.RetrieveDataMethod.htm" />
     <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.RetrieveDataMethod.htm" />
     <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.RetrieveDataMethod.htm" />
-    <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.RetrieveDataMethod.htm" />
+    <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.RetrieveDataMethod.htm" />
     <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.RetrieveDataMethod.htm" />
+    <HelpKINode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.RetrieveDataMethod.htm" />
   </HelpKINode>
   <HelpKINode Title="ReturnUrl property">
     <HelpKINode Title="ReturnUrl Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.ReturnUrl.htm" />
@@ -1440,8 +1421,8 @@
   <HelpKINode Title="Role.Question property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Question.htm" />
   <HelpKINode Title="Role.Title property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Title.htm" />
   <HelpKINode Title="Roles property">
-    <HelpKINode Title="Roles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Roles.htm" />
     <HelpKINode Title="Roles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Roles.htm" />
+    <HelpKINode Title="Roles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Roles.htm" />
     <HelpKINode Title="Roles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.Roles.htm" />
   </HelpKINode>
   <HelpKINode Title="RolesController class">
@@ -1449,27 +1430,26 @@
     <HelpKINode Title="RolesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
     <HelpKINode Title="about RolesController class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
-    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
   </HelpKINode>
   <HelpKINode Title="RolesController.AssignCategories method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.AssignCategories.htm" />
   <HelpKINode Title="RolesController.Create method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm" />
+  <HelpKINode Title="RolesController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Db.htm" />
   <HelpKINode Title="RolesController.Delete method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Delete.htm" />
   <HelpKINode Title="RolesController.DeleteConfirmed method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.DeleteConfirmed.htm" />
   <HelpKINode Title="RolesController.Details method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Details.htm" />
   <HelpKINode Title="RolesController.Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="RolesController.Edit method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit.htm" />
   <HelpKINode Title="RolesController.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Index.htm" />
   <HelpKINode Title="RolesController.OrderByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.OrderByIndex.htm" />
   <HelpKINode Title="RolesController.Reorder method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder.htm" />
-  <HelpKINode Title="RolesController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController._db.htm" />
   <HelpKINode Title="RolesCount property">
-    <HelpKINode Title="RolesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.RolesCount.htm" />
     <HelpKINode Title="RolesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.RolesCount.htm" />
+    <HelpKINode Title="RolesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.RolesCount.htm" />
   </HelpKINode>
   <HelpKINode Title="RolesGrid class">
     <HelpKINode Title="RolesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm" />
@@ -1489,10 +1469,7 @@
   <HelpKINode Title="RolesGrid.RetrieveDataMethod property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.RetrieveDataMethod.htm" />
   <HelpKINode Title="RolesGrid.Title property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Title.htm" />
   <HelpKINode Title="RolesList property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.RolesList.htm" />
-  <HelpKINode Title="RoleTitle property">
-    <HelpKINode Title="RoleTitle Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.RoleTitle.htm" />
-    <HelpKINode Title="RoleTitle Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.RoleTitle.htm" />
-  </HelpKINode>
+  <HelpKINode Title="RoleTitle property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.RoleTitle.htm" />
   <HelpKINode Title="RoleViewModel class">
     <HelpKINode Title="RoleViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm" />
     <HelpKINode Title="RoleViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm" />
@@ -1524,19 +1501,19 @@
     <HelpKINode Title="Score Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.Score.htm" />
   </HelpKINode>
   <HelpKINode Title="Seed method">
-    <HelpKINode Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
     <HelpKINode Title="Seed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
+    <HelpKINode Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
   </HelpKINode>
   <HelpKINode Title="SelectCategoryToReorder method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.SelectCategoryToReorder.htm" />
   <HelpKINode Title="SelectedAnswerIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.SelectedAnswerIndex.htm" />
   <HelpKINode Title="SelectedProvider property">
-    <HelpKINode Title="SelectedProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.SelectedProvider.htm" />
     <HelpKINode Title="SelectedProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.SelectedProvider.htm" />
+    <HelpKINode Title="SelectedProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.SelectedProvider.htm" />
   </HelpKINode>
   <HelpKINode Title="SelectRole method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole.htm" />
   <HelpKINode Title="SendAsync method">
-    <HelpKINode Title="SendAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.SendAsync.htm" />
     <HelpKINode Title="SendAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.SendAsync.htm" />
+    <HelpKINode Title="SendAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.SendAsync.htm" />
   </HelpKINode>
   <HelpKINode Title="SendCode method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SendCode.htm" />
   <HelpKINode Title="SendCodeViewModel class">
@@ -1576,18 +1553,18 @@
     <HelpKINode Title="ShouldShowImageOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ShouldShowImageOnQuiz.htm" />
   </HelpKINode>
   <HelpKINode Title="ShouldShowQuestionOnQuiz property">
-    <HelpKINode Title="ShouldShowQuestionOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.ShouldShowQuestionOnQuiz.htm" />
-    <HelpKINode Title="ShouldShowQuestionOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ShouldShowQuestionOnQuiz.htm" />
     <HelpKINode Title="ShouldShowQuestionOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.ShouldShowQuestionOnQuiz.htm" />
+    <HelpKINode Title="ShouldShowQuestionOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ShouldShowQuestionOnQuiz.htm" />
+    <HelpKINode Title="ShouldShowQuestionOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.ShouldShowQuestionOnQuiz.htm" />
   </HelpKINode>
   <HelpKINode Title="ShouldShowSlideInSlideshow property">
     <HelpKINode Title="ShouldShowSlideInSlideshow Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.ShouldShowSlideInSlideshow.htm" />
-    <HelpKINode Title="ShouldShowSlideInSlideshow Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.ShouldShowSlideInSlideshow.htm" />
     <HelpKINode Title="ShouldShowSlideInSlideshow Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.ShouldShowSlideInSlideshow.htm" />
+    <HelpKINode Title="ShouldShowSlideInSlideshow Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.ShouldShowSlideInSlideshow.htm" />
   </HelpKINode>
   <HelpKINode Title="SignInManager property">
-    <HelpKINode Title="SignInManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SignInManager.htm" />
     <HelpKINode Title="SignInManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SignInManager.htm" />
+    <HelpKINode Title="SignInManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SignInManager.htm" />
   </HelpKINode>
   <HelpKINode Title="Slide class">
     <HelpKINode Title="Slide Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm" />
@@ -1622,8 +1599,8 @@
   <HelpKINode Title="Slide.Title property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Title.htm" />
   <HelpKINode Title="Slides property">
     <HelpKINode Title="Slides Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Slides.htm" />
-    <HelpKINode Title="Slides Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Slides.htm" />
     <HelpKINode Title="Slides Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Slides.htm" />
+    <HelpKINode Title="Slides Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Slides.htm" />
   </HelpKINode>
   <HelpKINode Title="SlidesController class">
     <HelpKINode Title="SlidesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm" />
@@ -1636,12 +1613,13 @@
   </HelpKINode>
   <HelpKINode Title="SlidesController.AddAnswer method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.AddAnswer.htm" />
   <HelpKINode Title="SlidesController.Create method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create.htm" />
+  <HelpKINode Title="SlidesController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Db.htm" />
   <HelpKINode Title="SlidesController.Delete method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Delete.htm" />
   <HelpKINode Title="SlidesController.DeleteConfirmed method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.DeleteConfirmed.htm" />
   <HelpKINode Title="SlidesController.Details method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Details.htm" />
   <HelpKINode Title="SlidesController.Dispose method">
-    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
+    <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
   </HelpKINode>
   <HelpKINode Title="SlidesController.Edit method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm" />
   <HelpKINode Title="SlidesController.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Index.htm" />
@@ -1652,7 +1630,6 @@
   <HelpKINode Title="SlidesController.Reorder method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm" />
   <HelpKINode Title="SlidesController.SelectCategoryToReorder method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.SelectCategoryToReorder.htm" />
   <HelpKINode Title="SlidesController.ViewSlide method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.ViewSlide.htm" />
-  <HelpKINode Title="SlidesController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController._db.htm" />
   <HelpKINode Title="SlidesCount property">
     <HelpKINode Title="SlidesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.SlidesCount.htm" />
     <HelpKINode Title="SlidesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.SlidesCount.htm" />
@@ -1725,7 +1702,6 @@
   <HelpKINode Title="TimeToComplete property">
     <HelpKINode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.TimeToComplete.htm" />
     <HelpKINode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.TimeToComplete.htm" />
-    <HelpKINode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToComplete.htm" />
     <HelpKINode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.TimeToComplete.htm" />
   </HelpKINode>
   <HelpKINode Title="TimeToCompleteString property">
@@ -1733,26 +1709,26 @@
     <HelpKINode Title="TimeToCompleteString Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToCompleteString.htm" />
   </HelpKINode>
   <HelpKINode Title="Title property">
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Title.htm" />
     <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Title.htm" />
-    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Title.htm" />
     <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Title.htm" />
+    <HelpKINode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Title.htm" />
   </HelpKINode>
   <HelpKINode Title="TrainingController class">
     <HelpKINode Title="TrainingController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
     <HelpKINode Title="TrainingController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
     <HelpKINode Title="about TrainingController class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
-    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
   </HelpKINode>
+  <HelpKINode Title="TrainingController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Db.htm" />
   <HelpKINode Title="TrainingController.Dispose method">
     <HelpKINode Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
     <HelpKINode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
@@ -1763,7 +1739,6 @@
   <HelpKINode Title="TrainingController.OrderSlidesByIndex property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.OrderSlidesByIndex.htm" />
   <HelpKINode Title="TrainingController.Quiz method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Quiz.htm" />
   <HelpKINode Title="TrainingController.SelectRole method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole.htm" />
-  <HelpKINode Title="TrainingController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController._db.htm" />
   <HelpKINode Title="TrainingResult class">
     <HelpKINode Title="TrainingResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm" />
     <HelpKINode Title="TrainingResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm" />
@@ -1779,9 +1754,9 @@
   <HelpKINode Title="TrainingResult.TimeToComplete property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.TimeToComplete.htm" />
   <HelpKINode Title="TrainingResult.User property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.User.htm" />
   <HelpKINode Title="TrainingResults property">
+    <HelpKINode Title="TrainingResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.TrainingResults.htm" />
     <HelpKINode Title="TrainingResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.TrainingResults.htm" />
     <HelpKINode Title="TrainingResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.TrainingResults.htm" />
-    <HelpKINode Title="TrainingResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.TrainingResults.htm" />
   </HelpKINode>
   <HelpKINode Title="TrainingResultsGrid class">
     <HelpKINode Title="TrainingResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm" />
@@ -1810,17 +1785,7 @@
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm" />
   </HelpKINode>
-  <HelpKINode Title="TrainingResultViewModel.CompanyName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompanyName.htm" />
-  <HelpKINode Title="TrainingResultViewModel.CompletionDateTime property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompletionDateTime.htm" />
-  <HelpKINode Title="TrainingResultViewModel.Email property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Email.htm" />
-  <HelpKINode Title="TrainingResultViewModel.FirstName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.FirstName.htm" />
-  <HelpKINode Title="TrainingResultViewModel.Id property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Id.htm" />
-  <HelpKINode Title="TrainingResultViewModel.LastName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.LastName.htm" />
-  <HelpKINode Title="TrainingResultViewModel.PhoneNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.PhoneNumber.htm" />
   <HelpKINode Title="TrainingResultViewModel.QuizAttemptsCount property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.QuizAttemptsCount.htm" />
-  <HelpKINode Title="TrainingResultViewModel.QuizResults property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.QuizResults.htm" />
-  <HelpKINode Title="TrainingResultViewModel.RoleTitle property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.RoleTitle.htm" />
-  <HelpKINode Title="TrainingResultViewModel.TimeToComplete property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToComplete.htm" />
   <HelpKINode Title="TrainingResultViewModel.TimeToCompleteString property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToCompleteString.htm" />
   <HelpKINode Title="TrainingResultViewModel.TrainingResultViewModel constructor" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.-ctor.htm" />
   <HelpKINode Title="TrainingRoles property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.TrainingRoles.htm" />
@@ -1841,8 +1806,8 @@
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm" />
   </HelpKINode>
   <HelpKINode Title="User property">
-    <HelpKINode Title="User Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.User.htm" />
     <HelpKINode Title="User Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.User.htm" />
+    <HelpKINode Title="User Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.User.htm" />
   </HelpKINode>
   <HelpKINode Title="User.CompanyName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.CompanyName.htm" />
   <HelpKINode Title="User.FirstName property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.FirstName.htm" />
@@ -1854,10 +1819,10 @@
   <HelpKINode Title="User.PhoneNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.PhoneNumber.htm" />
   <HelpKINode Title="User.Role property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.Role.htm" />
   <HelpKINode Title="User.TrainingResults property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.TrainingResults.htm" />
-  <HelpKINode Title="UserId property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.UserId.htm" />
+  <HelpKINode Title="UserId property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.UserId.htm" />
   <HelpKINode Title="UserManager property">
-    <HelpKINode Title="UserManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.UserManager.htm" />
     <HelpKINode Title="UserManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.UserManager.htm" />
+    <HelpKINode Title="UserManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.UserManager.htm" />
   </HelpKINode>
   <HelpKINode Title="UserResults method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.UserResults.htm" />
   <HelpKINode Title="UsersController class">
@@ -1865,11 +1830,11 @@
     <HelpKINode Title="UsersController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
     <HelpKINode Title="about UsersController class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
     <HelpKINode Title="all members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
-    <HelpKINode Title="fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
     <HelpKINode Title="methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
     <HelpKINode Title="properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
   </HelpKINode>
   <HelpKINode Title="UsersController.Create method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create.htm" />
+  <HelpKINode Title="UsersController.Db property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Db.htm" />
   <HelpKINode Title="UsersController.Delete method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Delete.htm" />
   <HelpKINode Title="UsersController.DeleteConfirmed method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.DeleteConfirmed.htm" />
   <HelpKINode Title="UsersController.Details method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Details.htm" />
@@ -1879,7 +1844,6 @@
   </HelpKINode>
   <HelpKINode Title="UsersController.Edit method" Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit.htm" />
   <HelpKINode Title="UsersController.Index method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Index.htm" />
-  <HelpKINode Title="UsersController._db field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController._db.htm" />
   <HelpKINode Title="UsersGrid class">
     <HelpKINode Title="UsersGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm" />
     <HelpKINode Title="UsersGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm" />
@@ -1959,23 +1923,15 @@
   <HelpKINode Title="VerifyPhoneNumberViewModel.PhoneNumber property" Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.PhoneNumber.htm" />
   <HelpKINode Title="ViewSlide method" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.ViewSlide.htm" />
   <HelpKINode Title="XsrfKey field">
-    <HelpKINode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.XsrfKey.htm" />
+    <HelpKINode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.XsrfKey.htm" />
     <HelpKINode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.XsrfKey.htm" />
-  </HelpKINode>
-  <HelpKINode Title="_db field">
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController._db.htm" />
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController._db.htm" />
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController._db.htm" />
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController._db.htm" />
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController._db.htm" />
-    <HelpKINode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController._db.htm" />
   </HelpKINode>
   <HelpKINode Title="_signInManager field">
     <HelpKINode Title="_signInManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._signInManager.htm" />
     <HelpKINode Title="_signInManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController._signInManager.htm" />
   </HelpKINode>
   <HelpKINode Title="_userManager field">
-    <HelpKINode Title="_userManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController._userManager.htm" />
     <HelpKINode Title="_userManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._userManager.htm" />
+    <HelpKINode Title="_userManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController._userManager.htm" />
   </HelpKINode>
 </HelpKI>

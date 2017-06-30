@@ -5,12 +5,26 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    /// <summary>
+    ///     Class TrainingResultViewModel.
+    /// </summary>
     public class TrainingResultViewModel
     {
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="TrainingResultViewModel" /> class.
+        /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public TrainingResultViewModel()
         {
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="TrainingResultViewModel" /> class.
+        /// </summary>
+        /// <param name="trainingResult">The training result.</param>
+        /// TODO Edit XML Comment Template for #ctor
         public TrainingResultViewModel(TrainingResult trainingResult)
         {
             CompletionDateTime = trainingResult.CompletionDateTime;
@@ -27,9 +41,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             UserId = user.Id;
         }
 
+        /// <summary>
+        ///     Gets the quiz attempts count.
+        /// </summary>
+        /// <value>The quiz attempts count.</value>
+        /// TODO Edit XML Comment Template for QuizAttemptsCount
         [DisplayName("Number of Quiz Attempts")]
         public int QuizAttemptsCount => QuizResults.Count;
 
+        /// <summary>
+        ///     Gets the time to complete string.
+        /// </summary>
+        /// <value>The time to complete string.</value>
+        [DisplayName("Time to Complete")]
+        public string TimeToCompleteString =>
+            $"{TimeToComplete.TotalMinutes:#.##} Minutes";
+
+        /// <summary>
+        ///     Gets or sets the name of the company.
+        /// </summary>
+        /// <value>The name of the company.</value>
+        /// TODO Edit XML Comment Template for CompanyName
         [DisplayName("Company")]
         public string CompanyName
         {
@@ -37,6 +69,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the completion date time.
+        /// </summary>
+        /// <value>The completion date time.</value>
+        /// TODO Edit XML Comment Template for CompletionDateTime
         [DisplayName("Completed On")]
         public DateTime? CompletionDateTime
         {
@@ -44,19 +81,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the email.
+        /// </summary>
+        /// <value>The email.</value>
+        /// TODO Edit XML Comment Template for Email
         public string Email
         {
             get;
             set;
         }
 
-        [DisplayName("Phone Number")]
-        public string PhoneNumber
-        {
-            get;
-            set;
-        }
-
+        /// <summary>
+        ///     Gets or sets the first name.
+        /// </summary>
+        /// <value>The first name.</value>
+        /// TODO Edit XML Comment Template for FirstName
         [DisplayName("First Name")]
         public string FirstName
         {
@@ -64,12 +104,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the last name.
+        /// </summary>
+        /// <value>The last name.</value>
+        /// TODO Edit XML Comment Template for LastName
         [DisplayName("Last Name")]
         public string LastName
         {
@@ -77,6 +127,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the phone number.
+        /// </summary>
+        /// <value>The phone number.</value>
+        /// TODO Edit XML Comment Template for PhoneNumber
+        [DisplayName("Phone Number")]
+        public string PhoneNumber
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     Gets or sets the quiz results.
+        /// </summary>
+        /// <value>The quiz results.</value>
+        /// TODO Edit XML Comment Template for QuizResults
         [DisplayName("Quiz Results")]
         public IList<QuizResult> QuizResults
         {
@@ -84,24 +151,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the role title.
+        /// </summary>
+        /// <value>The role title.</value>
+        /// TODO Edit XML Comment Template for RoleTitle
         [DisplayName("Role")]
         public string RoleTitle
         {
             get;
             set;
         }
-       
-        internal TimeSpan TimeToComplete
+
+        public string UserId
         {
             get;
             set;
         }
 
-        [DisplayName("Time to Complete")]
-        public string TimeToCompleteString =>
-            $"{TimeToComplete.TotalMinutes:#.##} Minutes";
-
-        public string UserId
+        /// <summary>
+        ///     Gets or sets the time to complete.
+        /// </summary>
+        /// <value>The time to complete.</value>
+        /// TODO Edit XML Comment Template for TimeToComplete
+        internal TimeSpan TimeToComplete
         {
             get;
             set;

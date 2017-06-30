@@ -1,27 +1,58 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.OtherExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using System;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    ///     The slides controller. Requires authorization and authentication as an administrator.
+    ///     Class SlidesController.
     /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for SlidesController
     [Authorize(Roles = "Administrator")]
     public class SlidesController : Controller
     {
+        /// <summary>
+        ///     The JPG type
+        /// </summary>
+        /// TODO Edit XML Comment Template for JpgType
         private const string JpgType = "image/jpg";
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
 
-        /// <summary>Gets the add answer view.</summary>
-        /// <returns>The add answer view.</returns>
+        /// <summary>
+        ///     The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
+
+        /// <summary>
+        ///     Gets the index of the order category by.
+        /// </summary>
+        /// <value>The index of the order category by.</value>
+        /// TODO Edit XML Comment Template for OrderCategoryByIndex
+        private static Func<Category, object> OrderCategoryByIndex => category
+            => category.Index;
+
+        /// <summary>
+        ///     Gets the order category by title.
+        /// </summary>
+        /// <value>The order category by title.</value>
+        /// TODO Edit XML Comment Template for OrderCategoryByTitle
+        private static Func<Category, object> OrderCategoryByTitle => category
+            => category.Title;
+
+        /// <summary>
+        ///     Adds the answer.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AddAnswer
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult AddAnswer()
         {
@@ -35,27 +66,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        private static Func<Category, object> OrderCategoryByIndex => category
-            => category.Index;
-
-        private static Func<Category, object> OrderCategoryByTitle => category
-            => category.Title;
-
-        /// <summary>Gets the create view.</summary>
-        /// <returns>The create view.</returns>
+        /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpGet]
         public ActionResult Create()
         {
             var model = new SlideViewModel(
                 null,
-                _db.GetCategories(OrderCategoryByTitle));
+                Db.GetCategories(OrderCategoryByTitle));
 
             return View(model);
         }
 
-        /// <summary>Posts the create view.</summary>
+        /// <summary>
+        ///     Creates the specified slide view model.
+        /// </summary>
         /// <param name="slideViewModel">The slide view model.</param>
-        /// <returns>Redirects to <see cref="Index"/>.</returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(SlideViewModel slideViewModel)
@@ -74,18 +105,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 ImageDescription = slideViewModel.ImageDescription,
                 Question = slideViewModel.Question,
                 ShouldShowImageOnQuiz = slideViewModel.ShouldShowImageOnQuiz,
-                ShouldShowQuestionOnQuiz = slideViewModel.ShouldShowQuestionOnQuiz,
-                ShouldShowSlideInSlideshow = slideViewModel.ShouldShowSlideInSlideshow,
+                ShouldShowQuestionOnQuiz =
+                    slideViewModel.ShouldShowQuestionOnQuiz,
+                ShouldShowSlideInSlideshow =
+                    slideViewModel.ShouldShowSlideInSlideshow,
                 Title = slideViewModel.Title
             };
 
-            _db.CreateSlide(slide, slideViewModel.CategoryId);
+            Db.CreateSlide(slide, slideViewModel.CategoryId);
             return RedirectToAction("Index");
         }
 
-        /// <summary>Gets the delete view for the specified <see cref="Slide"/>.</summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>The delete view for the specified <see cref="Slide"/>.</returns>
+        /// <summary>
+        ///     Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Delete
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -96,76 +132,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     "Parameter missing.\nType: 'int'\nName: 'id'");
             }
 
-            var slide = _db.GetSlide(id.Value).AsViewModel();
-
-            if (slide == null)
-            {
-                return this.CreateError(
-                    HttpStatusCode.NotFound,
-                    $"Slide with id '{id.Value}' not found.");
-            }
-
-            return View(slide);
-        }
-
-        /// <summary>Posts the delete view for the specified <see cref="Slide"/>.</summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>Redirects to <see cref="Index"/>.</returns>
-        [ActionName("Delete")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            var slide = _db.GetSlide(id);
-
-            if (slide != null)
-            {
-                _db.DeleteSlide(slide);
-            }
-
-            _db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        /// <summary>Gets the details view for the specified <see cref="Slide"/>.</summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>The details view for the specified <see cref="Slide"/>.</returns>
-        [HttpGet]
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return this.CreateError(
-                    HttpStatusCode.BadRequest,
-                    "Parameter missing.\nType: 'int'\nName: 'id'");
-            }
-
-            var slide = _db.GetSlide(id.Value).AsViewModel();
-
-            if (slide == null)
-            {
-                return this.CreateError(
-                    HttpStatusCode.NotFound,
-                    $"Slide with id '{id.Value}' not found.");
-            }
-
-            return View(slide);
-        }
-
-        /// <summary>Gets the edit view for the specified <see cref="Slide"/>.</summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>The edit view for the specified <see cref="Slide"/>.</returns>
-        [HttpGet]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return this.CreateError(
-                    HttpStatusCode.BadRequest,
-                    "Parameter missing.\nType: 'int'\nName: 'id'");
-            }
-
-            var model = _db.GetSlide(id.Value).AsViewModel();
+            var model = Db.GetSlide(id.Value).AsViewModel();
 
             if (model == null)
             {
@@ -177,9 +144,90 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
-        /// <summary>Posts the edit view for the specified <see cref="SlideViewModel"/>.</summary>
-        /// <param name="model">The <see cref="SlideViewModel"/>.</param>
-        /// <returns>Redirects to <see cref="Index"/>.</returns>
+        /// <summary>
+        ///     Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for DeleteConfirmed
+        [ActionName("Delete")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var slide = Db.GetSlide(id);
+
+            if (slide != null)
+            {
+                Db.DeleteSlide(slide);
+            }
+
+            Db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        ///     Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Details
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
+            }
+
+            var slide = Db.GetSlide(id.Value).AsViewModel();
+
+            if (slide == null)
+            {
+                return this.CreateError(
+                    HttpStatusCode.NotFound,
+                    $"Slide with id '{id.Value}' not found.");
+            }
+
+            return View(slide);
+        }
+
+        /// <summary>
+        ///     Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return this.CreateError(
+                    HttpStatusCode.BadRequest,
+                    "Parameter missing.\nType: 'int'\nName: 'id'");
+            }
+
+            var model = Db.GetSlide(id.Value).AsViewModel();
+
+            if (model == null)
+            {
+                return this.CreateError(
+                    HttpStatusCode.NotFound,
+                    $"Slide with id '{id.Value}' not found.");
+            }
+
+            return View(model);
+        }
+
+        /// <summary>
+        ///     Edits the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SlideViewModel model)
@@ -203,27 +251,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Title = model.Title
             };
 
-            _db.Edit(slide, model.CategoryId);
+            Db.Edit(slide, model.CategoryId);
             return RedirectToAction("Index");
         }
 
-        /// <summary>Gets the index view.</summary>
-        /// <returns>The index view.</returns>
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetSlides().AsViewModels();
+            var model = Db.GetSlides().AsViewModels();
             return View(model);
         }
 
-        /// <summary>Gets the image for the specified <see cref="Slide"/>.</summary>
-        /// <param name="id">The <see cref="Slide"/> identifier.</param>
-        /// <returns>The image for the specified <see cref="Slide"/>.</returns>
+        /// <summary>
+        ///     Renders the image.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for RenderImage
         [AllowAnonymous]
         [HttpGet]
         public ActionResult RenderImage(int id)
         {
-            var slide = _db.GetSlide(id);
+            var slide = Db.GetSlide(id);
 
             if (slide == null)
             {
@@ -235,9 +289,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 : File(slide.ImageBytes, JpgType);
         }
 
-        /// <summary>Gets the reorder view for the specified <see cref="Category"/>.</summary>
-        /// <param name="categoryId">The <see cref="Category"/> identifier.</param>
-        /// <returns>The reorder view for the specified <see cref="Category"/>.</returns>
+        /// <summary>
+        ///     Reorders the specified category identifier.
+        /// </summary>
+        /// <param name="categoryId">The category identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
         [HttpGet]
         public ActionResult Reorder(int? categoryId)
         {
@@ -246,40 +303,63 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return RedirectToAction("SelectCategoryToReorder");
             }
 
-            var model = _db.GetSlides(categoryId.Value).AsViewModels();
+            var model = Db.GetSlides(categoryId.Value).AsViewModels();
             return View(model);
         }
 
-        /// <summary>Posts the reorder view for the specified slides.</summary>
+        /// <summary>
+        ///     Reorders the specified slides.
+        /// </summary>
         /// <param name="slides">The slides.</param>
-        /// <returns>Redirects to <see cref="Index"/>.</returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
         [HttpPost]
         public ActionResult Reorder(IList<Slide> slides)
         {
-            _db.Reorder(slides);
+            Db.Reorder(slides);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Selects the category to reorder.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for SelectCategoryToReorder
         [HttpGet]
         public ActionResult SelectCategoryToReorder()
         {
-            var model = _db.GetCategories().AsViewModels();
+            var model = Db.GetCategories().AsViewModels();
             return View(model);
         }
 
+        /// <summary>
+        ///     Views the slide.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ViewSlide
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ViewSlide(int id)
         {
-            var model = _db.GetSlide(id).AsViewModel();
+            var model = Db.GetSlide(id).AsViewModel();
             return View(model);
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);

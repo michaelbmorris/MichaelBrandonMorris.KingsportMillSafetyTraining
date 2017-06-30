@@ -4,8 +4,18 @@ using System.Web.Mvc;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class HomeController.
+    /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for HomeController
     public class HomeController : Controller
     {
+        /// <summary>
+        ///     Abouts this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for About
         public ActionResult About()
         {
             try
@@ -17,9 +27,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }     
+            }
         }
 
+        /// <summary>
+        ///     Contacts this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Contact
         public ActionResult Contact()
         {
             try
@@ -31,9 +46,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }           
+            }
         }
 
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         public ActionResult Index()
         {
             try
@@ -45,7 +65,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
                     e.Message);
-            }    
+            }
         }
     }
 }

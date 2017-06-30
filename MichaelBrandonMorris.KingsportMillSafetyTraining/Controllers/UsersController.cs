@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -9,17 +7,41 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class UsersController.
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// TODO Edit XML Comment Template for UsersController
     [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
     {
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+        /// <summary>
+        ///     Gets the database.
+        /// </summary>
+        /// <value>The database.</value>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
+        /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        ///     Creates the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
@@ -29,11 +51,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(user);
             }
 
-            _db.Users.Add(user);
-            _db.SaveChanges();
+            Db.Users.Add(user);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Delete
         [HttpGet]
         public ActionResult Delete(string id)
         {
@@ -42,7 +70,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var applicationUser = _db.Users.Find(id);
+            var applicationUser = Db.Users.Find(id);
 
             if (applicationUser == null)
             {
@@ -52,23 +80,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(applicationUser);
         }
 
+        /// <summary>
+        ///     Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="Exception"></exception>
+        /// TODO Edit XML Comment Template for DeleteConfirmed
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            var applicationUser = _db.Users.Find(id);
+            var applicationUser = Db.Users.Find(id);
 
             if (applicationUser == null)
             {
                 throw new Exception();
             }
 
-            _db.Users.Remove(applicationUser);
-            _db.SaveChanges();
+            Db.Users.Remove(applicationUser);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Details
         [HttpGet]
         public ActionResult Details(string id)
         {
@@ -77,7 +118,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var applicationUser = _db.Users.Find(id);
+            var applicationUser = Db.Users.Find(id);
 
             if (applicationUser == null)
             {
@@ -87,6 +128,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(applicationUser);
         }
 
+        /// <summary>
+        ///     Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -95,7 +142,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var applicationUser = _db.Users.Find(id);
+            var applicationUser = Db.Users.Find(id);
 
             if (applicationUser == null)
             {
@@ -105,6 +152,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(applicationUser);
         }
 
+        /// <summary>
+        ///     Edits the specified user.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(User user)
@@ -114,22 +167,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(user);
             }
 
-            _db.Edit(user);
+            Db.Edit(user);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetUsers().AsViewModels();
+            var model = Db.GetUsers().AsViewModels();
             return View(model);
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);

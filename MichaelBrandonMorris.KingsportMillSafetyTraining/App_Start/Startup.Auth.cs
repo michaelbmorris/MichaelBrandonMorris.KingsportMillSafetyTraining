@@ -9,11 +9,21 @@ using Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    /// <summary>
+    ///     Class Startup.
+    /// </summary>
+    /// TODO Edit XML Comment Template for Startup
     public partial class Startup
     {
+        /// <summary>
+        ///     Configures the authentication.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// TODO Edit XML Comment Template for ConfigureAuth
         public void ConfigureAuth(IAppBuilder app)
         {
-            app.CreatePerOwinContext(KingsportMillSafetyTrainingDbContext.Create);
+            app.CreatePerOwinContext(
+                KingsportMillSafetyTrainingDbContext.Create);
 
             app.CreatePerOwinContext<ApplicationUserManager>(
                 ApplicationUserManager.Create);

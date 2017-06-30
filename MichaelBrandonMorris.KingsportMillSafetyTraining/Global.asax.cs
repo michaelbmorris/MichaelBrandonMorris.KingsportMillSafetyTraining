@@ -5,8 +5,17 @@ using System.Web.Routing;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    /// <summary>
+    ///     Class MvcApplication.
+    /// </summary>
+    /// <seealso cref="System.Web.HttpApplication" />
+    /// TODO Edit XML Comment Template for MvcApplication
     public class MvcApplication : HttpApplication
     {
+        /// <summary>
+        ///     Applications the start.
+        /// </summary>
+        /// TODO Edit XML Comment Template for Application_Start
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

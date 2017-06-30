@@ -2,20 +2,31 @@
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
-    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult>;
+    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
+        KingsportMillSafetyTraining.Db.Models.QuizResult>;
 using Grid =
-    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult>;
+    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.
+        KingsportMillSafetyTraining.Db.Models.QuizResult>;
 using RetrieveDataMethod =
     System.Func<MichaelBrandonMorris.MvcGrid.Models.GridContext,
-        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult>>;
+        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.
+            KingsportMillSafetyTraining.Db.Models.QuizResult>>;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
+    /// <summary>
+    ///     Class QuizResultsGrid.
+    /// </summary>
+    /// TODO Edit XML Comment Template for QuizResultsGrid
     internal static class QuizResultsGrid
     {
+        /// <summary>
+        ///     Gets the attempt number.
+        /// </summary>
+        /// <value>The attempt number.</value>
+        /// TODO Edit XML Comment Template for AttemptNumber
         private static Column AttemptNumber => new Column
         {
             ColumnName = "AttemptNumber",
@@ -25,6 +36,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.AttemptNumber.ToString()
         };
 
+        /// <summary>
+        ///     Gets the questions correct.
+        /// </summary>
+        /// <value>The questions correct.</value>
+        /// TODO Edit XML Comment Template for QuestionsCorrect
         private static Column QuestionsCorrect => new Column
         {
             ColumnName = "QuestionsCorrect",
@@ -35,6 +51,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = "{Value} / {Model.TotalQuestions}"
         };
 
+        /// <summary>
+        ///     Gets the retrieve data method.
+        /// </summary>
+        /// <value>The retrieve data method.</value>
+        /// TODO Edit XML Comment Template for RetrieveDataMethod
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
             var sortColumnName = context.QueryOptions.SortColumnName;
@@ -61,6 +82,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             return result;
         };
 
+        /// <summary>
+        ///     Gets the score.
+        /// </summary>
+        /// <value>The score.</value>
+        /// TODO Edit XML Comment Template for Score
         private static Column Score => new Column
         {
             ColumnName = "Score",
@@ -70,6 +96,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.Score
         };
 
+        /// <summary>
+        ///     Gets the time to complete.
+        /// </summary>
+        /// <value>The time to complete.</value>
+        /// TODO Edit XML Comment Template for TimeToComplete
         private static Column TimeToComplete => new Column
         {
             ColumnName = "TimeToComplete",
@@ -79,6 +110,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.TimeToCompleteString
         };
 
+        /// <summary>
+        ///     Gets the quiz results grid.
+        /// </summary>
+        /// <returns>System.String.Grid.</returns>
+        /// TODO Edit XML Comment Template for GetQuizResultsGrid
         internal static (string Title, Grid Grid) GetQuizResultsGrid()
         {
             var grid = new Grid();

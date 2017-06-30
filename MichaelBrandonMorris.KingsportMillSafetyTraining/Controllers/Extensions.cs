@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Net;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class Extensions.
+    /// </summary>
+    /// TODO Edit XML Comment Template for Extensions
     internal static class Extensions
     {
         /// <summary>
-        ///     Creates a new error, stores it in the session data, and then
-        ///     returns the error as a <see cref="HttpStatusCodeResult" />.
+        ///     Creates the error.
         /// </summary>
-        /// <param name="controller"></param>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
-        /// <returns></returns>
+        /// <param name="controller">The controller.</param>
+        /// <param name="code">The code.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for CreateError
         internal static ActionResult CreateError(
             this IController controller,
             HttpStatusCode code,
@@ -27,10 +29,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Gets the stored error.
+        ///     Gets the error.
         /// </summary>
-        /// <param name="controller"></param>
-        /// <returns></returns>
+        /// <param name="controller">The controller.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.NullReferenceException">
+        ///     Stored
+        ///     session error is null.
+        /// </exception>
+        /// TODO Edit XML Comment Template for GetError
         internal static (HttpStatusCode Code, string Message) GetError(
             this IController controller)
         {

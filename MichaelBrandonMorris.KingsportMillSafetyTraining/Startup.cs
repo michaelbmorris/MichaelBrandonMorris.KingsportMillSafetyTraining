@@ -9,8 +9,17 @@ using Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    /// <summary>
+    ///     Class Startup.
+    /// </summary>
+    /// TODO Edit XML Comment Template for Startup
     public partial class Startup
     {
+        /// <summary>
+        ///     Configurations the specified application.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// TODO Edit XML Comment Template for Configuration
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -20,6 +29,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 ApplicationUserManager.Create);
         }
 
+        /// <summary>
+        ///     Updates the current indices.
+        /// </summary>
+        /// TODO Edit XML Comment Template for UpdateCurrentIndices
         private static void UpdateCurrentIndices()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
@@ -30,6 +43,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
         }
 
+        /// <summary>
+        ///     Creates the roles.
+        /// </summary>
+        /// TODO Edit XML Comment Template for CreateRoles
         private void CreateRoles()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())

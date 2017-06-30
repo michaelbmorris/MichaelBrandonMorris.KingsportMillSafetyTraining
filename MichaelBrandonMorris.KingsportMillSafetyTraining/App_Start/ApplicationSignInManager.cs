@@ -8,18 +8,23 @@ using Microsoft.Owin.Security;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     /// <summary>
-    ///     The sign-in manager for the application.
+    ///     Class ApplicationSignInManager.
     /// </summary>
-    public class ApplicationSignInManager
-        : SignInManager<User, string>
+    /// <seealso cref="SignInManager{TUser,TKey}" />
+    /// <seealso cref="User" />
+    /// TODO Edit XML Comment Template for ApplicationSignInManager
+    public class ApplicationSignInManager : SignInManager<User, string>
     {
         /// <summary>
-        ///     Creates a new instance of the sign-in manager with the 
-        ///     specified <see cref="ApplicationUserManager"/> and 
-        ///     <see cref="IAuthenticationManager"/>.
+        ///     Initializes a new instance of the
+        ///     <see cref="ApplicationSignInManager" /> class.
         /// </summary>
-        /// <param name="userManager"></param>
-        /// <param name="authenticationManager"></param>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="authenticationManager">
+        ///     The authentication
+        ///     manager.
+        /// </param>
+        /// TODO Edit XML Comment Template for #ctor
         public ApplicationSignInManager(
             ApplicationUserManager userManager,
             IAuthenticationManager authenticationManager)
@@ -28,14 +33,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
-        ///     Invokes the <see cref="ApplicationSignInManager"/> constructor 
-        ///     with the current <see cref="IOwinContext"/>'s 
-        ///     <see cref="ApplicationUserManager"/> and 
-        ///     <see cref="IAuthenticationManager"/>.
+        ///     Creates the specified options.
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
+        /// <param name="options">The options.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>ApplicationSignInManager.</returns>
+        /// TODO Edit XML Comment Template for Create
         public static ApplicationSignInManager Create(
             IdentityFactoryOptions<ApplicationSignInManager> options,
             IOwinContext context)
@@ -46,12 +49,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
-        ///     Creates a <see cref="ClaimsIdentity"/> asynchronously. 
+        ///     Called to generate the ClaimsIdentity for the user,
+        ///     override to add additional claims before SignIn
         /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(
-            User user)
+        /// <param name="user">The user.</param>
+        /// <returns>Task&lt;ClaimsIdentity&gt;.</returns>
+        /// TODO Edit XML Comment Template for CreateUserIdentityAsync
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {
             return user.GenerateUserIdentityAsync(
                 (ApplicationUserManager) UserManager);

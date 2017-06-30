@@ -9,23 +9,36 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    ///     The controller for training results. Accessible only to 
-    ///     authenticated users.
+    ///     Class ResultsController.
     /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for ResultsController
     [Authorize]
     public class ResultsController : Controller
     {
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+        /// <summary>
+        ///     The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
-        ///     Shows the details of the specified training result. If no 
-        ///     training result is specified, returns HTTP Bad Request. If the 
-        ///     specified training result does not exist, returns HTTP Not 
-        ///     Found. If the current user is not an administrator and they do 
-        ///     not own the specified training result, returns HTTP Forbidden.
+        ///     Detailses the specified identifier.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nType: 'int'\nName: 'id'
+        /// </exception>
+        /// <exception cref="UnauthorizedAccessException">
+        ///     You do not
+        ///     have permission to view this.
+        /// </exception>
+        /// TODO Edit XML Comment Template for Details
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -38,13 +51,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 if (!User.IsInRole("Administrator")
-                    && !_db.IsUserTrainingResult(User.GetId(), id.Value))
+                    && !Db.IsUserTrainingResult(User.GetId(), id.Value))
                 {
                     throw new UnauthorizedAccessException(
                         "You do not have permission to view this.");
                 }
 
-                var model = _db.GetTrainingResult(id.Value).AsViewModel();
+                var model = Db.GetTrainingResult(id.Value).AsViewModel();
                 return View(model);
             }
             catch (UnauthorizedAccessException e)
@@ -68,11 +81,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     If the current user is an administrator, shows all training 
-        ///     results. If the user is not an administrator, redirects to the 
-        ///     page for the user's results.
+        ///     Indexes this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public ActionResult Index()
         {
@@ -86,18 +98,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            var model = _db.GetTrainingResultsDescending().AsViewModels();
+            var model = Db.GetTrainingResultsDescending().AsViewModels();
             return View(model);
         }
 
         /// <summary>
-        ///     Shows the training results for the specified user. If no user 
-        ///     is specified, returns HTTP Bad Request. If the current user is 
-        ///     not an administrator and not the specified user, returns HTTP 
-        ///     Forbidden.
+        ///     Users the results.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nName: 'id'\nType: 'string'
+        /// </exception>
+        /// <exception cref="UnauthorizedAccessException">
+        ///     You do not
+        ///     have permission to view this.
+        /// </exception>
+        /// TODO Edit XML Comment Template for UserResults
         [HttpGet]
         public ActionResult UserResults(string id = null)
         {
@@ -116,7 +134,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "You do not have permission to view this.");
                 }
 
-                var model = new UserTrainingResultsViewModel(_db.GetUser(id).AsViewModel(), _db.GetTrainingResultsDescending().AsViewModels());
+                var model = new UserTrainingResultsViewModel(
+                    Db.GetUser(id).AsViewModel(),
+                    Db.GetTrainingResultsDescending().AsViewModels());
                 return View(model);
             }
             catch (UnauthorizedAccessException e)
@@ -140,15 +160,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Disposes of the database context when the controller is 
-        ///     disposed.
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
         /// </summary>
-        /// <param name="disposing"></param>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);

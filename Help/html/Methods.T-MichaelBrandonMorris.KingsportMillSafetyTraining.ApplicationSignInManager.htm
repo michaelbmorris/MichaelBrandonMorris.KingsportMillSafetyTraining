@@ -81,10 +81,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Invokes the <a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">ApplicationSignInManager</a> constructor
-       with the current <a href="http://msdn.microsoft.com/en-us/library/microsoft.owin.iowincontext.aspx" target="_blank">IOwinContext</a>'s
-       <a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm">ApplicationUserManager</a> and
-       <a href="http://msdn.microsoft.com/en-us/library/microsoft.owin.security.iauthenticationmanager.aspx" target="_blank">IAuthenticationManager</a>.
+       Creates the specified options.
    </div>
                       </td>
                     </tr>
@@ -97,7 +94,8 @@
                       </td>
                       <td>
                         <div class="summary">
-       Creates a <span class="nolink">[ClaimsIdentity]</span> asynchronously.
+       Called to generate the ClaimsIdentity for the user,
+       override to add additional claims before SignIn
    </div>
                       </td>
                     </tr>

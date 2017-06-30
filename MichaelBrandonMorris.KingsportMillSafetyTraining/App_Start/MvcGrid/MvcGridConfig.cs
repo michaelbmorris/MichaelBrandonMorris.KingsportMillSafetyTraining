@@ -7,23 +7,37 @@ using WebActivatorEx;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
     /// <summary>
-    ///     Configures the grids.
+    ///     Class MvcGridConfig.
     /// </summary>
+    /// TODO Edit XML Comment Template for MvcGridConfig
     public static class MvcGridConfig
     {
+        /// <summary>
+        ///     The delete value template
+        /// </summary>
+        /// TODO Edit XML Comment Template for DeleteValueTemplate
         internal const string DeleteValueTemplate =
             "<a href='{Value}' class='btn btn-danger' role='button'>Delete</a>";
 
+        /// <summary>
+        ///     The details value template
+        /// </summary>
+        /// TODO Edit XML Comment Template for DetailsValueTemplate
         internal const string DetailsValueTemplate =
                 "<a href='{Value}' class='btn btn-primary' role='button'>Details</a>"
             ;
 
+        /// <summary>
+        ///     The edit value template
+        /// </summary>
+        /// TODO Edit XML Comment Template for EditValueTemplate
         internal const string EditValueTemplate =
             "<a href='{Value}' class='btn btn-primary' role='button'>Edit</a>";
 
         /// <summary>
-        ///     Adds the grids to the grid definition table.
+        ///     Registers the grids.
         /// </summary>
+        /// TODO Edit XML Comment Template for RegisterGrids
         public static void RegisterGrids()
         {
             var categoriesGrid = CategoriesGrid.GetCategoriesGrid();

@@ -5,8 +5,22 @@ using MichaelBrandonMorris.MvcGrid.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
+    /// <summary>
+    /// Class Extensions.
+    /// </summary>
+    /// TODO Edit XML Comment Template for Extensions
     internal static class Extensions
     {
+        /// <summary>
+        /// Orders the by.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="enumerable">The enumerable.</param>
+        /// <param name="sortBy">The sort by.</param>
+        /// <param name="sortDirection">The sort direction.</param>
+        /// <returns>IList&lt;T&gt;.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">sortDirection - null</exception>
+        /// TODO Edit XML Comment Template for OrderBy`1
         internal static IList<T> OrderBy<T>(
             this IEnumerable<T> enumerable,
             Func<T, object> sortBy,

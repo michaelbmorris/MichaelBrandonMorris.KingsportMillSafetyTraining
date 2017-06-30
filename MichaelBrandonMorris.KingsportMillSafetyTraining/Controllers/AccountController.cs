@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 using Microsoft.AspNet.Identity;
@@ -12,16 +13,39 @@ using Microsoft.Owin.Security;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    /// Class AccountController.
+    /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for AccountController
     [Authorize]
     public class AccountController : Controller
     {
+        /// <summary>
+        /// The sign in manager
+        /// </summary>
+        /// TODO Edit XML Comment Template for _signInManager
         private ApplicationSignInManager _signInManager;
+        /// <summary>
+        /// The user manager
+        /// </summary>
+        /// TODO Edit XML Comment Template for _userManager
         private ApplicationUserManager _userManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public AccountController()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="signInManager">The sign in manager.</param>
+        /// TODO Edit XML Comment Template for #ctor
         public AccountController(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager)
@@ -30,6 +54,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        /// Gets the sign in manager.
+        /// </summary>
+        /// <value>The sign in manager.</value>
+        /// TODO Edit XML Comment Template for SignInManager
         public ApplicationSignInManager SignInManager
         {
             get => _signInManager
@@ -38,6 +67,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             private set => _signInManager = value;
         }
 
+        /// <summary>
+        /// Gets the user manager.
+        /// </summary>
+        /// <value>The user manager.</value>
+        /// TODO Edit XML Comment Template for UserManager
         public ApplicationUserManager UserManager
         {
             get => _userManager
@@ -46,6 +80,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             private set => _userManager = value;
         }
 
+        /// <summary>
+        /// Confirms the email.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="code">The code.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ConfirmEmail
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -69,6 +110,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Externals the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ExternalLogin
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -94,6 +142,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Externals the login callback.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ExternalLoginCallback
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -144,6 +198,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Externals the login confirmation.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ExternalLoginConfirmation
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -202,6 +263,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }      
         }
 
+        /// <summary>
+        /// Externals the login failure.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ExternalLoginFailure
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ExternalLoginFailure()
@@ -218,6 +284,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Forgots the password.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ForgotPassword
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ForgotPassword()
@@ -234,6 +305,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }         
         }
 
+        /// <summary>
+        /// Forgots the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ForgotPassword
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -265,6 +342,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }          
         }
 
+        /// <summary>
+        /// Forgots the password confirmation.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ForgotPasswordConfirmation
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ForgotPasswordConfirmation()
@@ -281,6 +363,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }       
         }
 
+        /// <summary>
+        /// Logins the specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Login
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Login(string returnUrl)
@@ -298,6 +386,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }     
         }
 
+        /// <summary>
+        /// Logins the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for Login
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -344,6 +439,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }           
         }
 
+        /// <summary>
+        /// Logs the off.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -363,6 +463,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }     
         }
 
+        /// <summary>
+        /// Registers this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Register
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Register()
@@ -379,6 +484,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }        
         }
 
+        /// <summary>
+        /// Registers the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for Register
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -421,6 +532,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }          
         }
 
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ResetPassword
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPassword(string code)
@@ -437,6 +554,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }        
         }
 
+        /// <summary>
+        /// Resets the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ResetPassword
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -478,6 +601,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }          
         }
 
+        /// <summary>
+        /// Resets the password confirmation.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ResetPasswordConfirmation
         [AllowAnonymous]
         [HttpGet]
         public ActionResult ResetPasswordConfirmation()
@@ -494,6 +622,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }        
         }
 
+        /// <summary>
+        /// Sends the code.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for SendCode
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> SendCode(
@@ -536,6 +671,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }         
         }
 
+        /// <summary>
+        /// Sends the code.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for SendCode
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -571,6 +712,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }        
         }
 
+        /// <summary>
+        /// Verifies the code.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for VerifyCode
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> VerifyCode(
@@ -601,6 +750,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }        
         }
 
+        /// <summary>
+        /// Verifies the code.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for VerifyCode
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -639,6 +794,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             } 
         }
 
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -658,15 +818,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             base.Dispose(disposing);
         }
-
-        #region Helpers
-
-        private const string XsrfKey = "XsrfId";
-
+        
+        /// <summary>
+        /// Gets the authentication manager.
+        /// </summary>
+        /// <value>The authentication manager.</value>
+        /// TODO Edit XML Comment Template for AuthenticationManager
         private IAuthenticationManager AuthenticationManager => HttpContext
             .GetOwinContext()
             .Authentication;
 
+        /// <summary>
+        /// Adds the errors.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// TODO Edit XML Comment Template for AddErrors
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -675,6 +841,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Redirects to local.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for RedirectToLocal
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -684,57 +856,5 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-        internal class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
-            {
-            }
-
-            public ChallengeResult(
-                string provider,
-                string redirectUri,
-                string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider
-            {
-                get;
-                set;
-            }
-
-            public string RedirectUri
-            {
-                get;
-                set;
-            }
-
-            public string UserId
-            {
-                get;
-                set;
-            }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties
-                {
-                    RedirectUri = RedirectUri
-                };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext()
-                    .Authentication.Challenge(properties, LoginProvider);
-            }
-        }
-
-        #endregion
     }
 }

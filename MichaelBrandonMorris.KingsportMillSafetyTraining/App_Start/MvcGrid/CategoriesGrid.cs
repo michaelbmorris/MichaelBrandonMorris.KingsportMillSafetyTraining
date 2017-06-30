@@ -4,18 +4,29 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
-    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
+        KingsportMillSafetyTraining.Models.CategoryViewModel>;
 using Grid =
-    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>;
+    MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.
+        KingsportMillSafetyTraining.Models.CategoryViewModel>;
 using RetrieveDataMethod =
     System.Func<MichaelBrandonMorris.MvcGrid.Models.GridContext,
-        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
-        >>;
+        MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.
+            KingsportMillSafetyTraining.Models.CategoryViewModel>>;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
+    /// <summary>
+    ///     Class CategoriesGrid.
+    /// </summary>
+    /// TODO Edit XML Comment Template for CategoriesGrid
     internal static class CategoriesGrid
     {
+        /// <summary>
+        ///     Gets the assign roles.
+        /// </summary>
+        /// <value>The assign roles.</value>
+        /// TODO Edit XML Comment Template for AssignRoles
         private static Column AssignRoles => new Column
         {
             ColumnName = "AssignRoles",
@@ -34,6 +45,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 "<a href='{Value}' class='btn btn-primary' role='button'>Assign Roles</a>"
         };
 
+        /// <summary>
+        ///     Gets the delete.
+        /// </summary>
+        /// <value>The delete.</value>
+        /// TODO Edit XML Comment Template for Delete
         private static Column Delete => new Column
         {
             ColumnName = "Delete",
@@ -51,6 +67,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = MvcGridConfig.DeleteValueTemplate
         };
 
+        /// <summary>
+        ///     Gets the details.
+        /// </summary>
+        /// <value>The details.</value>
+        /// TODO Edit XML Comment Template for Details
         private static Column Details => new Column
         {
             ColumnName = "Details",
@@ -68,6 +89,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = MvcGridConfig.DetailsValueTemplate
         };
 
+        /// <summary>
+        ///     Gets the edit.
+        /// </summary>
+        /// <value>The edit.</value>
+        /// TODO Edit XML Comment Template for Edit
         private static Column Edit => new Column
         {
             ColumnName = "Edit",
@@ -85,6 +111,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = MvcGridConfig.EditValueTemplate
         };
 
+        /// <summary>
+        ///     Gets the index.
+        /// </summary>
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
         private static Column Index => new Column
         {
             ColumnName = "Index",
@@ -94,6 +125,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.Index.ToString()
         };
 
+        /// <summary>
+        ///     Gets the retrieve data method.
+        /// </summary>
+        /// <value>The retrieve data method.</value>
+        /// TODO Edit XML Comment Template for RetrieveDataMethod
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
             var sortColumnName = context.QueryOptions.SortColumnName;
@@ -123,6 +159,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             return result;
         };
 
+        /// <summary>
+        ///     Gets the roles count.
+        /// </summary>
+        /// <value>The roles count.</value>
+        /// TODO Edit XML Comment Template for RolesCount
         private static Column RolesCount => new Column
         {
             ColumnName = "RolesCount",
@@ -132,6 +173,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.RolesCount.ToString()
         };
 
+        /// <summary>
+        ///     Gets the slides count.
+        /// </summary>
+        /// <value>The slides count.</value>
+        /// TODO Edit XML Comment Template for SlidesCount
         private static Column SlidesCount => new Column
         {
             ColumnName = "SlidesCount",
@@ -141,6 +187,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.SlidesCount.ToString()
         };
 
+        /// <summary>
+        ///     Gets the title.
+        /// </summary>
+        /// <value>The title.</value>
+        /// TODO Edit XML Comment Template for Title
         private static Column Title => new Column
         {
             ColumnName = "Title",
@@ -150,6 +201,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueExpression = (x, y) => x.Title
         };
 
+        /// <summary>
+        ///     Gets the categories grid.
+        /// </summary>
+        /// <returns>System.String.Grid.</returns>
+        /// TODO Edit XML Comment Template for GetCategoriesGrid
         internal static (string Title, Grid Grid) GetCategoriesGrid()
         {
             var grid = new Grid();

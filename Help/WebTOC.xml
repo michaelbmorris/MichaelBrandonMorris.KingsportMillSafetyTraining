@@ -1,75 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpTOC>
 
-  <HelpTOCNode Id="1e6e8784-ee97-48ad-8a73-064b8065f2d7" Title="MichaelBrandonMorris.KingsportMillSafetyTraining Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.htm">
-    <HelpTOCNode Id="8cef5af4-42e7-4a81-9976-d4fd070d55a1" Title="ApplicationSignInManager Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">
+  <HelpTOCNode Id="cc31a474-31af-426d-8242-55850acd1083" Title="MichaelBrandonMorris.KingsportMillSafetyTraining Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.htm">
+    <HelpTOCNode Id="92fd1e71-8831-49ce-bf96-3dfcb1900926" Title="ApplicationSignInManager Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">
       <HelpTOCNode Title="ApplicationSignInManager Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm" />
       <HelpTOCNode Title="ApplicationSignInManager Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.-ctor.htm" />
-      <HelpTOCNode Id="2459046c-b97f-4248-93cd-2017902a3c5c" Title="ApplicationSignInManager Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">
+      <HelpTOCNode Id="0d376851-2163-4bf4-ba67-76576ad037cf" Title="ApplicationSignInManager Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">
         <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.Create.htm" />
-        <HelpTOCNode Id="9791836b-9a5e-494f-80a2-4582e64af9c4" Title="CreateUserIdentityAsync Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm">
+        <HelpTOCNode Id="6887e7eb-2233-460b-b4f1-715fe10d4a78" Title="CreateUserIdentityAsync Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm">
           <HelpTOCNode Title="CreateUserIdentityAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.CreateUserIdentityAsync.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="ApplicationSignInManager Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="249f3338-6d40-497d-80fb-64c288f70778" Title="ApplicationUserManager Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm">
+    <HelpTOCNode Id="aaba7e58-b983-4325-a227-3624816e85d4" Title="ApplicationUserManager Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm">
       <HelpTOCNode Title="ApplicationUserManager Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm" />
       <HelpTOCNode Title="ApplicationUserManager Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.-ctor.htm" />
-      <HelpTOCNode Id="19733c8a-59e8-4fd1-aae7-2f1dcfb92baa" Title="ApplicationUserManager Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm">
+      <HelpTOCNode Id="7a5b6d40-cd2a-4f60-baa1-070bec71e510" Title="ApplicationUserManager Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm">
         <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.Create.htm" />
         <HelpTOCNode Title="GetRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.GetRole.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ApplicationUserManager Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationUserManager.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="59fe2ea3-15c6-4b8a-ad74-76e3a3f48f33" Title="BundleConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm">
+    <HelpTOCNode Id="57370c0c-d2ad-41dc-96a8-61ec3b167d22" Title="BundleConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm">
       <HelpTOCNode Title="BundleConfig Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm" />
-      <HelpTOCNode Id="616990e7-712c-4d38-a096-8053c36be2aa" Title="BundleConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm">
+      <HelpTOCNode Id="2eb83b3b-4886-4428-b51d-d90df2e9a64c" Title="BundleConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.htm">
         <HelpTOCNode Title="RegisterBundles Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.BundleConfig.RegisterBundles.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="df422d57-8618-4a62-baf8-eb23eeb0ebdf" Title="EmailService Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm">
+    <HelpTOCNode Id="2e8d3229-7f43-41ac-9c6b-400e4f25d3c2" Title="EmailService Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm">
       <HelpTOCNode Title="EmailService Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm" />
-      <HelpTOCNode Id="434a6d4b-fa5f-4824-be1d-43bffa948387" Title="EmailService Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm">
+      <HelpTOCNode Id="b4a60369-cf1d-4192-8f61-6a2707634bb1" Title="EmailService Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.htm">
         <HelpTOCNode Title="SendAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.EmailService.SendAsync.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="2ed26eab-009b-443d-be9e-a6aaee368238" Title="FilterConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm">
+    <HelpTOCNode Id="9a06c680-9ea4-484f-843c-b351d55b3a33" Title="FilterConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm">
       <HelpTOCNode Title="FilterConfig Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm" />
-      <HelpTOCNode Id="553e00b1-9a5f-4849-afd5-904c7c844ef2" Title="FilterConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm">
+      <HelpTOCNode Id="2f5f1e4e-56ae-4707-bd45-baeef4355e7f" Title="FilterConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.htm">
         <HelpTOCNode Title="RegisterGlobalFilters Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.FilterConfig.RegisterGlobalFilters.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="01214752-2fe1-4052-861b-7a46eddf4189" Title="Helpers Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm">
-      <HelpTOCNode Title="Helpers Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm" />
-      <HelpTOCNode Id="fc0a4495-51cf-45f6-8ee0-041d68d33b20" Title="Helpers Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.htm">
-        <HelpTOCNode Title="CantorInverse Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorInverse.htm" />
-        <HelpTOCNode Title="CantorPair Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Helpers.CantorPair.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="e1acc35b-54c4-41fe-9131-58755d684470" Title="MvcApplication Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm">
+    <HelpTOCNode Id="e5aaa133-5ce6-4054-b2e5-9f8b5a527a19" Title="MvcApplication Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm">
       <HelpTOCNode Title="MvcApplication Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm" />
-      <HelpTOCNode Id="8ecc02cb-e0db-4c5d-804a-347d4e45be95" Title="MvcApplication Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm">
+      <HelpTOCNode Id="650085d8-a232-4414-8ede-9902b77f7a6e" Title="MvcApplication Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm">
         <HelpTOCNode Title="Application_Start Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.Application_Start.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="MvcApplication Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm" />
       <HelpTOCNode Title="MvcApplication Events" Url="html/Events.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcApplication.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="c49bedd6-03d7-486f-aa68-f95962af7e39" Title="RouteConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.htm">
+    <HelpTOCNode Id="8c9a9c2a-e169-4b94-bd84-253cb564e604" Title="RouteConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.htm">
       <HelpTOCNode Title="RouteConfig Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.htm" />
-      <HelpTOCNode Id="f64d9c47-0899-4a15-bdbf-2069bcae57d9" Title="RouteConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.htm">
+      <HelpTOCNode Id="0e0b3111-4a39-4b9b-9b2f-01d4c945aea3" Title="RouteConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.htm">
         <HelpTOCNode Title="RegisterRoutes Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.RouteConfig.RegisterRoutes.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="2ed58389-8453-43b1-b836-8992c062c2a6" Title="SmsService Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.htm">
+    <HelpTOCNode Id="7d0607e2-23f1-44b1-931c-777673dd50af" Title="SmsService Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.htm">
       <HelpTOCNode Title="SmsService Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.htm" />
-      <HelpTOCNode Id="9a604b50-ab1f-45da-b0dc-41c561021212" Title="SmsService Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.htm">
+      <HelpTOCNode Id="a6fa85a4-bdb7-42e5-8417-363d65377cf1" Title="SmsService Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.htm">
         <HelpTOCNode Title="SendAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.SmsService.SendAsync.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="eb74d2a1-513f-4879-b0c0-23e4237d975a" Title="Startup Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.htm">
+    <HelpTOCNode Id="51fc27f3-c0ce-43b0-87cc-6a93715aa0bd" Title="Startup Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.htm">
       <HelpTOCNode Title="Startup Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.htm" />
-      <HelpTOCNode Id="4ac92f0c-023a-4785-b4e3-e49390606669" Title="Startup Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.htm">
+      <HelpTOCNode Id="8417196f-4d13-499d-ad01-5e046c6c78f1" Title="Startup Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.htm">
         <HelpTOCNode Title="Configuration Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.Configuration.htm" />
         <HelpTOCNode Title="ConfigureAuth Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.ConfigureAuth.htm" />
         <HelpTOCNode Title="CreateRoles Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Startup.CreateRoles.htm" />
@@ -77,160 +70,140 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="cf956afc-d0f8-4694-93ca-ddd11764b4f5" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.htm">
-    <HelpTOCNode Id="d2bb9982-ab08-4d16-a014-4ecd4e5244aa" Title="AccountController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
+  <HelpTOCNode Id="4fbd7676-3743-47d0-93d6-ac87cba3769c" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.htm">
+    <HelpTOCNode Id="a76ed537-ee21-4f8b-adcc-970ff75c527c" Title="AccountController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
       <HelpTOCNode Title="AccountController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm" />
-      <HelpTOCNode Id="5bf1bbb2-e632-43f4-b41c-6e89ab07eb94" Title="AccountController Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.-ctor.htm">
+      <HelpTOCNode Id="776f7115-de28-4802-be85-453aa1130faa" Title="AccountController Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.-ctor.htm">
         <HelpTOCNode Title="AccountController Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.-ctor.htm" />
         <HelpTOCNode Title="AccountController Constructor (ApplicationUserManager, ApplicationSignInManager)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.-ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="1c6fe71e-6697-4caa-9337-3872bcdc7281" Title="AccountController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
+      <HelpTOCNode Id="c40a9d5c-b69c-4a52-a8ab-224b5f26bc4e" Title="AccountController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
         <HelpTOCNode Title="_signInManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._signInManager.htm" />
         <HelpTOCNode Title="_userManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController._userManager.htm" />
-        <HelpTOCNode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.XsrfKey.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="b362a6a5-41ff-4f57-a987-033f8467d654" Title="AccountController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
+      <HelpTOCNode Id="c1360b11-f880-4b39-aacb-d69ee8872581" Title="AccountController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
         <HelpTOCNode Title="AddErrors Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.AddErrors.htm" />
         <HelpTOCNode Title="ConfirmEmail Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ConfirmEmail.htm" />
-        <HelpTOCNode Id="423a4780-2d15-4b3b-bdce-530d2f107a71" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm">
+        <HelpTOCNode Id="b56c1520-a552-4d5b-bc1e-e77a8c3c2d19" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Dispose.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="ExternalLogin Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLogin.htm" />
         <HelpTOCNode Title="ExternalLoginCallback Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLoginCallback.htm" />
         <HelpTOCNode Title="ExternalLoginConfirmation Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLoginConfirmation.htm" />
         <HelpTOCNode Title="ExternalLoginFailure Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ExternalLoginFailure.htm" />
-        <HelpTOCNode Id="401ff672-0e45-4f61-9441-ba957d333976" Title="ForgotPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPassword.htm">
+        <HelpTOCNode Id="cd499c4d-836e-436a-927d-671da794d1f2" Title="ForgotPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPassword.htm">
           <HelpTOCNode Title="ForgotPassword Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPassword.htm" />
           <HelpTOCNode Title="ForgotPassword Method (ForgotPasswordViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPassword_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="ForgotPasswordConfirmation Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ForgotPasswordConfirmation.htm" />
-        <HelpTOCNode Id="aa314567-19e3-4b85-bb74-f34c9a7ddabc" Title="Login Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Login.htm">
+        <HelpTOCNode Id="68a6f467-8461-4578-b024-674b458b357a" Title="Login Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Login.htm">
           <HelpTOCNode Title="Login Method (String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Login.htm" />
           <HelpTOCNode Title="Login Method (LoginViewModel, String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Login_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="LogOff Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.LogOff.htm" />
         <HelpTOCNode Title="RedirectToLocal Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.RedirectToLocal.htm" />
-        <HelpTOCNode Id="84ac9290-0543-432a-9fe3-1481bf5a3a67" Title="Register Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Register.htm">
+        <HelpTOCNode Id="afc07092-ca43-4e9d-b318-19ef66e8a2b5" Title="Register Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Register.htm">
           <HelpTOCNode Title="Register Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Register.htm" />
           <HelpTOCNode Title="Register Method (RegisterViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.Register_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="1f166b8e-14c8-46ab-a008-a23f00ef0962" Title="ResetPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPassword.htm">
+        <HelpTOCNode Id="ce880f20-31d9-41cb-b4ae-77d45c0fa3e3" Title="ResetPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPassword.htm">
           <HelpTOCNode Title="ResetPassword Method (String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPassword.htm" />
           <HelpTOCNode Title="ResetPassword Method (ResetPasswordViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPassword_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="ResetPasswordConfirmation Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ResetPasswordConfirmation.htm" />
-        <HelpTOCNode Id="f5129dbb-056a-419a-a53f-10a06d5aa963" Title="SendCode Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SendCode.htm">
+        <HelpTOCNode Id="76641e93-ad7a-4d69-ba93-3523bc0a621c" Title="SendCode Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SendCode.htm">
           <HelpTOCNode Title="SendCode Method (String, Boolean)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SendCode.htm" />
           <HelpTOCNode Title="SendCode Method (SendCodeViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SendCode_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="39096a28-e5a4-4599-b584-b096ef8c2aa7" Title="VerifyCode Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.VerifyCode.htm">
+        <HelpTOCNode Id="b811b9a8-fa42-4ff0-889d-1b4296c4e96a" Title="VerifyCode Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.VerifyCode.htm">
           <HelpTOCNode Title="VerifyCode Method (String, String, Boolean)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.VerifyCode.htm" />
           <HelpTOCNode Title="VerifyCode Method (VerifyCodeViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.VerifyCode_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="623f9a62-5df3-4b8b-a569-d1ceee3d01a9" Title="AccountController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
+      <HelpTOCNode Id="ff56c3d7-0559-4f4f-bdf7-ed4e2dfc3347" Title="AccountController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.htm">
         <HelpTOCNode Title="AuthenticationManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.AuthenticationManager.htm" />
         <HelpTOCNode Title="SignInManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.SignInManager.htm" />
         <HelpTOCNode Title="UserManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.UserManager.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e9a6d3f1-b6dd-4ca8-a429-68260af1cabb" Title="AccountController.ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm">
-      <HelpTOCNode Title="AccountController.ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm" />
-      <HelpTOCNode Id="2470d937-8638-4c79-afc9-e0d95a06e9ac" Title="ChallengeResult Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.-ctor.htm">
-        <HelpTOCNode Title="ChallengeResult Constructor (String, String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.-ctor.htm" />
-        <HelpTOCNode Title="ChallengeResult Constructor (String, String, String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.-ctor_1.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="1d918c4a-7954-427f-b692-eaa26aeb3c13" Title="AccountController.ChallengeResult Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm">
-        <HelpTOCNode Id="cc705a33-5fb4-44ff-839b-aab2d6c59712" Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm">
-          <HelpTOCNode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.ExecuteResult.htm" />
-        </HelpTOCNode>
-      </HelpTOCNode>
-      <HelpTOCNode Id="7efd7f3f-6d33-4d5b-bac9-4cc498ff98e3" Title="AccountController.ChallengeResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.htm">
-        <HelpTOCNode Title="LoginProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.LoginProvider.htm" />
-        <HelpTOCNode Title="RedirectUri Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.RedirectUri.htm" />
-        <HelpTOCNode Title="UserId Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.AccountController.ChallengeResult.UserId.htm" />
-      </HelpTOCNode>
-    </HelpTOCNode>
-    <HelpTOCNode Id="cb4d05a0-f6da-4015-b212-9978557b4c6c" Title="CategoriesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
+    <HelpTOCNode Id="6da241e1-81cb-446b-b9f0-cb876dd656a1" Title="CategoriesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
       <HelpTOCNode Title="CategoriesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm" />
-      <HelpTOCNode Id="b28dcac6-716c-472b-b3b8-bed7845442ca" Title="CategoriesController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController._db.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="9e929a87-4fe5-4b34-9e59-aae4b7011a8b" Title="CategoriesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
-        <HelpTOCNode Id="1708d08b-8be9-4f0b-bd5f-cdcfd5f98bc1" Title="AssignRoles Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.AssignRoles.htm">
+      <HelpTOCNode Id="cbdeccc8-6a27-4861-80c5-d0cd329a4f4b" Title="CategoriesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
+        <HelpTOCNode Id="347059e6-9886-422c-8184-0d65be3caf35" Title="AssignRoles Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.AssignRoles.htm">
           <HelpTOCNode Title="AssignRoles Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.AssignRoles.htm" />
           <HelpTOCNode Title="AssignRoles Method (IList(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.AssignRoles_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="53d6424e-d557-4a11-a696-c1d45676c60e" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm">
+        <HelpTOCNode Id="94e74031-36a6-4f31-af58-7108ce3e5930" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm">
           <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create.htm" />
           <HelpTOCNode Title="Create Method (Category)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Create_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Delete.htm" />
         <HelpTOCNode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.DeleteConfirmed.htm" />
         <HelpTOCNode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Details.htm" />
-        <HelpTOCNode Id="5d1aa9e5-c027-49d1-b133-697c5edfb761" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Dispose.htm">
+        <HelpTOCNode Id="46078400-4a01-411d-95a7-f2b82853f656" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Dispose.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="3fc41583-d9bb-4b91-ab67-22343b3e5caf" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit.htm">
+        <HelpTOCNode Id="fc8d1657-c8db-4883-8082-ea004f590b0a" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit.htm">
           <HelpTOCNode Title="Edit Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit.htm" />
           <HelpTOCNode Title="Edit Method (Category)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Index.htm" />
-        <HelpTOCNode Id="a78157e3-4836-4e59-ac13-0fa8e1733216" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm">
+        <HelpTOCNode Id="d8295104-00d6-4d41-92fd-614ac05884f2" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm">
           <HelpTOCNode Title="Reorder Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm" />
           <HelpTOCNode Title="Reorder Method (IList(Category))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="c1180f77-9a87-4f8e-a1f3-c9750ffa04b2" Title="CategoriesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
+      <HelpTOCNode Id="5ef4b906-eb06-42cd-a6ac-6acb1af0c88a" Title="CategoriesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Db.htm" />
         <HelpTOCNode Title="OrderByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.OrderByIndex.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="e277ecd3-49c9-4c3a-8e61-bed0162c8527" Title="ErrorController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm">
+    <HelpTOCNode Id="16578e97-0b14-4cf7-8fd7-43e1c33aaa11" Title="ErrorController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm">
       <HelpTOCNode Title="ErrorController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm" />
-      <HelpTOCNode Id="89e8dc29-124b-42d5-8e5d-fc011afce838" Title="ErrorController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm">
+      <HelpTOCNode Id="aee4d00e-a2a9-4ca7-99bb-733c2f93aeb4" Title="ErrorController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm">
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.Index.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="ErrorController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ErrorController.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="d98c0e41-2343-4c92-84b8-9942baccb577" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm">
+    <HelpTOCNode Id="20e67a4d-78a5-4649-ba12-1de24a246886" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm">
       <HelpTOCNode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm" />
-      <HelpTOCNode Id="8f0e68b6-501a-414c-97af-e9fc4a6cc7c1" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm">
+      <HelpTOCNode Id="aa7e78cb-02fb-4fd6-8a33-80b31a194bd6" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.htm">
         <HelpTOCNode Title="CreateError Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.CreateError.htm" />
         <HelpTOCNode Title="GetError Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Extensions.GetError.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="adc57786-a6b5-4673-aeb5-577ec9a21893" Title="HomeController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm">
+    <HelpTOCNode Id="5b6b6df3-15ef-41f2-a9ff-8ff2094a1db9" Title="HomeController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm">
       <HelpTOCNode Title="HomeController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm" />
-      <HelpTOCNode Id="c7c59e77-243e-4e27-b3a5-811ccc793de9" Title="HomeController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm">
+      <HelpTOCNode Id="88f74a7f-8e54-4de1-aa17-6cde6072a3d3" Title="HomeController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm">
         <HelpTOCNode Title="About Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.About.htm" />
         <HelpTOCNode Title="Contact Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.Contact.htm" />
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.Index.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="HomeController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.HomeController.htm" />
     </HelpTOCNode>
-    <HelpTOCNode Id="987b42ac-ae99-47ce-9a40-e5ca11bdbe6d" Title="ManageController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
+    <HelpTOCNode Id="870a04fd-5643-49e1-ab57-1fa17d18a467" Title="ManageController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
       <HelpTOCNode Title="ManageController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm" />
-      <HelpTOCNode Id="4378bf72-c87f-4000-bcf1-6f99535fda10" Title="ManageController Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.-ctor.htm">
+      <HelpTOCNode Id="6d5c413d-b538-4207-96dd-9fd68164ce9b" Title="ManageController Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.-ctor.htm">
         <HelpTOCNode Title="ManageController Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.-ctor.htm" />
         <HelpTOCNode Title="ManageController Constructor (ApplicationUserManager, ApplicationSignInManager)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.-ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="cc10cf25-2026-4999-8b6d-f3a27c6d47d2" Title="ManageController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
+      <HelpTOCNode Id="d109f833-d273-40ff-8f52-cc3265a5a2f4" Title="ManageController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
         <HelpTOCNode Title="_signInManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController._signInManager.htm" />
         <HelpTOCNode Title="_userManager Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController._userManager.htm" />
         <HelpTOCNode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.XsrfKey.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="e3018b72-53a8-4d0d-8b05-36613447a3ff" Title="ManageController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
+      <HelpTOCNode Id="139a04c8-5cd7-4088-a39a-7582fe8fb919" Title="ManageController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
         <HelpTOCNode Title="AddErrors Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AddErrors.htm" />
-        <HelpTOCNode Id="10397b41-8671-4af2-bc89-10847b272693" Title="AddPhoneNumber Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AddPhoneNumber.htm">
+        <HelpTOCNode Id="752746ae-f540-4b9a-94d1-41744d08918e" Title="AddPhoneNumber Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AddPhoneNumber.htm">
           <HelpTOCNode Title="AddPhoneNumber Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AddPhoneNumber.htm" />
           <HelpTOCNode Title="AddPhoneNumber Method (AddPhoneNumberViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AddPhoneNumber_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="118837a3-314d-4124-9ef0-4022537ace4d" Title="ChangePassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword.htm">
+        <HelpTOCNode Id="8d2f1247-b067-4a20-aea2-74185a353eb3" Title="ChangePassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword.htm">
           <HelpTOCNode Title="ChangePassword Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword.htm" />
           <HelpTOCNode Title="ChangePassword Method (ChangePasswordViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ChangePassword_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="DisableTwoFactorAuthentication Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.DisableTwoFactorAuthentication.htm" />
-        <HelpTOCNode Id="65d73961-a5ab-4f3b-8797-ca33a6c5d816" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm">
+        <HelpTOCNode Id="47916fef-88af-4bd2-b365-422a621cbf51" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.Dispose.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="EnableTwoFactorAuthentication Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.EnableTwoFactorAuthentication.htm" />
@@ -243,16 +216,16 @@
         <HelpTOCNode Title="ManageLogins Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageLogins.htm" />
         <HelpTOCNode Title="RemoveLogin Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.RemoveLogin.htm" />
         <HelpTOCNode Title="RemovePhoneNumber Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.RemovePhoneNumber.htm" />
-        <HelpTOCNode Id="2ce3a60c-86b6-4e57-9928-a2b2f2568862" Title="SetPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SetPassword.htm">
+        <HelpTOCNode Id="7a033b53-4af5-453c-a4ce-992708e532d0" Title="SetPassword Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SetPassword.htm">
           <HelpTOCNode Title="SetPassword Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SetPassword.htm" />
           <HelpTOCNode Title="SetPassword Method (SetPasswordViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SetPassword_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="e2769f23-62d9-430a-aee0-a52ec776bd87" Title="VerifyPhoneNumber Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.VerifyPhoneNumber.htm">
+        <HelpTOCNode Id="a9a64be2-13b2-4762-bda1-b98ad4df0b1a" Title="VerifyPhoneNumber Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.VerifyPhoneNumber.htm">
           <HelpTOCNode Title="VerifyPhoneNumber Method (String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.VerifyPhoneNumber.htm" />
           <HelpTOCNode Title="VerifyPhoneNumber Method (VerifyPhoneNumberViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.VerifyPhoneNumber_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="3b3b0648-0f66-4357-b6f1-0fe03b364bab" Title="ManageController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
+      <HelpTOCNode Id="cd90f6d0-e99b-4c2e-b174-d165fe71435c" Title="ManageController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.htm">
         <HelpTOCNode Title="AuthenticationManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.AuthenticationManager.htm" />
         <HelpTOCNode Title="OwinContext Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.OwinContext.htm" />
         <HelpTOCNode Title="SignInManager Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.SignInManager.htm" />
@@ -260,150 +233,166 @@
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="ManageController.ManageMessageId Enumeration" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ManageController.ManageMessageId.htm" />
-    <HelpTOCNode Id="4b30f94b-c495-43a4-bf98-e804633a8deb" Title="ResultsController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
+    <HelpTOCNode Id="5292d165-4605-410c-aa25-2f37511f5264" Title="ResultsController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
       <HelpTOCNode Title="ResultsController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
-      <HelpTOCNode Id="09f684b3-1e17-4a2c-bf79-529e2414e095" Title="ResultsController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController._db.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="60274f2b-bc8b-4d28-b1e6-bd74f6d44ddc" Title="ResultsController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
+      <HelpTOCNode Id="a1d65eeb-ed0f-4298-8509-e9127c87df96" Title="ResultsController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
         <HelpTOCNode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Details.htm" />
-        <HelpTOCNode Id="12c65bd6-bf12-4bd6-bd7a-cf51950a01d5" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm">
+        <HelpTOCNode Id="c72c00f0-595d-4d4f-8004-e19a731eaf5d" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Dispose.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Index.htm" />
         <HelpTOCNode Title="UserResults Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.UserResults.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Title="ResultsController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm" />
-    </HelpTOCNode>
-    <HelpTOCNode Id="8bf1d66b-ffd5-4e29-943d-a7e38a5a516e" Title="RolesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
-      <HelpTOCNode Title="RolesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
-      <HelpTOCNode Id="d911d603-78db-4838-8fda-a9fe33db821c" Title="RolesController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController._db.htm" />
+      <HelpTOCNode Id="743437a5-f87c-48be-a62e-e4ac27e03b52" Title="ResultsController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.Db.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="f2381b91-d10c-46f9-a4c4-e9099f50e0e8" Title="RolesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
-        <HelpTOCNode Id="94565f01-982c-4d56-8629-2117aa6d68a5" Title="AssignCategories Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.AssignCategories.htm">
+    </HelpTOCNode>
+    <HelpTOCNode Id="71afd7d5-5248-4ba7-911a-8e26a6f67b0c" Title="RolesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
+      <HelpTOCNode Title="RolesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm" />
+      <HelpTOCNode Id="3978d2f8-92c0-4230-9102-dc2074b1c5b1" Title="RolesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
+        <HelpTOCNode Id="9f994b48-094c-4d2a-b850-69b085b22aa1" Title="AssignCategories Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.AssignCategories.htm">
           <HelpTOCNode Title="AssignCategories Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.AssignCategories.htm" />
           <HelpTOCNode Title="AssignCategories Method (IList(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.AssignCategories_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="90ab7813-c4ab-4fc5-bb07-9d623b569025" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm">
+        <HelpTOCNode Id="92c5f165-a628-4917-bc85-2a9e2d00f921" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm">
           <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create.htm" />
           <HelpTOCNode Title="Create Method (Role)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Create_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Delete.htm" />
         <HelpTOCNode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.DeleteConfirmed.htm" />
         <HelpTOCNode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Details.htm" />
-        <HelpTOCNode Id="68687171-ca0c-4c64-82ac-d6549fa8bbce" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm">
+        <HelpTOCNode Id="21e2631d-bd56-47f5-af38-8ad26440810e" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Dispose.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="dc545ebf-c0c7-443e-871b-52184f008f97" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit.htm">
+        <HelpTOCNode Id="9ac3e6c3-bd34-4568-aee2-f2985483e4e3" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit.htm">
           <HelpTOCNode Title="Edit Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit.htm" />
           <HelpTOCNode Title="Edit Method (Role)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Edit_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Index.htm" />
-        <HelpTOCNode Id="65a165af-234f-4875-99eb-28a3b22605f5" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder.htm">
+        <HelpTOCNode Id="9ceb4fd5-00fc-488d-b7ce-5aeee6f2b584" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder.htm">
           <HelpTOCNode Title="Reorder Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder.htm" />
           <HelpTOCNode Title="Reorder Method (IList(Role))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Reorder_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="b11fb713-adb5-4fd3-b44c-4a941d4ad663" Title="RolesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
+      <HelpTOCNode Id="825db05d-0644-426d-a940-89bfc40abe20" Title="RolesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.Db.htm" />
         <HelpTOCNode Title="OrderByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.RolesController.OrderByIndex.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="8a1b958a-86d9-446b-8ad8-020f84f515bb" Title="SlidesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
+    <HelpTOCNode Id="bce13f0f-7c7b-4e7b-bcaf-3fee7578d011" Title="SlidesController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
       <HelpTOCNode Title="SlidesController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm" />
-      <HelpTOCNode Id="81698146-7f21-4fc5-b09b-f7e7d3c3922e" Title="SlidesController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController._db.htm" />
+      <HelpTOCNode Id="72c1f620-669f-470e-ae0b-732edf34b7b0" Title="SlidesController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
         <HelpTOCNode Title="JpgType Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.JpgType.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="33651433-3a71-45a8-8dd9-ed1e396c80e5" Title="SlidesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
+      <HelpTOCNode Id="9a6283c6-0ade-4ec1-8a38-256dfc40fdcd" Title="SlidesController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
         <HelpTOCNode Title="AddAnswer Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.AddAnswer.htm" />
-        <HelpTOCNode Id="76f3e44c-429b-46ca-8691-7240832883da" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create.htm">
+        <HelpTOCNode Id="f0815eeb-1eea-4ac2-8f20-9ae240c9aded" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create.htm">
           <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create.htm" />
           <HelpTOCNode Title="Create Method (SlideViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Create_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Delete.htm" />
         <HelpTOCNode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.DeleteConfirmed.htm" />
         <HelpTOCNode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Details.htm" />
-        <HelpTOCNode Id="b1656ebd-56a9-4e6d-8b91-e07bcd71110f" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm">
+        <HelpTOCNode Id="77d9b13e-cb70-4fce-aaf6-e047cc1bcc22" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Dispose.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="a9800cb7-7eb1-4d4d-b19f-538725962b5b" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm">
+        <HelpTOCNode Id="12e70896-b79d-4845-820d-620748b184d6" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm">
           <HelpTOCNode Title="Edit Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit.htm" />
           <HelpTOCNode Title="Edit Method (SlideViewModel)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Edit_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Index.htm" />
         <HelpTOCNode Title="RenderImage Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.RenderImage.htm" />
-        <HelpTOCNode Id="8f8ac0c0-cb38-46d9-b0a5-ba9819fa88b9" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm">
+        <HelpTOCNode Id="48158e00-8fad-46d2-aad3-1105046376f4" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm">
           <HelpTOCNode Title="Reorder Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder.htm" />
           <HelpTOCNode Title="Reorder Method (IList(Slide))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Reorder_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="SelectCategoryToReorder Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.SelectCategoryToReorder.htm" />
         <HelpTOCNode Title="ViewSlide Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.ViewSlide.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="55d6538a-802c-44e8-85a7-8ee40160ef14" Title="SlidesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
+      <HelpTOCNode Id="9f5c284e-84c4-4e78-b3e9-9fb886e0f6cd" Title="SlidesController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.Db.htm" />
         <HelpTOCNode Title="OrderCategoryByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.OrderCategoryByIndex.htm" />
         <HelpTOCNode Title="OrderCategoryByTitle Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.SlidesController.OrderCategoryByTitle.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="83fcd7aa-0f3f-4a78-b6fc-1c66f8b8a20b" Title="TrainingController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
+    <HelpTOCNode Id="efd5d027-0270-4203-83f8-d9755eaff594" Title="TrainingController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
       <HelpTOCNode Title="TrainingController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm" />
-      <HelpTOCNode Id="d79e2afc-05ab-4f2d-9f5a-82cccd0b000a" Title="TrainingController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController._db.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="e4710717-0f11-448d-aeef-830100be8fff" Title="TrainingController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
-        <HelpTOCNode Id="6ab0f39f-74bc-45e4-81ed-e49a23c6925d" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm">
+      <HelpTOCNode Id="43e21c92-d692-452c-889d-36e8da2ac658" Title="TrainingController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
+        <HelpTOCNode Id="f9a763e1-12d1-43bf-b19e-926fe99a7c98" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Dispose.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetCurrentUserRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.GetCurrentUserRole.htm" />
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Index.htm" />
-        <HelpTOCNode Id="2c60b272-d644-4534-a0c3-3cbefe1cb936" Title="Quiz Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Quiz.htm">
+        <HelpTOCNode Id="22cfa733-26b6-45ea-a9e4-66c7f062add1" Title="Quiz Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Quiz.htm">
           <HelpTOCNode Title="Quiz Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Quiz.htm" />
           <HelpTOCNode Title="Quiz Method (IList(QuizSlideViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Quiz_1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="21e9f9b4-72bd-4336-be9b-8675be0c69cd" Title="SelectRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole.htm">
+        <HelpTOCNode Id="915c5801-2423-4613-a5e9-2696c90d87d3" Title="SelectRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole.htm">
           <HelpTOCNode Title="SelectRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole.htm" />
           <HelpTOCNode Title="SelectRole Method (Nullable(Int32))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.SelectRole_1.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="79cbf209-2786-493f-bb60-48733bf89e83" Title="TrainingController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
+      <HelpTOCNode Id="c9d75897-8723-47cd-84c2-2fcce4462ade" Title="TrainingController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.Db.htm" />
         <HelpTOCNode Title="OrderCategoriesByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.OrderCategoriesByIndex.htm" />
         <HelpTOCNode Title="OrderSlidesByIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.TrainingController.OrderSlidesByIndex.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="3e44b1ad-9f4e-444b-837a-3c598599dc6a" Title="UsersController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
+    <HelpTOCNode Id="f102045e-efe9-481b-b7c5-0439e3d8c13c" Title="UsersController Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
       <HelpTOCNode Title="UsersController Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
-      <HelpTOCNode Id="dad2f6b2-668a-4165-b1f1-faf7edf62fcc" Title="UsersController Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
-        <HelpTOCNode Title="_db Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController._db.htm" />
-      </HelpTOCNode>
-      <HelpTOCNode Id="3ffb33fb-d901-48fa-bc72-aca80d705473" Title="UsersController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
-        <HelpTOCNode Id="d3d06d1f-9822-4af1-9a78-eb3d21092bd0" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create.htm">
+      <HelpTOCNode Id="aa8eba45-27a7-4127-8bae-7991b863d182" Title="UsersController Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
+        <HelpTOCNode Id="ce420540-6b76-4c0f-88b5-708e867ae3e5" Title="Create Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create.htm">
           <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create.htm" />
           <HelpTOCNode Title="Create Method (User)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Create_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Delete Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Delete.htm" />
         <HelpTOCNode Title="DeleteConfirmed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.DeleteConfirmed.htm" />
         <HelpTOCNode Title="Details Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Details.htm" />
-        <HelpTOCNode Id="18cbab94-f84a-48c8-a5ca-05c3e6aaab6c" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm">
+        <HelpTOCNode Id="79268a37-fd6c-4359-89af-7f80c8aa8620" Title="Dispose Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm">
           <HelpTOCNode Title="Dispose Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Dispose.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="1870c9c5-a5b8-441e-b7a1-23e39a0277f3" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit.htm">
+        <HelpTOCNode Id="7560499b-df37-46a3-9868-76c0067fdb5e" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit.htm">
           <HelpTOCNode Title="Edit Method (String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit.htm" />
           <HelpTOCNode Title="Edit Method (User)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Edit_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Index.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Title="UsersController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm" />
+      <HelpTOCNode Id="9fa6f9a8-55c0-4a69-b769-1b49acc28053" Title="UsersController Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.htm">
+        <HelpTOCNode Title="Db Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.UsersController.Db.htm" />
+      </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="12d111f1-47fb-4dab-ad0d-d0f59f641939" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.htm">
-    <HelpTOCNode Id="84d5f7c1-a86a-434a-8add-d55408164c75" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm">
+  <HelpTOCNode Id="35294945-af36-4ee7-9395-cf7ff491765f" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.htm">
+    <HelpTOCNode Id="24cb53b5-22cf-4a81-b3e9-2f1e48359efe" Title="ChallengeResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm">
+      <HelpTOCNode Title="ChallengeResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm" />
+      <HelpTOCNode Id="d90ff0e6-37db-4ffd-ab7c-1c5146ef995c" Title="ChallengeResult Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.-ctor.htm">
+        <HelpTOCNode Title="ChallengeResult Constructor (String, String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.-ctor.htm" />
+        <HelpTOCNode Title="ChallengeResult Constructor (String, String, String)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.-ctor_1.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="b288d77e-3784-4a66-ba2d-503dc803d765" Title="ChallengeResult Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm">
+        <HelpTOCNode Title="XsrfKey Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.XsrfKey.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6e0ba797-dabd-43ac-8884-a367b3e83c44" Title="ChallengeResult Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm">
+        <HelpTOCNode Id="729b998e-3b88-417b-bf9b-9921190b0c1d" Title="ExecuteResult Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm">
+          <HelpTOCNode Title="ExecuteResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.ExecuteResult.htm" />
+        </HelpTOCNode>
+      </HelpTOCNode>
+      <HelpTOCNode Id="a8c94474-2785-42c9-943a-6a18e90b206d" Title="ChallengeResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.htm">
+        <HelpTOCNode Title="LoginProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.LoginProvider.htm" />
+        <HelpTOCNode Title="RedirectUri Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.RedirectUri.htm" />
+        <HelpTOCNode Title="UserId Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers.ChallengeResult.UserId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+  <HelpTOCNode Id="6db1d0bd-f0c9-4166-b313-4d985a56ee14" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.htm">
+    <HelpTOCNode Id="a26c58ac-1d7d-43d5-8c46-9a9549aab6d1" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm">
       <HelpTOCNode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm" />
-      <HelpTOCNode Id="b58f5c93-7e19-4193-9dfc-c049e102a415" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm">
+      <HelpTOCNode Id="db35365b-1f7f-4fa6-b2d4-d4ac17b86892" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.htm">
         <HelpTOCNode Title="Answers Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.Answers.htm" />
         <HelpTOCNode Title="GetCategories Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetCategories.htm" />
         <HelpTOCNode Title="GetQuizResults Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetQuizResults.htm" />
         <HelpTOCNode Title="GetRoles Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetRoles.htm" />
-        <HelpTOCNode Id="dd575504-406e-4f57-9a02-d73b1c3da93b" Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides.htm">
+        <HelpTOCNode Id="465aba36-9e02-479f-be35-744dbec56139" Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides.htm">
           <HelpTOCNode Title="GetSlides Method (Category, Func(Slide, Object), Func(Slide, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides.htm" />
           <HelpTOCNode Title="GetSlides Method (IList(Category), Func(Slide, Object), Func(Slide, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides_1.htm" />
           <HelpTOCNode Title="GetSlides Method (Role, Func(Category, Object), Func(Category, Boolean), Func(Slide, Object), Func(Slide, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetSlides_2.htm" />
@@ -412,10 +401,10 @@
         <HelpTOCNode Title="GetTrainingResultsDescending Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Extensions.GetTrainingResultsDescending.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="816c2831-762a-4242-936a-7dd0af833452" Title="KingsportMillSafetyTrainingDbContext Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
+    <HelpTOCNode Id="5360a9b6-c96f-4945-9373-7b360be80344" Title="KingsportMillSafetyTrainingDbContext Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
       <HelpTOCNode Title="KingsportMillSafetyTrainingDbContext Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm" />
       <HelpTOCNode Title="KingsportMillSafetyTrainingDbContext Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.-ctor.htm" />
-      <HelpTOCNode Id="e8297adf-6252-4031-83f1-edd99f1a72c6" Title="KingsportMillSafetyTrainingDbContext Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
+      <HelpTOCNode Id="26a6bbaf-d3a3-4df9-9391-adbad8ea948d" Title="KingsportMillSafetyTrainingDbContext Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
         <HelpTOCNode Title="AddQuizResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.AddQuizResult.htm" />
         <HelpTOCNode Title="AddTrainingResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.AddTrainingResult.htm" />
         <HelpTOCNode Title="Create Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Create.htm" />
@@ -425,11 +414,11 @@
         <HelpTOCNode Title="DeleteCategory Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteCategory.htm" />
         <HelpTOCNode Title="DeleteRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteRole.htm" />
         <HelpTOCNode Title="DeleteSlide Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DeleteSlide.htm" />
-        <HelpTOCNode Id="fcf56b5b-0ea5-4c08-a8b1-f2180f829e52" Title="Overload:MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DoTransaction">
+        <HelpTOCNode Id="92f2210a-a3db-479a-b1bc-09ca7787ee8f" Title="Overload:MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DoTransaction">
           <HelpTOCNode Title="DoTransaction Method (Action)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DoTransaction.htm" />
           <HelpTOCNode Title="DoTransaction(T) Method (Func(T))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.DoTransaction--1.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="933c5ae8-536a-49cd-a6bf-1a44778630bb" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit-.htm">
+        <HelpTOCNode Id="f39bdb32-b482-4f41-8db7-e2724acd6c36" Title="Edit Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit-.htm">
           <HelpTOCNode Title="Edit(T) Method (T)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit--1.htm" />
           <HelpTOCNode Title="Edit Method (Slide, Int32)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit.htm" />
           <HelpTOCNode Title="Edit Method (TrainingResult)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Edit_1.htm" />
@@ -437,26 +426,29 @@
         <HelpTOCNode Title="GetCategories Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetCategories.htm" />
         <HelpTOCNode Title="GetCategory Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetCategory.htm" />
         <HelpTOCNode Title="GetNotFoundMessage(T) Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetNotFoundMessage--1.htm" />
-        <HelpTOCNode Id="109ba8fc-a50a-4a8e-8cab-77a67c91b783" Title="GetRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole.htm">
+        <HelpTOCNode Id="23c96388-b5bf-4493-a76d-61087d273263" Title="GetRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole.htm">
           <HelpTOCNode Title="GetRole Method (Int32)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole.htm" />
           <HelpTOCNode Title="GetRole Method (Func(Role, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRole_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetRoles Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetRoles.htm" />
         <HelpTOCNode Title="GetSlide Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlide.htm" />
-        <HelpTOCNode Id="985affed-f990-485e-93fa-7197b7d6a285" Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides.htm">
+        <HelpTOCNode Id="c9d68659-406d-4d08-b582-638e31bf6c32" Title="GetSlides Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides.htm">
           <HelpTOCNode Title="GetSlides Method (Func(Slide, Object), Func(Slide, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides.htm" />
           <HelpTOCNode Title="GetSlides Method (Int32, Func(Slide, Object), Func(Slide, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetSlides_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetTrainingResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResult.htm" />
-        <HelpTOCNode Id="bab0769a-7e3f-4268-8347-db14c76e1e43" Title="GetTrainingResultsDescending Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResultsDescending.htm">
+        <HelpTOCNode Id="b16991c4-901d-4439-b8d6-9f97e4dc01fa" Title="GetTrainingResultsDescending Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResultsDescending.htm">
           <HelpTOCNode Title="GetTrainingResultsDescending Method (Func(TrainingResult, Object), Func(TrainingResult, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResultsDescending.htm" />
           <HelpTOCNode Title="GetTrainingResultsDescending Method (String, Func(TrainingResult, Object), Func(TrainingResult, Boolean))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetTrainingResultsDescending_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetUser Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetUser.htm" />
         <HelpTOCNode Title="GetUsers Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.GetUsers.htm" />
         <HelpTOCNode Title="IsUserTrainingResult Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.IsUserTrainingResult.htm" />
-        <HelpTOCNode Title="PairCategoryAndRole Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
-        <HelpTOCNode Id="30a84e1b-b7a8-43d3-bd6d-6646fcb21b47" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm">
+        <HelpTOCNode Id="04e3486c-c065-4b2b-8f99-494085f677ef" Title="PairCategoryAndRole Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm">
+          <HelpTOCNode Title="PairCategoryAndRole Method (Int32)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole.htm" />
+          <HelpTOCNode Title="PairCategoryAndRole Method (Int32, Int32)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.PairCategoryAndRole_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="943baa09-a959-490d-b28c-2b9ded20f00f" Title="Reorder Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm">
           <HelpTOCNode Title="Reorder Method (IList(Category))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder.htm" />
           <HelpTOCNode Title="Reorder Method (IList(Slide))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder_1.htm" />
           <HelpTOCNode Title="Reorder Method (IList(Role))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Reorder_2.htm" />
@@ -469,7 +461,7 @@
         <HelpTOCNode Title="UpdateCurrentCategoryIndex Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.UpdateCurrentCategoryIndex.htm" />
         <HelpTOCNode Title="UpdateCurrentSlideIndex Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.UpdateCurrentSlideIndex.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="72585c1f-ab82-4de2-afbf-cac3a57e5643" Title="KingsportMillSafetyTrainingDbContext Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
+      <HelpTOCNode Id="a67f228f-522d-4214-9718-97cd6e9dc9d0" Title="KingsportMillSafetyTrainingDbContext Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.htm">
         <HelpTOCNode Title="Answers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Answers.htm" />
         <HelpTOCNode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Categories.htm" />
         <HelpTOCNode Title="Slides Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.KingsportMillSafetyTrainingDbContext.Slides.htm" />
@@ -478,41 +470,41 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="df590622-87a3-4676-9197-d5cca900e183" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.htm">
-    <HelpTOCNode Id="ecdaac8f-c42e-4661-be71-8f74ad437e4c" Title="Configuration Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm">
+  <HelpTOCNode Id="a884006a-ca3d-4c51-bc7f-5ce40b33f3f5" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.htm">
+    <HelpTOCNode Id="1795f80f-3efd-4a12-97f1-20ff3c6a46b3" Title="Configuration Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm">
       <HelpTOCNode Title="Configuration Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm" />
       <HelpTOCNode Title="Configuration Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.-ctor.htm" />
-      <HelpTOCNode Id="720408f9-c676-4b89-aab8-a28c339dbee5" Title="Configuration Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm">
-        <HelpTOCNode Id="28e285f5-f75f-4c22-942f-42c38eef1249" Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm">
+      <HelpTOCNode Id="9310aecf-7ff5-47ac-be9a-422e4be104de" Title="Configuration Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm">
+        <HelpTOCNode Id="1705268f-daf8-4c69-92b2-26ea4a0478aa" Title="Seed Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm">
           <HelpTOCNode Title="Seed Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.Seed.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
       <HelpTOCNode Title="Configuration Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations.Configuration.htm" />
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="7899179a-ac56-499e-9eda-3d814d768269" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.htm">
-    <HelpTOCNode Id="6b9ec659-45fa-4ccf-b5d2-b8b0a59eda65" Title="Answer Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
+  <HelpTOCNode Id="6ea77b68-ce30-4aa6-b8f7-aad065f662df" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.htm">
+    <HelpTOCNode Id="6e2e5dcc-3182-4f08-a35c-1eec5c356ba5" Title="Answer Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
       <HelpTOCNode Title="Answer Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm" />
       <HelpTOCNode Title="Answer Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.-ctor.htm" />
-      <HelpTOCNode Id="8b388c41-89b7-453b-9498-6415321040b4" Title="Answer Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
+      <HelpTOCNode Id="2edab94e-7f12-4a2e-b47f-677966b42c4d" Title="Answer Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
         <HelpTOCNode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.CurrentIndex.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="Answer Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm" />
-      <HelpTOCNode Id="0d80d513-95d7-4240-b764-9c2cc0927916" Title="Answer Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
+      <HelpTOCNode Id="505647ca-ac85-4d7f-8e96-221a4a6d648f" Title="Answer Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.htm">
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Id.htm" />
         <HelpTOCNode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Index.htm" />
         <HelpTOCNode Title="Slide Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Slide.htm" />
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Answer.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c4cefc57-51b0-4225-a12e-04d6ae3d7af5" Title="Category Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
+    <HelpTOCNode Id="5dacd582-dab6-44ba-9e24-f6fae88e0045" Title="Category Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
       <HelpTOCNode Title="Category Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm" />
       <HelpTOCNode Title="Category Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.-ctor.htm" />
-      <HelpTOCNode Id="be3361fe-a4f7-48de-8ecf-4ca25185fae2" Title="Category Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
+      <HelpTOCNode Id="a3b26f4d-0801-48c7-a102-4f758cf9e188" Title="Category Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
         <HelpTOCNode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.CurrentIndex.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="Category Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm" />
-      <HelpTOCNode Id="d59d2521-44c7-47ed-bf99-5de705eb9256" Title="Category Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
+      <HelpTOCNode Id="9d816df1-81c1-4c43-a035-17e464495902" Title="Category Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.htm">
         <HelpTOCNode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Description.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Id.htm" />
         <HelpTOCNode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Index.htm" />
@@ -521,18 +513,18 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c21280a7-2c27-443f-b24b-f24f7f3a5d5f" Title="QuizResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm">
+    <HelpTOCNode Id="a0acc746-2635-4e25-8365-adcfd90d553e" Title="QuizResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm">
       <HelpTOCNode Title="QuizResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm" />
       <HelpTOCNode Title="QuizResult Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm" />
-      <HelpTOCNode Id="38d8cbdb-4089-47e7-9872-abd0b105e621" Title="QuizResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm">
+      <HelpTOCNode Id="1d642cf7-e2d0-4738-8298-57bb889b9390" Title="QuizResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.htm">
         <HelpTOCNode Title="Score Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.Score.htm" />
         <HelpTOCNode Title="TimeToCompleteString Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.QuizResult.TimeToCompleteString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b02f028e-4bc7-4521-87d1-4ed649d63d88" Title="Role Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm">
+    <HelpTOCNode Id="b60eb71d-54e2-4d93-af83-99c5ffddec92" Title="Role Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm">
       <HelpTOCNode Title="Role Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm" />
       <HelpTOCNode Title="Role Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm" />
-      <HelpTOCNode Id="1459ac1d-ca82-450b-b38e-624bf3b03d71" Title="Role Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm">
+      <HelpTOCNode Id="f47460bd-61fb-4abb-b2c4-3403d4eecfc9" Title="Role Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.htm">
         <HelpTOCNode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Categories.htm" />
         <HelpTOCNode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Description.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Id.htm" />
@@ -541,24 +533,24 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d6ddb505-38ed-4853-bf44-017b96a0bfde" Title="Slide Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
+    <HelpTOCNode Id="96b445e0-7ac7-4824-966d-5858651156dc" Title="Slide Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
       <HelpTOCNode Title="Slide Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm" />
       <HelpTOCNode Title="Slide Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.-ctor.htm" />
-      <HelpTOCNode Id="c2a086e4-8899-49fa-beb5-3fe404b44d19" Title="Slide Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
+      <HelpTOCNode Id="237af777-f023-4056-9341-30e5913aea9c" Title="Slide Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
         <HelpTOCNode Title="CurrentIndex Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.CurrentIndex.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="d5d7f88d-eabe-4c8a-a3b4-c3f56e766193" Title="Slide Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
-        <HelpTOCNode Id="05409c30-99cd-433a-8f7b-0d202f721ed3" Title="Equals Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Equals.htm">
+      <HelpTOCNode Id="d6c21c36-22ee-4f86-bc65-01a4ffb7fd48" Title="Slide Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
+        <HelpTOCNode Id="62a3ae39-5a28-4486-aa83-75b883611492" Title="Equals Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Equals.htm">
           <HelpTOCNode Title="Equals Method (Slide)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Equals.htm" />
           <HelpTOCNode Title="Equals Method (Object)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Equals_1.htm" />
         </HelpTOCNode>
         <HelpTOCNode Title="GetHashCode Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.GetHashCode.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="eeebc06d-a175-4d3c-9baa-0552e27d1761" Title="Slide Operators" Url="html/Operators.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
+      <HelpTOCNode Id="7a5b6e22-44d7-4386-be8f-a907dfe35dd7" Title="Slide Operators" Url="html/Operators.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
         <HelpTOCNode Title="Equality Operator " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.op_Equality.htm" />
         <HelpTOCNode Title="Inequality Operator " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.op_Inequality.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="3fdcef47-962c-45bc-a13a-98b4c81246d6" Title="Slide Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
+      <HelpTOCNode Id="00bedfbb-c3da-4e5c-8be6-9d4aa30f45d2" Title="Slide Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.htm">
         <HelpTOCNode Title="Answers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Answers.htm" />
         <HelpTOCNode Title="Category Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Category.htm" />
         <HelpTOCNode Title="Content Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Content.htm" />
@@ -574,10 +566,10 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Slide.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d62ab223-fd5f-4f50-99e8-8d9b326834b7" Title="TrainingResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm">
+    <HelpTOCNode Id="10c79494-4e8d-4c00-90cb-b54e213cbfba" Title="TrainingResult Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm">
       <HelpTOCNode Title="TrainingResult Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm" />
       <HelpTOCNode Title="TrainingResult Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm" />
-      <HelpTOCNode Id="55d1c8e4-924f-4e1f-9905-509c5f55b130" Title="TrainingResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm">
+      <HelpTOCNode Id="86a9db6b-e95d-4db3-af26-f3dfb8c32883" Title="TrainingResult Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.htm">
         <HelpTOCNode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.CompletionDateTime.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.Id.htm" />
         <HelpTOCNode Title="QuizResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.QuizResults.htm" />
@@ -586,12 +578,12 @@
         <HelpTOCNode Title="User Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.TrainingResult.User.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7db861a0-3133-4d60-9472-0291c6a17a3b" Title="User Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
+    <HelpTOCNode Id="f4a7d47b-6870-431f-9087-2e83cdb81fba" Title="User Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
       <HelpTOCNode Title="User Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm" />
-      <HelpTOCNode Id="02d5bfa4-b9e5-4823-819c-a9e3a6a209b4" Title="User Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
+      <HelpTOCNode Id="4080e555-726b-4aca-a952-11cba45796c0" Title="User Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
         <HelpTOCNode Title="GenerateUserIdentityAsync Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.GenerateUserIdentityAsync.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="7827ce8c-cd6f-483e-b00e-99000b9f125f" Title="User Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
+      <HelpTOCNode Id="416840e7-2f1a-4b94-88b7-cf6ca1fe8403" Title="User Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">
         <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.CompanyName.htm" />
         <HelpTOCNode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.FirstName.htm" />
         <HelpTOCNode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.LastName.htm" />
@@ -604,41 +596,41 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="76986304-e20b-4052-a08c-50e8d2fadf2c" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.htm">
-    <HelpTOCNode Id="50bd2d6e-68df-460b-a728-9d7f6e2507dd" Title="AssignCategoriesViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm">
+  <HelpTOCNode Id="4b198d9a-0802-4bf7-87c9-75b7dcb14f8e" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.htm">
+    <HelpTOCNode Id="ea6a946c-ca41-4fe9-b009-14fee85b5f97" Title="AssignCategoriesViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm">
       <HelpTOCNode Title="AssignCategoriesViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm" />
-      <HelpTOCNode Id="6e0a0b9a-32bb-4dfc-bd90-121c65723315" Title="AssignCategoriesViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.-ctor.htm">
+      <HelpTOCNode Id="7263e324-4b2d-4fc0-bf38-5f8e54bc7302" Title="AssignCategoriesViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.-ctor.htm">
         <HelpTOCNode Title="AssignCategoriesViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.-ctor.htm" />
         <HelpTOCNode Title="AssignCategoriesViewModel Constructor (IList(Role), IList(CategoryViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.-ctor_1.htm" />
         <HelpTOCNode Title="AssignCategoriesViewModel Constructor (Role, IList(CategoryViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.-ctor_2.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="AssignCategoriesViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm" />
-      <HelpTOCNode Id="09dc194b-6952-4e24-9c17-03a0ea973608" Title="AssignCategoriesViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm">
+      <HelpTOCNode Id="5f8d4170-4c55-4ffc-b68c-b640a8da5945" Title="AssignCategoriesViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.htm">
         <HelpTOCNode Title="CategoryViewModels Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.CategoryViewModels.htm" />
         <HelpTOCNode Title="Roles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel.Roles.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5031f758-c89a-457c-81be-783e88635412" Title="AssignRolesViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm">
+    <HelpTOCNode Id="42ff9104-1d3b-4089-93e3-77cedaa37910" Title="AssignRolesViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm">
       <HelpTOCNode Title="AssignRolesViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm" />
-      <HelpTOCNode Id="504107f5-03b2-408e-a099-e9c5f7ea2ddf" Title="AssignRolesViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.-ctor.htm">
+      <HelpTOCNode Id="886a67ee-ca8c-4a80-8cbf-b38cb0ab081d" Title="AssignRolesViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.-ctor.htm">
         <HelpTOCNode Title="AssignRolesViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.-ctor.htm" />
         <HelpTOCNode Title="AssignRolesViewModel Constructor (IList(Category), IList(RoleViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.-ctor_1.htm" />
         <HelpTOCNode Title="AssignRolesViewModel Constructor (Category, IList(RoleViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.-ctor_2.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="AssignRolesViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm" />
-      <HelpTOCNode Id="5d12c0af-c5ed-4a82-872d-ef24a26ac9b8" Title="AssignRolesViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm">
+      <HelpTOCNode Id="8d6209df-92cd-495d-a818-35bd3c839924" Title="AssignRolesViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.htm">
         <HelpTOCNode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.Categories.htm" />
         <HelpTOCNode Title="RoleViewModels Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel.RoleViewModels.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c688cfbc-7951-4fb8-9d9b-850ad0d8a5bb" Title="CategoryViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm">
+    <HelpTOCNode Id="50707787-4643-44c8-983e-34283dd08007" Title="CategoryViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm">
       <HelpTOCNode Title="CategoryViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm" />
-      <HelpTOCNode Id="e61445c0-3524-404c-aab5-90f0c13ed379" Title="CategoryViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.-ctor.htm">
+      <HelpTOCNode Id="97c3eda1-a9e2-4c68-8bd7-2042e5b58f5c" Title="CategoryViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.-ctor.htm">
         <HelpTOCNode Title="CategoryViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.-ctor.htm" />
         <HelpTOCNode Title="CategoryViewModel Constructor (Category)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.-ctor_1.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="CategoryViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm" />
-      <HelpTOCNode Id="aef81403-d030-4669-a79c-174c4d3cf67a" Title="CategoryViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm">
+      <HelpTOCNode Id="95a1e9cd-a7ae-4c75-b5dd-e3bf8b78b4c4" Title="CategoryViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.htm">
         <HelpTOCNode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Description.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Id.htm" />
         <HelpTOCNode Title="Index Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Index.htm" />
@@ -650,28 +642,28 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="cfaa084e-8137-45ea-a60b-8cfad2caf29a" Title="ErrorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm">
+    <HelpTOCNode Id="088094b6-db42-416c-8904-1003172f7d84" Title="ErrorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm">
       <HelpTOCNode Title="ErrorViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm" />
       <HelpTOCNode Title="ErrorViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm" />
-      <HelpTOCNode Id="d250eceb-07e0-49ae-8309-46b4ebbb0eab" Title="ErrorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm">
+      <HelpTOCNode Id="5b7dbb47-c650-4048-9400-30bbb857699f" Title="ErrorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.htm">
         <HelpTOCNode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.Code.htm" />
         <HelpTOCNode Title="CodeName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.CodeName.htm" />
         <HelpTOCNode Title="CodeNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.CodeNumber.htm" />
         <HelpTOCNode Title="Message Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ErrorViewModel.Message.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="03fac55c-a555-427c-964c-50dde727b391" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm">
+    <HelpTOCNode Id="3d50942c-8be0-4ef5-a3e3-4e586edeeeb5" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm">
       <HelpTOCNode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm" />
-      <HelpTOCNode Id="1daa9718-06a7-40d0-892e-8f7f746c649c" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm">
+      <HelpTOCNode Id="60a8151a-e23e-485c-a4ad-29a078f36968" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.htm">
         <HelpTOCNode Title="AsQuizSlideViewModels Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsQuizSlideViewModels.htm" />
-        <HelpTOCNode Id="b32a9fd5-fc73-4b23-952f-e50228dfa35c" Title="AsViewModel Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel.htm">
+        <HelpTOCNode Id="893cdcd8-ae68-44a0-970d-3ab154744802" Title="AsViewModel Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel.htm">
           <HelpTOCNode Title="AsViewModel Method (Slide, IList(Category))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel.htm" />
           <HelpTOCNode Title="AsViewModel Method (User)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel_1.htm" />
           <HelpTOCNode Title="AsViewModel Method (Role)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel_2.htm" />
           <HelpTOCNode Title="AsViewModel Method (Category)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel_3.htm" />
           <HelpTOCNode Title="AsViewModel Method (TrainingResult)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModel_4.htm" />
         </HelpTOCNode>
-        <HelpTOCNode Id="06ec2242-391f-4a5d-8870-888ec97ad7c2" Title="AsViewModels Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModels.htm">
+        <HelpTOCNode Id="edfd0aca-f183-40d2-a009-5959bbc08a37" Title="AsViewModels Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModels.htm">
           <HelpTOCNode Title="AsViewModels Method (IList(User))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModels.htm" />
           <HelpTOCNode Title="AsViewModels Method (IList(Slide))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModels_1.htm" />
           <HelpTOCNode Title="AsViewModels Method (IList(Role))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Extensions.AsViewModels_2.htm" />
@@ -680,33 +672,33 @@
         </HelpTOCNode>
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="f8503a06-3f01-43f6-b891-a292590b6082" Title="ListQuantityAttribute Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
+    <HelpTOCNode Id="80a8e1e1-ac3d-4a44-8594-f8b3783edaaa" Title="ListQuantityAttribute Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
       <HelpTOCNode Title="ListQuantityAttribute Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm" />
       <HelpTOCNode Title="ListQuantityAttribute Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.-ctor.htm" />
-      <HelpTOCNode Id="e66bcf1a-3abe-43ca-9035-43689d343949" Title="ListQuantityAttribute Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
-        <HelpTOCNode Id="8bfc7e17-d738-4007-9f04-feb70658bccc" Title="IsValid Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm">
+      <HelpTOCNode Id="6533290c-d67d-4e56-b2de-0a07fb272e2e" Title="ListQuantityAttribute Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
+        <HelpTOCNode Id="ce2cdd64-dd81-461c-9d01-ee462f608ed6" Title="IsValid Method " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm">
           <HelpTOCNode Title="IsValid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.IsValid.htm" />
         </HelpTOCNode>
       </HelpTOCNode>
-      <HelpTOCNode Id="fd0b46ff-0ccc-45a8-b0d9-43166ff4c0e1" Title="ListQuantityAttribute Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
+      <HelpTOCNode Id="d10d469f-b6a1-49a9-b292-93684297ac19" Title="ListQuantityAttribute Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.htm">
         <HelpTOCNode Title="MaxElements Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.MaxElements.htm" />
         <HelpTOCNode Title="MinElements Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ListQuantityAttribute.MinElements.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
     <HelpTOCNode Title="QuestionState Enumeration" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuestionState.htm" />
-    <HelpTOCNode Id="cc249d75-b3db-41f4-a8f8-4c751c823658" Title="QuizSlideViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
+    <HelpTOCNode Id="5ed3c387-7ec7-4a34-b70f-a9971da2cbbb" Title="QuizSlideViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
       <HelpTOCNode Title="QuizSlideViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm" />
-      <HelpTOCNode Id="d997592d-d98c-4c2c-aa53-20cca7467a5d" Title="QuizSlideViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.-ctor.htm">
+      <HelpTOCNode Id="53520b38-2087-4f44-aa28-4ff88bed2999" Title="QuizSlideViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.-ctor.htm">
         <HelpTOCNode Title="QuizSlideViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.-ctor.htm" />
         <HelpTOCNode Title="QuizSlideViewModel Constructor (Slide)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.-ctor_1.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="a6d90be2-89e2-4ec2-b53a-48f106108b90" Title="QuizSlideViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
+      <HelpTOCNode Id="c7682649-b9c9-43ec-8fb2-32f912f3c7c3" Title="QuizSlideViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
         <HelpTOCNode Title="AnswerQuestion Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.AnswerQuestion.htm" />
         <HelpTOCNode Title="IsCorrect Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.IsCorrect.htm" />
         <HelpTOCNode Title="IsIncorrect Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.IsIncorrect.htm" />
         <HelpTOCNode Title="IsUnanswered Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.IsUnanswered.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="6526337d-d6fe-49bb-b1d9-9b113bcf43d7" Title="QuizSlideViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
+      <HelpTOCNode Id="efd721ff-0733-421b-9b72-ce8ea08e674b" Title="QuizSlideViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.htm">
         <HelpTOCNode Title="Answers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Answers.htm" />
         <HelpTOCNode Title="CorrectAnswerIndex Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.CorrectAnswerIndex.htm" />
         <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.Id.htm" />
@@ -717,14 +709,14 @@
         <HelpTOCNode Title="ShouldShowImageOnQuiz Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel.ShouldShowImageOnQuiz.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="066dba64-549b-44d2-b57c-0a1de6cf3443" Title="RoleViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm">
+    <HelpTOCNode Id="3f0041f0-e8ab-44d7-8f2a-b8ffab2d2cf8" Title="RoleViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm">
       <HelpTOCNode Title="RoleViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm" />
-      <HelpTOCNode Id="bc472a0f-862a-4497-b266-1ab19880efcc" Title="RoleViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.-ctor.htm">
+      <HelpTOCNode Id="6a2ab629-bbda-42e2-9f10-88874fc03879" Title="RoleViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.-ctor.htm">
         <HelpTOCNode Title="RoleViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.-ctor.htm" />
         <HelpTOCNode Title="RoleViewModel Constructor (Role)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.-ctor_1.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="RoleViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm" />
-      <HelpTOCNode Id="910d6551-9087-49a3-84ef-76b7c63ffe91" Title="RoleViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm">
+      <HelpTOCNode Id="c54bf53b-f428-470e-9b20-78c876e3fdcd" Title="RoleViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.htm">
         <HelpTOCNode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Categories.htm" />
         <HelpTOCNode Title="CategoriesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.CategoriesCount.htm" />
         <HelpTOCNode Title="Description Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Description.htm" />
@@ -734,15 +726,15 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="53e02d5e-2bb6-42db-a5af-cb4ecd413b37" Title="SlideViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm">
+    <HelpTOCNode Id="164d1128-f2ce-4168-9fd5-81c123876f17" Title="SlideViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm">
       <HelpTOCNode Title="SlideViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm" />
-      <HelpTOCNode Id="3685797e-7ff4-46e9-be8d-24ff61bc37fb" Title="SlideViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.-ctor.htm">
+      <HelpTOCNode Id="53240352-dfb7-4c68-9c7b-5e086f102c78" Title="SlideViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.-ctor.htm">
         <HelpTOCNode Title="SlideViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.-ctor.htm" />
         <HelpTOCNode Title="SlideViewModel Constructor (Slide)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.-ctor_1.htm" />
         <HelpTOCNode Title="SlideViewModel Constructor (Slide, IList(Category))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.-ctor_2.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="SlideViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm" />
-      <HelpTOCNode Id="b154b63c-2694-4136-b55e-9287778fa372" Title="SlideViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm">
+      <HelpTOCNode Id="676be9a0-a9b9-4b77-beed-e7513af00d4d" Title="SlideViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.htm">
         <HelpTOCNode Title="Answers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Answers.htm" />
         <HelpTOCNode Title="Categories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Categories.htm" />
         <HelpTOCNode Title="CategoryId Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.CategoryId.htm" />
@@ -761,48 +753,38 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="d5bc9b18-d844-41ea-9904-d5a51f336948" Title="TrainingResultViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm">
+    <HelpTOCNode Id="125d1ff6-536f-43e6-ada2-db21a79cdc49" Title="TrainingResultViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm">
       <HelpTOCNode Title="TrainingResultViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm" />
-      <HelpTOCNode Id="009fd8be-fd96-4ffc-bf68-035ada84e300" Title="TrainingResultViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.-ctor.htm">
+      <HelpTOCNode Id="dfee4c43-b745-409f-9ca6-81c69bd78545" Title="TrainingResultViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.-ctor.htm">
         <HelpTOCNode Title="TrainingResultViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.-ctor.htm" />
         <HelpTOCNode Title="TrainingResultViewModel Constructor (TrainingResult)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.-ctor_1.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="TrainingResultViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm" />
-      <HelpTOCNode Id="6e13e53c-6a51-46e0-9428-205ab1f635ce" Title="TrainingResultViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm">
-        <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompanyName.htm" />
-        <HelpTOCNode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.CompletionDateTime.htm" />
-        <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Email.htm" />
-        <HelpTOCNode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.FirstName.htm" />
-        <HelpTOCNode Title="Id Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.Id.htm" />
-        <HelpTOCNode Title="LastName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.LastName.htm" />
-        <HelpTOCNode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.PhoneNumber.htm" />
+      <HelpTOCNode Id="23ee2840-dac3-46af-bb7a-7d21d3167c16" Title="TrainingResultViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.htm">
         <HelpTOCNode Title="QuizAttemptsCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.QuizAttemptsCount.htm" />
-        <HelpTOCNode Title="QuizResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.QuizResults.htm" />
-        <HelpTOCNode Title="RoleTitle Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.RoleTitle.htm" />
-        <HelpTOCNode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToComplete.htm" />
         <HelpTOCNode Title="TimeToCompleteString Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel.TimeToCompleteString.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="fef18c5c-b5dc-44cd-ae2f-2ec5bfd00f67" Title="UserTrainingResultsViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm">
+    <HelpTOCNode Id="a47e86f6-5b11-487e-a015-6959e8e4aada" Title="UserTrainingResultsViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm">
       <HelpTOCNode Title="UserTrainingResultsViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm" />
-      <HelpTOCNode Id="2086b269-0a99-47a5-9601-41a18a5b36bf" Title="UserTrainingResultsViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.-ctor.htm">
+      <HelpTOCNode Id="971a2611-b0d0-4a7c-beb9-facbc8f3e36f" Title="UserTrainingResultsViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.-ctor.htm">
         <HelpTOCNode Title="UserTrainingResultsViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.-ctor.htm" />
         <HelpTOCNode Title="UserTrainingResultsViewModel Constructor (UserViewModel, IList(TrainingResultViewModel))" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.-ctor_1.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="UserTrainingResultsViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm" />
-      <HelpTOCNode Id="cfb3481f-5fcb-446e-b95d-7d63207d58e2" Title="UserTrainingResultsViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm">
+      <HelpTOCNode Id="fbf84dad-72b6-4946-9a01-c3f07358cd74" Title="UserTrainingResultsViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.htm">
         <HelpTOCNode Title="TrainingResults Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.TrainingResults.htm" />
         <HelpTOCNode Title="User Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel.User.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="fcb748b1-5c8f-4ad9-91b9-ab692ccae8fd" Title="UserViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm">
+    <HelpTOCNode Id="47283e2b-7d89-4796-abe6-d8c7580d340a" Title="UserViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm">
       <HelpTOCNode Title="UserViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm" />
-      <HelpTOCNode Id="9c0149bb-aaf5-4f59-93e1-712d33252714" Title="UserViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.-ctor.htm">
+      <HelpTOCNode Id="6557c705-1ab3-4f84-8c6a-eab76ead3eb9" Title="UserViewModel Constructor " Url="html/Overload-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.-ctor.htm">
         <HelpTOCNode Title="UserViewModel Constructor " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.-ctor.htm" />
         <HelpTOCNode Title="UserViewModel Constructor (User)" Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.-ctor_1.htm" />
       </HelpTOCNode>
       <HelpTOCNode Title="UserViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm" />
-      <HelpTOCNode Id="1e98e9b1-228b-493f-ae4e-c60bd5a2a799" Title="UserViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm">
+      <HelpTOCNode Id="607cf1b4-32d2-404b-aa55-46946d0bb191" Title="UserViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.htm">
         <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.CompanyName.htm" />
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.Email.htm" />
         <HelpTOCNode Title="FirstName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel.FirstName.htm" />
@@ -815,48 +797,48 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="cc79a39a-8142-47cf-a990-a707dce1482a" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.htm">
-    <HelpTOCNode Id="c652ff3a-641a-4e3a-8495-14240816153d" Title="ExternalLoginConfirmationViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm">
+  <HelpTOCNode Id="5b0fd703-4be7-481d-85b4-a3ae77b6f65e" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.htm">
+    <HelpTOCNode Id="110b94d2-d4ac-4bc6-96b2-f16f660ad5e5" Title="ExternalLoginConfirmationViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm">
       <HelpTOCNode Title="ExternalLoginConfirmationViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm" />
       <HelpTOCNode Title="ExternalLoginConfirmationViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm" />
-      <HelpTOCNode Id="acf1d5e9-ce9a-4450-b345-76ac2d2826cf" Title="ExternalLoginConfirmationViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm">
+      <HelpTOCNode Id="fda955ac-4fae-4ab0-a5cc-78be59aaba23" Title="ExternalLoginConfirmationViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.htm">
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginConfirmationViewModel.Email.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="75dbc8fb-0b08-4f66-9709-fead0e550c96" Title="ExternalLoginListViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm">
+    <HelpTOCNode Id="6d5e2152-6978-4f77-a966-7ca686120ad6" Title="ExternalLoginListViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm">
       <HelpTOCNode Title="ExternalLoginListViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm" />
       <HelpTOCNode Title="ExternalLoginListViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm" />
-      <HelpTOCNode Id="a639ffe3-5630-4a7a-b08c-ef71f09de938" Title="ExternalLoginListViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm">
+      <HelpTOCNode Id="a22c2a0a-864e-4593-98b1-91fdffd4147c" Title="ExternalLoginListViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.htm">
         <HelpTOCNode Title="ReturnUrl Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ExternalLoginListViewModel.ReturnUrl.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5690b1dd-c0ac-4d3a-8de7-96462d903320" Title="ForgotPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm">
+    <HelpTOCNode Id="c3187f41-8b3f-42f4-8de9-8b2f4e36e724" Title="ForgotPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm">
       <HelpTOCNode Title="ForgotPasswordViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm" />
       <HelpTOCNode Title="ForgotPasswordViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm" />
-      <HelpTOCNode Id="8b76c957-6372-4551-b744-9ccc79187352" Title="ForgotPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm">
+      <HelpTOCNode Id="aa24e08a-615f-470a-be5e-ab4ac6228bdf" Title="ForgotPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.htm">
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotPasswordViewModel.Email.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b051f3c5-47d7-4667-bf52-c6e13b21db34" Title="ForgotViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm">
+    <HelpTOCNode Id="1a01d375-ba6f-4b73-b391-8cb83863f215" Title="ForgotViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm">
       <HelpTOCNode Title="ForgotViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm" />
       <HelpTOCNode Title="ForgotViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm" />
-      <HelpTOCNode Id="e2e54d16-3b84-4a82-8299-bbb5ff714b78" Title="ForgotViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm">
+      <HelpTOCNode Id="b16f2e7c-ade1-47e8-b563-f185e10b7e89" Title="ForgotViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.htm">
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ForgotViewModel.Email.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="862f6501-d7e2-4549-a7dc-efb6ddb93a31" Title="LoginViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm">
+    <HelpTOCNode Id="2de6f4a5-63c7-44e8-bf46-45c2fe5d18d1" Title="LoginViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm">
       <HelpTOCNode Title="LoginViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm" />
       <HelpTOCNode Title="LoginViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm" />
-      <HelpTOCNode Id="6f095e57-9c4d-4cc5-83f6-a741275896c1" Title="LoginViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm">
+      <HelpTOCNode Id="cad5b86a-efd1-49f3-bee2-ceda4e9a1f88" Title="LoginViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.htm">
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.Email.htm" />
         <HelpTOCNode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.Password.htm" />
         <HelpTOCNode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel.RememberMe.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c7b524c1-1fa0-4d86-8f47-b43bb3103594" Title="RegisterViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm">
+    <HelpTOCNode Id="480aba27-42ab-4e97-bcca-a97df16225d3" Title="RegisterViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm">
       <HelpTOCNode Title="RegisterViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm" />
       <HelpTOCNode Title="RegisterViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm" />
-      <HelpTOCNode Id="4085a731-d763-4b5c-bdf4-4652d2efd0bf" Title="RegisterViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm">
+      <HelpTOCNode Id="f4202796-9c30-4cdd-81d3-4ca4bd3a4f89" Title="RegisterViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.htm">
         <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.CompanyName.htm" />
         <HelpTOCNode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.ConfirmPassword.htm" />
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.Email.htm" />
@@ -867,30 +849,30 @@
         <HelpTOCNode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel.PhoneNumber.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="feaf4ae9-1584-478d-bb4f-3c51ed5f8353" Title="ResetPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm">
+    <HelpTOCNode Id="1b2c7864-cfdc-4079-9e73-6b54c8fba800" Title="ResetPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm">
       <HelpTOCNode Title="ResetPasswordViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm" />
       <HelpTOCNode Title="ResetPasswordViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm" />
-      <HelpTOCNode Id="d5f16afd-53aa-403e-84fe-a0e723d11dc4" Title="ResetPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm">
+      <HelpTOCNode Id="1d4c68e7-acb4-41ce-acea-4d3e98faf038" Title="ResetPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.htm">
         <HelpTOCNode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Code.htm" />
         <HelpTOCNode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.ConfirmPassword.htm" />
         <HelpTOCNode Title="Email Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Email.htm" />
         <HelpTOCNode Title="Password Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.ResetPasswordViewModel.Password.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="5bb3c329-d98f-4c68-b477-d2d582c7e1ad" Title="SendCodeViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm">
+    <HelpTOCNode Id="69611c5f-dfdb-4305-b166-cc540cf310ad" Title="SendCodeViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm">
       <HelpTOCNode Title="SendCodeViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm" />
       <HelpTOCNode Title="SendCodeViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm" />
-      <HelpTOCNode Id="797dacf0-6ba7-43c0-a524-ad7231fca684" Title="SendCodeViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm">
+      <HelpTOCNode Id="53445198-550e-4fb6-9aaf-7ea6ba57b1d7" Title="SendCodeViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.htm">
         <HelpTOCNode Title="Providers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.Providers.htm" />
         <HelpTOCNode Title="RememberMe Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.RememberMe.htm" />
         <HelpTOCNode Title="ReturnUrl Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.ReturnUrl.htm" />
         <HelpTOCNode Title="SelectedProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.SendCodeViewModel.SelectedProvider.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="4d8c2ad4-eee4-4e45-a4c9-66a007a7b191" Title="VerifyCodeViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm">
+    <HelpTOCNode Id="cdfb1cd5-f2b7-43dc-b77c-d79a23baa895" Title="VerifyCodeViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm">
       <HelpTOCNode Title="VerifyCodeViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm" />
       <HelpTOCNode Title="VerifyCodeViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm" />
-      <HelpTOCNode Id="394e9a6d-b1e2-481b-a7f7-61dad37ab99e" Title="VerifyCodeViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm">
+      <HelpTOCNode Id="40908f17-cdd7-4f35-8d9b-75f7a69bd2a3" Title="VerifyCodeViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.htm">
         <HelpTOCNode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.Code.htm" />
         <HelpTOCNode Title="Provider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.Provider.htm" />
         <HelpTOCNode Title="RememberBrowser Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.VerifyCodeViewModel.RememberBrowser.htm" />
@@ -899,42 +881,42 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="a41f9775-7735-4df0-afe1-5882a2214236" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.htm">
-    <HelpTOCNode Id="91869d2f-a60c-49aa-b3b5-81d1af245177" Title="AddPhoneNumberViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm">
+  <HelpTOCNode Id="45ea3df9-5ef9-441f-ab35-878bfd83a59b" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.htm">
+    <HelpTOCNode Id="04abf165-39c5-4052-a64e-4c5a9e6d0f08" Title="AddPhoneNumberViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm">
       <HelpTOCNode Title="AddPhoneNumberViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm" />
       <HelpTOCNode Title="AddPhoneNumberViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm" />
-      <HelpTOCNode Id="a92b3d75-ee4f-48e9-9fd3-da2e679a840d" Title="AddPhoneNumberViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm">
+      <HelpTOCNode Id="bd2d33b7-b2fa-40ac-a1d1-23d1063bb577" Title="AddPhoneNumberViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.htm">
         <HelpTOCNode Title="Number Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.AddPhoneNumberViewModel.Number.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="33f0de52-a725-4284-9978-ea5cf68b2516" Title="ChangePasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm">
+    <HelpTOCNode Id="fe96ade3-c901-4b30-a38f-c9b52fde7f33" Title="ChangePasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm">
       <HelpTOCNode Title="ChangePasswordViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm" />
       <HelpTOCNode Title="ChangePasswordViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm" />
-      <HelpTOCNode Id="9c28a0a0-94a8-4308-96f6-553b0a405686" Title="ChangePasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm">
+      <HelpTOCNode Id="e000703e-0073-4782-891a-c5b475aa882e" Title="ChangePasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.htm">
         <HelpTOCNode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.ConfirmPassword.htm" />
         <HelpTOCNode Title="NewPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.NewPassword.htm" />
         <HelpTOCNode Title="OldPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ChangePasswordViewModel.OldPassword.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="6b571c23-52b0-4e6a-a580-b5e266cdc84b" Title="ConfigureTwoFactorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm">
+    <HelpTOCNode Id="bd7508d1-c21b-455d-83b3-ebf8b603052c" Title="ConfigureTwoFactorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm">
       <HelpTOCNode Title="ConfigureTwoFactorViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm" />
       <HelpTOCNode Title="ConfigureTwoFactorViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm" />
-      <HelpTOCNode Id="6c58e1b8-89a5-4fff-9787-89dcababe879" Title="ConfigureTwoFactorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm">
+      <HelpTOCNode Id="48480cc1-2094-4de0-b434-d7aa04f7fed8" Title="ConfigureTwoFactorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.htm">
         <HelpTOCNode Title="Providers Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.Providers.htm" />
         <HelpTOCNode Title="SelectedProvider Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ConfigureTwoFactorViewModel.SelectedProvider.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="31de256b-9cea-4bdf-8499-847c032e85b5" Title="FactorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm">
+    <HelpTOCNode Id="41e413c2-7244-45ff-935a-f112d0cd90e6" Title="FactorViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm">
       <HelpTOCNode Title="FactorViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm" />
       <HelpTOCNode Title="FactorViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm" />
-      <HelpTOCNode Id="17898bdf-f60a-4ac6-acbc-251c01cae6ba" Title="FactorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm">
+      <HelpTOCNode Id="908210fb-33aa-4e08-950d-c23eeafd6c60" Title="FactorViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.htm">
         <HelpTOCNode Title="Purpose Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.FactorViewModel.Purpose.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c92b01a7-f0b4-4f40-bea2-8197c1cabad0" Title="IndexViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm">
+    <HelpTOCNode Id="31bb286e-e54c-476f-89d4-f6e8d80f6ba4" Title="IndexViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm">
       <HelpTOCNode Title="IndexViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm" />
       <HelpTOCNode Title="IndexViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm" />
-      <HelpTOCNode Id="e92a27ba-fb89-439f-be95-eb3c687e84db" Title="IndexViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm">
+      <HelpTOCNode Id="3fc0513e-0853-4f22-85c9-14bd2be3abac" Title="IndexViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.htm">
         <HelpTOCNode Title="BrowserRemembered Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.BrowserRemembered.htm" />
         <HelpTOCNode Title="HasPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.HasPassword.htm" />
         <HelpTOCNode Title="Logins Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.Logins.htm" />
@@ -942,38 +924,38 @@
         <HelpTOCNode Title="TwoFactor Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.IndexViewModel.TwoFactor.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b0ecef0f-014f-4820-8325-9f633e96613e" Title="ManageLoginsViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm">
+    <HelpTOCNode Id="f73e8176-4d56-47cb-b9e4-ce82526d3bf4" Title="ManageLoginsViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm">
       <HelpTOCNode Title="ManageLoginsViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm" />
       <HelpTOCNode Title="ManageLoginsViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm" />
-      <HelpTOCNode Id="add99f25-ab92-4020-a32f-8e0ad9173db7" Title="ManageLoginsViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm">
+      <HelpTOCNode Id="ff7a6efb-6d58-4e59-bea0-258baecad1b8" Title="ManageLoginsViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.htm">
         <HelpTOCNode Title="CurrentLogins Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.CurrentLogins.htm" />
         <HelpTOCNode Title="OtherLogins Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.ManageLoginsViewModel.OtherLogins.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="74550daf-4810-437c-a417-cabc0f6116ee" Title="SetPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm">
+    <HelpTOCNode Id="9cc886e3-6931-461c-864c-b2759315fad7" Title="SetPasswordViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm">
       <HelpTOCNode Title="SetPasswordViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm" />
       <HelpTOCNode Title="SetPasswordViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm" />
-      <HelpTOCNode Id="8b822420-a0a9-45fa-af75-b7dace80af6a" Title="SetPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm">
+      <HelpTOCNode Id="2a8519d6-98e4-45d1-bbcf-4fabe97703f1" Title="SetPasswordViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.htm">
         <HelpTOCNode Title="ConfirmPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.ConfirmPassword.htm" />
         <HelpTOCNode Title="NewPassword Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.SetPasswordViewModel.NewPassword.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="698213de-be71-4cd8-b10a-80f480244451" Title="VerifyPhoneNumberViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm">
+    <HelpTOCNode Id="cb5f6bf0-d68a-49bc-860a-6ebe10d06007" Title="VerifyPhoneNumberViewModel Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm">
       <HelpTOCNode Title="VerifyPhoneNumberViewModel Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm" />
       <HelpTOCNode Title="VerifyPhoneNumberViewModel Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm" />
-      <HelpTOCNode Id="4e889ad8-6dbb-4d37-ab93-3cd5cf043483" Title="VerifyPhoneNumberViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm">
+      <HelpTOCNode Id="40f449de-8658-476d-b482-cf51df7afe02" Title="VerifyPhoneNumberViewModel Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.htm">
         <HelpTOCNode Title="Code Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.Code.htm" />
         <HelpTOCNode Title="PhoneNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage.VerifyPhoneNumberViewModel.PhoneNumber.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="2afa4661-fc4b-4835-81b3-5a2945541a14" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.htm">
-    <HelpTOCNode Id="5d385772-78d2-4e98-8de8-d19779fdd332" Title="CategoriesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
+  <HelpTOCNode Id="f24c7ab2-5a52-4b98-8e5d-5fb6cbc64004" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.htm">
+    <HelpTOCNode Id="5a08f1e5-f1e3-415b-8a4e-f41259695cda" Title="CategoriesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
       <HelpTOCNode Title="CategoriesGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm" />
-      <HelpTOCNode Id="cbc13e75-ee68-4ad3-9962-5f87375da97a" Title="CategoriesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
+      <HelpTOCNode Id="ae2c1d5d-d240-4dcd-b976-7f6bec03857c" Title="CategoriesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
         <HelpTOCNode Title="GetCategoriesGrid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.GetCategoriesGrid.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="cff56fc8-4563-4b23-af55-7734565620bb" Title="CategoriesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
+      <HelpTOCNode Id="9c42b604-1250-49c5-8373-cd5eb823a069" Title="CategoriesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.htm">
         <HelpTOCNode Title="AssignRoles Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.AssignRoles.htm" />
         <HelpTOCNode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Delete.htm" />
         <HelpTOCNode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Details.htm" />
@@ -985,29 +967,29 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.CategoriesGrid.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="4f56d6d1-df0d-4ac7-80ad-4c9fbe7f2c6e" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm">
+    <HelpTOCNode Id="72c63644-ed7d-492f-a837-40f0fb975bcb" Title="Extensions Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm">
       <HelpTOCNode Title="Extensions Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm" />
-      <HelpTOCNode Id="3f43f05d-b467-4d6a-a6ad-852408d6bc6a" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm">
+      <HelpTOCNode Id="7317cfcf-8e33-407f-a3ec-7de3733fcd79" Title="Extensions Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.htm">
         <HelpTOCNode Title="OrderBy(T) Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.Extensions.OrderBy--1.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="7836b184-d8c7-498a-88de-8d48ee48bce8" Title="MvcGridConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
+    <HelpTOCNode Id="1c7951be-de0c-4cba-9604-84a7680c4c52" Title="MvcGridConfig Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
       <HelpTOCNode Title="MvcGridConfig Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm" />
-      <HelpTOCNode Id="218af2fe-03eb-4cb2-bf2d-83a445d8b129" Title="MvcGridConfig Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
+      <HelpTOCNode Id="56916ccf-8d3e-4d6b-83cd-2294c86a11ad" Title="MvcGridConfig Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
         <HelpTOCNode Title="DeleteValueTemplate Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.DeleteValueTemplate.htm" />
         <HelpTOCNode Title="DetailsValueTemplate Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.DetailsValueTemplate.htm" />
         <HelpTOCNode Title="EditValueTemplate Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.EditValueTemplate.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="c9061adf-3f80-40bf-a26f-73d9d1896fb2" Title="MvcGridConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
+      <HelpTOCNode Id="e5dcece1-a717-4b04-b7b5-b25250717e23" Title="MvcGridConfig Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.htm">
         <HelpTOCNode Title="RegisterGrids Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.MvcGridConfig.RegisterGrids.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="005fb3f3-bac6-460c-a952-afe0b42bfac7" Title="QuizResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
+    <HelpTOCNode Id="6557bd20-72c0-4eb7-a266-6930ba8f0538" Title="QuizResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
       <HelpTOCNode Title="QuizResultsGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm" />
-      <HelpTOCNode Id="9ee998f1-89f4-4afe-a40f-40c644c346d7" Title="QuizResultsGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
+      <HelpTOCNode Id="cff01966-e4de-47e8-a1fb-b663ce3f0834" Title="QuizResultsGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
         <HelpTOCNode Title="GetQuizResultsGrid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.GetQuizResultsGrid.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="0e099b7e-61b7-49ec-bf84-268add9500fe" Title="QuizResultsGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
+      <HelpTOCNode Id="556d23ad-51fa-457c-98a7-6c8ea6add1d6" Title="QuizResultsGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.htm">
         <HelpTOCNode Title="AttemptNumber Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.AttemptNumber.htm" />
         <HelpTOCNode Title="QuestionsCorrect Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.QuestionsCorrect.htm" />
         <HelpTOCNode Title="RetrieveDataMethod Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.RetrieveDataMethod.htm" />
@@ -1015,12 +997,12 @@
         <HelpTOCNode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.QuizResultsGrid.TimeToComplete.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="a91154db-fc1c-4cc5-8d09-fd49a93089e5" Title="RolesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
+    <HelpTOCNode Id="7b9e0034-9736-47f4-bdb1-00cc1786b2fe" Title="RolesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
       <HelpTOCNode Title="RolesGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm" />
-      <HelpTOCNode Id="88180197-6e0b-4ebb-8153-7a5e6984b34e" Title="RolesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
+      <HelpTOCNode Id="ae4e5110-bbd2-4cf3-aa8d-4c6b22d8a8b1" Title="RolesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
         <HelpTOCNode Title="GetRolesGrid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.GetRolesGrid.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="2ff0c1d5-6ab0-4071-b822-9cb3cc9a382e" Title="RolesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
+      <HelpTOCNode Id="a5fa77e8-3029-4c0b-adda-8de73cf95f4c" Title="RolesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.htm">
         <HelpTOCNode Title="AssignCategories Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.AssignCategories.htm" />
         <HelpTOCNode Title="CategoriesCount Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.CategoriesCount.htm" />
         <HelpTOCNode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Delete.htm" />
@@ -1031,15 +1013,15 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.RolesGrid.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="b9eb7d6f-cdf5-4f2a-b244-65049e6ff68c" Title="SlidesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
+    <HelpTOCNode Id="4b807c81-2621-4132-9ae9-b141259fbd18" Title="SlidesGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
       <HelpTOCNode Title="SlidesGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm" />
-      <HelpTOCNode Id="f89090b4-6f4f-4774-aea3-3c313a3b0700" Title="SlidesGrid Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
+      <HelpTOCNode Id="0dfc5f2c-ab10-4d29-8143-a88c76f8accc" Title="SlidesGrid Fields" Url="html/Fields.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
         <HelpTOCNode Title="Index Field" Url="html/F-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Index.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="5c2d6e13-8130-46be-a73b-08b02877b010" Title="SlidesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
+      <HelpTOCNode Id="f438a743-e950-48ee-830f-08839fd6948d" Title="SlidesGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
         <HelpTOCNode Title="GetSlidesGrid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.GetSlidesGrid.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="47ca5a0a-8e0e-4801-bbd4-fe9259bca56a" Title="SlidesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
+      <HelpTOCNode Id="46d56083-20ce-4fc8-a189-d801b39fb101" Title="SlidesGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.htm">
         <HelpTOCNode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Delete.htm" />
         <HelpTOCNode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Details.htm" />
         <HelpTOCNode Title="Edit Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Edit.htm" />
@@ -1051,10 +1033,10 @@
         <HelpTOCNode Title="Title Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.SlidesGrid.Title.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="c2674dab-907e-42cd-aa97-5af7fa87a03b" Title="TrainingResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm">
+    <HelpTOCNode Id="71e26ef8-4429-42c5-a3ec-33596561479c" Title="TrainingResultsGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm">
       <HelpTOCNode Title="TrainingResultsGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm" />
       <HelpTOCNode Title="TrainingResultsGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm" />
-      <HelpTOCNode Id="896fab94-a455-4b15-96a2-b554cb8652dc" Title="TrainingResultsGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm">
+      <HelpTOCNode Id="a9954a97-51b2-48ff-a6e4-fc1e7df4d07d" Title="TrainingResultsGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.htm">
         <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.CompanyName.htm" />
         <HelpTOCNode Title="CompletionDateTime Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.CompletionDateTime.htm" />
         <HelpTOCNode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.Details.htm" />
@@ -1067,12 +1049,12 @@
         <HelpTOCNode Title="TimeToComplete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.TrainingResultsGrid.TimeToComplete.htm" />
       </HelpTOCNode>
     </HelpTOCNode>
-    <HelpTOCNode Id="de573915-7415-46ba-939f-53ddc02a8b26" Title="UsersGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
+    <HelpTOCNode Id="e2c5e2df-e3b4-46e6-b4b6-c95714e73cc5" Title="UsersGrid Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
       <HelpTOCNode Title="UsersGrid Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm" />
-      <HelpTOCNode Id="79454483-2b80-43f9-9755-9680b848d5c0" Title="UsersGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
+      <HelpTOCNode Id="c17ff08b-ff52-4227-948b-25788f4ce093" Title="UsersGrid Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
         <HelpTOCNode Title="GetUsersGrid Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.GetUsersGrid.htm" />
       </HelpTOCNode>
-      <HelpTOCNode Id="0531edc6-1626-4737-b356-cc336ac7a0ad" Title="UsersGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
+      <HelpTOCNode Id="b85e3e61-d54f-4214-a8dd-29d1549cd9e0" Title="UsersGrid Properties" Url="html/Properties.T-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.htm">
         <HelpTOCNode Title="CompanyName Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.CompanyName.htm" />
         <HelpTOCNode Title="Delete Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Delete.htm" />
         <HelpTOCNode Title="Details Property " Url="html/P-MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid.UsersGrid.Details.htm" />
@@ -1088,10 +1070,10 @@
       </HelpTOCNode>
     </HelpTOCNode>
   </HelpTOCNode>
-  <HelpTOCNode Id="bba3a430-4402-4a9f-86b4-0a8f04b4c763" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.htm">
-    <HelpTOCNode Id="492ba5a6-33ec-4fb4-a137-31b48f57ccab" Title="HomeControllerTest Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.htm">
+  <HelpTOCNode Id="9e926c16-5ee5-4eca-a749-db1cd01737b8" Title="MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers Namespace" Url="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.htm">
+    <HelpTOCNode Id="6e36f8fa-2287-4d73-bed4-6eb82590d423" Title="HomeControllerTest Class" Url="html/T-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.htm">
       <HelpTOCNode Title="HomeControllerTest Members" Url="html/AllMembers.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.htm" />
-      <HelpTOCNode Id="81f8d41c-5fba-4cea-be69-fd4a062961b3" Title="HomeControllerTest Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.htm">
+      <HelpTOCNode Id="030090c3-3a46-4835-b24b-0ecd84990c10" Title="HomeControllerTest Methods" Url="html/Methods.T-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.htm">
         <HelpTOCNode Title="About Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.About.htm" />
         <HelpTOCNode Title="Contact Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Contact.htm" />
         <HelpTOCNode Title="Index Method " Url="html/M-MichaelBrandonMorris.KingsportMillSafetyTraining.Tests.Controllers.HomeControllerTest.Index.htm" />

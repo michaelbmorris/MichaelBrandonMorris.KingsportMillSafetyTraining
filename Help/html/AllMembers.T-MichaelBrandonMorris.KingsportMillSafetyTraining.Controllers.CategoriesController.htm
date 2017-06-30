@@ -66,9 +66,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Gets the view to assign roles to the specified category. If no
-       category is specified, gets the assign roles model for all
-       categories.
+   Assigns the roles.
    </div>
                       </td>
                     </tr>
@@ -81,9 +79,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Posts the results of assigning roles to categories. Unpairs all
-       categories and roles, and then pairs the assigned categories
-       and roles.
+   Assigns the roles.
    </div>
                       </td>
                     </tr>
@@ -114,7 +110,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Gets the view to create a new category.
+   Creates this instance.
    </div>
                       </td>
                     </tr>
@@ -127,8 +123,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Posts the new category. If the new category is valid, adds it
-       to the database.
+   Creates the specified category.
    </div>
                       </td>
                     </tr>
@@ -159,9 +154,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Gets the view to delete the specified category. If no category
-       is specified, returns HTTP Bad Request. If the specified
-       category is not found, returns HTTP Not Found.
+   Deletes the specified identifier.
    </div>
                       </td>
                     </tr>
@@ -174,9 +167,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Posts the delete confirmation for the specified category. If no
-       category is specified, returns HTTP Bad Request. If the
-       specified category is not found, returns HTTP Not Found.
+   Deletes the confirmed.
    </div>
                       </td>
                     </tr>
@@ -189,9 +180,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Returns the detailed view for the specified category. If no
-       category is specified, returns HTTP Bad Request. If the
-       specified category is not found, returns HTTP Not Found.
+   Detailses the specified identifier.
    </div>
                       </td>
                     </tr>
@@ -204,8 +193,7 @@
                       </td>
                       <td>
                         <div class="summary">
-       Disposes of the database context when the controller is
-       disposed.
+   Releases unmanaged resources and optionally releases managed resources.
    </div>
                       </td>
                     </tr>
@@ -225,7 +213,11 @@
                       <td>
                         <a href="M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit.htm">Edit(Nullable<span class="languageSpecificText"><span class="cs">&lt;</span><span class="vb">(Of </span><span class="cpp">&lt;</span><span class="fs">&lt;'</span><span class="nu">(</span></span>Int32<span class="languageSpecificText"><span class="cs">&gt;</span><span class="vb">)</span><span class="cpp">&gt;</span><span class="fs">&gt;</span><span class="nu">)</span></span>)</a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Edits the specified identifier.
+   </div>
+                      </td>
                     </tr>
                     <tr data="public;declared;notNetfw;">
                       <td>
@@ -234,7 +226,11 @@
                       <td>
                         <a href="M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Edit_1.htm">Edit(Category)</a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Edits the specified category.
+   </div>
+                      </td>
                     </tr>
                     <tr data="protected;inherited;notNetfw;">
                       <td>
@@ -328,7 +324,11 @@
                       <td>
                         <a href="M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Index.htm">Index</a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Indexes this instance.
+   </div>
+                      </td>
                     </tr>
                     <tr data="protected;inherited;notNetfw;">
                       <td>
@@ -428,7 +428,11 @@
                       <td>
                         <a href="M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder.htm">Reorder<span class="languageSpecificText"><span class="cs">()</span><span class="cpp">()</span><span class="nu">()</span><span class="fs">()</span></span></a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Reorders this instance.
+   </div>
+                      </td>
                     </tr>
                     <tr data="public;declared;notNetfw;">
                       <td>
@@ -437,7 +441,11 @@
                       <td>
                         <a href="M-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Reorder_1.htm">Reorder(IList<span class="languageSpecificText"><span class="cs">&lt;</span><span class="vb">(Of </span><span class="cpp">&lt;</span><span class="fs">&lt;'</span><span class="nu">(</span></span>Category<span class="languageSpecificText"><span class="cs">&gt;</span><span class="vb">)</span><span class="cpp">&gt;</span><span class="fs">&gt;</span><span class="nu">)</span></span>)</a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Reorders the specified categories.
+   </div>
+                      </td>
                     </tr>
                     <tr data="public;inherited;notNetfw;">
                       <td>
@@ -448,35 +456,6 @@
                       </td>
                       <td>
                         <div class="summary">Returns a string that represents the current object.</div> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.object.aspx" target="_blank">Object</a>.)</td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="LW_CollapsibleArea_Container">
-                  <div class="LW_CollapsibleArea_TitleDiv">
-                    <h2 class="LW_CollapsibleArea_Title">Fields</h2>
-                    <div class="LW_CollapsibleArea_HrDiv">
-                      <hr class="LW_CollapsibleArea_Hr" />
-                    </div>
-                  </div>
-                  <a id="fieldTableSection">
-                    <!---->
-                  </a>
-                  <table class="members">
-                    <tr>
-                      <th class="iconColumn">
-               
-            </th>
-                      <th class="nameColumn">Name</th>
-                      <th class="descriptionColumn">Description</th>
-                    </tr>
-                    <tr data="private;declared;notNetfw;">
-                      <td>
-                        <img src="../icons/privfield.gif" alt="Private field" title="Private field" />
-                      </td>
-                      <td>
-                        <a href="F-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController._db.htm">_db</a>
-                      </td>
-                      <td />
                     </tr>
                   </table>
                 </div>
@@ -525,6 +504,19 @@
                       </td>
                       <td> (Inherited from <a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.controllerbase.aspx" target="_blank">ControllerBase</a>.)</td>
                     </tr>
+                    <tr data="private;declared;notNetfw;">
+                      <td>
+                        <img src="../icons/privproperty.gif" alt="Private property" title="Private property" />
+                      </td>
+                      <td>
+                        <a href="P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.Db.htm">Db</a>
+                      </td>
+                      <td>
+                        <div class="summary">
+   The database
+   </div>
+                      </td>
+                    </tr>
                     <tr data="protected;inherited;notNetfw;">
                       <td>
                         <img src="../icons/protproperty.gif" alt="Protected property" title="Protected property" />
@@ -560,7 +552,11 @@
                       <td>
                         <a href="P-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.CategoriesController.OrderByIndex.htm">OrderByIndex</a>
                       </td>
-                      <td />
+                      <td>
+                        <div class="summary">
+   Gets the index of the order by.
+   </div>
+                      </td>
                     </tr>
                     <tr data="public;inherited;notNetfw;">
                       <td>

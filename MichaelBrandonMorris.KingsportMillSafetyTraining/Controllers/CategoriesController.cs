@@ -9,23 +9,36 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    ///     The controller for categories. Accessible only to administrators.
+    /// Class CategoriesController.
     /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for CategoriesController
     [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+        /// <summary>
+        /// The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
+        /// <summary>
+        /// Gets the index of the order by.
+        /// </summary>
+        /// <value>The index of the order by.</value>
+        /// TODO Edit XML Comment Template for OrderByIndex
         private static Func<Category, object> OrderByIndex => category =>
             category.Index;
 
         /// <summary>
-        ///     Gets the view to assign roles to the specified category. If no
-        ///     category is specified, gets the assign roles model for all
-        ///     categories.
+        /// Assigns the roles.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AssignRoles
         [HttpGet]
         public ActionResult AssignRoles(int? id)
         {
@@ -33,11 +46,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 var model = id == null
                     ? new AssignRolesViewModel(
-                        _db.GetCategories(),
-                        _db.GetRoles().AsViewModels())
+                        Db.GetCategories(),
+                        Db.GetRoles().AsViewModels())
                     : new AssignRolesViewModel(
-                        _db.GetCategory(id.Value),
-                        _db.GetRoles().AsViewModels());
+                        Db.GetCategory(id.Value),
+                        Db.GetRoles().AsViewModels());
 
                 return View(model);
             }
@@ -50,18 +63,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the results of assigning roles to categories. Unpairs all
-        ///     categories and roles, and then pairs the assigned categories
-        ///     and roles.
+        /// Assigns the roles.
         /// </summary>
-        /// <param name="categoryRoles"></param>
-        /// <returns></returns>
+        /// <param name="categoryRoles">The category roles.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AssignRoles
         [HttpPost]
         public ActionResult AssignRoles(IList<int> categoryRoles)
         {
             try
             {
-                _db.UnpairCategoriesAndRoles();
+                Db.UnpairCategoriesAndRoles();
 
                 if (categoryRoles == null)
                 {
@@ -70,10 +82,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 foreach (var categoryRole in categoryRoles)
                 {
-                    var cantorInversePair = Helpers.CantorInverse(categoryRole);
-                    var categoryId = cantorInversePair.Item1;
-                    var roleId = cantorInversePair.Item2;
-                    _db.PairCategoryAndRole(categoryId, roleId);
+                    Db.PairCategoryAndRole(Math.Cantor.Inverse(categoryRole));
                 }
 
                 return RedirectToAction("Index");
@@ -87,9 +96,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Gets the view to create a new category.
+        /// Creates this instance.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpGet]
         public ActionResult Create()
         {
@@ -106,11 +116,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the new category. If the new category is valid, adds it
-        ///     to the database.
+        /// Creates the specified category.
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
+        /// <param name="category">The category.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Category category)
@@ -122,7 +132,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(category);
                 }
 
-                _db.CreateCategory(category);
+                Db.CreateCategory(category);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -134,12 +144,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Gets the view to delete the specified category. If no category
-        ///     is specified, returns HTTP Bad Request. If the specified
-        ///     category is not found, returns HTTP Not Found.
+        /// Deletes the specified identifier.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// TODO Edit XML Comment Template for Delete
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -151,7 +162,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var category = _db.GetCategory(id.Value);
+                var category = Db.GetCategory(id.Value);
 
                 if (category == null)
                 {
@@ -178,12 +189,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Posts the delete confirmation for the specified category. If no
-        ///     category is specified, returns HTTP Bad Request. If the
-        ///     specified category is not found, returns HTTP Not Found.
+        /// Deletes the confirmed.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// TODO Edit XML Comment Template for DeleteConfirmed
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -197,7 +209,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var category = _db.GetCategory(id.Value);
+                var category = Db.GetCategory(id.Value);
 
                 if (category == null)
                 {
@@ -205,7 +217,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         $"Category with Id {id} not found.");
                 }
 
-                _db.DeleteCategory(category);
+                Db.DeleteCategory(category);
                 return RedirectToAction("Index");
             }
             catch (InvalidOperationException e)
@@ -225,12 +237,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Returns the detailed view for the specified category. If no
-        ///     category is specified, returns HTTP Bad Request. If the
-        ///     specified category is not found, returns HTTP Not Found.
+        /// Detailses the specified identifier.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// TODO Edit XML Comment Template for Details
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -242,7 +254,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = _db.GetCategory(id.Value).AsViewModel();
+                var model = Db.GetCategory(id.Value).AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -261,6 +273,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// TODO Edit XML Comment Template for Edit
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -272,7 +291,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = _db.GetCategory(id.Value).AsViewModel();
+                var model = Db.GetCategory(id.Value);
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -291,6 +310,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Edits the specified category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
@@ -302,55 +327,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(category);
                 }
 
-                _db.Edit(category);
-                return RedirectToAction("Index");
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e.Message);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Index()
-        {
-            try
-            {
-                var model = _db.GetCategories(x => x.Index).AsViewModels();
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e.Message);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Reorder()
-        {
-            try
-            {
-                var model = _db.GetCategories(OrderByIndex).AsViewModels();
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e.Message);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Reorder(IList<Category> categories)
-        {
-            try
-            {
-                _db.Reorder(categories);
+                Db.Edit(category);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -362,15 +339,79 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Disposes of the database context when the controller is
-        ///     disposed.
+        /// Indexes this instance.
         /// </summary>
-        /// <param name="disposing"></param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
+        [HttpGet]
+        public ActionResult Index()
+        {
+            try
+            {
+                var model = Db.GetCategories(x => x.Index).AsViewModels();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Reorders this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
+        [HttpGet]
+        public ActionResult Reorder()
+        {
+            try
+            {
+                var model = Db.GetCategories(OrderByIndex).AsViewModels();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Reorders the specified categories.
+        /// </summary>
+        /// <param name="categories">The categories.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
+        [HttpPost]
+        public ActionResult Reorder(IList<Category> categories)
+        {
+            try
+            {
+                Db.Reorder(categories);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Releases unmanaged resources and optionally releases managed resources.
+        /// </summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);

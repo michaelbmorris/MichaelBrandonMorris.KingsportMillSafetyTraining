@@ -27,7 +27,7 @@
       <MSHelp:Attr Name="Locale" Value="en-us" />
       <MSHelp:Attr Name="TopicType" Value="kbSyntax" />
       <MSHelp:Attr Name="TopicType" Value="apiref" />
-      <MSHelp:Attr Name="Abstract" Value="Shows the training results for the specified user. If no user is specified, returns HTTP Bad Request. If the current user is not an administrator and not the specified user, returns HTTP Forbidden." />
+      <MSHelp:Attr Name="Abstract" Value="Users the results." />
       <MSHelp:Attr Name="AssemblyVersion" Value="" />
     </xml>
   </head>
@@ -41,10 +41,7 @@
             <div id="mainSection">
               <div id="mainBody">
                 <div class="summary">
-       Shows the training results for the specified user. If no user
-       is specified, returns HTTP Bad Request. If the current user is
-       not an administrator and not the specified user, returns HTTP
-       Forbidden.
+       Users the results.
    </div>
                 <p />
     <b>Namespace:</b> 
@@ -60,7 +57,13 @@
 <span class="keyword">public</span>:
 <a href="http://msdn.microsoft.com/en-us/library/system.web.mvc.actionresult.aspx" target="_blank">ActionResult</a>^ <span class="identifier">UserResults</span>(
 	<a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a>^ <span class="parameter">id</span>
-)</pre></div></div></div><div id="parameters"><h4 class="subHeading">Parameters</h4><dl paramName="id"><dt><span class="parameterItalic">id</span></dt><dd>Type: <a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a><br /></dd></dl></div><h4 class="subHeading">Return Value</h4></div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">See Also</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="seeAlsoSection"><!----></a><div class="seeAlsoStyle"><a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">ResultsController Class</a></div><div class="seeAlsoStyle"><a href="N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.htm">MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers Namespace</a></div></div></div>
+)</pre></div></div></div><div id="parameters"><h4 class="subHeading">Parameters</h4><dl paramName="id"><dt><span class="parameterItalic">id</span></dt><dd>Type: <a href="http://msdn.microsoft.com/en-us/library/system.string.aspx" target="_blank">String</a><br />The identifier.</dd></dl></div><h4 class="subHeading">Return Value</h4>ActionResult.</div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">Exceptions</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="exceptionsSection"><!----></a><div class="tableSection"><table width="100%" cellspacing="0" cellpadding="5" frame="lhs"><tr><th class="exceptionNameColumn">Exception</th><th class="exceptionConditionColumn">Condition</th></tr><tr><td><a href="http://msdn.microsoft.com/en-us/library/system.invalidoperationexception.aspx" target="_blank">InvalidOperationException</a></td><td>
+       Parameter
+       missing.\nName: 'id'\nType: 'string'
+   </td></tr><tr><td><a href="http://msdn.microsoft.com/en-us/library/system.unauthorizedaccessexception.aspx" target="_blank">UnauthorizedAccessException</a></td><td>
+       You do not
+       have permission to view this.
+   </td></tr></table></div></div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">See Also</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="seeAlsoSection"><!----></a><div class="seeAlsoStyle"><a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.ResultsController.htm">ResultsController Class</a></div><div class="seeAlsoStyle"><a href="N-MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.htm">MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers Namespace</a></div></div></div>
             </div>
           </div>
         </div>

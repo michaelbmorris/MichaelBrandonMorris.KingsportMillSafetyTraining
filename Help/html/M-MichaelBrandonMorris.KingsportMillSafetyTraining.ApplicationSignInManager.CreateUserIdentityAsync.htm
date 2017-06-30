@@ -27,7 +27,7 @@
       <MSHelp:Attr Name="Locale" Value="en-us" />
       <MSHelp:Attr Name="TopicType" Value="kbSyntax" />
       <MSHelp:Attr Name="TopicType" Value="apiref" />
-      <MSHelp:Attr Name="Abstract" Value="Creates a asynchronously." />
+      <MSHelp:Attr Name="Abstract" Value="Called to generate the ClaimsIdentity for the user, override to add additional claims before SignIn" />
       <MSHelp:Attr Name="AssemblyVersion" Value="" />
     </xml>
   </head>
@@ -41,7 +41,8 @@
             <div id="mainSection">
               <div id="mainBody">
                 <div class="summary">
-       Creates a <span class="nolink">[ClaimsIdentity]</span> asynchronously.
+       Called to generate the ClaimsIdentity for the user,
+       override to add additional claims before SignIn
    </div>
                 <p />
     <b>Namespace:</b> 
@@ -54,7 +55,7 @@
 ) <span class="keyword">As</span> <span class="nolink">Task</span>(<span class="keyword">Of</span> <span class="nolink">ClaimsIdentity</span>)</pre></div><div class="CodeSnippetContainerCode ManagedCPlusPlusCode"><pre xml:space="preserve" class="libCScode"><span class="keyword">public</span>:
 <span class="nolink">Task</span>&lt;<span class="nolink">ClaimsIdentity</span>^&gt;^ <span class="identifier">CreateUserIdentityAsync</span>(
 	<a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">User</a>^ <span class="parameter">user</span>
-)</pre></div></div></div><div id="parameters"><h4 class="subHeading">Parameters</h4><dl paramName="user"><dt><span class="parameterItalic">user</span></dt><dd>Type: <a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span><span class="fs">.</span></span>User</a><br /></dd></dl></div><h4 class="subHeading">Return Value</h4></div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">See Also</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="seeAlsoSection"><!----></a><div class="seeAlsoStyle"><a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">ApplicationSignInManager Class</a></div><div class="seeAlsoStyle"><a href="N-MichaelBrandonMorris.KingsportMillSafetyTraining.htm">MichaelBrandonMorris.KingsportMillSafetyTraining Namespace</a></div></div></div>
+)</pre></div></div></div><div id="parameters"><h4 class="subHeading">Parameters</h4><dl paramName="user"><dt><span class="parameterItalic">user</span></dt><dd>Type: <a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User.htm">MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models<span class="languageSpecificText"><span class="cs">.</span><span class="vb">.</span><span class="cpp">::</span><span class="nu">.</span><span class="fs">.</span></span>User</a><br />The user.</dd></dl></div><h4 class="subHeading">Return Value</h4>Task&lt;ClaimsIdentity&gt;.</div><div class="LW_CollapsibleArea_Container"><div class="LW_CollapsibleArea_TitleDiv"><h2 class="LW_CollapsibleArea_Title">See Also</h2><div class="LW_CollapsibleArea_HrDiv"><hr class="LW_CollapsibleArea_Hr" /></div></div><a id="seeAlsoSection"><!----></a><div class="seeAlsoStyle"><a href="T-MichaelBrandonMorris.KingsportMillSafetyTraining.ApplicationSignInManager.htm">ApplicationSignInManager Class</a></div><div class="seeAlsoStyle"><a href="N-MichaelBrandonMorris.KingsportMillSafetyTraining.htm">MichaelBrandonMorris.KingsportMillSafetyTraining Namespace</a></div></div></div>
             </div>
           </div>
         </div>

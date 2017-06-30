@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,16 +14,42 @@ using Microsoft.Owin.Security;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class ManageController.
+    /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for ManageController
     [Authorize]
     public class ManageController : Controller
     {
+        /// <summary>
+        ///     The sign in manager
+        /// </summary>
+        /// TODO Edit XML Comment Template for _signInManager
         private ApplicationSignInManager _signInManager;
+
+        /// <summary>
+        ///     The user manager
+        /// </summary>
+        /// TODO Edit XML Comment Template for _userManager
         private ApplicationUserManager _userManager;
 
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="ManageController" /> class.
+        /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
         public ManageController()
         {
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="ManageController" /> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="signInManager">The sign in manager.</param>
+        /// TODO Edit XML Comment Template for #ctor
         public ManageController(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager)
@@ -31,20 +58,40 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             SignInManager = signInManager;
         }
 
+        /// <summary>
+        ///     Gets the sign in manager.
+        /// </summary>
+        /// <value>The sign in manager.</value>
+        /// TODO Edit XML Comment Template for SignInManager
         public ApplicationSignInManager SignInManager
         {
             get => _signInManager ?? GetSignInManager();
             private set => _signInManager = value;
         }
 
+        /// <summary>
+        ///     Gets the user manager.
+        /// </summary>
+        /// <value>The user manager.</value>
+        /// TODO Edit XML Comment Template for UserManager
         public ApplicationUserManager UserManager
         {
             get => _userManager ?? GetUserManager();
             private set => _userManager = value;
         }
 
+        /// <summary>
+        ///     Gets the owin context.
+        /// </summary>
+        /// <value>The owin context.</value>
+        /// TODO Edit XML Comment Template for OwinContext
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
+        /// <summary>
+        ///     Adds the phone number.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {
             try
@@ -59,6 +106,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Adds the phone number.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for AddPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(
@@ -109,6 +162,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Changes the password.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ChangePassword
         [HttpGet]
         public ActionResult ChangePassword()
         {
@@ -124,6 +182,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Changes the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(
@@ -169,6 +233,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Disables the two factor authentication.
+        /// </summary>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for DisableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
@@ -193,6 +262,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Enables the two factor authentication.
+        /// </summary>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for EnableTwoFactorAuthentication
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
@@ -225,6 +299,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Indexes the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
@@ -284,13 +364,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Links the login.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
             try
             {
-                return new AccountController.ChallengeResult(
+                return new ChallengeResult(
                     provider,
                     Url.Action("LinkLoginCallback", "Manage"),
                     User.GetId());
@@ -303,6 +389,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Links the login callback.
+        /// </summary>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for LinkLoginCallback
         [HttpGet]
         public async Task<ActionResult> LinkLoginCallback()
         {
@@ -343,6 +434,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Manages the logins.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ManageLogins
         [HttpGet]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
@@ -389,6 +486,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Removes the login.
+        /// </summary>
+        /// <param name="loginProvider">The login provider.</param>
+        /// <param name="providerKey">The provider key.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for RemoveLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(
@@ -434,6 +538,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Removes the phone number.
+        /// </summary>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for RemovePhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
@@ -475,6 +584,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Sets the password.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for SetPassword
         [HttpGet]
         public ActionResult SetPassword()
         {
@@ -490,6 +604,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Sets the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -534,6 +654,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Verifies the phone number.
+        /// </summary>
+        /// <param name="phoneNumber">The phone number.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for VerifyPhoneNumber
         [HttpGet]
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
@@ -559,6 +685,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Verifies the phone number.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for VerifyPhoneNumber
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(
@@ -604,6 +736,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -615,11 +756,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        ///     Gets the sign in manager.
+        /// </summary>
+        /// <returns>ApplicationSignInManager.</returns>
+        /// TODO Edit XML Comment Template for GetSignInManager
         private ApplicationSignInManager GetSignInManager()
         {
             return OwinContext.Get<ApplicationSignInManager>();
         }
 
+        /// <summary>
+        ///     Gets the user manager.
+        /// </summary>
+        /// <returns>ApplicationUserManager.</returns>
+        /// TODO Edit XML Comment Template for GetUserManager
         private ApplicationUserManager GetUserManager()
         {
             return OwinContext.GetUserManager<ApplicationUserManager>();
@@ -627,11 +778,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
         #region Helpers
 
+        /// <summary>
+        ///     The XSRF key
+        /// </summary>
+        /// TODO Edit XML Comment Template for XsrfKey
         private const string XsrfKey = "XsrfId";
 
+        /// <summary>
+        ///     Gets the authentication manager.
+        /// </summary>
+        /// <value>The authentication manager.</value>
+        /// TODO Edit XML Comment Template for AuthenticationManager
         private IAuthenticationManager AuthenticationManager => OwinContext
             .Authentication;
 
+        /// <summary>
+        ///     Adds the errors.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        /// TODO Edit XML Comment Template for AddErrors
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -640,20 +805,66 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        ///     Determines whether this instance has password.
+        /// </summary>
+        /// <returns>
+        ///     <c>true</c> if this instance has password;
+        ///     otherwise, <c>false</c>.
+        /// </returns>
+        /// TODO Edit XML Comment Template for HasPassword
         private bool HasPassword()
         {
             var user = UserManager.FindById(User.GetId());
             return user?.PasswordHash != null;
         }
 
+        /// <summary>
+        ///     Enum ManageMessageId
+        /// </summary>
+        /// TODO Edit XML Comment Template for ManageMessageId
         public enum ManageMessageId
         {
+            /// <summary>
+            ///     The add phone success
+            /// </summary>
+            /// TODO Edit XML Comment Template for AddPhoneSuccess
             AddPhoneSuccess,
+
+            /// <summary>
+            ///     The change password success
+            /// </summary>
+            /// TODO Edit XML Comment Template for ChangePasswordSuccess
             ChangePasswordSuccess,
+
+            /// <summary>
+            ///     The set two factor success
+            /// </summary>
+            /// TODO Edit XML Comment Template for SetTwoFactorSuccess
             SetTwoFactorSuccess,
+
+            /// <summary>
+            ///     The set password success
+            /// </summary>
+            /// TODO Edit XML Comment Template for SetPasswordSuccess
             SetPasswordSuccess,
+
+            /// <summary>
+            ///     The remove login success
+            /// </summary>
+            /// TODO Edit XML Comment Template for RemoveLoginSuccess
             RemoveLoginSuccess,
+
+            /// <summary>
+            ///     The remove phone success
+            /// </summary>
+            /// TODO Edit XML Comment Template for RemovePhoneSuccess
             RemovePhoneSuccess,
+
+            /// <summary>
+            ///     The error
+            /// </summary>
+            /// TODO Edit XML Comment Template for Error
             Error
         }
 

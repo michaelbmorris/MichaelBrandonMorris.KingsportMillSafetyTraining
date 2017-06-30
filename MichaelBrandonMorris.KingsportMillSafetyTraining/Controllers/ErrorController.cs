@@ -5,8 +5,18 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class ErrorController.
+    /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for ErrorController
     public class ErrorController : Controller
     {
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         public ActionResult Index()
         {
             try
@@ -19,7 +29,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     Message = error.Message
                 };
 
-                Response.StatusCode = (int)error.Code;
+                Response.StatusCode = (int) error.Code;
                 return View(model);
             }
             catch (Exception e)

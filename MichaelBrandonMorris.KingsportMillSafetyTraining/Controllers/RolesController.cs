@@ -6,33 +6,64 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.Math;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    /// <summary>
+    ///     Class RolesController.
+    /// </summary>
+    /// <seealso cref="Controller" />
+    /// TODO Edit XML Comment Template for RolesController
     [Authorize(Roles = "Administrator")]
     public class RolesController : Controller
     {
-        private readonly KingsportMillSafetyTrainingDbContext _db = new KingsportMillSafetyTrainingDbContext();
+        /// <summary>
+        ///     The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
+        /// <summary>
+        ///     Gets the index of the order by.
+        /// </summary>
+        /// <value>The index of the order by.</value>
+        /// TODO Edit XML Comment Template for OrderByIndex
+        private static Func<Role, object> OrderByIndex => role => role.Index;
+
+        /// <summary>
+        ///     Assigns the categories.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AssignCategories
         [HttpGet]
         public ActionResult AssignCategories(int? id)
         {
-            AssignCategoriesViewModel model;
-            if (id == null)
-            {
-                model = new AssignCategoriesViewModel(_db.GetRoles(), _db.GetCategories().AsViewModels());
-            }
-            else
-            {
-                model = new AssignCategoriesViewModel(_db.GetRole(id.Value), _db.GetCategories().AsViewModels());
-            }
+            var model = id == null
+                ? new AssignCategoriesViewModel(
+                    Db.GetRoles(),
+                    Db.GetCategories().AsViewModels())
+                : new AssignCategoriesViewModel(
+                    Db.GetRole(id.Value),
+                    Db.GetCategories().AsViewModels());
+
             return View(model);
         }
 
+        /// <summary>
+        ///     Assigns the categories.
+        /// </summary>
+        /// <param name="roleCategories">The role categories.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for AssignCategories
         [HttpPost]
         public ActionResult AssignCategories(IList<int> roleCategories)
         {
-            _db.UnpairCategoriesAndRoles();
+            Db.UnpairCategoriesAndRoles();
 
             if (roleCategories == null)
             {
@@ -41,21 +72,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             foreach (var roleCategory in roleCategories)
             {
-                var cantorInversePair = Helpers.CantorInverse(roleCategory);
-                var roleId = cantorInversePair.Item1;
-                var categoryId = cantorInversePair.Item2;
-                _db.PairCategoryAndRole(categoryId, roleId);
+                Db.PairCategoryAndRole(Cantor.Inverse(roleCategory));
             }
 
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Creates this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        ///     Creates the specified role.
+        /// </summary>
+        /// <param name="role">The role.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Role role)
@@ -65,11 +104,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(role);
             }
 
-            _db.CreateRole(role);
-            _db.SaveChanges();
+            Db.CreateRole(role);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Deletes the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Delete
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -78,7 +123,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var role = _db.GetRole(id.Value);
+            var role = Db.GetRole(id.Value);
 
             if (role == null)
             {
@@ -88,22 +133,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(role);
         }
 
+        /// <summary>
+        ///     Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for DeleteConfirmed
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var role = _db.GetRole(id);
+            var role = Db.GetRole(id);
 
             if (role != null)
             {
-                _db.DeleteRole(role);
+                Db.DeleteRole(role);
             }
 
-            _db.SaveChanges();
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Detailses the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Details
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -112,7 +169,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var model = _db.GetRole(id.Value).AsViewModel();
+            var model = Db.GetRole(id.Value).AsViewModel();
 
             if (model == null)
             {
@@ -122,6 +179,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(model);
         }
 
+        /// <summary>
+        ///     Edits the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -130,7 +193,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var role = _db.GetRole(id.Value);
+            var role = Db.GetRole(id.Value);
 
             if (role == null)
             {
@@ -140,6 +203,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return View(role);
         }
 
+        /// <summary>
+        ///     Edits the specified role.
+        /// </summary>
+        /// <param name="role">The role.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Role role)
@@ -149,39 +218,62 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(role);
             }
 
-            _db.Entry(role).State = EntityState.Modified;
-            _db.SaveChanges();
+            Db.Entry(role).State = EntityState.Modified;
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        private static Func<Role, object> OrderByIndex => role => role.Index;
-
+        /// <summary>
+        ///     Indexes this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Index
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _db.GetRoles(OrderByIndex).AsViewModels();
+            var model = Db.GetRoles(OrderByIndex).AsViewModels();
             return View(model);
         }
 
+        /// <summary>
+        ///     Reorders this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
         [HttpGet]
         public ActionResult Reorder()
         {
-            var model = _db.GetRoles(OrderByIndex).AsViewModels();
+            var model = Db.GetRoles(OrderByIndex).AsViewModels();
             return View(model);
         }
 
+        /// <summary>
+        ///     Reorders the specified roles.
+        /// </summary>
+        /// <param name="roles">The roles.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Reorder
         [HttpPost]
         public ActionResult Reorder(IList<Role> roles)
         {
-            _db.Reorder(roles);
+            Db.Reorder(roles);
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
+        /// </summary>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
+        /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                _db.Dispose();
+                Db.Dispose();
             }
 
             base.Dispose(disposing);
