@@ -1,3 +1,2 @@
 # MichaelBrandonMorris.KingsportMillSafetyTraining
-
-This is an ASP.NET MVC application for safety training at the (currently Domtar) Kingsport Mill.
+C# ASP.NET MVC web application for safety training at the Kingsport, TN paper mill.
