@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
@@ -154,7 +157,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                var category = db.GetCategory(categoryId);
+                Category category = null;
+
+                try
+                {
+                    category = db.GetCategory(categoryId);
+                }
+                catch (ArgumentNullException)
+                {
+                }
+                catch (KeyNotFoundException)
+                {
+                }
 
                 var query = category == null
                     ? db.GetRoles().AsViewModels()

@@ -3,28 +3,13 @@
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    /// Class Category.
+    ///     Class Category.
     /// </summary>
     /// TODO Edit XML Comment Template for Category
     public class Category
     {
         /// <summary>
-        /// The current index
-        /// </summary>
-        /// TODO Edit XML Comment Template for CurrentIndex
-        public static int CurrentIndex;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Category"/> class.
-        /// </summary>
-        /// TODO Edit XML Comment Template for #ctor
-        public Category()
-        {
-            Index = ++CurrentIndex;
-        }
-
-        /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
@@ -35,7 +20,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         /// TODO Edit XML Comment Template for Id
@@ -46,7 +31,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the index.
+        ///     Gets or sets the index.
         /// </summary>
         /// <value>The index.</value>
         /// TODO Edit XML Comment Template for Index
@@ -57,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the roles.
+        ///     Gets or sets the roles.
         /// </summary>
         /// <value>The roles.</value>
         /// TODO Edit XML Comment Template for Roles
@@ -68,7 +53,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         } = new List<Role>();
 
         /// <summary>
-        /// Gets or sets the slides.
+        ///     Gets or sets the slides.
         /// </summary>
         /// <value>The slides.</value>
         /// TODO Edit XML Comment Template for Slides
@@ -79,11 +64,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         } = new List<Slide>();
 
         /// <summary>
-        /// Gets or sets the title.
+        ///     Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
         /// TODO Edit XML Comment Template for Title
         public string Title
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     The current index
+        /// </summary>
+        /// TODO Edit XML Comment Template for CurrentIndex
+        public static int CurrentIndex
         {
             get;
             set;

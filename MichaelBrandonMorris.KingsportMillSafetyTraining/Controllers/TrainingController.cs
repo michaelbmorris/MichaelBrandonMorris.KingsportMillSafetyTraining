@@ -14,7 +14,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// <summary>
     ///     Class TrainingController.
     /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for TrainingController
     [Authorize]
     public class TrainingController : Controller
@@ -36,6 +36,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             .Index;
 
         /// <summary>
+        ///     Gets the should show on quiz.
+        /// </summary>
+        /// <value>The should show on quiz.</value>
+        /// TODO Edit XML Comment Template for ShouldShowOnQuiz
+        private static Func<Slide, bool> ShouldShowOnQuiz => x =>
+            x.ShouldShowSlideInSlideshow && x.ShouldShowQuestionOnQuiz;
+
+        /// <summary>
         ///     The database
         /// </summary>
         /// TODO Edit XML Comment Template for Db
@@ -43,6 +51,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             get;
         } = new KingsportMillSafetyTrainingDbContext();
+
+        /// <summary>
+        ///     Confirms the role.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// <exception cref="InvalidOperationException">
+        ///     Cannot confirm
+        ///     user role because no role is selected.
+        /// </exception>
+        /// TODO Edit XML Comment Template for ConfirmRole
+        public ActionResult ConfirmRole()
+        {
+            try
+            {
+                var role = GetCurrentUserRole();
+
+                if (role == null)
+                {
+                    throw new InvalidOperationException(
+                        "Cannot confirm user role because no role is selected.");
+                }
+
+                System.Web.HttpContext.Current.Session["Confirmed"] = 1;
+                return View(role);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
+        }
 
         /// <summary>
         ///     Indexes this instance.
@@ -61,11 +101,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return RedirectToAction("SelectRole");
                 }
 
+                if (System.Web.HttpContext.Current.Session["Confirmed"] == null)
+                {
+                    return RedirectToAction("ConfirmRole");
+                }
+
+                System.Web.HttpContext.Current.Session["Confirmed"] = null;
                 Db.SetUserLatestTrainingStartDateTime(User.GetId());
+
                 var model = role.GetSlides(
                         OrderCategoriesByIndex,
                         orderSlidesBy: OrderSlidesByIndex)
                     .AsViewModels();
+
                 return View(model);
             }
             catch (Exception e)
@@ -85,12 +133,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult Quiz()
         {
             var role = GetCurrentUserRole();
-            var model = role
-                .GetSlides(
-                    slidesWhere: slide => slide.ShouldShowSlideInSlideshow
-                                          && slide.ShouldShowQuestionOnQuiz)
+
+            var model = role.GetSlides(slidesWhere: ShouldShowOnQuiz)
                 .AsQuizSlideViewModels()
                 .Shuffle();
+
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
             Db.AddTrainingResult(User.GetId());
             Db.SetUserLatestQuizStartDateTime(User.GetId());

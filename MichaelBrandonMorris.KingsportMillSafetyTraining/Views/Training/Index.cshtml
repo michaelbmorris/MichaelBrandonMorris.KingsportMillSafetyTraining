@@ -1,5 +1,4 @@
-﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
-@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
 
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
@@ -16,17 +15,17 @@
             <div class="item @(item == Model.First() ? "active" : "")">
                 <div class="carousel-content">
                     <h2>
-                        @Html.DisplayFor(item.CategoryTitle)
+                        @Html.DisplayFor(modelItem => item.CategoryTitle)
                     </h2>
                     <h4>
-                        @Html.DisplayFor(item.Title)
+                        @Html.DisplayFor(modelitem => item.Title)
                     </h4>
                     <div class="row">
                         @if (item.ImageBytes == null)
                         {
                             <div class="col-md-12">
                                 <p>
-                                    @Html.DisplayFor(item.Content)
+                                    @Html.DisplayFor(modelItem => item.Content)
                                 </p>
                             </div>
                         }
@@ -34,7 +33,7 @@
                         {
                             <div class="col-md-6">
                                 <p>
-                                    @Html.DisplayFor(item.Content)
+                                    @Html.DisplayFor(modelItem => item.Content)
                                 </p>
                             </div>
                             <div class="col-md-6">

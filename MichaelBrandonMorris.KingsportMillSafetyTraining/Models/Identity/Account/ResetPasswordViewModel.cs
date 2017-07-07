@@ -1,15 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    Account
 {
+    /// <summary>
+    ///     Class ResetPasswordViewModel.
+    /// </summary>
+    /// TODO Edit XML Comment Template for ResetPasswordViewModel
     public class ResetPasswordViewModel
     {
+        /// <summary>
+        ///     Gets or sets the code.
+        /// </summary>
+        /// <value>The code.</value>
+        /// TODO Edit XML Comment Template for Code
         public string Code
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the confirm password.
+        /// </summary>
+        /// <value>The confirm password.</value>
+        /// TODO Edit XML Comment Template for ConfirmPassword
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare(
@@ -22,6 +37,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Accou
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the email.
+        /// </summary>
+        /// <value>The email.</value>
+        /// TODO Edit XML Comment Template for Email
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -31,6 +51,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Accou
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the password.
+        /// </summary>
+        /// <value>The password.</value>
+        /// TODO Edit XML Comment Template for Password
         [Required]
         [StringLength(
             100,

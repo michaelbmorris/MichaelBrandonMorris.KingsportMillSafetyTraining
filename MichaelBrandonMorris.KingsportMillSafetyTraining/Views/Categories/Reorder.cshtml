@@ -6,11 +6,13 @@
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
+<p class="bg-info">
+    Click and drag the arrows to change order.
+</p>
+
 @using (Html.BeginForm())
 {
-    <p class="bg-info">
-        Click and drag the arrows to change order.
-    </p>
+    
     <table class="table table-condensed table-hover table-striped"
            id="sort">
         <tbody>
@@ -18,9 +20,9 @@
             {
                 <tr>
                     <td>
-                        <span class="glyphicon glyphicon-move handle"></span>
+                        <span class="glyphicon glyphicon-move handle"></span>                       
+                        @Html.DisplayFor(model => Model[i].Title)
                         @Html.HiddenFor(model => Model[i].Id)
-                        @Html.DisplayFor(m => Model[i].Title)
                         @Html.HiddenFor(model => Model[i].Index, new
                         {
                             name = string.Format("slides[{0}].Index", i), @readonly = true, @class = "index"

@@ -163,6 +163,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the user identifier.
+        /// </summary>
+        /// <value>The user identifier.</value>
         public string UserId
         {
             get;

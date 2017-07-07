@@ -8,7 +8,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     /// <summary>
     ///     Class MvcApplication.
     /// </summary>
-    /// <seealso cref="System.Web.HttpApplication" />
+    /// <seealso cref="HttpApplication" />
     /// TODO Edit XML Comment Template for MvcApplication
     public class MvcApplication : HttpApplication
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
@@ -100,7 +101,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             return new KingsportMillSafetyTrainingDbContext();
         }
-
 
         /// <summary>
         ///     Adds the quiz result.
@@ -213,10 +213,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// TODO Edit XML Comment Template for CreateSlide
         public void CreateSlide(Slide slide, int categoryId)
         {
+            Debug.WriteLine("creating slide");
             DoTransaction(
                 () =>
                 {
-                    slide.Category = Categories.Find(categoryId);
+                    var category = Categories.Find(categoryId);
+
+                    slide.Category =
+                        category
+                        ?? throw new KeyNotFoundException(
+                            $"Category with id '{categoryId}' not found.");
+
+                    slide.Index = category.Slides.Count;
                     Slides.Add(slide);
                 });
         }
@@ -239,21 +247,39 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     Categories.Attach(category);
                     Categories.Remove(category);
                 });
+
+            UpdateCurrentCategoryIndex();
         }
 
         /// <summary>
-        ///     Deletes the role.
+        /// Deletes the role.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="id">The identifier.</param>
+        /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for DeleteRole
-        public void DeleteRole(Role role)
+        public void DeleteRole(int? id)
         {
             DoTransaction(
                 () =>
                 {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var role = TrainingRoles.Find(id);
+
+                    if (role == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Role with id '{id}' not found.");
+                    }
+
                     TrainingRoles.Attach(role);
                     TrainingRoles.Remove(role);
                 });
+
+            UpdateCurrentRoleIndex();
         }
 
         /// <summary>
@@ -379,21 +405,59 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Category.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for GetCategory
-        public Category GetCategory(int id)
+        public Category GetCategory(int? id)
         {
-            return DoTransaction(() => Categories.Find(id));
+            return DoTransaction(
+                () =>
+                {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var category = Categories.Find(id);
+
+                    if (category == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Category with id '{id}' not found.");
+                    }
+
+                    return category;
+                });
         }
 
         /// <summary>
-        ///     Gets the role.
+        /// Gets the role.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Role.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for GetRole
-        public Role GetRole(int id)
+        public Role GetRole(int? id)
         {
-            return DoTransaction(() => TrainingRoles.Find(id));
+            return DoTransaction(
+                () =>
+                {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var role = TrainingRoles.Find(id);
+
+                    if (role == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Role with id '{id}' not found.");
+                    }
+
+                    return role;
+                });
         }
 
         /// <summary>
@@ -426,10 +490,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Slide.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for GetSlide
-        public Slide GetSlide(int id)
+        public Slide GetSlide(int? id)
         {
-            return DoTransaction(() => Slides.Find(id));
+            return DoTransaction(
+                () =>
+                {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var slide = Slides.Find(id);
+
+                    if (slide == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Slide with id '{id}' not found.");
+                    }
+
+                    return slide;
+                });
         }
 
         /// <summary>
@@ -443,7 +526,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             Func<Slide, object> orderBy = null,
             Func<Slide, bool> where = null)
         {
-            return Slides.OrderByWhere(orderBy, where);
+            return DoTransaction(() => Slides.OrderByWhere(orderBy, where));
         }
 
         /// <summary>
@@ -578,7 +661,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 
 
         /// <summary>
-        /// Pairs the category and role.
+        ///     Pairs the category and role.
         /// </summary>
         /// <param name="categoryAndRoleIds">The category and role ids.</param>
         /// TODO Edit XML Comment Template for PairCategoryAndRole
@@ -645,6 +728,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         categoryToEdit.Index = category.Index;
                     }
                 });
+
+            UpdateCurrentCategoryIndex();
         }
 
         /// <summary>
@@ -778,9 +863,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
-                    Answer.CurrentIndex = !Categories.Any()
+                    Answer.CurrentIndex = !Answers.Any()
                         ? 0
-                        : Categories.Max(x => x.Index);
+                        : Answers.Max(x => x.Index);
                 });
         }
 
@@ -800,17 +885,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        ///     Updates the index of the current slide.
+        ///     Updates the index of the current role.
         /// </summary>
-        /// TODO Edit XML Comment Template for UpdateCurrentSlideIndex
-        public void UpdateCurrentSlideIndex()
+        /// TODO Edit XML Comment Template for UpdateCurrentRoleIndex
+        public void UpdateCurrentRoleIndex()
         {
             DoTransaction(
                 () =>
                 {
-                    Slide.CurrentIndex = !Categories.Any()
+                    Role.CurrentIndex = !TrainingRoles.Any()
                         ? 0
-                        : Categories.Max(x => x.Index);
+                        : TrainingRoles.Max(x => x.Index);
                 });
         }
 
@@ -821,8 +906,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// TODO Edit XML Comment Template for DoTransaction
         internal void DoTransaction(Action action)
         {
-            using (var transaction =
-                Database.CurrentTransaction ?? Database.BeginTransaction())
+            using (var transaction = Database.BeginTransaction())
             {
                 try
                 {
@@ -833,6 +917,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 catch (DbEntityValidationException)
                 {
                     transaction.Rollback();
+                    throw;
                 }
                 catch (Exception)
                 {
@@ -853,8 +938,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             T t;
 
-            using (var transaction =
-                Database.CurrentTransaction ?? Database.BeginTransaction())
+            using (var transaction = Database.BeginTransaction())
             {
                 try
                 {

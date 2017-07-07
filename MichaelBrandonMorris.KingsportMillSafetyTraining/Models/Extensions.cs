@@ -37,7 +37,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             if (slide == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(slide));
             }
 
             return new SlideViewModel(slide, categories);
@@ -54,7 +54,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             if (user == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(user));
             }
 
             return new UserViewModel(user);
@@ -71,7 +71,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             if (role == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(role));
             }
 
             return new RoleViewModel(role);
@@ -88,7 +88,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             if (category == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(category));
             }
 
             return new CategoryViewModel(category);
@@ -106,7 +106,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             if (trainingResult == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(trainingResult));
             }
 
             return new TrainingResultViewModel(trainingResult);

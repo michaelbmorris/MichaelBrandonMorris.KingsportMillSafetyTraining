@@ -1,5 +1,4 @@
-﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
-@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
 
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
@@ -64,7 +63,7 @@
                 {
                     <td class="rowspan"
                         rowspan="@rowCount">
-                        @Html.DisplayFor(Model[k].CategoryTitle)
+                        @Html.DisplayFor(model => Model[k].CategoryTitle)
                         <br/>
                         @Html.ActionLink("Details", "Details", "Categories", new
                         {
@@ -84,23 +83,26 @@
                     </td>
                 }
                 <td>
-                    @Html.DisplayFor(Model[k].Title)
+                    @Html.DisplayFor(model => Model[k].Title)
                 </td>
                 <td>
-                    <img src="@Url.Action("RenderImage", new
-                              {
-                                  id = Model[k].Id
-                              })"
-                         alt="@Model[k].ImageDescription"/>
+                    @if (Model[k].ImageBytes != null)
+                    {
+                        <img src="@Url.Action("RenderImage", new
+                                  {
+                                      id = Model[k].Id
+                                  })"
+                             alt="@Model[k].ImageDescription"/>
+                    }        
                 </td>
                 <td>
-                    @Html.DisplayFor(Model[k].ShouldShowSlideInSlideshow)
+                    @Html.DisplayFor(model => Model[k].ShouldShowSlideInSlideshow)
                 </td>
                 <td>
-                    @Html.DisplayFor(Model[k].ShouldShowQuestionOnQuiz)
+                    @Html.DisplayFor(model => Model[k].ShouldShowQuestionOnQuiz)
                 </td>
                 <td>
-                    @Html.DisplayFor(Model[k].ShouldShowImageOnQuiz)
+                    @Html.DisplayFor(model => Model[k].ShouldShowImageOnQuiz)
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new

@@ -50,35 +50,50 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions, Version=1.0.6390.12873, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.1.0.6390.12873\lib\net461\MichaelBrandonMorris.Extensions.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.CollectionExtensions, Version=1.0.6390.23789, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.CollectionExtensions.1.0.6390.23789\lib\net452\MichaelBrandonMorris.Extensions.CollectionExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6390.12654, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6390.12654\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.OtherExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.OtherExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.OtherExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.MvcGrid, Version=1.0.6390.18806, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.MvcGrid.1.0.6390.18806\lib\net462\MichaelBrandonMorris.MvcGrid.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.PrimitiveExtensions, Version=1.0.6390.20452, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrimitiveExtensions.1.0.6390.20452\lib\net452\MichaelBrandonMorris.Extensions.PrimitiveExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.PrincipalExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrincipalExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.PrincipalExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.3.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.WebExtensions, Version=1.0.6390.20453, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.WebExtensions.1.0.6390.20453\lib\net452\MichaelBrandonMorris.Extensions.WebExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.3.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6396.27756, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6396.27756\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.3.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.MvcGrid, Version=1.0.6397.27551, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.MvcGrid.1.0.6397.27551\lib\net462\MichaelBrandonMorris.MvcGrid.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.Web, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.3.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.3.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.4.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.4.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.4.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.4.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.4.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.4.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -111,8 +126,8 @@
     <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="MoreLinq, Version=2.5.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.2.5.0\lib\net40\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=2.6.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.6.0\lib\net40\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -120,6 +135,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
@@ -481,7 +499,7 @@
     <Content Include="Views\Roles\AssignCategories.cshtml" />
     <Content Include="Views\Categories\Reorder.cshtml" />
     <Content Include="Views\Categories\EditorTemplates\CategoryViewModel.cshtml" />
-    <Content Include="Views\Roles\EditorTemplates\Role.cshtml" />
+    <Content Include="Views\Roles\EditorTemplates\RoleViewModel.cshtml" />
     <Content Include="Views\Categories\AssignRoles.cshtml" />
     <Content Include="Views\Roles\DisplayTemplates\RoleViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
@@ -490,7 +508,6 @@
     <Content Include="Views\Training\Index.cshtml" />
     <Content Include="Views\Roles\Reorder.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
-    <Content Include="Views\Slides\DisplayTemplates\Slide.cshtml" />
     <Content Include="Views\Training\Quiz.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
@@ -503,6 +520,7 @@
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\UserResults.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Training\ConfirmRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

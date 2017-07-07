@@ -1,0 +1,37 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role
+
+@{
+    ViewBag.Title = "ConfirmRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>Your current training type is:</p>
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+</dl>
+
+<p>Is this correct?</p>
+<p class="bg-info">If you are unsure, press "No" to see the options.</p>
+
+@Html.ActionLink("Yes", "Index", null, new
+{
+    @class = "btn btn-primary"
+})
+
+@Html.ActionLink("No", "SelectRole", null, new
+{
+    @class = "btn btn-danger"
+})
+

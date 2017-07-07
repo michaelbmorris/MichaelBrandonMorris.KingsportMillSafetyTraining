@@ -1,9 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manage
+namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
+    Manage
 {
+    /// <summary>
+    ///     Class ChangePasswordViewModel.
+    /// </summary>
+    /// TODO Edit XML Comment Template for ChangePasswordViewModel
     public class ChangePasswordViewModel
     {
+        /// <summary>
+        ///     Gets or sets the confirm password.
+        /// </summary>
+        /// <value>The confirm password.</value>
+        /// TODO Edit XML Comment Template for ConfirmPassword
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
         [Compare(
@@ -16,6 +26,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manag
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the new password.
+        /// </summary>
+        /// <value>The new password.</value>
+        /// TODO Edit XML Comment Template for NewPassword
         [Required]
         [StringLength(
             100,
@@ -29,6 +44,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Manag
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the old password.
+        /// </summary>
+        /// <value>The old password.</value>
+        /// TODO Edit XML Comment Template for OldPassword
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]

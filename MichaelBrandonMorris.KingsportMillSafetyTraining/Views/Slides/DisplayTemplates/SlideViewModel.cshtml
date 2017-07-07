@@ -34,11 +34,14 @@
     </dt>
 
     <dd>
-        <img src="@Url.Action("RenderImage", new
-                  {
-                      id = Model.Id
-                  })"
-             alt="@Model.ImageDescription"/>
+        @if (Model.ImageBytes != null)
+        {
+            <img src="@Url.Action("RenderImage", new
+                      {
+                          id = Model.Id
+                      })"
+                 alt="@Model.ImageDescription"/>
+        }
     </dd>
 
     <dt>

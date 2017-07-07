@@ -5,11 +5,12 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.Math;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    /// Class CategoriesController.
+    ///     Class CategoriesController.
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for CategoriesController
@@ -17,7 +18,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     public class CategoriesController : Controller
     {
         /// <summary>
-        /// The database
+        ///     Gets the index of the order by.
+        /// </summary>
+        /// <value>The index of the order by.</value>
+        /// TODO Edit XML Comment Template for OrderByIndex
+        private static Func<Category, object> OrderByIndex => category =>
+            category.Index;
+
+        /// <summary>
+        ///     The database
         /// </summary>
         /// TODO Edit XML Comment Template for Db
         private KingsportMillSafetyTrainingDbContext Db
@@ -26,15 +35,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
-        /// Gets the index of the order by.
-        /// </summary>
-        /// <value>The index of the order by.</value>
-        /// TODO Edit XML Comment Template for OrderByIndex
-        private static Func<Category, object> OrderByIndex => category =>
-            category.Index;
-
-        /// <summary>
-        /// Assigns the roles.
+        ///     Assigns the roles.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
@@ -63,7 +64,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Assigns the roles.
+        ///     Assigns the roles.
         /// </summary>
         /// <param name="categoryRoles">The category roles.</param>
         /// <returns>ActionResult.</returns>
@@ -82,7 +83,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 foreach (var categoryRole in categoryRoles)
                 {
-                    Db.PairCategoryAndRole(Math.Cantor.Inverse(categoryRole));
+                    Db.PairCategoryAndRole(Cantor.Inverse(categoryRole));
                 }
 
                 return RedirectToAction("Index");
@@ -96,7 +97,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Creates this instance.
+        ///     Creates this instance.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
@@ -116,23 +117,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Creates the specified category.
+        ///     Creates the specified category.
         /// </summary>
-        /// <param name="category">The category.</param>
+        /// <param name="model">The model.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(CategoryViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(category);
+                    return View(model);
                 }
 
-                Db.CreateCategory(category);
+                Db.CreateCategory(
+                    new Category
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Index = ++Category.CurrentIndex
+                    });
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -144,11 +152,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Deletes the specified identifier.
+        ///     Deletes the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nType: 'int'\nName: 'id'
+        /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for Delete
         [HttpGet]
@@ -156,23 +167,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                if (id == null)
-                {
-                    throw new InvalidOperationException(
-                        "Parameter missing.\nType: 'int'\nName: 'id'");
-                }
 
-                var category = Db.GetCategory(id.Value);
-
-                if (category == null)
-                {
-                    throw new KeyNotFoundException(
-                        $"Category with Id {id} not found.");
-                }
-
-                return View(category);
+                var model = Db.GetCategory(id).AsViewModel();
+                return View(model);
             }
-            catch (InvalidOperationException e)
+            catch (ArgumentNullException e)
             {
                 return this.CreateError(HttpStatusCode.BadRequest, e.Message);
             }
@@ -189,11 +188,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Deletes the confirmed.
+        ///     Deletes the confirmed.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nType: 'int'\nName: 'id'
+        /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for DeleteConfirmed
         [ActionName("Delete")]
@@ -237,11 +239,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Detailses the specified identifier.
+        ///     Detailses the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nType: 'int'\nName: 'id'
+        /// </exception>
         /// TODO Edit XML Comment Template for Details
         [HttpGet]
         public ActionResult Details(int? id)
@@ -274,11 +279,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Edits the specified identifier.
+        ///     Edits the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// <exception cref="InvalidOperationException">Parameter missing.\nType: 'int'\nName: 'id'</exception>
+        /// <exception cref="InvalidOperationException">
+        ///     Parameter
+        ///     missing.\nType: 'int'\nName: 'id'
+        /// </exception>
         /// TODO Edit XML Comment Template for Edit
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -291,7 +299,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = Db.GetCategory(id.Value);
+                var model = Db.GetCategory(id.Value).AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -311,7 +319,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Edits the specified category.
+        ///     Edits the specified category.
         /// </summary>
         /// <param name="category">The category.</param>
         /// <returns>ActionResult.</returns>
@@ -339,7 +347,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Indexes this instance.
+        ///     Indexes this instance.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
@@ -360,7 +368,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Reorders this instance.
+        ///     Reorders this instance.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
@@ -381,7 +389,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Reorders the specified categories.
+        ///     Reorders the specified categories.
         /// </summary>
         /// <param name="categories">The categories.</param>
         /// <returns>ActionResult.</returns>
@@ -403,9 +411,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Releases unmanaged resources and optionally releases managed resources.
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
         /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {

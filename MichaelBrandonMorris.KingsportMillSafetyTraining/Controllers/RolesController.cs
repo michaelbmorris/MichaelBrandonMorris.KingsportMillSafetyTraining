@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -92,20 +91,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Creates the specified role.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="model">The model.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Role role)
+        public ActionResult Create(RoleViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(role);
+                return View(model);
             }
 
-            Db.CreateRole(role);
-            Db.SaveChanges();
+            Db.CreateRole(new Role
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Question = model.Question
+            });
+
             return RedirectToAction("Index");
         }
 
@@ -118,19 +122,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var model = Db.GetRole(id).AsViewModel();
+                return View(model);
             }
-
-            var role = Db.GetRole(id.Value);
-
-            if (role == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                Console.WriteLine(e);
+                throw;
             }
-
-            return View(role);
         }
 
         /// <summary>
@@ -142,17 +143,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
-            var role = Db.GetRole(id);
-
-            if (role != null)
+            try
             {
-                Db.DeleteRole(role);
+                Db.DeleteRole(id);
+                return RedirectToAction("Index");
             }
-
-            Db.SaveChanges();
-            return RedirectToAction("Index");
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         /// <summary>
@@ -164,19 +175,37 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    throw new InvalidOperationException(
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                }
+
+                var model = Db.GetRole(id.Value).AsViewModel();
+
+                if (model == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(model);
             }
-
-            var model = Db.GetRole(id.Value).AsViewModel();
-
-            if (model == null)
+            catch (ArgumentNullException e)
             {
-                return HttpNotFound();
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
-
-            return View(model);
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }          
         }
 
         /// <summary>
@@ -188,39 +217,67 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    throw new InvalidOperationException(
+                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                }
+
+                var model = Db.GetRole(id.Value).AsViewModel();
+                return View(model);
             }
-
-            var role = Db.GetRole(id.Value);
-
-            if (role == null)
+            catch (ArgumentNullException e)
             {
-                return HttpNotFound();
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
             }
-
-            return View(role);
+            catch (InvalidOperationException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }         
         }
 
         /// <summary>
         ///     Edits the specified role.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="model">The role.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Role role)
+        public ActionResult Edit(RoleViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(role);
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
 
-            Db.Entry(role).State = EntityState.Modified;
-            Db.SaveChanges();
-            return RedirectToAction("Index");
+                Db.Edit(
+                    new Role
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        Question = model.Question,
+                        Index = model.Index
+                    });
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }     
         }
 
         /// <summary>

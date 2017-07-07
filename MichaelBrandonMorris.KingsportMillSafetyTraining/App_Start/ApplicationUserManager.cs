@@ -27,6 +27,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
         }
 
+        /// <summary>
+        ///     Creates the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>ApplicationUserManager.</returns>
+        /// TODO Edit XML Comment Template for Create
         public static ApplicationUserManager Create(
             IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using MichaelBrandonMorris.Extensions.OtherExtensions;
+using MichaelBrandonMorris.Extensions.WebExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -24,15 +24,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private const string JpgType = "image/jpg";
 
         /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
-
-        /// <summary>
         ///     Gets the index of the order category by.
         /// </summary>
         /// <value>The index of the order category by.</value>
@@ -47,6 +38,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for OrderCategoryByTitle
         private static Func<Category, object> OrderCategoryByTitle => category
             => category.Title;
+
+        /// <summary>
+        ///     The database
+        /// </summary>
+        /// TODO Edit XML Comment Template for Db
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
         ///     Adds the answer.
@@ -84,35 +84,35 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Creates the specified slide view model.
         /// </summary>
-        /// <param name="slideViewModel">The slide view model.</param>
+        /// <param name="model">The slide view model.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SlideViewModel slideViewModel)
+        public ActionResult Create(SlideViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(slideViewModel);
+                return View(model);
             }
 
             var slide = new Slide
             {
-                Answers = slideViewModel.Answers,
-                Content = slideViewModel.Content,
-                CorrectAnswerIndex = slideViewModel.CorrectAnswerIndex,
-                ImageBytes = slideViewModel.Image?.ToBytes(),
-                ImageDescription = slideViewModel.ImageDescription,
-                Question = slideViewModel.Question,
-                ShouldShowImageOnQuiz = slideViewModel.ShouldShowImageOnQuiz,
+                Answers = model.Answers,
+                Content = model.Content,
+                CorrectAnswerIndex = model.CorrectAnswerIndex,
+                ImageBytes = model.Image?.ToBytes(),
+                ImageDescription = model.ImageDescription,
+                Question = model.Question,
+                ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
                 ShouldShowQuestionOnQuiz =
-                    slideViewModel.ShouldShowQuestionOnQuiz,
+                    model.ShouldShowQuestionOnQuiz,
                 ShouldShowSlideInSlideshow =
-                    slideViewModel.ShouldShowSlideInSlideshow,
-                Title = slideViewModel.Title
+                    model.ShouldShowSlideInSlideshow,
+                Title = model.Title
             };
 
-            Db.CreateSlide(slide, slideViewModel.CategoryId);
+            Db.CreateSlide(slide, model.CategoryId);
             return RedirectToAction("Index");
         }
 
@@ -203,23 +203,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if (id == null)
+            try
+            {
+                var model = Db.GetSlide(id).AsViewModel(Db.GetCategories());
+                return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+            }
+            catch (Exception e)
             {
                 return this.CreateError(
-                    HttpStatusCode.BadRequest,
-                    "Parameter missing.\nType: 'int'\nName: 'id'");
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
             }
-
-            var model = Db.GetSlide(id.Value).AsViewModel();
-
-            if (model == null)
-            {
-                return this.CreateError(
-                    HttpStatusCode.NotFound,
-                    $"Slide with id '{id.Value}' not found.");
-            }
-
-            return View(model);
         }
 
         /// <summary>
@@ -232,27 +234,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SlideViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                var slide = new Slide
+                {
+                    Answers = model.Answers,
+                    Content = model.Content,
+                    CorrectAnswerIndex = model.CorrectAnswerIndex,
+                    Id = model.Id,
+                    ImageBytes = model.Image?.ToBytes(),
+                    ImageDescription = model.ImageDescription,
+                    Question = model.Question,
+                    ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
+                    ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
+                    ShouldShowSlideInSlideshow =
+                        model.ShouldShowSlideInSlideshow,
+                    Title = model.Title
+                };
+
+                Db.Edit(slide, model.CategoryId);
+                return RedirectToAction("Index");
             }
-
-            var slide = new Slide
+            catch (Exception e)
             {
-                Answers = model.Answers,
-                Content = model.Content,
-                CorrectAnswerIndex = model.CorrectAnswerIndex,
-                ImageBytes = model.Image?.ToBytes(),
-                ImageDescription = model.ImageDescription,
-                Question = model.Question,
-                ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
-                ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
-                ShouldShowSlideInSlideshow = model.ShouldShowSlideInSlideshow,
-                Title = model.Title
-            };
-
-            Db.Edit(slide, model.CategoryId);
-            return RedirectToAction("Index");
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e.Message);
+            }
         }
 
         /// <summary>

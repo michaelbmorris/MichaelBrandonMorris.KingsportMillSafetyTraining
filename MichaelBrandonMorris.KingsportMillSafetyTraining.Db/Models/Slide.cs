@@ -13,21 +13,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     public class Slide : IEquatable<Slide>
     {
         /// <summary>
-        /// The current index
-        /// </summary>
-        /// TODO Edit XML Comment Template for CurrentIndex
-        public static int CurrentIndex;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Slide"/> class.
-        /// </summary>
-        /// TODO Edit XML Comment Template for #ctor
-        public Slide()
-        {
-            Index = ++CurrentIndex;
-        }
-
-        /// <summary>
         /// Gets or sets the answers.
         /// </summary>
         /// <value>The answers.</value>

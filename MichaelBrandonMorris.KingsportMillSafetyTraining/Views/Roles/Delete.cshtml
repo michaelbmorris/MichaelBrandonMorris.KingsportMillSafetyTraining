@@ -1,4 +1,4 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -11,12 +11,12 @@
 {
     @Html.AntiForgeryToken()
     <div>
-        <input class="btn btn-default"
+        <input class="btn btn-danger"
                type="submit"
-               value="Delete"/> |
-        <button class="btn btn-default"
-                onclick="location.href = '@Url.Action("Index")';return false;">
-            Cancel
-        </button>
+               value="Delete"/>
+        @Html.ActionLink("Cancel", "Index", null, new
+        {
+            @class = "btn btn-primary"
+        })
     </div>
 }

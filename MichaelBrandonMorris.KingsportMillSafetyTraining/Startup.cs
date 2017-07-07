@@ -39,7 +39,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             {
                 db.UpdateCurrentAnswerIndex();
                 db.UpdateCurrentCategoryIndex();
-                db.UpdateCurrentSlideIndex();
+                db.UpdateCurrentRoleIndex();
             }
         }
 

@@ -3,13 +3,13 @@
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    /// Class Role.
+    ///     Class Role.
     /// </summary>
     /// TODO Edit XML Comment Template for Role
     public class Role
     {
         /// <summary>
-        /// Gets or sets the categories.
+        ///     Gets or sets the categories.
         /// </summary>
         /// <value>The categories.</value>
         /// TODO Edit XML Comment Template for Categories
@@ -20,7 +20,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         } = new List<Category>();
 
         /// <summary>
-        /// Gets or sets the description.
+        ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
@@ -31,7 +31,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the identifier.
+        ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         /// TODO Edit XML Comment Template for Id
@@ -42,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the index.
+        ///     Gets or sets the index.
         /// </summary>
         /// <value>The index.</value>
         /// TODO Edit XML Comment Template for Index
@@ -53,7 +53,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the question.
+        ///     Gets or sets the question.
         /// </summary>
         /// <value>The question.</value>
         /// TODO Edit XML Comment Template for Question
@@ -64,11 +64,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Gets or sets the title.
+        ///     Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
         /// TODO Edit XML Comment Template for Title
         public string Title
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     Gets or sets the index of the current.
+        /// </summary>
+        /// <value>The index of the current.</value>
+        /// TODO Edit XML Comment Template for CurrentIndex
+        public static int CurrentIndex
         {
             get;
             set;

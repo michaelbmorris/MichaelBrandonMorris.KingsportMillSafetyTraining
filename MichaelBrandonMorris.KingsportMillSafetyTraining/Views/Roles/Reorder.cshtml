@@ -24,13 +24,11 @@
             <tr>
                 <td>
                     <span class="glyphicon glyphicon-move handle"></span>
-                    @Html.DisplayFor(m => Model[i].Title)
+                    @Html.DisplayFor(model => Model[i].Title)
                     @Html.HiddenFor(model => Model[i].Id)
                     @Html.HiddenFor(model => Model[i].Index, new
                     {
-                        name = string.Format("slides[{0}].Index", i),
-                        @readonly = true,
-                        @class = "index"
+                        name = string.Format("slides[{0}].Index", i), @readonly = true, @class = "index"
                     })
                 </td>
             </tr>
@@ -47,14 +45,14 @@
 })
 }
 
-@section Scripts
+@section scripts
 {
     <script>
-        $(function() {
+        $(function () {
             $('#sort tbody').sortable({
-                handle: ".hanle",
-                stop: function() {
-                    $("#sort tbody tr").each(function(index, element) {
+                handle: ".handle",
+                stop: function () {
+                    $("#sort tbody tr").each(function (index, element) {
                         var hiddenInput = $(element).find(".index");
                         hiddenInput.val(index);
                     });
@@ -62,7 +60,7 @@
             });
         });
 
-        $('td, th', '#sort').each(function() {
+        $('td, th', '#sort').each(function () {
             var cell = $(this);
             cell.width(cell.width());
         });
