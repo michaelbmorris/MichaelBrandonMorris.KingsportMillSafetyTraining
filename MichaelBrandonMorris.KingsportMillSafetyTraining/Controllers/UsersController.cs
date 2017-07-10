@@ -10,7 +10,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// <summary>
     ///     Class UsersController.
     /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for UsersController
     [Authorize(Roles = "Administrator")]
     public class UsersController : Controller
@@ -24,37 +24,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             get;
         } = new KingsportMillSafetyTrainingDbContext();
-
-        /// <summary>
-        ///     Creates this instance.
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Create
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        /// <summary>
-        ///     Creates the specified user.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(user);
-            }
-
-            Db.Users.Add(user);
-            Db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         /// <summary>
         ///     Deletes the specified identifier.
@@ -142,32 +111,42 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var applicationUser = Db.Users.Find(id);
+            var model = Db.Users.Find(id).AsViewModel();
 
-            if (applicationUser == null)
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return View(applicationUser);
+            return View(model);
         }
 
         /// <summary>
         ///     Edits the specified user.
         /// </summary>
-        /// <param name="user">The user.</param>
+        /// <param name="model">The user.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(User user)
+        public ActionResult Edit(UserViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View(model);
             }
 
-            Db.Edit(user);
+            Db.Edit(new User
+            {
+                FirstName = model.FirstName,
+                MiddleName = model.MiddleName,
+                LastName = model.LastName,
+                CompanyName = model.CompanyName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Id = model.Id
+            });
+
             return RedirectToAction("Index");
         }
 

@@ -18,6 +18,7 @@
     </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src=@Url.Content("~/Content/ckeditor/ckeditor.js")></script>
 
     @if (User.Identity.IsAuthenticated
          && User.IsInRole("Administrator"))
@@ -160,13 +161,6 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     @Html.ActionLink("View All", "Index", "Users")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Users")
                                 </li>
                             </ul>
                         </li>
