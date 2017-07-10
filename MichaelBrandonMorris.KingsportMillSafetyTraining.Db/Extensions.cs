@@ -66,7 +66,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// TODO Edit XML Comment Template for GetRoles
         public static IList<Role> GetRoles(this Category category)
         {
-            return category.Roles;
+            return category.Roles.ToList();
         }
 
         /// <summary>

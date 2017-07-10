@@ -71,7 +71,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             foreach (var roleCategory in roleCategories)
             {
-                Db.PairCategoryAndRole(Cantor.Inverse(roleCategory));
+                Db.PairRoleAndCategory(Cantor.Inverse(roleCategory));
             }
 
             return RedirectToAction("Index");

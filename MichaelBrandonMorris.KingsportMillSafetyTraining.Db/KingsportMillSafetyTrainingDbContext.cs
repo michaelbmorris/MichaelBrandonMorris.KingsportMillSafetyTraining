@@ -252,7 +252,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        /// Deletes the role.
+        ///     Deletes the role.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <exception cref="KeyNotFoundException"></exception>
@@ -431,7 +431,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        /// Gets the role.
+        ///     Gets the role.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Role.</returns>
@@ -698,6 +698,40 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     {
                         throw new KeyNotFoundException(
                             $"Role with id '{roleId}' not found.");
+                    }
+
+                    category.Roles.Add(role);
+                    role.Categories.Add(category);
+                });
+        }
+
+        public void PairRoleAndCategory(
+            (int RoleId, int CategoryId) roleAndCategoryIds)
+        {
+            PairRoleAndCategory(
+                roleAndCategoryIds.RoleId,
+                roleAndCategoryIds.CategoryId);
+        }
+
+        public void PairRoleAndCategory(int roleId, int categoryId)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var role = TrainingRoles.Find(roleId);
+
+                    if (role == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Role with id '{roleId}' not found.");
+                    }
+
+                    var category = Categories.Find(categoryId);
+
+                    if (category == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Category with id '{categoryId}' not found.");
                     }
 
                     role.Categories.Add(category);
