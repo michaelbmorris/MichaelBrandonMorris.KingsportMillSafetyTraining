@@ -39,6 +39,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(
+                new ScriptBundle("~/bundles/ckeditor").Include(
+                    "~/content/ckeditor/ckeditor.js"));
+
+            bundles.Add(
                 new StyleBundle("~/Content/css").Include(
                     "~/Content/reset.css",
                     "~/Content/bootstrap.css",

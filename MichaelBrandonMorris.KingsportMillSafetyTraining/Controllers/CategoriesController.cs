@@ -321,21 +321,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Edits the specified category.
         /// </summary>
-        /// <param name="category">The category.</param>
+        /// <param name="model">The category.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(CategoryViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(category);
+                    return View(model);
                 }
 
-                Db.Edit(category);
+                Db.Edit(new Category
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Index = model.Index,
+                    Id = model.Id,
+                    Roles = model.Roles,
+                    Slides = model.Slides
+                });
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)

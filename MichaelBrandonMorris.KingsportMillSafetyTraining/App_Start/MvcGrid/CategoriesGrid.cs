@@ -184,7 +184,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Roles",
-            ValueExpression = (x, y) => x.RolesCount.ToString()
+            ValueExpression = (x, y) => x.Roles.Count.ToString()
         };
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Slides",
-            ValueExpression = (x, y) => x.SlidesCount.ToString()
+            ValueExpression = (x, y) => x.Slides.Count.ToString()
         };
 
         /// <summary>

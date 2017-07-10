@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -57,6 +58,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
+        [AllowHtml]
         public string Description
         {
             get;
@@ -90,6 +92,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The question.</value>
         /// TODO Edit XML Comment Template for Question
+        [AllowHtml]
         public string Question
         {
             get;

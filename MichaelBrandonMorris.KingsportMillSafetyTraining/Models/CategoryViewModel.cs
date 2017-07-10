@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -36,13 +37,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Gets the roles count.
-        /// </summary>
-        /// <value>The roles count.</value>
-        /// TODO Edit XML Comment Template for RolesCount
-        public int RolesCount => Roles.Count;
-
-        /// <summary>
         ///     Gets the roles list.
         /// </summary>
         /// <value>The roles list.</value>
@@ -52,17 +46,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             (current, role) => current + "<li>" + role.Title + "</li>");
 
         /// <summary>
-        ///     Gets the slides count.
-        /// </summary>
-        /// <value>The slides count.</value>
-        /// TODO Edit XML Comment Template for SlidesCount
-        public int SlidesCount => Slides.Count;
-
-        /// <summary>
         ///     Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
+        [AllowHtml]
         public string Description
         {
             get;

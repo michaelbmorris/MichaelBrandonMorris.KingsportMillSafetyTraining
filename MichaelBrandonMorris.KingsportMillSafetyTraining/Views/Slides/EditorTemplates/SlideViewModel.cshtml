@@ -1,5 +1,7 @@
-﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
+﻿@using MichaelBrandonMorris.Extensions.WebExtensions
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+
+@Scripts.Render("~/bundles/ckeditor")
 
 @Html.ValidationSummary(true, "", new
 {
@@ -52,10 +54,7 @@
         @class = "control-label col-md-2"
     })
     <div class="col-md-10">
-        @Html.TextAreaFor(model => model.Content, new
-        {
-            @class = "form-control"
-        })
+        @Html.CkeditorFor(model => model.Content)
         @Html.ValidationMessageFor(model => model.Content, "", new
         {
             @class = "text-danger"
