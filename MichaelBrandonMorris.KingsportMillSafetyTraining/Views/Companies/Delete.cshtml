@@ -1,0 +1,23 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.Subtitle = "Are you sure you want to delete this?";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @Html.DisplayForModel(Model)
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Cancel", "Index", null, new
+            {
+                @class = "btn btn-primary"
+            })
+        </div>
+    }
+</div>

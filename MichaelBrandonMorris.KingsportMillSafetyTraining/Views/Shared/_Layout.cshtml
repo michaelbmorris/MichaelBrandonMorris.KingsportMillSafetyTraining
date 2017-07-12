@@ -156,6 +156,28 @@
                                data-toggle="dropdown"
                                href="#"
                                role="button">
+                                Companies <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("View All", "Index", "Companies")
+                                </li>
+                                <li class="divider"
+                                    role="separator">
+                                </li>
+                                <li class="dropdown-header">Actions</li>
+                                <li>
+                                    @Html.ActionLink("Create", "Create", "Companies")
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a aria-expanded="false"
+                               aria-haspopup="true"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown"
+                               href="#"
+                               role="button">
                                 Users <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">

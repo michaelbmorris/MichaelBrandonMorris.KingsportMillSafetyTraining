@@ -107,6 +107,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 Title = model.Title,
                 Description = model.Description,
+                Index = ++Role.CurrentIndex,
                 Question = model.Question
             });
 

@@ -32,6 +32,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             Answers = Set<Answer>();
             Categories = Set<Category>();
+            Companies = Set<Company>();
             Slides = Set<Slide>();
             TrainingResults = Set<TrainingResult>();
             TrainingRoles = Set<Role>();
@@ -54,6 +55,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <value>The categories.</value>
         /// TODO Edit XML Comment Template for Categories
         internal DbSet<Category> Categories
+        {
+            get;
+            set;
+        }
+
+        internal DbSet<Company> Companies
         {
             get;
             set;
@@ -177,6 +184,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        public void CreateCompany(Company company)
+        {
+            DoTransaction(
+                () =>
+                {
+                    Companies.Add(company);
+                });
+        }
+
         /// <summary>
         ///     Creates the category.
         /// </summary>
@@ -251,6 +267,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             UpdateCurrentCategoryIndex();
         }
 
+        public void DeleteCompany(int? id)
+        {
+            DoTransaction(
+                () =>
+                {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var company = Companies.Find(id);
+
+                    if (company == null)
+                    {
+                        throw new KeyNotFoundException("Company with id '{id}' not found.");
+                    }
+
+                    Companies.Attach(company);
+                    Companies.Remove(company);
+                });
+        }
+
         /// <summary>
         ///     Deletes the role.
         /// </summary>
@@ -301,6 +339,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     Slides.Attach(slide);
                     Slides.Remove(slide);
                 });
+        }
+
+        public void Edit(User user, int companyId)
+        {
+            DoTransaction(
+                () =>
+                {
+                    user.Company = Companies.Find(companyId)
+                                   ?? throw new KeyNotFoundException(
+                                       $"Company with id '{companyId}' not found.");
+                    Edit(user);
+                });
+        }
+
+        public void SetUserCompany(User user, int companyId)
+        {
+            DoTransaction(
+                () =>
+                {
+                    user.Company = Companies.Find(companyId)
+                                   ?? throw new KeyNotFoundException(
+                                       $"Company with id '{companyId}' not found.");
+                });
+        }
+
+        public IList<Company> GetCompanies(
+            Func<Company, object> orderBy = null,
+            Func<Company, bool> where = null)
+        {
+            return DoTransaction(() => Companies.OrderByWhere(orderBy, where));
         }
 
         /// <summary>
@@ -427,6 +495,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     }
 
                     return category;
+                });
+        }
+
+        public Company GetCompany(int? id)
+        {
+            return DoTransaction(
+                () =>
+                {
+                    if (id == null)
+                    {
+                        throw new ArgumentNullException(nameof(id));
+                    }
+
+                    var company = Companies.Find(id);
+
+                    if (company == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"Company with id '{id}' not found.");
+                    }
+
+                    return company;
                 });
         }
 

@@ -46,6 +46,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 wherePredicate);
         }
 
+        public static IList<User> GetEmployees(
+            this Company company,
+            Func<User, object> orderBy = null,
+            Func<User, bool> where = null)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.DoTransaction(
+                    () => company.Employees.OrderByWhere(orderBy, where));
+            }
+        }
+
         /// <summary>
         ///     Gets the quiz results.
         /// </summary>

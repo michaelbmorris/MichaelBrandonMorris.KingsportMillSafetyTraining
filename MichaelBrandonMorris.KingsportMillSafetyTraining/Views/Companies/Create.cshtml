@@ -1,15 +1,14 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
 
 @{
     ViewBag.Title = "Create";
-    ViewBag.Subtitle = "Category";
+    ViewBag.Subtitle = "Company";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         @Html.EditorForModel(Model)
         <div class="form-group">
@@ -24,4 +23,5 @@
             </div>
         </div>
     </div>
+    
 }

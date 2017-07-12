@@ -23,6 +23,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return slides.Select(x => new QuizSlideViewModel(x));
         }
 
+        public static IList<CompanyViewModel> AsViewModels(
+            this IList<Company> companies)
+        {
+            return companies.Select(company => company.AsViewModel());
+        }
+
         /// <summary>
         ///     Ases the view model.
         /// </summary>
@@ -110,6 +116,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
 
             return new TrainingResultViewModel(trainingResult);
+        }
+
+        public static CompanyViewModel AsViewModel(this Company company)
+        {
+            if (company == null)
+            {
+                throw new ArgumentNullException(nameof(company));
+            }
+
+            return new CompanyViewModel(company);
         }
 
         /// <summary>

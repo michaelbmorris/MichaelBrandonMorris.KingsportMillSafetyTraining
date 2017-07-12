@@ -136,16 +136,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
-            Db.Edit(new User
+            Db.Edit(
+                new User
             {
                 FirstName = model.FirstName,
                 MiddleName = model.MiddleName,
                 LastName = model.LastName,
-                CompanyName = model.CompanyName,
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
                 Id = model.Id
-            });
+            },
+            model.CompanyId);
 
             return RedirectToAction("Index");
         }

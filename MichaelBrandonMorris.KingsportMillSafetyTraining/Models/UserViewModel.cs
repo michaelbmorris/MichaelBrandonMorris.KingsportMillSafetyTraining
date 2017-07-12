@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
@@ -28,7 +29,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public UserViewModel(User user)
         {
-            CompanyName = user.CompanyName;
+            CompanyName = user.Company.Name;
             Email = user.Email;
             FirstName = user.FirstName;
             Id = user.Id;
@@ -55,6 +56,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for CompanyName
         [DisplayName("Company")]
         public string CompanyName
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Company")]
+        public int CompanyId
+        {
+            get;
+            set;
+        }
+
+        public IList<Company> Companies
         {
             get;
             set;

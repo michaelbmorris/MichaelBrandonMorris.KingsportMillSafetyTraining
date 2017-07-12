@@ -1,27 +1,28 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
 
 @{
-    ViewBag.Title = "Create";
-    ViewBag.Subtitle = "Category";
+    ViewBag.Title = "Edit";
+    ViewBag.Subtitle = "Company";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
+        @Html.HiddenFor(model => model.Id)
         @Html.EditorForModel(Model)
+
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
                 <input class="btn btn-primary"
                        type="submit"
-                       value="Create"/>
+                       value="Save"/>
                 @Html.ActionLink("Cancel", "Index", null, new
                 {
                     @class = "btn btn-danger"
                 })
             </div>
         </div>
-    </div>
+    </div>   
 }

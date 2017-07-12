@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -31,6 +33,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// TODO Edit XML Comment Template for _userManager
         private ApplicationUserManager _userManager;
+
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
@@ -474,7 +481,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                return View();
+                var model = new RegisterViewModel
+                {
+                    Companies = Db.GetCompanies()
+                };
+
+                return View(model);
             }
             catch (Exception e)
             {
@@ -504,11 +516,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var user = new User
                 {
-                    CompanyName = model.CompanyName,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MiddleName = model.MiddleName,
+                    OtherCompanyName = model.OtherCompanyName,
                     PhoneNumber = model.PhoneNumber,
                     UserName = model.Email
                 };
@@ -517,6 +529,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (result.Succeeded)
                 {
+                    Db.SetUserCompany(user, model.CompanyId);
                     await SignInManager.SignInAsync(user, false, false);
                     return RedirectToAction("Index", "Home");
                 }

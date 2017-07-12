@@ -1,0 +1,31 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.Subtitle = "Company";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @Html.DisplayForModel(Model)
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new
+    {
+        id = Model.Id
+    }, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Delete", "Delete", new
+    {
+        id = Model.Id
+    }, new
+    {
+        @class = "btn btn-danger"
+    })
+    @Html.ActionLink("View All Companies", "Index", null, new
+    {
+        @class = "btn btn-primary"
+    })
+</p>

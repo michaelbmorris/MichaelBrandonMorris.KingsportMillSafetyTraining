@@ -15,13 +15,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// TODO Edit XML Comment Template for User
     public class User : IdentityUser
     {
-        /// <summary>
-        ///     Gets or sets the name of the company.
-        /// </summary>
-        /// <value>The name of the company.</value>
-        /// TODO Edit XML Comment Template for CompanyName
-        [DisplayName("Company")]
-        public string CompanyName
+        public virtual Company Company
         {
             get;
             set;
@@ -94,6 +88,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// <value>The phone number.</value>
         /// TODO Edit XML Comment Template for PhoneNumber
         public new string PhoneNumber
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Other Company")]
+        public string OtherCompanyName
         {
             get;
             set;

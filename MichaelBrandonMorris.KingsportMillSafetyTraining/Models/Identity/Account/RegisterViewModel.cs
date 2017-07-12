@@ -1,4 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     Account
@@ -10,17 +16,44 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     public class RegisterViewModel
     {
         /// <summary>
-        ///     Gets or sets the name of the company.
+        ///     Gets or sets the company identifier.
         /// </summary>
-        /// <value>The name of the company.</value>
+        /// <value>The identifier of the company.</value>
         /// TODO Edit XML Comment Template for CompanyName
-        [Display(Name = "Company Name")]
+        [Display(Name = "Company")]
+        [Range(1, int.MaxValue, ErrorMessage = "You must select a company.")]
         [Required]
-        public string CompanyName
+        public int CompanyId
         {
             get;
             set;
         }
+
+        public IList<Company> Companies
+        {
+            get;
+            set;
+        }
+
+        [DisplayName("Other Company")]
+        public string OtherCompanyName
+        {
+            get;
+            set;
+        }
+
+        public SelectListItem DefaultCompanyItem => new SelectListItem
+        {
+            Value = 0.ToString(),
+            Text = "Select a company..."
+        };
+
+        public IList<SelectListItem> CompanyItems => DefaultCompanyItem.Append(Companies.Select(
+            company => new SelectListItem
+            {
+                Value = company.Id.ToString(),
+                Text = company.Name
+            }));
 
         /// <summary>
         ///     Gets or sets the confirm password.
@@ -29,7 +62,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// TODO Edit XML Comment Template for ConfirmPassword
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare(
+        [System.ComponentModel.DataAnnotations.Compare(
             "Password",
             ErrorMessage =
                 "The password and confirmation password do not match.")]

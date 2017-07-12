@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
@@ -104,6 +105,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The title.</value>
         /// TODO Edit XML Comment Template for Title
+        [Required]
         public string Title
         {
             get;
