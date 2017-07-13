@@ -37,28 +37,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         };
 
         /// <summary>
-        ///     Gets the delete.
-        /// </summary>
-        /// <value>The delete.</value>
-        /// TODO Edit XML Comment Template for Delete
-        private static Column Delete => new Column
-        {
-            ColumnName = "Delete",
-            EnableFiltering = false,
-            EnableSorting = false,
-            HeaderText = string.Empty,
-            HtmlEncode = false,
-            ValueExpression = (x, y) => y.UrlHelper.Action(
-                "Delete",
-                "Users",
-                new
-                {
-                    id = x.Id
-                }),
-            ValueTemplate = MvcGridConfig.DeleteValueTemplate
-        };
-
-        /// <summary>
         ///     Gets the details.
         /// </summary>
         /// <value>The details.</value>
@@ -260,7 +238,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(Edit);
             grid.AddColumn(Details);
             grid.AddColumn(Results);
-            grid.AddColumn(Delete);
             grid.WithSorting(true, "LastName", SortDirection.Asc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
             return ("UsersGrid", grid);

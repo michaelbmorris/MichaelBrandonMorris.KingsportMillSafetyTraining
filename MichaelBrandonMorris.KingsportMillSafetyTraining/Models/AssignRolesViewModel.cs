@@ -27,7 +27,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public AssignRolesViewModel(
             IList<Category> categories,
-            IList<RoleViewModel> roleViewModels)
+            IList<GroupViewModel> roleViewModels)
         {
             Categories = categories;
             RoleViewModels = roleViewModels;
@@ -42,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public AssignRolesViewModel(
             Category category,
-            IList<RoleViewModel> roleViewModels)
+            IList<GroupViewModel> roleViewModels)
         {
             Categories = new List<Category>
             {
@@ -68,7 +68,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The role view models.</value>
         /// TODO Edit XML Comment Template for RoleViewModels
-        public IList<RoleViewModel> RoleViewModels
+        public IList<GroupViewModel> RoleViewModels
         {
             get;
             set;

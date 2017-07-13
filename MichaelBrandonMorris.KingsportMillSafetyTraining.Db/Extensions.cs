@@ -31,17 +31,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <summary>
         ///     Gets the categories.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="group">The group.</param>
         /// <param name="orderByPredicate">The order by predicate.</param>
         /// <param name="wherePredicate">The where predicate.</param>
         /// <returns>IList&lt;Category&gt;.</returns>
         /// TODO Edit XML Comment Template for GetCategories
         public static IList<Category> GetCategories(
-            this Role role,
+            this Group group,
             Func<Category, object> orderByPredicate = null,
             Func<Category, bool> wherePredicate = null)
         {
-            return role.Categories.OrderByWhere(
+            return group.Categories.OrderByWhere(
                 orderByPredicate,
                 wherePredicate);
         }
@@ -59,6 +59,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
+        ///     Gets the roles.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <returns>IList&lt;Group&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetGroups
+        public static IList<Group> GetGroups(this Category category)
+        {
+            return category.Groups.ToList();
+        }
+
+        /// <summary>
         ///     Gets the quiz results.
         /// </summary>
         /// <param name="trainingResult">The training result.</param>
@@ -68,17 +79,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             this TrainingResult trainingResult)
         {
             return trainingResult.QuizResults.ToList();
-        }
-
-        /// <summary>
-        ///     Gets the roles.
-        /// </summary>
-        /// <param name="category">The category.</param>
-        /// <returns>IList&lt;Role&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetRoles
-        public static IList<Role> GetRoles(this Category category)
-        {
-            return category.Roles.ToList();
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <summary>
         ///     Gets the slides.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="group">The group.</param>
         /// <param name="orderCategoriesBy">The order categories by.</param>
         /// <param name="categoriesWhere">The categories where.</param>
         /// <param name="orderSlidesBy">The order slides by.</param>
@@ -129,7 +129,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <returns>IList&lt;Slide&gt;.</returns>
         /// TODO Edit XML Comment Template for GetSlides
         public static IList<Slide> GetSlides(
-            this Role role,
+            this Group group,
             Func<Category, object> orderCategoriesBy = null,
             Func<Category, bool> categoriesWhere = null,
             Func<Slide, object> orderSlidesBy = null,
@@ -138,7 +138,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 return db.DoTransaction(
-                    () => role.GetCategories(orderCategoriesBy, categoriesWhere)
+                    () => group
+                        .GetCategories(orderCategoriesBy, categoriesWhere)
                         .GetSlides(orderSlidesBy, slidesWhere));
             }
         }

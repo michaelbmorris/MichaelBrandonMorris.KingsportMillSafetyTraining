@@ -1,5 +1,4 @@
-﻿@using MichaelBrandonMorris.Extensions.OtherExtensions
-@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
 
 @{
     ViewBag.Title = "Quiz";
@@ -49,7 +48,7 @@
                                     </a> to review, and then retry the question.
                                 </p>
                             }
-                            <span>@(i + 1)</span>. @Html.DisplayFor(Model[i].Question)
+                            <span>@(i + 1)</span>. @Html.DisplayFor(modelQuestion => Model[i].Question)
                         </div>
                     </div>
                     <div class="row">

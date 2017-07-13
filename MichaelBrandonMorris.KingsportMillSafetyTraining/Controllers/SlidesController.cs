@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using MichaelBrandonMorris.Extensions.WebExtensions;
+using MichaelBrandonMorris.Extensions.Web.HttpPostedFileBase;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -105,10 +105,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 ImageDescription = model.ImageDescription,
                 Question = model.Question,
                 ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
-                ShouldShowQuestionOnQuiz =
-                    model.ShouldShowQuestionOnQuiz,
-                ShouldShowSlideInSlideshow =
-                    model.ShouldShowSlideInSlideshow,
+                ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
+                ShouldShowSlideInSlideshow = model.ShouldShowSlideInSlideshow,
                 Title = model.Title
             };
 
@@ -125,23 +123,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return this.CreateError(
-                    HttpStatusCode.BadRequest,
-                    "Parameter missing.\nType: 'int'\nName: 'id'");
+                var model = Db.GetSlide(id).AsViewModel();
+                return View(model);
             }
-
-            var model = Db.GetSlide(id.Value).AsViewModel();
-
-            if (model == null)
+            catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.NotFound,
-                    $"Slide with id '{id.Value}' not found.");
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
-
-            return View(model);
         }
 
         /// <summary>
@@ -175,23 +165,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return this.CreateError(
-                    HttpStatusCode.BadRequest,
-                    "Parameter missing.\nType: 'int'\nName: 'id'");
+                var slide = Db.GetSlide(id).AsViewModel();
+                return View(slide);
             }
-
-            var slide = Db.GetSlide(id.Value).AsViewModel();
-
-            if (slide == null)
+            catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.NotFound,
-                    $"Slide with id '{id.Value}' not found.");
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
-
-            return View(slide);
         }
 
         /// <summary>
@@ -210,17 +192,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e.Message);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -262,9 +242,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e.Message);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 

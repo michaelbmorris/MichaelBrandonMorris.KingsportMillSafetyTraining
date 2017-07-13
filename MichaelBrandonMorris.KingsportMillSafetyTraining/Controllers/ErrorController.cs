@@ -36,7 +36,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
     }

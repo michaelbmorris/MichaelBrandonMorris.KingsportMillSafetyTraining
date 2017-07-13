@@ -15,14 +15,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     /// TODO Edit XML Comment Template for RegisterViewModel
     public class RegisterViewModel
     {
+        private const string RequiredErrorMessage = "This field is required.";
+
         /// <summary>
         ///     Gets or sets the company identifier.
         /// </summary>
         /// <value>The identifier of the company.</value>
         /// TODO Edit XML Comment Template for CompanyName
         [Display(Name = "Company")]
-        [Range(1, int.MaxValue, ErrorMessage = "You must select a company.")]
-        [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "This field is required.")]
         public int CompanyId
         {
             get;
@@ -79,7 +80,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// TODO Edit XML Comment Template for Email
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string Email
         {
             get;
@@ -92,7 +93,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// <value>The first name.</value>
         /// TODO Edit XML Comment Template for FirstName
         [Display(Name = "First Name")]
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string FirstName
         {
             get;
@@ -105,7 +106,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// <value>The last name.</value>
         /// TODO Edit XML Comment Template for LastName
         [Display(Name = "Last Name")]
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         public string LastName
         {
             get;
@@ -129,7 +130,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// </summary>
         /// <value>The password.</value>
         /// TODO Edit XML Comment Template for Password
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         [StringLength(
             100,
             ErrorMessage = "The {0} must be at least {2} characters long.",
@@ -148,7 +149,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         /// <value>The phone number.</value>
         /// TODO Edit XML Comment Template for PhoneNumber
         [Display(Name = "Phone Number")]
-        [Required]
+        [Required(ErrorMessage = RequiredErrorMessage)]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(
             @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",

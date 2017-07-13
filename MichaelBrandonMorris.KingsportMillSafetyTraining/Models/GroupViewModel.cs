@@ -6,34 +6,34 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
     /// <summary>
-    ///     Class RoleViewModel.
+    ///     Class GroupViewModel.
     /// </summary>
-    /// TODO Edit XML Comment Template for RoleViewModel
-    public class RoleViewModel
+    /// TODO Edit XML Comment Template for GroupViewModel
+    public class GroupViewModel
     {
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="RoleViewModel" /> class.
+        ///     <see cref="GroupViewModel" /> class.
         /// </summary>
         /// TODO Edit XML Comment Template for #ctor
-        public RoleViewModel()
+        public GroupViewModel()
         {
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="RoleViewModel" /> class.
+        ///     <see cref="GroupViewModel" /> class.
         /// </summary>
-        /// <param name="role">The role.</param>
+        /// <param name="group">The group.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public RoleViewModel(Role role)
+        public GroupViewModel(Group group)
         {
-            Categories = role.Categories;
-            Description = role.Description;
-            Id = role.Id;
-            Index = role.Index;
-            Question = role.Question;
-            Title = role.Title;
+            Categories = group.Categories;
+            Description = group.Description;
+            Id = group.Id;
+            Index = group.Index;
+            Question = group.Question;
+            Title = group.Title;
         }
 
         /// <summary>

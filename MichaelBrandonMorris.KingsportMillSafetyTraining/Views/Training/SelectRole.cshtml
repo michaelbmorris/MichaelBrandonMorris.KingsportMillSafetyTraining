@@ -1,7 +1,7 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
 
 @{
-    ViewBag.Title = "Select Role";
+    ViewBag.Title = "Select Group";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
@@ -21,14 +21,14 @@
                         @Html.Raw(Html.Encode(item.Question).Replace("\n", "<br />"))
                     </p>
                             <button class="btn btn-default"
-                                    name="roleId"
+                                    name="groupId"
                                     value="@item.Id">
                                 Yes
                             </button>
                             @if (item == Model.Last())
                             {
                                 <button class="btn btn-default"
-                                        name="roleId"
+                                        name="groupId"
                                         value="null">
                                     No
                                 </button>

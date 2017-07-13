@@ -32,7 +32,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Description = category.Description;
             Id = category.Id;
             Index = category.Index;
-            Roles = category.Roles;
+            Roles = category.Groups;
             Slides = category.Slides;
             Title = category.Title;
         }
@@ -84,12 +84,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets or sets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        /// TODO Edit XML Comment Template for Roles
-        public IList<Role> Roles
+        /// TODO Edit XML Comment Template for Groups
+        public IList<Group> Roles
         {
             get;
             set;
-        } = new List<Role>();
+        } = new List<Group>();
 
         /// <summary>
         ///     Gets or sets the slides.

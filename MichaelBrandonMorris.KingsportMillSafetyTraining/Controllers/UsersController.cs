@@ -26,54 +26,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
-        ///     Deletes the specified identifier.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Delete
-        [HttpGet]
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var applicationUser = Db.Users.Find(id);
-
-            if (applicationUser == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(applicationUser);
-        }
-
-        /// <summary>
-        ///     Deletes the confirmed.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>ActionResult.</returns>
-        /// <exception cref="Exception"></exception>
-        /// TODO Edit XML Comment Template for DeleteConfirmed
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            var applicationUser = Db.Users.Find(id);
-
-            if (applicationUser == null)
-            {
-                throw new Exception();
-            }
-
-            Db.Users.Remove(applicationUser);
-            Db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        /// <summary>
         ///     Detailses the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
@@ -82,19 +34,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Details(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var model = Db.GetUser(id).AsViewModel();
+                return View(model);
             }
-
-            var applicationUser = Db.Users.Find(id);
-
-            if (applicationUser == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
             }
-
-            return View(applicationUser);
         }
 
         /// <summary>
@@ -106,19 +56,46 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var model = Db.GetUser(id).AsViewModel(Db.GetCompanies());
+                return View(model);
             }
-
-            var model = Db.Users.Find(id).AsViewModel();
-
-            if (model == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
             }
+        }
 
-            return View(model);
+        public ActionResult ChangeRole(string id)
+        {
+            try
+            {
+                var model = Db.GetUser(id).AsViewModel();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
+            }
+        }
+
+        public ActionResult ChangeRole(string id, string roleId)
+        {
+            try
+            {
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
+            }
         }
 
         /// <summary>
@@ -131,24 +108,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+
+                Db.Edit(
+                    new User
+                    {
+                        FirstName = model.FirstName,
+                        MiddleName = model.MiddleName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        PhoneNumber = model.PhoneNumber,
+                        Id = model.Id
+                    },
+                    model.CompanyId);
+
+                return RedirectToAction("Index");
             }
-
-            Db.Edit(
-                new User
+            catch (Exception e)
             {
-                FirstName = model.FirstName,
-                MiddleName = model.MiddleName,
-                LastName = model.LastName,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                Id = model.Id
-            },
-            model.CompanyId);
-
-            return RedirectToAction("Index");
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
+            } 
         }
 
         /// <summary>
@@ -159,8 +145,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = Db.GetUsers().AsViewModels();
-            return View(model);
+            try
+            {
+                return View();
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(
+                    HttpStatusCode.InternalServerError,
+                    e);
+            }
         }
 
         /// <summary>

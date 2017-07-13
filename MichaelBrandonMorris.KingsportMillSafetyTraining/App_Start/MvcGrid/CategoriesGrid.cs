@@ -45,7 +45,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                     id = x.Id
                 }),
             ValueTemplate =
-                "<a href='{Value}' class='btn btn-primary' role='button'>Assign Roles</a>"
+                "<a href='{Value}' class='btn btn-primary' role='button'>Assign Groups</a>"
         };
 
         /// <summary>
@@ -143,11 +143,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                Role role = null;
+                Group role = null;
 
                 try
                 {
-                    role = db.GetRole(roleId);
+                    role = db.GetGroup(roleId);
                 }
                 catch (ArgumentNullException)
                 {
@@ -183,7 +183,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ColumnName = "RolesCount",
             EnableFiltering = true,
             EnableSorting = true,
-            HeaderText = "Number of Roles",
+            HeaderText = "Number of Groups",
             ValueExpression = (x, y) => x.Roles.Count.ToString()
         };
 

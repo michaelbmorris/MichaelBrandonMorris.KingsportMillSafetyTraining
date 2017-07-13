@@ -94,19 +94,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         ///     Gets the role.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <returns>Task&lt;Role&gt;.</returns>
+        /// <returns>Task&lt;Group&gt;.</returns>
         /// <exception cref="Exception"></exception>
-        /// TODO Edit XML Comment Template for GetRole
-        public async Task<Role> GetRole(string userId)
+        /// TODO Edit XML Comment Template for GetGroup
+        public async Task<Group> GetRole(string userId)
         {
             var user = await FindByIdAsync(userId);
 
-            if (user.Role == null)
+            if (user.Group == null)
             {
                 throw new Exception();
             }
 
-            return user.Role;
+            return user.Group;
         }
     }
 }

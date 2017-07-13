@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -21,6 +24,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
         }
 
+        public SelectListItem DefaultCompanyItem => new SelectListItem
+        {
+            Value = 0.ToString(),
+            Text = "Select a company..."
+        };
+
+        public IList<SelectListItem> CompanyItems => DefaultCompanyItem.Append(Companies.Select(
+            company => new SelectListItem
+            {
+                Value = company.Id.ToString(),
+                Text = company.Name
+            }));
+
         /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="UserViewModel" /> class.
@@ -29,13 +45,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public UserViewModel(User user)
         {
-            CompanyName = user.Company.Name;
             Email = user.Email;
             FirstName = user.FirstName;
             Id = user.Id;
             LastName = user.LastName;
             MiddleName = user.MiddleName;
             PhoneNumber = user.PhoneNumber;
+
+            if (user.Company != null)
+            {
+                CompanyName = user.Company.Name;
+            }
 
             var lastTrainingResult = user.TrainingResults.LastOrDefault();
 
@@ -47,6 +67,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             LastTrainingResultDateTime = lastTrainingResult.CompletionDateTime;
 
             LastTrainingResultId = lastTrainingResult.Id;
+        }
+
+        public UserViewModel(User user, IList<Company> companies)
+            : this(user)
+        {
+            Companies = companies;
         }
 
         /// <summary>
@@ -61,7 +87,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
-        [DisplayName("Company")]
+        /// <summary>
+        ///     Gets or sets the company identifier.
+        /// </summary>
+        /// <value>The identifier of the company.</value>
+        /// TODO Edit XML Comment Template for CompanyName
+        [Display(Name = "Company")]
+        [Range(1, int.MaxValue, ErrorMessage = "This field is required.")]
         public int CompanyId
         {
             get;

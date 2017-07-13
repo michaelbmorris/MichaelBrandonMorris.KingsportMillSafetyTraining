@@ -1,4 +1,7 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.RegisterViewModel
+
 @{
     ViewBag.Title = "Register";
     ViewBag.Subtitle = "Create a new account.";
@@ -10,148 +13,19 @@
 }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new
-    {
-        @class = "text-danger"
-    })
+    @Html.BootstrapHorizontalTextBoxFor(model => model.FirstName, true, "given-name")
+    @Html.BootstrapHorizontalTextBoxFor(model => model.MiddleName, false, "additional-name")
+    @Html.BootstrapHorizontalTextBoxFor(model => model.LastName, true, "family-name")
+    @Html.BootstrapHorizontalDropDownListFor(model => model.CompanyId, Model.CompanyItems)
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FirstName, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.MiddleName, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.MiddleName, new
-            {
-                @class = "form-control"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.LastName, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.CompanyId, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.CompanyId, Model.CompanyItems, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <p class="bg-info">
-        If you selected "Other" above, please enter the name of your company below.
+    <p class="bg-info col-md-offset-2 col-md-10">
+        If you selected "Other" above, please enter the name of your company below. Otherwise, leave this field blank.
     </p>
-    <div class="form-group">
-        @Html.LabelFor(model => model.OtherCompanyName, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.OtherCompanyName, new
-            {
-                @class = "form-control"
-            })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.PhoneNumber, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new
-        {
-            @class = "col-md-2 control-label"
-        })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new
-            {
-                @class = "form-control", required = "required"
-            })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-10 col-md-offset-2">
-            <input class="btn btn-default"
-                   type="submit"
-                   value="Register"/>
-        </div>
-    </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-
-    <script type="text/javascript">
-        $(function() {
-            $('#datetimepicker1').datetimepicker({
-                format: "MM/DD/YYYY"
-            });
-        });
-    </script>
+    @Html.BootstrapHorizontalTextBoxFor(model => model.OtherCompanyName)
+    @Html.BootstrapHorizontalTextBoxFor(model => model.PhoneNumber, true, "tel-national")
+    @Html.BootstrapHorizontalTextBoxFor(model => model.Email, true, "email")
+    @Html.BootstrapHorizontalPasswordFor(model => model.Password, "new-password")
+    @Html.BootstrapHorizontalPasswordFor(model => model.ConfirmPassword, "new-password")
+    @Html.BootstrapHorizontalSubmit("Register", BootstrapContextualClass.Primary)
 }

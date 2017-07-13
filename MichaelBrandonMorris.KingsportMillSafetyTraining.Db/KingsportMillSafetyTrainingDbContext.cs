@@ -35,7 +35,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             Companies = Set<Company>();
             Slides = Set<Slide>();
             TrainingResults = Set<TrainingResult>();
-            TrainingRoles = Set<Role>();
+            Groups = Set<Group>();
         }
 
         /// <summary>
@@ -67,6 +67,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
+        ///     Gets or sets the training groups.
+        /// </summary>
+        /// <value>The training groups.</value>
+        /// TODO Edit XML Comment Template for Groups
+        internal DbSet<Group> Groups
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         ///     Gets or sets the slides.
         /// </summary>
         /// <value>The slides.</value>
@@ -83,17 +94,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <value>The training results.</value>
         /// TODO Edit XML Comment Template for TrainingResults
         internal DbSet<TrainingResult> TrainingResults
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        ///     Gets or sets the training roles.
-        /// </summary>
-        /// <value>The training roles.</value>
-        /// TODO Edit XML Comment Template for TrainingRoles
-        internal DbSet<Role> TrainingRoles
         {
             get;
             set;
@@ -179,17 +179,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     user.TrainingResults.Add(
                         new TrainingResult
                         {
-                            Role = user.Role
+                            Group = user.Group
                         });
-                });
-        }
-
-        public void CreateCompany(Company company)
-        {
-            DoTransaction(
-                () =>
-                {
-                    Companies.Add(company);
                 });
         }
 
@@ -207,17 +198,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
-        /// <summary>
-        ///     Creates the role.
-        /// </summary>
-        /// <param name="role">The role.</param>
-        /// TODO Edit XML Comment Template for CreateRole
-        public void CreateRole(Role role)
+        public void CreateCompany(Company company)
         {
             DoTransaction(
                 () =>
                 {
-                    TrainingRoles.Add(role);
+                    Companies.Add(company);
+                });
+        }
+
+        /// <summary>
+        ///     Creates the role.
+        /// </summary>
+        /// <param name="role">The role.</param>
+        /// TODO Edit XML Comment Template for CreateGroup
+        public void CreateGroup(Group role)
+        {
+            DoTransaction(
+                () =>
+                {
+                    Groups.Add(role);
                 });
         }
 
@@ -281,7 +281,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 
                     if (company == null)
                     {
-                        throw new KeyNotFoundException("Company with id '{id}' not found.");
+                        throw new KeyNotFoundException(
+                            "Company with id '{id}' not found.");
                     }
 
                     Companies.Attach(company);
@@ -294,8 +295,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        /// TODO Edit XML Comment Template for DeleteRole
-        public void DeleteRole(int? id)
+        /// TODO Edit XML Comment Template for DeleteGroup
+        public void DeleteGroup(int? id)
         {
             DoTransaction(
                 () =>
@@ -305,19 +306,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         throw new ArgumentNullException(nameof(id));
                     }
 
-                    var role = TrainingRoles.Find(id);
+                    var role = Groups.Find(id);
 
                     if (role == null)
                     {
                         throw new KeyNotFoundException(
-                            $"Role with id '{id}' not found.");
+                            $"Group with id '{id}' not found.");
                     }
 
-                    TrainingRoles.Attach(role);
-                    TrainingRoles.Remove(role);
+                    Groups.Attach(role);
+                    Groups.Remove(role);
                 });
 
-            UpdateCurrentRoleIndex();
+            UpdateCurrentGroupIndex();
         }
 
         /// <summary>
@@ -351,24 +352,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                                        $"Company with id '{companyId}' not found.");
                     Edit(user);
                 });
-        }
-
-        public void SetUserCompany(User user, int companyId)
-        {
-            DoTransaction(
-                () =>
-                {
-                    user.Company = Companies.Find(companyId)
-                                   ?? throw new KeyNotFoundException(
-                                       $"Company with id '{companyId}' not found.");
-                });
-        }
-
-        public IList<Company> GetCompanies(
-            Func<Company, object> orderBy = null,
-            Func<Company, bool> where = null)
-        {
-            return DoTransaction(() => Companies.OrderByWhere(orderBy, where));
         }
 
         /// <summary>
@@ -498,6 +481,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        public IList<Company> GetCompanies(
+            Func<Company, object> orderBy = null,
+            Func<Company, bool> where = null)
+        {
+            return DoTransaction(() => Companies.OrderByWhere(orderBy, where));
+        }
+
         public Company GetCompany(int? id)
         {
             return DoTransaction(
@@ -524,11 +514,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         ///     Gets the role.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>Role.</returns>
+        /// <returns>Group.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="KeyNotFoundException"></exception>
-        /// TODO Edit XML Comment Template for GetRole
-        public Role GetRole(int? id)
+        /// TODO Edit XML Comment Template for GetGroup
+        public Group GetGroup(int? id)
         {
             return DoTransaction(
                 () =>
@@ -538,15 +528,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         throw new ArgumentNullException(nameof(id));
                     }
 
-                    var role = TrainingRoles.Find(id);
+                    var group = Groups.Find(id);
 
-                    if (role == null)
+                    if (group == null)
                     {
                         throw new KeyNotFoundException(
-                            $"Role with id '{id}' not found.");
+                            $"Group with id '{id}' not found.");
                     }
 
-                    return role;
+                    return group;
                 });
         }
 
@@ -554,25 +544,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         ///     Gets the role.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
-        /// <returns>Role.</returns>
-        /// TODO Edit XML Comment Template for GetRole
-        public Role GetRole(Func<Role, bool> predicate)
+        /// <returns>Group.</returns>
+        /// TODO Edit XML Comment Template for GetGroup
+        public Group GetGroup(Func<Group, bool> predicate)
         {
-            return DoTransaction(() => TrainingRoles.Single(predicate));
+            return DoTransaction(() => Groups.Single(predicate));
         }
 
         /// <summary>
-        ///     Gets the roles.
+        ///     Gets the groups.
         /// </summary>
         /// <param name="orderByPredicate">The order by predicate.</param>
         /// <param name="wherePredicate">The where predicate.</param>
-        /// <returns>IList&lt;Role&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetRoles
-        public IList<Role> GetRoles(
-            Func<Role, object> orderByPredicate = null,
-            Func<Role, bool> wherePredicate = null)
+        /// <returns>IList&lt;Group&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetGroups
+        public IList<Group> GetGroups(
+            Func<Group, object> orderByPredicate = null,
+            Func<Group, bool> wherePredicate = null)
         {
-            return TrainingRoles.OrderByWhere(orderByPredicate, wherePredicate);
+            return Groups.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
         /// <summary>
@@ -690,7 +680,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             return DoTransaction(
                 () =>
                 {
+                    if (userId == null)
+                    {
+                        throw new ArgumentNullException(nameof(userId));
+                    }
+
                     var user = Users.Find(userId);
+
+                    if (user == null)
+                    {
+                        throw new KeyNotFoundException(
+                            $"User with id '{userId}' not found.");
+                    }
+
                     return user.GetTrainingResultsDescending(
                         orderByPredicate,
                         wherePredicate);
@@ -754,22 +756,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         ///     Pairs the category and role.
         /// </summary>
         /// <param name="categoryAndRoleIds">The category and role ids.</param>
-        /// TODO Edit XML Comment Template for PairCategoryAndRole
-        public void PairCategoryAndRole(
-            (int categoryId, int roleId) categoryAndRoleIds)
+        /// TODO Edit XML Comment Template for PairCategoryAndGroup
+        public void PairCategoryAndGroup(
+            (int CategoryId, int GroupId) categoryAndGroupIds)
         {
-            PairCategoryAndRole(
-                categoryAndRoleIds.categoryId,
-                categoryAndRoleIds.roleId);
+            PairCategoryAndGroup(
+                categoryAndGroupIds.CategoryId,
+                categoryAndGroupIds.GroupId);
         }
 
         /// <summary>
         ///     Pairs the category and role.
         /// </summary>
         /// <param name="categoryId">The category identifier.</param>
-        /// <param name="roleId">The role identifier.</param>
-        /// TODO Edit XML Comment Template for PairCategoryAndRole
-        public void PairCategoryAndRole(int categoryId, int roleId)
+        /// <param name="groupId">The role identifier.</param>
+        /// TODO Edit XML Comment Template for PairCategoryAndGroup
+        public void PairCategoryAndGroup(int categoryId, int groupId)
         {
             DoTransaction(
                 () =>
@@ -782,38 +784,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                             $"Category with id '{categoryId}' not found.");
                     }
 
-                    var role = TrainingRoles.Find(roleId);
+                    var role = Groups.Find(groupId);
 
                     if (role == null)
                     {
                         throw new KeyNotFoundException(
-                            $"Role with id '{roleId}' not found.");
+                            $"Group with id '{groupId}' not found.");
                     }
 
-                    category.Roles.Add(role);
+                    category.Groups.Add(role);
                     role.Categories.Add(category);
                 });
         }
 
-        public void PairRoleAndCategory(
-            (int RoleId, int CategoryId) roleAndCategoryIds)
+        public void PairGroupAndCategory(
+            (int GroupId, int CategoryId) groupAndCategoryIds)
         {
-            PairRoleAndCategory(
-                roleAndCategoryIds.RoleId,
-                roleAndCategoryIds.CategoryId);
+            PairGroupAndCategory(
+                groupAndCategoryIds.GroupId,
+                groupAndCategoryIds.CategoryId);
         }
 
-        public void PairRoleAndCategory(int roleId, int categoryId)
+        public void PairGroupAndCategory(int groupId, int categoryId)
         {
             DoTransaction(
                 () =>
                 {
-                    var role = TrainingRoles.Find(roleId);
+                    var role = Groups.Find(groupId);
 
                     if (role == null)
                     {
                         throw new KeyNotFoundException(
-                            $"Role with id '{roleId}' not found.");
+                            $"Group with id '{groupId}' not found.");
                     }
 
                     var category = Categories.Find(categoryId);
@@ -825,7 +827,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     }
 
                     role.Categories.Add(category);
-                    category.Roles.Add(role);
+                    category.Groups.Add(role);
                 });
         }
 
@@ -882,27 +884,39 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        ///     Reorders the specified roles.
+        ///     Reorders the specified groups.
         /// </summary>
-        /// <param name="roles">The roles.</param>
+        /// <param name="groups">The groups.</param>
         /// TODO Edit XML Comment Template for Reorder
-        public void Reorder(IList<Role> roles)
+        public void Reorder(IList<Group> groups)
         {
             DoTransaction(
                 () =>
                 {
-                    foreach (var role in roles)
+                    foreach (var group in groups)
                     {
-                        var roleToEdit = TrainingRoles.Find(role.Id);
+                        var roleToEdit = Groups.Find(group.Id);
 
                         if (roleToEdit == null)
                         {
                             throw new KeyNotFoundException(
-                                GetNotFoundMessage<Role>(role.Id));
+                                GetNotFoundMessage<Group>(group.Id));
                         }
 
-                        roleToEdit.Index = role.Index;
+                        roleToEdit.Index = group.Index;
                     }
+                });
+        }
+
+        public void SetUserCompany(string userId, int companyId)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var user = Users.Find(userId);
+                    user.Company = Companies.Find(companyId)
+                                   ?? throw new KeyNotFoundException(
+                                       $"Company with id '{companyId}' not found.");
                 });
         }
 
@@ -949,31 +963,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 {
                     var user = Users.Find(userId);
 
-                    user.Role = roleId == null
-                        ? TrainingRoles.MaxBy(x => x.Index)
-                        : TrainingRoles.Find(roleId);
+                    user.Group = roleId == null
+                        ? Groups.MaxBy(x => x.Index)
+                        : Groups.Find(roleId);
                 });
         }
 
         /// <summary>
-        ///     Unpairs the categories and roles.
+        ///     Unpairs the categories and groups.
         /// </summary>
-        /// TODO Edit XML Comment Template for UnpairCategoriesAndRoles
-        public void UnpairCategoriesAndRoles()
+        /// TODO Edit XML Comment Template for UnpairCategoriesAndGroups
+        public void UnpairCategoriesAndGroups()
         {
             DoTransaction(
                 () =>
                 {
                     foreach (var category in GetCategories())
-                    foreach (var role in category.GetRoles())
+                    foreach (var group in category.GetGroups())
                     {
-                        category.Roles.Remove(role);
+                        category.Groups.Remove(group);
                     }
 
-                    foreach (var role in GetRoles())
-                    foreach (var category in role.GetCategories())
+                    foreach (var group in GetGroups())
+                    foreach (var category in group.GetCategories())
                     {
-                        role.Categories.Remove(category);
+                        group.Categories.Remove(category);
                     }
                 });
         }
@@ -1011,15 +1025,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <summary>
         ///     Updates the index of the current role.
         /// </summary>
-        /// TODO Edit XML Comment Template for UpdateCurrentRoleIndex
-        public void UpdateCurrentRoleIndex()
+        /// TODO Edit XML Comment Template for UpdateCurrentGroupIndex
+        public void UpdateCurrentGroupIndex()
         {
             DoTransaction(
                 () =>
                 {
-                    Role.CurrentIndex = !TrainingRoles.Any()
-                        ? 0
-                        : TrainingRoles.Max(x => x.Index);
+                    Group.CurrentIndex =
+                        !Groups.Any() ? 0 : Groups.Max(x => x.Index);
                 });
         }
 

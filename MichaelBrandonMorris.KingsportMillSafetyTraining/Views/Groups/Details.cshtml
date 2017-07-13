@@ -1,8 +1,8 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel
 
 @{
     ViewBag.Title = "Details";
-    ViewBag.Subtitle = "Role";
+    ViewBag.Subtitle = "Group";
 }
 
 @Html.DisplayForModel(Model)
@@ -22,7 +22,7 @@
     {
         @class = "btn btn-danger"
     })
-    @Html.ActionLink("View All Roles", "Index", null, new
+    @Html.ActionLink("View All Groups", "Index", null, new
     {
         @class = "btn btn-primary pull-right"
     })

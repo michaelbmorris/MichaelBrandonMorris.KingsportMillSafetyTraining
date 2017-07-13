@@ -3,10 +3,10 @@
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
     /// <summary>
-    ///     Class Role.
+    ///     Class Group.
     /// </summary>
-    /// TODO Edit XML Comment Template for Role
-    public class Role
+    /// TODO Edit XML Comment Template for Group
+    public class Group
     {
         /// <summary>
         ///     Gets or sets the categories.

@@ -1,8 +1,8 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel
 
 @{
-    ViewBag.Title = "Edit";
-    ViewBag.Subtitle = "Role";
+    ViewBag.Title = "Create";
+    ViewBag.Subtitle = "Group";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,17 +11,16 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        @Html.HiddenFor(model => model.Id)
         @Html.EditorForModel(Model)
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
                 <input class="btn btn-primary"
                        type="submit"
-                       value="Save Changes" />
+                       value="Create"/>
                 @Html.ActionLink("Cancel", "Index", null, new
-           {
-               @class = "btn btn-danger"
-           })
+                {
+                    @class = "btn btn-danger"
+                })
             </div>
         </div>
     </div>

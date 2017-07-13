@@ -26,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -45,7 +45,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -64,7 +64,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
     }

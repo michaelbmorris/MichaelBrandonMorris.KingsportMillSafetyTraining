@@ -1,4 +1,4 @@
-﻿@using MichaelBrandonMorris.Extensions.WebExtensions
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper
 @using MichaelBrandonMorris.Math
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignCategoriesViewModel
 
@@ -14,7 +14,7 @@
             <tr>
                 @foreach (var role in Model.Roles)
                 {
-                    <th>@Html.DisplayFor(role.Title)</th>
+                    <th>@Html.DisplayFor(modelRole => role.Title)</th>
                 }
             </tr>
         </thead>
@@ -27,7 +27,7 @@
                         <td>
                             <div class="checkbox">
                                 <label>
-                                    <input name="roleCategories"
+                                    <input name="groupCategories"
                                            type="checkbox"
                                            value="@Cantor.Pair(role.Id, categoryViewModel.Id)"
                                            @Html.Attribute("checked", "checked", categoryViewModel.Roles.Contains(role))/>

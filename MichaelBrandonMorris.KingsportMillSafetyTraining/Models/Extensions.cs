@@ -56,31 +56,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <returns>UserViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
-        public static UserViewModel AsViewModel(this User user)
+        public static UserViewModel AsViewModel(
+            this User user,
+            IList<Company> companies = null)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return new UserViewModel(user);
+            return new UserViewModel(user, companies);
         }
 
         /// <summary>
         ///     Ases the view model.
         /// </summary>
         /// <param name="role">The role.</param>
-        /// <returns>RoleViewModel.</returns>
+        /// <returns>GroupViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
-        public static RoleViewModel AsViewModel(this Role role)
+        public static GroupViewModel AsViewModel(this Group role)
         {
             if (role == null)
             {
                 throw new ArgumentNullException(nameof(role));
             }
 
-            return new RoleViewModel(role);
+            return new GroupViewModel(role);
         }
 
         /// <summary>
@@ -155,11 +157,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Ases the view models.
         /// </summary>
         /// <param name="roles">The roles.</param>
-        /// <returns>IList&lt;RoleViewModel&gt;.</returns>
+        /// <returns>IList&lt;GroupViewModel&gt;.</returns>
         /// TODO Edit XML Comment Template for AsViewModels
-        public static IList<RoleViewModel> AsViewModels(this IList<Role> roles)
+        public static IList<GroupViewModel> AsViewModels(this IList<Group> roles)
         {
-            return roles.Select(x => new RoleViewModel(x));
+            return roles.Select(x => new GroupViewModel(x));
         }
 
         /// <summary>

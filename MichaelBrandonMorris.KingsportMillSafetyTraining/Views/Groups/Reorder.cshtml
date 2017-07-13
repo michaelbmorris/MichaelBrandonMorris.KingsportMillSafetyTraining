@@ -1,15 +1,15 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.RoleViewModel>
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
 
 @{
     ViewBag.Title = "Reorder";
-    ViewBag.Subtitle = "Roles";
+    ViewBag.Subtitle = "Groups";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
 <p class="bg-info">
-    On the role selection page, the role questions will be shown in the order below.<br />
-    If the user answers "Yes" to any of the questions, they will be placed in that role.<br />
-    The last role's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that role.<br />
+    On the group selection page, the group questions will be shown in the order below.<br />
+    If the user answers "Yes" to any of the questions, they will be placed in that group.<br />
+    The last group's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that group.<br />
     <br/>
     Click and drag the arrows to change order.
 </p>

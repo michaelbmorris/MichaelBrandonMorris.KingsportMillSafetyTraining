@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -20,6 +21,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public SlideViewModel()
         {
         }
+
+        public IList<SelectListItem> CategorySelectList => Categories.Select(
+            category => new SelectListItem
+            {
+                Value = category.Id.ToString(),
+                Text = category.Title
+            });
 
         /// <summary>
         ///     Initializes a new instance of the

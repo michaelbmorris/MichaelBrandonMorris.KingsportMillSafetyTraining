@@ -1,11 +1,5 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Users";
 }
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 @Html.MvcGrid("UsersGrid")

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
+
+@{
+    ViewBag.Title = "Groups";
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Reorder", "Reorder", null, new
+    {
+        @class = "btn btn-primary"
+    })
+    @Html.ActionLink("Assign Categories", "AssignCategories", null, new
+    {
+        @class = "btn btn-primary"
+    })
+</p>
+
+<p class="bg-info">
+    On the group selection page, the group questions will be shown in ascending index order.<br />
+    If the user answers "Yes" to any of the questions, they will be placed in that group.<br />
+    The last (highest index) group's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that group.<br />
+</p>
+
+@Html.MvcGrid("GroupsGrid")

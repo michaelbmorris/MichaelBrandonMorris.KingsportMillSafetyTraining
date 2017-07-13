@@ -48,10 +48,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var model = id == null
                     ? new AssignRolesViewModel(
                         Db.GetCategories(),
-                        Db.GetRoles().AsViewModels())
+                        Db.GetGroups().AsViewModels())
                     : new AssignRolesViewModel(
                         Db.GetCategory(id.Value),
-                        Db.GetRoles().AsViewModels());
+                        Db.GetGroups().AsViewModels());
 
                 return View(model);
             }
@@ -59,7 +59,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -74,7 +74,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                Db.UnpairCategoriesAndRoles();
+                Db.UnpairCategoriesAndGroups();
 
                 if (categoryRoles == null)
                 {
@@ -83,7 +83,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 foreach (var categoryRole in categoryRoles)
                 {
-                    Db.PairCategoryAndRole(Cantor.Inverse(categoryRole));
+                    Db.PairCategoryAndGroup(Cantor.Inverse(categoryRole));
                 }
 
                 return RedirectToAction("Index");
@@ -92,7 +92,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -112,7 +112,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -147,7 +147,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -173,17 +173,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -224,17 +224,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -264,17 +264,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -304,17 +304,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -341,7 +341,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     Description = model.Description,
                     Index = model.Index,
                     Id = model.Id,
-                    Roles = model.Roles,
+                    Groups = model.Roles,
                     Slides = model.Slides
                 });
 
@@ -351,7 +351,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -372,7 +372,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -393,7 +393,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -415,7 +415,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 

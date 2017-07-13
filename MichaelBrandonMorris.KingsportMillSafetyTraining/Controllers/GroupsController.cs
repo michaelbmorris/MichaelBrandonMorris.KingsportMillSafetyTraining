@@ -10,13 +10,20 @@ using MichaelBrandonMorris.Math;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    ///     Class RolesController.
+    ///     Class GroupsController.
     /// </summary>
     /// <seealso cref="Controller" />
-    /// TODO Edit XML Comment Template for RolesController
+    /// TODO Edit XML Comment Template for GroupsController
     [Authorize(Roles = "Administrator")]
-    public class RolesController : Controller
+    public class GroupsController : Controller
     {
+        /// <summary>
+        ///     Gets the index of the order by.
+        /// </summary>
+        /// <value>The index of the order by.</value>
+        /// TODO Edit XML Comment Template for OrderByIndex
+        private static Func<Group, object> OrderByIndex => role => role.Index;
+
         /// <summary>
         ///     The database
         /// </summary>
@@ -25,13 +32,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             get;
         } = new KingsportMillSafetyTrainingDbContext();
-
-        /// <summary>
-        ///     Gets the index of the order by.
-        /// </summary>
-        /// <value>The index of the order by.</value>
-        /// TODO Edit XML Comment Template for OrderByIndex
-        private static Func<Role, object> OrderByIndex => role => role.Index;
 
         /// <summary>
         ///     Assigns the categories.
@@ -44,10 +44,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             var model = id == null
                 ? new AssignCategoriesViewModel(
-                    Db.GetRoles(),
+                    Db.GetGroups(),
                     Db.GetCategories().AsViewModels())
                 : new AssignCategoriesViewModel(
-                    Db.GetRole(id.Value),
+                    Db.GetGroup(id.Value),
                     Db.GetCategories().AsViewModels());
 
             return View(model);
@@ -56,22 +56,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Assigns the categories.
         /// </summary>
-        /// <param name="roleCategories">The role categories.</param>
+        /// <param name="groupCategories">The role categories.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for AssignCategories
         [HttpPost]
-        public ActionResult AssignCategories(IList<int> roleCategories)
+        public ActionResult AssignCategories(IList<int> groupCategories)
         {
-            Db.UnpairCategoriesAndRoles();
+            Db.UnpairCategoriesAndGroups();
 
-            if (roleCategories == null)
+            if (groupCategories == null)
             {
                 return RedirectToAction("Index");
             }
 
-            foreach (var roleCategory in roleCategories)
+            foreach (var groupCategory in groupCategories)
             {
-                Db.PairRoleAndCategory(Cantor.Inverse(roleCategory));
+                Db.PairGroupAndCategory(Cantor.Inverse(groupCategory));
             }
 
             return RedirectToAction("Index");
@@ -96,20 +96,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(RoleViewModel model)
+        public ActionResult Create(GroupViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            Db.CreateRole(new Role
-            {
-                Title = model.Title,
-                Description = model.Description,
-                Index = ++Role.CurrentIndex,
-                Question = model.Question
-            });
+            Db.CreateGroup(
+                new Group
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Index = ++Group.CurrentIndex,
+                    Question = model.Question
+                });
 
             return RedirectToAction("Index");
         }
@@ -125,7 +126,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = Db.GetRole(id).AsViewModel();
+                var model = Db.GetGroup(id).AsViewModel();
                 return View(model);
             }
             catch (Exception e)
@@ -134,7 +135,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 throw;
             }
         }
-
         /// <summary>
         ///     Deletes the confirmed.
         /// </summary>
@@ -148,22 +148,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                Db.DeleteRole(id);
+                Db.DeleteGroup(id);
                 return RedirectToAction("Index");
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -184,7 +184,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = Db.GetRole(id.Value).AsViewModel();
+                var model = Db.GetGroup(id.Value).AsViewModel();
 
                 if (model == null)
                 {
@@ -195,18 +195,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (InvalidOperationException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
-            }          
+                    e);
+            }
         }
 
         /// <summary>
@@ -226,23 +226,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = Db.GetRole(id.Value).AsViewModel();
+                var model = Db.GetGroup(id.Value).AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e.Message);
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (InvalidOperationException e)
             {
-                return this.CreateError(HttpStatusCode.BadRequest, e.Message);
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (Exception e)
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
-            }         
+                    e);
+            }
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(RoleViewModel model)
+        public ActionResult Edit(GroupViewModel model)
         {
             try
             {
@@ -263,7 +263,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 Db.Edit(
-                    new Role
+                    new Group
                     {
                         Title = model.Title,
                         Description = model.Description,
@@ -277,8 +277,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
-            }     
+                    e);
+            }
         }
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = Db.GetRoles(OrderByIndex).AsViewModels();
+            var model = Db.GetGroups(OrderByIndex).AsViewModels();
             return View(model);
         }
 
@@ -301,7 +301,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Reorder()
         {
-            var model = Db.GetRoles(OrderByIndex).AsViewModels();
+            var model = Db.GetGroups(OrderByIndex).AsViewModels();
             return View(model);
         }
 
@@ -312,7 +312,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
         [HttpPost]
-        public ActionResult Reorder(IList<Role> roles)
+        public ActionResult Reorder(IList<Group> roles)
         {
             Db.Reorder(roles);
             return RedirectToAction("Index");

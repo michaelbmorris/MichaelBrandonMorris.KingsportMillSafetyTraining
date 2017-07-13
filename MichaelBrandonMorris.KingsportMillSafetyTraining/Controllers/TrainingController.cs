@@ -80,7 +80,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -120,7 +120,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(
                     HttpStatusCode.InternalServerError,
-                    e.Message);
+                    e);
             }
         }
 
@@ -208,7 +208,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectRole()
         {
-            var model = Db.GetRoles(x => x.Index).AsViewModels();
+            var model = Db.GetGroups(x => x.Index).AsViewModels();
             model = model.Take(model.Count - 1);
             return View(model);
         }
@@ -248,10 +248,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Gets the current user role.
         /// </summary>
-        /// <returns>Role.</returns>
+        /// <returns>Group.</returns>
         /// <exception cref="Exception"></exception>
         /// TODO Edit XML Comment Template for GetCurrentUserRole
-        private Role GetCurrentUserRole()
+        private Group GetCurrentUserRole()
         {
             var user = Db.GetUser(User.GetId());
 
@@ -260,7 +260,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 throw new Exception();
             }
 
-            return user.Role;
+            return user.Group;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 quizResultsGrid.Title,
                 quizResultsGrid.Grid);
 
-            var rolesGrid = RolesGrid.GetRolesGrid();
+            var rolesGrid = GroupsGrid.GetRolesGrid();
             MvcGridDefinitionTable.Add(rolesGrid.Title, rolesGrid.Grid);
 
             var slidesGrid = SlidesGrid.GetSlidesGrid();

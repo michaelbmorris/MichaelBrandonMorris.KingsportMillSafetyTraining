@@ -142,7 +142,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                var query = db.GetTrainingResultsDescending(id).AsViewModels();
+                var query = (id.IsNullOrWhiteSpace()
+                    ? db.GetTrainingResultsDescending()
+                    : db.GetTrainingResultsDescending(id)).AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())
                 {
@@ -167,7 +169,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ColumnName = "RoleTitle",
             EnableFiltering = true,
             EnableSorting = true,
-            HeaderText = "Role",
+            HeaderText = "Group",
             ValueExpression = (x, y) => x.RoleTitle
         };
 

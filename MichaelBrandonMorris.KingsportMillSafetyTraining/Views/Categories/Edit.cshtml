@@ -1,4 +1,6 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -17,18 +19,9 @@
 
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
-                <input class="btn btn-primary"
-                       type="submit"
-                       value="Save Changes"/>
-                @Html.ActionLink("Cancel", "Index", null, new
-                {
-                    @class = "btn btn-danger"
-                })
+                @Html.BootstrapSubmit("Save", BootstrapContextualClass.Primary)
+                @Html.BootstrapActionLinkButton("Cancel", "Index", null, BootstrapContextualClass.Danger)
             </div>
         </div>
     </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }

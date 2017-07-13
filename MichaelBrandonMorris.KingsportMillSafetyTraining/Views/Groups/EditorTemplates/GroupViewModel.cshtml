@@ -1,0 +1,16 @@
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel
+
+@Html.ValidationSummary(true, "", new
+{
+    @class = "text-danger"
+})
+
+@Html.BootstrapHorizontalTextBoxFor(model => model.Title, true)
+@Html.BootstrapHorizontalCkeditorFor(model => model.Description)
+
+<p class="bg-info col-md-offset-2 col-md-10">
+    The question will be displayed to users to help them select their group. If this is the default group, it does not need a question.
+</p>
+
+@Html.BootstrapHorizontalCkeditorFor(model => model.Question)

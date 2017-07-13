@@ -45,12 +45,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         ///     Gets or sets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        /// TODO Edit XML Comment Template for Roles
-        public virtual IList<Role> Roles
+        /// TODO Edit XML Comment Template for Groups
+        public virtual IList<Group> Groups
         {
             get;
             set;
-        } = new List<Role>();
+        } = new List<Group>();
 
         /// <summary>
         ///     Gets or sets the slides.

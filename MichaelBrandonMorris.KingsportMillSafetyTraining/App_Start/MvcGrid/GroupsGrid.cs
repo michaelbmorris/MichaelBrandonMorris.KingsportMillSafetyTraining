@@ -8,22 +8,22 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
 using Column =
     MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.RoleViewModel>;
+        KingsportMillSafetyTraining.Models.GroupViewModel>;
 using Grid =
     MichaelBrandonMorris.MvcGrid.Models.MvcGridBuilder<MichaelBrandonMorris.
-        KingsportMillSafetyTraining.Models.RoleViewModel>;
+        KingsportMillSafetyTraining.Models.GroupViewModel>;
 using RetrieveDataMethod =
     System.Func<MichaelBrandonMorris.MvcGrid.Models.GridContext,
         MichaelBrandonMorris.MvcGrid.Models.QueryResult<MichaelBrandonMorris.
-            KingsportMillSafetyTraining.Models.RoleViewModel>>;
+            KingsportMillSafetyTraining.Models.GroupViewModel>>;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 {
     /// <summary>
-    ///     Class RolesGrid.
+    ///     Class GroupsGrid.
     /// </summary>
-    /// TODO Edit XML Comment Template for RolesGrid
-    internal static class RolesGrid
+    /// TODO Edit XML Comment Template for GroupsGrid
+    internal static class GroupsGrid
     {
         /// <summary>
         ///     Gets the assign categories.
@@ -39,7 +39,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HtmlEncode = false,
             ValueExpression = (x, y) => y.UrlHelper.Action(
                 "AssignCategories",
-                "Roles",
+                "Groups",
                 new
                 {
                     id = x.Id
@@ -76,7 +76,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HtmlEncode = false,
             ValueExpression = (x, y) => y.UrlHelper.Action(
                 "Delete",
-                "Roles",
+                "Groups",
                 new
                 {
                     id = x.Id
@@ -98,7 +98,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HtmlEncode = false,
             ValueExpression = (x, y) => y.UrlHelper.Action(
                 "Details",
-                "Roles",
+                "Groups",
                 new
                 {
                     id = x.Id
@@ -120,7 +120,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HtmlEncode = false,
             ValueExpression = (x, y) => y.UrlHelper.Action(
                 "Edit",
-                "Roles",
+                "Groups",
                 new
                 {
                     id = x.Id
@@ -153,7 +153,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var id = context.QueryOptions.GetPageParameterString("id");
             id.TryParse(out int categoryId);
             var sortDirection = context.QueryOptions.SortDirection;
-            var result = new QueryResult<RoleViewModel>();
+            var result = new QueryResult<GroupViewModel>();
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
@@ -171,8 +171,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 }
 
                 var query = category == null
-                    ? db.GetRoles().AsViewModels()
-                    : category.GetRoles().AsViewModels();
+                    ? db.GetGroups().AsViewModels()
+                    : category.GetGroups().AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())
                 {
@@ -208,7 +208,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         /// TODO Edit XML Comment Template for GetRolesGrid
         internal static (string Title, Grid Grid) GetRolesGrid()
         {
-            var grid = new MvcGridBuilder<RoleViewModel>();
+            var grid = new MvcGridBuilder<GroupViewModel>();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
             grid.WithPageParameterNames("Id");
             grid.AddColumn(Index);
@@ -220,7 +220,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(Delete);
             grid.WithSorting(true, "Index", SortDirection.Asc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
-            return ("RolesGrid", grid);
+            return ("GroupsGrid", grid);
         }
     }
 }

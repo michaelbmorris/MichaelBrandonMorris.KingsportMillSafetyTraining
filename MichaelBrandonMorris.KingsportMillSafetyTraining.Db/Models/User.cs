@@ -104,8 +104,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         ///     Gets or sets the role.
         /// </summary>
         /// <value>The role.</value>
-        /// TODO Edit XML Comment Template for Role
-        public virtual Role Role
+        /// TODO Edit XML Comment Template for Group
+        public virtual Group Group
         {
             get;
             set;

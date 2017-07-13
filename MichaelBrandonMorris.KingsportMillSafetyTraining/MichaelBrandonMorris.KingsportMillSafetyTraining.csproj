@@ -16,7 +16,7 @@
     <RootNamespace>MichaelBrandonMorris.KingsportMillSafetyTraining</RootNamespace>
     <AssemblyName>MichaelBrandonMorris.KingsportMillSafetyTraining</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -62,8 +62,8 @@
     <Reference Include="MichaelBrandonMorris.Extensions.PrincipalExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrincipalExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.PrincipalExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions.WebExtensions, Version=1.0.6400.14903, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.WebExtensions.1.0.6400.14903\lib\net452\MichaelBrandonMorris.Extensions.WebExtensions.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6403.24359, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6403.24359\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6396.27756, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6396.27756\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
@@ -222,7 +222,7 @@
     <Compile Include="App_Start\MvcGrid\MvcGridConfig.cs" />
     <Compile Include="App_Start\MvcGrid\Extensions.cs" />
     <Compile Include="App_Start\MvcGrid\QuizResultsGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\RolesGrid.cs" />
+    <Compile Include="App_Start\MvcGrid\GroupsGrid.cs" />
     <Compile Include="App_Start\MvcGrid\SlidesGrid.cs" />
     <Compile Include="App_Start\MvcGrid\TrainingResultsGrid.cs" />
     <Compile Include="App_Start\MvcGrid\UsersGrid.cs" />
@@ -237,7 +237,7 @@
     <Compile Include="Controllers\Helpers\ChallengeResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\SlidesController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
@@ -273,7 +273,7 @@
     <Compile Include="Models\Identity\Account\SendCodeViewModel.cs" />
     <Compile Include="Models\Identity\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Models\QuizSlideViewModel.cs" />
-    <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\GroupViewModel.cs" />
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -816,29 +816,28 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\Delete.cshtml" />
-    <Content Include="Views\Roles\Details.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Groups\Create.cshtml" />
+    <Content Include="Views\Groups\Delete.cshtml" />
+    <Content Include="Views\Groups\Details.cshtml" />
+    <Content Include="Views\Groups\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
     <Content Include="Views\Slides\Reorder.cshtml" />
     <Content Include="Views\Slides\EditorTemplates\SlideViewModel.cshtml" />
     <Content Include="Views\Slides\EditorTemplates\Answer.cshtml" />
     <Content Include="Views\Slides\AddAnswer.cshtml" />
-    <Content Include="Views\Roles\AssignCategories.cshtml" />
+    <Content Include="Views\Groups\AssignCategories.cshtml" />
     <Content Include="Views\Categories\Reorder.cshtml" />
     <Content Include="Views\Categories\EditorTemplates\CategoryViewModel.cshtml" />
-    <Content Include="Views\Roles\EditorTemplates\RoleViewModel.cshtml" />
+    <Content Include="Views\Groups\EditorTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\AssignRoles.cshtml" />
-    <Content Include="Views\Roles\DisplayTemplates\RoleViewModel.cshtml" />
+    <Content Include="Views\Groups\DisplayTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
     <Content Include="Views\Training\SelectRole.cshtml" />
     <Content Include="Views\Training\Index.cshtml" />
-    <Content Include="Views\Roles\Reorder.cshtml" />
+    <Content Include="Views\Groups\Reorder.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
     <Content Include="Views\Training\Quiz.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />

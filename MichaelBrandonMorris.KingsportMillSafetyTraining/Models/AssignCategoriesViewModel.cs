@@ -26,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <param name="categoryViewModels">The category view models.</param>
         /// TODO Edit XML Comment Template for #ctor
         public AssignCategoriesViewModel(
-            IList<Role> roles,
+            IList<Group> roles,
             IList<CategoryViewModel> categoryViewModels)
         {
             Roles = roles;
@@ -41,10 +41,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <param name="categoryViewModels">The category view models.</param>
         /// TODO Edit XML Comment Template for #ctor
         public AssignCategoriesViewModel(
-            Role role,
+            Group role,
             IList<CategoryViewModel> categoryViewModels)
         {
-            Roles = new List<Role>
+            Roles = new List<Group>
             {
                 role
             };
@@ -67,8 +67,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets or sets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        /// TODO Edit XML Comment Template for Roles
-        public IList<Role> Roles
+        /// TODO Edit XML Comment Template for Groups
+        public IList<Group> Roles
         {
             get;
             set;

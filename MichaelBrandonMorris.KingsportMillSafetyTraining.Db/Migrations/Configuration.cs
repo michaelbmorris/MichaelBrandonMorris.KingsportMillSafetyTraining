@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Migrations;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations
 {
@@ -8,10 +9,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(KingsportMillSafetyTrainingDbContext context)
+        protected override void Seed(KingsportMillSafetyTrainingDbContext db)
         {
+            db.Companies.AddOrUpdate(
+                company => company.Name,
+                new Company
+                {
+                    Name = "Other"
+                });
         }
     }
 }
