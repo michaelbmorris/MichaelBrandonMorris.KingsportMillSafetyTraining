@@ -22,11 +22,7 @@
     margin-left: 0;
 }
 
-table img.thumbnail {
-    display: block;
-    height: 100%;
-    max-height: 100px;
-    max-width: 100px;
+img {
     width: 100%;
 }
 

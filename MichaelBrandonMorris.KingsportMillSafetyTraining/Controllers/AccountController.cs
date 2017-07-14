@@ -481,11 +481,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = new RegisterViewModel
-                {
-                    Companies = Db.GetCompanies()
-                };
-
+                var model = new RegisterViewModel();
                 return View(model);
             }
             catch (Exception e)

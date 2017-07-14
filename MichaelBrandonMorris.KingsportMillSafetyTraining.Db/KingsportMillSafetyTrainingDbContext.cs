@@ -331,7 +331,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
-                    foreach (var answer in slide.Answers())
+                    foreach (var answer in slide.GetAnswers())
                     {
                         Answers.Attach(answer);
                         Answers.Remove(answer);
@@ -350,7 +350,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     user.Company = Companies.Find(companyId)
                                    ?? throw new KeyNotFoundException(
                                        $"Company with id '{companyId}' not found.");
-                    Edit(user);
+
+                    Entry(user).State = EntityState.Modified;
                 });
         }
 
@@ -381,10 +382,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
+                    Debug.WriteLine(categoryId);
                     var entry = Entry(slide);
                     entry.State = EntityState.Modified;
+                    entry.Entity.Category =
+                        Categories.Find(categoryId)
+                        ?? throw new KeyNotFoundException(
+                            $"Category with id '{categoryId}' not found.");
 
-                    foreach (var answer in slide.Answers)
+                    foreach (var answer in slide.GetAnswers())
                     {
                         var originalAnswer =
                             entry.Entity.Answers.SingleOrDefault(
@@ -402,7 +408,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         }
                     }
 
-                    foreach (var answer in entry.Entity.Answers(x => x.Id != 0))
+                    foreach (var answer in entry.Entity.GetAnswers(x => x.Id != 0))
                     {
                         if (slide.Answers.All(x => x.Id != answer.Id))
                         {

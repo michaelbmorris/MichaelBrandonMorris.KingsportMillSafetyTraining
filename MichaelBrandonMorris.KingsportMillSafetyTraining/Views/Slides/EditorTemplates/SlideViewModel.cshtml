@@ -18,8 +18,19 @@
         @class = "control-label col-md-2"
     })
     <div class="col-md-10">
+        @Html.HiddenFor(model => model.ImageBytes)
+        @if (Model.ImageBytes != null)
+        {
+            <img src="@Url.Action("RenderImage", new
+                      {
+                          id = Model.Id
+                      })"
+                 alt="@Model.ImageDescription"/>
+        }
         <label class="btn btn-primary">
-            <input id ="file-upload"name="Image" type="file" style="display: none;" />
+            <input id="file-upload"name="Image"
+                   type="file"
+                   style="display: none;"/>
             Upload Image...
         </label>
         <span id="file-selected"></span>
@@ -82,7 +93,7 @@
 </div>
 
 <div class="form-group">
-    @Html.LabelFor(x => x.Answers, new
+    @Html.LabelFor(model => model.Answers, new
     {
         @class = "control-label col-md-2"
     })
@@ -99,6 +110,10 @@
                     Add New Answer
                 </button>
             </div>
-        </div>       
+        </div>
+        @Html.ValidationMessageFor(model => model.Answers, "", new
+        {
+            @class = "text-danger"
+        })
     </div>
 </div>

@@ -74,10 +74,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new SlideViewModel(
-                null,
-                Db.GetCategories(OrderCategoryByTitle));
-
+            var model = new SlideViewModel(null);
             return View(model);
         }
 
@@ -187,7 +184,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = Db.GetSlide(id).AsViewModel(Db.GetCategories());
+                var model = Db.GetSlide(id).AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -227,7 +224,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     Content = model.Content,
                     CorrectAnswerIndex = model.CorrectAnswerIndex,
                     Id = model.Id,
-                    ImageBytes = model.Image?.ToBytes(),
+                    ImageBytes =
+                        model.Image == null
+                            ? model.ImageBytes
+                            : model.Image.ToBytes(),
                     ImageDescription = model.ImageDescription,
                     Question = model.Question,
                     ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
@@ -254,7 +254,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = Db.GetSlides().AsViewModels();
+            var model = Db.GetCategories().AsViewModels();
             return View(model);
         }
 

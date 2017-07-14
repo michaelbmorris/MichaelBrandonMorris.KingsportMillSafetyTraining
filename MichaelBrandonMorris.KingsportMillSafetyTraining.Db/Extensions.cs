@@ -20,7 +20,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <param name="wherePredicate">The where predicate.</param>
         /// <returns>IList&lt;Answer&gt;.</returns>
         /// TODO Edit XML Comment Template for Answers
-        public static IList<Answer> Answers(
+        public static IList<Answer> GetAnswers(
             this Slide slide,
             Func<Answer, object> orderByPredicate = null,
             Func<Answer, bool> wherePredicate = null)

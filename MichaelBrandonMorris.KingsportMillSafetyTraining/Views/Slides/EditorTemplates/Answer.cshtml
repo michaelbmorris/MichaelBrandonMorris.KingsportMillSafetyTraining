@@ -17,6 +17,10 @@
         {
             @class = "form-control"
         })
+        @Html.ValidationMessageFor(model => model.Title, "", new
+        {
+            @class = "text-danger"
+        })
     </div>
     <div class="col-md-2">
         @* ReSharper disable once PossiblyUnassignedProperty

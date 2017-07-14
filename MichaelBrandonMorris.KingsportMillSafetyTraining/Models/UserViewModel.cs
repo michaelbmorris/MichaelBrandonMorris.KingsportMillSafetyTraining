@@ -24,19 +24,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
         }
 
-        public SelectListItem DefaultCompanyItem => new SelectListItem
-        {
-            Value = 0.ToString(),
-            Text = "Select a company..."
-        };
-
-        public IList<SelectListItem> CompanyItems => DefaultCompanyItem.Append(Companies.Select(
-            company => new SelectListItem
-            {
-                Value = company.Id.ToString(),
-                Text = company.Name
-            }));
-
         /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="UserViewModel" /> class.
@@ -51,6 +38,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             LastName = user.LastName;
             MiddleName = user.MiddleName;
             PhoneNumber = user.PhoneNumber;
+            UserName = user.UserName;
 
             if (user.Company != null)
             {
@@ -75,13 +63,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Companies = companies;
         }
 
-        /// <summary>
-        ///     Gets or sets the name of the company.
-        /// </summary>
-        /// <value>The name of the company.</value>
-        /// TODO Edit XML Comment Template for CompanyName
-        [DisplayName("Company")]
-        public string CompanyName
+        public IList<SelectListItem> CompanySelectList => Companies.Select(
+            company => new SelectListItem
+            {
+                Value = company.Id.ToString(),
+                Text = company.Name
+            });
+
+        public IList<Company> Companies
         {
             get;
             set;
@@ -100,7 +89,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
-        public IList<Company> Companies
+        /// <summary>
+        ///     Gets or sets the name of the company.
+        /// </summary>
+        /// <value>The name of the company.</value>
+        /// TODO Edit XML Comment Template for CompanyName
+        [DisplayName("Company")]
+        public string CompanyName
         {
             get;
             set;
@@ -194,6 +189,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for PhoneNumber
         [DisplayName("Phone Number")]
         public string PhoneNumber
+        {
+            get;
+            set;
+        }
+
+        public string UserName
         {
             get;
             set;

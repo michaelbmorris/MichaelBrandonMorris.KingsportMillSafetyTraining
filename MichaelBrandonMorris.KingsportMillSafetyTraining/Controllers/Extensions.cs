@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Data.Entity.Validation;
+#if DEBUG
+using System.Diagnostics;
+#endif
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -25,6 +29,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             HttpStatusCode code,
             Exception exception)
         {
+            Debug.WriteLine(exception.Message);
+            Debug.WriteLine(exception.StackTrace);
+
+            var dbEntityValidationException =
+                exception as DbEntityValidationException;
+
+            if (dbEntityValidationException == null)
+            {
+                throw exception;
+            }
+
+            foreach (var entityValidationError in
+                dbEntityValidationException.EntityValidationErrors)
+            {
+                foreach (var validationError in entityValidationError
+                    .ValidationErrors)
+                {
+                    Debug.WriteLine(validationError.ErrorMessage);
+                }
+            }
+
             throw exception;
         }
 #else

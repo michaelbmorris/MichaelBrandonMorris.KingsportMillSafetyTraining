@@ -61,7 +61,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// </summary>
         /// <value>The title.</value>
         /// TODO Edit XML Comment Template for Title
-        [Required]
+        [Required(ErrorMessage = "This field is required.")]
         public string Title
         {
             get;

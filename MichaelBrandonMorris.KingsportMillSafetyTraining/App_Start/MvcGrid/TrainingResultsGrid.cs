@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -32,7 +33,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Company",
-            ValueExpression = (x, y) => x.CompanyName
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.CompanyName
         };
 
         /// <summary>
@@ -46,7 +49,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Completed On",
-            ValueExpression = (x, y) => x.CompletionDateTime.ToString()
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.CompletionDateTime == null
+                        ? "Training not completed."
+                        : trainingResultViewModel.CompletionDateTime.ToString()
         };
 
         /// <summary>
@@ -61,13 +68,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableSorting = false,
             HeaderText = string.Empty,
             HtmlEncode = false,
-            ValueExpression = (x, y) => y.UrlHelper.Action(
-                "Details",
-                "Results",
-                new
-                {
-                    id = x.Id
-                }),
+            ValueExpression =
+                (trainingResultViewModel, gridContext) => gridContext.UrlHelper
+                    .Action(
+                        "Details",
+                        "Results",
+                        new
+                        {
+                            id = trainingResultViewModel.Id
+                        }),
             ValueTemplate = MvcGridConfig.DetailsValueTemplate
         };
 
@@ -83,7 +92,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Email",
-            ValueExpression = (x, y) => x.Email
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.Email
         };
 
         /// <summary>
@@ -97,7 +108,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "First Name",
-            ValueExpression = (x, y) => x.FirstName
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.FirstName
+        };
+
+        /// <summary>
+        ///     Gets the role title.
+        /// </summary>
+        /// <value>The role title.</value>
+        /// TODO Edit XML Comment Template for RoleTitle
+        private static Column GroupTitle => new Column
+        {
+            ColumnName = "GroupTitle",
+            EnableFiltering = true,
+            EnableSorting = true,
+            HeaderText = "Group",
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.RoleTitle
         };
 
         /// <summary>
@@ -111,7 +140,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Last Name",
-            ValueExpression = (x, y) => x.LastName
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.LastName
         };
 
         /// <summary>
@@ -125,7 +156,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Quiz Attempts",
-            ValueExpression = (x, y) => x.QuizAttemptsCount.ToString()
+            ValueExpression =
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.QuizAttemptsCount.ToString()
         };
 
         /// <summary>
@@ -160,20 +193,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         };
 
         /// <summary>
-        ///     Gets the role title.
-        /// </summary>
-        /// <value>The role title.</value>
-        /// TODO Edit XML Comment Template for RoleTitle
-        private static Column RoleTitle => new Column
-        {
-            ColumnName = "RoleTitle",
-            EnableFiltering = true,
-            EnableSorting = true,
-            HeaderText = "Group",
-            ValueExpression = (x, y) => x.RoleTitle
-        };
-
-        /// <summary>
         ///     Gets the time to complete.
         /// </summary>
         /// <value>The time to complete.</value>
@@ -184,7 +203,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableSorting = true,
             HeaderText = "Time to Complete",
             ValueExpression =
-                (x, y) => $"{x.TimeToComplete.TotalMinutes:#.##} Minutes"
+                (trainingResultViewModel, gridContext) =>
+                    trainingResultViewModel.TimeToComplete == default(TimeSpan)
+                        ? "Training not completed."
+                        : $"{trainingResultViewModel.TimeToComplete.TotalMinutes:#.##} Minutes"
         };
 
         internal static (string Title, Grid Grid) GetTrainingResultsGrid()
@@ -195,7 +217,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(LastName);
             grid.AddColumn(CompanyName);
             grid.AddColumn(Email);
-            grid.AddColumn(RoleTitle);
+            grid.AddColumn(GroupTitle);
             grid.AddColumn(CompletionDateTime);
             grid.AddColumn(TimeToComplete);
             grid.AddColumn(Details);
@@ -209,7 +231,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var grid = new Grid();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
             grid.WithPageParameterNames("Id");
-            grid.AddColumn(RoleTitle);
+            grid.AddColumn(GroupTitle);
             grid.AddColumn(CompletionDateTime);
             grid.AddColumn(TimeToComplete);
             grid.AddColumn(QuizAttemptsCount);

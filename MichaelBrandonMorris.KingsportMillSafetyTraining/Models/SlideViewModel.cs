@@ -2,8 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
+using Foolproof;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
@@ -58,17 +61,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Question = slide.Question;
         }
 
-        /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="SlideViewModel" /> class.
-        /// </summary>
-        /// <param name="slide">The slide.</param>
-        /// <param name="categories">The categories.</param>
-        /// TODO Edit XML Comment Template for #ctor
-        public SlideViewModel(Slide slide, IList<Category> categories)
-            : this(slide)
+        private static IList<Category> GetCategories()
         {
-            Categories = categories;
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetCategories();
+            }
         }
 
         /// <summary>
@@ -76,6 +74,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The answers.</value>
         /// TODO Edit XML Comment Template for Answers
+        [AnswersValid]
         public IList<Answer> Answers
         {
             get;
@@ -91,7 +90,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
-        } = new List<Category>();
+        } = GetCategories();
 
         /// <summary>
         ///     Gets or sets the category identifier.
@@ -99,6 +98,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The category identifier.</value>
         /// TODO Edit XML Comment Template for CategoryId
         [Display(Name = "Category")]
+        [Required(ErrorMessage = "This field is required.")]
         public int CategoryId
         {
             get;
@@ -123,6 +123,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The content.</value>
         /// TODO Edit XML Comment Template for Content
         [AllowHtml]
+        [Required(ErrorMessage = "This field is required.")]
         public string Content
         {
             get;
@@ -180,6 +181,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The image description.</value>
         /// TODO Edit XML Comment Template for ImageDescription
         [Display(Name = "Image Description")]
+        [RequiredIfNot("Image", null, ErrorMessage = "This field is required if there is an image.")]
         public string ImageDescription
         {
             get;
@@ -202,6 +204,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The question.</value>
         /// TODO Edit XML Comment Template for Question
+        [RequiredIfTrue("ShouldShowQuestionOnQuiz", ErrorMessage = "This field is required if \"Show Question on Quiz?\" is checked.")]
         public string Question
         {
             get;
@@ -261,6 +264,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The title.</value>
         /// TODO Edit XML Comment Template for Title
+        [Required]
         public string Title
         {
             get;

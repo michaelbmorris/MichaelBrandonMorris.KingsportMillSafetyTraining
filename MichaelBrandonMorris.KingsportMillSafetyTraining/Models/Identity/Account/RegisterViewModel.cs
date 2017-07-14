@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
@@ -33,7 +34,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         public IList<Company> Companies
         {
             get;
-            set;
+        } = GetCompanies();
+
+        private static IList<Company> GetCompanies()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetCompanies(company => company.Name);
+            }
         }
 
         [DisplayName("Other Company")]
@@ -43,18 +51,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             set;
         }
 
-        public SelectListItem DefaultCompanyItem => new SelectListItem
-        {
-            Value = 0.ToString(),
-            Text = "Select a company..."
-        };
-
-        public IList<SelectListItem> CompanyItems => DefaultCompanyItem.Append(Companies.Select(
+        public IList<SelectListItem> CompanySelectList => Companies.Select(
             company => new SelectListItem
             {
                 Value = company.Id.ToString(),
                 Text = company.Name
-            }));
+            });
 
         /// <summary>
         ///     Gets or sets the confirm password.

@@ -118,12 +118,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Db.Edit(
                     new User
                     {
-                        FirstName = model.FirstName,
-                        MiddleName = model.MiddleName,
-                        LastName = model.LastName,
                         Email = model.Email,
+                        FirstName = model.FirstName,
+                        Id = model.Id,
+                        LastName = model.LastName,
+                        MiddleName = model.MiddleName,
                         PhoneNumber = model.PhoneNumber,
-                        Id = model.Id
+                        UserName = model.UserName,
+                        
                     },
                     model.CompanyId);
 

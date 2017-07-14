@@ -1,4 +1,5 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel>
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
 
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
@@ -20,94 +21,76 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().CategoryTitle)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().Category)
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().Title)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().Title))
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().ImageBytes)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().ImageBytes)
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowSlideInSlideshow)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().ShouldShowSlideInSlideshow)
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowQuestionOnQuiz)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().ShouldShowQuestionOnQuiz)
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().ShouldShowImageOnQuiz)
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().ShouldShowImageOnQuiz)
             </th>
             <th></th>
             <th></th>
             <th></th>
         </tr>
     </thead>
-    @{
-        int rowCount;
-    }
-    @for (var i = 0; i < Model.Count; i += rowCount)
+    @foreach (var category in Model)
     {
-        var j = i;
-
-        while (Model[i].CategoryTitle == Model[j].CategoryTitle
-               && ++j < Model.Count)
-        {
-        }
-
-        rowCount = j - i;
-
-        for (var k = i; k < j; k++)
+        foreach (var slide in category.Slides)
         {
             <tr>
-                @if (k == i)
+                @if (slide == category.Slides.First())
                 {
                     <td class="rowspan"
-                        rowspan="@rowCount">
-                        @Html.DisplayFor(model => Model[k].CategoryTitle)
+                        rowspan="@category.Slides.Count">
+                        @Html.DisplayFor(model => category.Title)
                         <br/>
-                        @Html.ActionLink("Details", "Details", "Categories", new
+                        @Html.BootstrapActionLinkButton("Details", "Details", "Categories", new
                         {
-                            id = Model[k].CategoryId
-                        }, new
-                        {
-                            @class = "btn btn-primary"
-                        })
+                            id = category.Id
+                        }, BootstrapContextualClass.Primary)
                         <br/>
-                        @Html.ActionLink("Reorder Slides", "Reorder", new
+                        @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", new
                         {
-                            categoryId = Model[k].CategoryId
-                        }, new
-                        {
-                            @class = "btn btn-primary"
-                        })
+                            categoryId = category.Id
+                        }, BootstrapContextualClass.Primary)
                     </td>
                 }
                 <td>
-                    @Html.DisplayFor(model => Model[k].Title)
+                    @Html.DisplayFor(model => slide.Title)
                 </td>
                 <td>
-                    @if (Model[k].ImageBytes != null)
+                    @if (slide.ImageBytes != null)
                     {
                         <img src="@Url.Action("RenderImage", new
                                   {
-                                      id = Model[k].Id
+                                      id = slide.Id
                                   })"
-                             alt="@Model[k].ImageDescription"/>
-                    }        
+                             alt="@slide.ImageDescription"/>
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(model => Model[k].ShouldShowSlideInSlideshow)
+                    @Html.DisplayFor(model => slide.ShouldShowSlideInSlideshow)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => Model[k].ShouldShowQuestionOnQuiz)
+                    @Html.DisplayFor(model => slide.ShouldShowQuestionOnQuiz)
                 </td>
                 <td>
-                    @Html.DisplayFor(model => Model[k].ShouldShowImageOnQuiz)
+                    @Html.DisplayFor(model => slide.ShouldShowImageOnQuiz)
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new
                     {
-                        id = Model[k].Id
+                        id = slide.Id
                     }, new
                     {
                         @class = "btn btn-primary"
@@ -116,7 +99,7 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new
                     {
-                        id = Model[k].Id
+                        id = slide.Id
                     }, new
                     {
                         @class = "btn btn-primary"
@@ -125,7 +108,7 @@
                 <td>
                     @Html.ActionLink("Delete", "Delete", new
                     {
-                        id = Model[k].Id
+                        id = slide.Id
                     }, new
                     {
                         @class = "btn btn-danger"

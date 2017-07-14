@@ -33,12 +33,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             RoleTitle = trainingResult.Group.Title;
             TimeToComplete = trainingResult.TimeToComplete;
             var user = trainingResult.User;
-            CompanyName = user.Company.Name;
+
+            if (user == null)
+            {
+                return;
+            }
+            
             Email = user.Email;
             FirstName = user.FirstName;
             LastName = user.LastName;
             PhoneNumber = user.PhoneNumber;
             UserId = user.Id;
+            var company = user.Company;
+
+            if (company != null)
+            {
+                CompanyName = user.Company.Name;
+            }
         }
 
         /// <summary>

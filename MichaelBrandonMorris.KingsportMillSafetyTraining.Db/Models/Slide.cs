@@ -34,6 +34,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        public int CategoryId
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Gets or sets the content.
         /// </summary>

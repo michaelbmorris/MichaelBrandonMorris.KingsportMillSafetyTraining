@@ -12,13 +12,13 @@
 {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UserName)
         @Html.BootstrapHorizontalTextBoxFor(model => model.FirstName, true)
         @Html.BootstrapHorizontalTextBoxFor(model => model.MiddleName)
         @Html.BootstrapHorizontalTextBoxFor(model => model.LastName, true)
-        @Html.BootstrapHorizontalDropDownListFor(model => model.CompanyId, Model.CompanyItems)
+        @Html.BootstrapHorizontalDropDownListFor(model => model.CompanyId, Model.CompanySelectList, "Select a company...")
         @Html.BootstrapHorizontalTextBoxFor(model => model.Email, true)
         @Html.BootstrapHorizontalTextBoxFor(model => model.PhoneNumber, true)
-        @Html.BootstrapHorizontalSubmit("Save Changes", BootstrapContextualClass.Primary)
 
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">

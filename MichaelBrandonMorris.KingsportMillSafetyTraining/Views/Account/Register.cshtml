@@ -16,7 +16,7 @@
     @Html.BootstrapHorizontalTextBoxFor(model => model.FirstName, true, "given-name")
     @Html.BootstrapHorizontalTextBoxFor(model => model.MiddleName, false, "additional-name")
     @Html.BootstrapHorizontalTextBoxFor(model => model.LastName, true, "family-name")
-    @Html.BootstrapHorizontalDropDownListFor(model => model.CompanyId, Model.CompanyItems)
+    @Html.BootstrapHorizontalDropDownListFor(model => model.CompanyId, Model.CompanySelectList, "Select a company...")
 
     <p class="bg-info col-md-offset-2 col-md-10">
         If you selected "Other" above, please enter the name of your company below. Otherwise, leave this field blank.

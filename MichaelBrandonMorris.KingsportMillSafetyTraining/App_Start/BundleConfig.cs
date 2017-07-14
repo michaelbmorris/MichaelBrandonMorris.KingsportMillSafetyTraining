@@ -21,7 +21,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
             bundles.Add(
                 new ScriptBundle("~/bundles/jqueryval").Include(
-                    "~/Scripts/jquery.validate*"));
+                    "~/Scripts/jquery.validate*",
+                    "~/Scripts/MvcFoolProofJQueryValidation.js"));
 
             bundles.Add(
                 new ScriptBundle("~/bundles/modernizr").Include(

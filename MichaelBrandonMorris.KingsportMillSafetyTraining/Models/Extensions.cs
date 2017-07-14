@@ -37,16 +37,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <returns>SlideViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
-        public static SlideViewModel AsViewModel(
-            this Slide slide,
-            IList<Category> categories = null)
+        public static SlideViewModel AsViewModel(this Slide slide)
         {
             if (slide == null)
             {
                 throw new ArgumentNullException(nameof(slide));
             }
 
-            return new SlideViewModel(slide, categories);
+            return new SlideViewModel(slide);
         }
 
         /// <summary>
