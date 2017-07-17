@@ -1,4 +1,5 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,23 +9,24 @@
 
 @Html.DisplayForModel(Model)
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new
+<div>
+    @Html.BootstrapActionLinkButton("Edit", "Edit", new
     {
         id = Model.Id
-    }, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Delete", "Delete", new
+    }, BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Assign Groups", "AssignGroups", new
     {
         id = Model.Id
-    }, new
+    }, BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", "Slides", new
     {
-        @class = "btn btn-danger"
-    })
-    @Html.ActionLink("View All Categories", "Index", null, new
+        id = Model.Id
+    }, BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Delete", "Delete", new
     {
-        @class = "btn btn-primary pull-right"
-    })
-</p>
+        id = Model.Id
+    }, BootstrapContextualClass.Danger)
+</div>
+<div class="pull-right">
+    @Html.BootstrapActionLinkButton("View All Categories", "Index", BootstrapContextualClass.Primary)
+</div>

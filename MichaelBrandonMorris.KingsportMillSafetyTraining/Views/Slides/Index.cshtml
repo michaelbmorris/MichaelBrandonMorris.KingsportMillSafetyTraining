@@ -45,7 +45,7 @@
     </thead>
     @foreach (var category in Model)
     {
-        foreach (var slide in category.Slides)
+        foreach (var slide in category.Slides.OrderBy(slide => slide.Index))
         {
             <tr>
                 @if (slide == category.Slides.First())

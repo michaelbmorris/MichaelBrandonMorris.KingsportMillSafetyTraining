@@ -55,15 +55,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
         public static UserViewModel AsViewModel(
-            this User user,
-            IList<Company> companies = null)
+            this User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            return new UserViewModel(user, companies);
+            return new UserViewModel(user);
         }
 
         /// <summary>

@@ -130,7 +130,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// <returns>Task&lt;ClaimsIdentity&gt;.</returns>
         /// TODO Edit XML Comment Template for GenerateUserIdentityAsync
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
-            UserManager<User> manager)
+            UserManager<User, string> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(
                 this,

@@ -1,0 +1,21 @@
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
+
+@{
+    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+    ViewBag.Title = "Change Role";
+}
+
+@foreach (var role in Model.SystemRoles)
+{
+    <div class="checkbox">
+        <label>
+            <input name="categoryGroups"
+                   type="checkbox"
+                   value="@role.Id"
+                   @Html.Attribute("checked", "checked", Model.Roles.Any(userRole => userRole.Id == role.Id))/>
+            @Html.DisplayFor(model => role.Name)
+        </label>
+    </div>
+}

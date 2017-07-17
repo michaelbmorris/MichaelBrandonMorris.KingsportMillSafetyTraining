@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 {
@@ -26,6 +27,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             Func<Answer, bool> wherePredicate = null)
         {
             return slide.Answers.OrderByWhere(orderByPredicate, wherePredicate);
+        }
+
+        public static IList<Role> GetRoles(this User user)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return user.Roles.Select(userRole => db.GetRole(userRole.RoleId)).ToList();
+            }
         }
 
         /// <summary>

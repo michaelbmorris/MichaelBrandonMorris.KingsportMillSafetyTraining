@@ -1,5 +1,6 @@
 ﻿using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
@@ -52,13 +53,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 var roleManager =
-                    new RoleManager<IdentityRole>(
-                        new RoleStore<IdentityRole>(db));
+                    new RoleManager<Role>(
+                        new RoleStore<Role>(db));
 
                 if (!roleManager.RoleExists("Administrator"))
                 {
                     roleManager.Create(
-                        new IdentityRole
+                        new Role
                         {
                             Name = "Administrator"
                         });
@@ -67,7 +68,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 if (!roleManager.RoleExists("User"))
                 {
                     roleManager.Create(
-                        new IdentityRole
+                        new Role
                         {
                             Name = "User"
                         });

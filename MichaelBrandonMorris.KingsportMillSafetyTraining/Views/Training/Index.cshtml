@@ -25,7 +25,7 @@
                         {
                             <div class="col-md-12">
                                 <p>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.Raw(item.Content)
                                 </p>
                             </div>
                         }
@@ -33,7 +33,7 @@
                         {
                             <div class="col-md-6">
                                 <p>
-                                    @Html.DisplayFor(modelItem => item.Content)
+                                    @Html.Raw(item.Content)
                                 </p>
                             </div>
                             <div class="col-md-6">

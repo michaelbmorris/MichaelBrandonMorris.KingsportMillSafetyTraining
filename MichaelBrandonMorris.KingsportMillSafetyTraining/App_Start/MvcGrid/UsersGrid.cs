@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -34,6 +35,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableSorting = true,
             HeaderText = "Company",
             ValueExpression = (x, y) => x.CompanyName
+        };
+
+        private static Column ChangeRole => new Column
+        {
+            ColumnName = "ChangeRole",
+            EnableFiltering = false,
+            EnableSorting = false,
+            HeaderText = string.Empty,
+            HtmlEncode = false,
+            ValueExpression =
+                (userViewModel, gridContext) => gridContext.UrlHelper.Action(
+                    "ChangeRole",
+                    "Users",
+                    new
+                    {
+                        id = userViewModel.Id
+                    }),
+            ValueTemplate = "<a href='{Value}' class='btn btn-primary' role='button'>Change Role</a>"
         };
 
         /// <summary>
@@ -235,9 +254,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(Email);
             grid.AddColumn(PhoneNumber);
             grid.AddColumn(LastTrainingDateTime);
-            grid.AddColumn(Edit);
             grid.AddColumn(Details);
             grid.AddColumn(Results);
+            grid.AddColumn(Edit);
+            grid.AddColumn(ChangeRole);            
             grid.WithSorting(true, "LastName", SortDirection.Asc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
             return ("UsersGrid", grid);

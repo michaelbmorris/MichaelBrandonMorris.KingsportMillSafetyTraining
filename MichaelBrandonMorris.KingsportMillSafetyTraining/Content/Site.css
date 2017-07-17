@@ -22,12 +22,13 @@
     margin-left: 0;
 }
 
-img {
-    width: 100%;
-}
-
 td img {
     height: 34px;
+}
+
+.carousel img {
+    max-width: 100%;
+    height: auto;
 }
 
 :not(label).correct:before {

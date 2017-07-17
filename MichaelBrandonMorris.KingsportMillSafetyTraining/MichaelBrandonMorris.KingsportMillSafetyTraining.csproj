@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MichaelBrandonMorris.KingsportMillSafetyTraining</RootNamespace>
     <AssemblyName>MichaelBrandonMorris.KingsportMillSafetyTraining</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion> 
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -27,7 +27,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-	<MvcBuildViews>true</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -65,8 +65,8 @@
     <Reference Include="MichaelBrandonMorris.Extensions.PrincipalExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrincipalExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.PrincipalExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6404.11943, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6404.11943\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6407.20796, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6407.20796\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6396.27756, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6396.27756\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
@@ -865,6 +865,7 @@
     <Content Include="Views\Companies\Index.cshtml" />
     <Content Include="Views\Companies\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Companies\DisplayTemplates\CompanyViewModel.cshtml" />
+    <Content Include="Views\Users\ChangeRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

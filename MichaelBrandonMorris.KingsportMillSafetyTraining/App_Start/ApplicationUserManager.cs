@@ -15,14 +15,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     /// <seealso cref="UserManager{TUser}" />
     /// <seealso cref="User" />
     /// TODO Edit XML Comment Template for ApplicationUserManager
-    public class ApplicationUserManager : UserManager<User>
+    public class ApplicationUserManager : UserManager<User, string>
     {
         /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="store">The store.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public ApplicationUserManager(IUserStore<User> store)
+        public ApplicationUserManager(IUserStore<User, string> store)
             : base(store)
         {
         }
@@ -39,7 +39,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             IOwinContext context)
         {
             var manager = new ApplicationUserManager(
-                new UserStore<User>(
+                new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 
             manager.UserValidator = new UserValidator<User>(manager)

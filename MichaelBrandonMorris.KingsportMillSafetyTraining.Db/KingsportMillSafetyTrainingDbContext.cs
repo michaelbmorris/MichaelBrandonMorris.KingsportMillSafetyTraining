@@ -19,7 +19,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
     /// <seealso cref="User" />
     /// TODO Edit XML Comment Template for KingsportMillSafetyTrainingDbContext
     public sealed class KingsportMillSafetyTrainingDbContext
-        : IdentityDbContext<User>
+        : IdentityDbContext<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
     {
         /// <summary>
         ///     Initializes a new instance of the
@@ -28,7 +28,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// </summary>
         /// TODO Edit XML Comment Template for #ctor
         public KingsportMillSafetyTrainingDbContext()
-            : base("DefaultConnection", false)
         {
             Answers = Set<Answer>();
             Categories = Set<Category>();
@@ -47,6 +46,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             get;
             set;
+        }
+
+        public Role GetRole(string id)
+        {
+            return Roles.Find(id);
         }
 
         /// <summary>
@@ -75,6 +79,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             get;
             set;
+        }
+
+        public IList<Role> GetRoles()
+        {
+            return DoTransaction(() => Roles.ToList());
         }
 
         /// <summary>
@@ -874,17 +883,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
-                    foreach (var slide in slides)
+                    for (var i = 0; i < slides.Count; i++)
                     {
-                        var slideToEdit = Slides.Find(slide.Id);
+                        var slide = Slides.Find(slides[i].Id);
 
-                        if (slideToEdit == null)
+                        if (slide == null)
                         {
                             throw new KeyNotFoundException(
-                                GetNotFoundMessage<Slide>(slide.Id));
+                                GetNotFoundMessage<Slide>(slides[i].Id));
                         }
 
-                        slideToEdit.Index = slide.Index;
+                        slide.Index = i;
                     }
                 });
         }

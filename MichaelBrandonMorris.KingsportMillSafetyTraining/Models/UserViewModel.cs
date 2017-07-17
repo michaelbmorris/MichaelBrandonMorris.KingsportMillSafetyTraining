@@ -5,7 +5,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
@@ -37,7 +39,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Id = user.Id;
             LastName = user.LastName;
             MiddleName = user.MiddleName;
+            OtherCompanyName = user.OtherCompanyName;
             PhoneNumber = user.PhoneNumber;
+            Roles = user.GetRoles();
             UserName = user.UserName;
 
             if (user.Company != null)
@@ -53,15 +57,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
 
             LastTrainingResultDateTime = lastTrainingResult.CompletionDateTime;
-
             LastTrainingResultId = lastTrainingResult.Id;
         }
 
-        public UserViewModel(User user, IList<Company> companies)
-            : this(user)
+        public IList<Company> Companies
         {
-            Companies = companies;
-        }
+            get;
+        } = GetCompanies();
 
         public IList<SelectListItem> CompanySelectList => Companies.Select(
             company => new SelectListItem
@@ -70,11 +72,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 Text = company.Name
             });
 
-        public IList<Company> Companies
+        public IList<Role> Roles
         {
             get;
             set;
         }
+
+        public IList<Role> SystemRoles
+        {
+            get;
+        } = GetRoles();
 
         /// <summary>
         ///     Gets or sets the company identifier.
@@ -96,6 +103,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for CompanyName
         [DisplayName("Company")]
         public string CompanyName
+        {
+            get;
+            set;
+        }
+
+        public string OtherCompanyName
         {
             get;
             set;
@@ -198,6 +211,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
+        }
+
+        private static IList<Company> GetCompanies()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetCompanies();
+            }
+        }
+
+        private static IList<Role> GetRoles()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetRoles();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.Migrations;
+using System.Data.Entity.Migrations;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations

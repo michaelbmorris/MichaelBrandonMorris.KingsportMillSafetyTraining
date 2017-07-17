@@ -58,7 +58,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var model = Db.GetUser(id).AsViewModel(Db.GetCompanies());
+                var model = Db.GetUser(id).AsViewModel();
                 return View(model);
             }
             catch (Exception e)
@@ -69,6 +69,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult ChangeRole(string id)
         {
             try
@@ -84,7 +85,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        public ActionResult ChangeRole(string id, string roleId)
+        [HttpPost]
+        public ActionResult ChangeRole(string[] roleIds)
         {
             try
             {
