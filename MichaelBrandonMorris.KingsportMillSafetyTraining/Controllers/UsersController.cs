@@ -2,7 +2,6 @@
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -25,6 +24,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             get;
         } = new KingsportMillSafetyTrainingDbContext();
 
+        [HttpGet]
+        public ActionResult ChangeRole(string id)
+        {
+            try
+            {
+                var model = Db.GetUser(id).AsViewModel();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangeRole(string[] roleIds)
+        {
+            try
+            {
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
         /// <summary>
         ///     Detailses the specified identifier.
         /// </summary>
@@ -41,9 +67,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -63,40 +87,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult ChangeRole(string id)
-        {
-            try
-            {
-                var model = Db.GetUser(id).AsViewModel();
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult ChangeRole(string[] roleIds)
-        {
-            try
-            {
-                return RedirectToAction("Index");
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -117,28 +108,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                Db.Edit(
-                    new User
-                    {
-                        Email = model.Email,
-                        FirstName = model.FirstName,
-                        Id = model.Id,
-                        LastName = model.LastName,
-                        MiddleName = model.MiddleName,
-                        PhoneNumber = model.PhoneNumber,
-                        UserName = model.UserName,
-                        
-                    },
-                    model.CompanyId);
+                Db.EditUser(
+                    model.CompanyId,
+                    model.Email,
+                    model.FirstName,
+                    model.Id,
+                    model.LastName,
+                    model.MiddleName,
+                    model.OtherCompanyName,
+                    model.PhoneNumber);
 
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            } 
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -151,13 +136,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                return View();
+                return View(new UserViewModel());
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 

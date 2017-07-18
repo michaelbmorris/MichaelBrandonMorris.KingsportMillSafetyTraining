@@ -19,7 +19,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
     /// <seealso cref="User" />
     /// TODO Edit XML Comment Template for KingsportMillSafetyTrainingDbContext
     public sealed class KingsportMillSafetyTrainingDbContext
-        : IdentityDbContext<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>
+        : IdentityDbContext<User, Role, string, IdentityUserLogin,
+            IdentityUserRole, IdentityUserClaim>
     {
         /// <summary>
         ///     Initializes a new instance of the
@@ -48,11 +49,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             set;
         }
 
-        public Role GetRole(string id)
-        {
-            return Roles.Find(id);
-        }
-
         /// <summary>
         ///     Gets or sets the categories.
         /// </summary>
@@ -79,11 +75,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         {
             get;
             set;
-        }
-
-        public IList<Role> GetRoles()
-        {
-            return DoTransaction(() => Roles.ToList());
         }
 
         /// <summary>
@@ -351,19 +342,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
-        public void Edit(User user, int companyId)
-        {
-            DoTransaction(
-                () =>
-                {
-                    user.Company = Companies.Find(companyId)
-                                   ?? throw new KeyNotFoundException(
-                                       $"Company with id '{companyId}' not found.");
-
-                    Entry(user).State = EntityState.Modified;
-                });
-        }
-
         /// <summary>
         ///     Edits the specified t.
         /// </summary>
@@ -391,9 +369,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
-                    Debug.WriteLine(categoryId);
                     var entry = Entry(slide);
                     entry.State = EntityState.Modified;
+
                     entry.Entity.Category =
                         Categories.Find(categoryId)
                         ?? throw new KeyNotFoundException(
@@ -417,7 +395,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         }
                     }
 
-                    foreach (var answer in entry.Entity.GetAnswers(x => x.Id != 0))
+                    foreach (var answer in entry.Entity.GetAnswers(
+                        x => x.Id != 0))
                     {
                         if (slide.Answers.All(x => x.Id != answer.Id))
                         {
@@ -449,6 +428,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 
                     var trainingResultEntry = Entry(trainingResult);
                     trainingResultEntry.CurrentValues.SetValues(trainingResult);
+                });
+        }
+
+        public void EditUser(
+            int companyId,
+            string email,
+            string firstName,
+            string userId,
+            string lastName,
+            string middleName,
+            string otherCompanyName,
+            string phoneNumber)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var user = Users.Find(userId);
+                    user.Company = Companies.Find(companyId);
+                    user.Email = email;
+                    user.FirstName = firstName;
+                    user.LastName = lastName;
+                    user.MiddleName = middleName;
+                    user.OtherCompanyName = otherCompanyName;
+                    user.PhoneNumber = phoneNumber;
+                    user.UserName = email;
                 });
         }
 
@@ -578,6 +582,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             Func<Group, bool> wherePredicate = null)
         {
             return Groups.OrderByWhere(orderByPredicate, wherePredicate);
+        }
+
+        public Role GetRole(string id)
+        {
+            return Roles.Find(id);
+        }
+
+        public IList<Role> GetRoles(
+            Func<Role, object> orderBy = null,
+            Func<Role, bool> where = null)
+        {
+            return DoTransaction(() => Roles.OrderByWhere(orderBy, where));
         }
 
         /// <summary>
@@ -883,17 +899,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             DoTransaction(
                 () =>
                 {
-                    for (var i = 0; i < slides.Count; i++)
+                    foreach (var s in slides)
                     {
-                        var slide = Slides.Find(slides[i].Id);
+                        var slide = Slides.Find(s.Id);
 
                         if (slide == null)
                         {
                             throw new KeyNotFoundException(
-                                GetNotFoundMessage<Slide>(slides[i].Id));
+                                GetNotFoundMessage<Slide>(s.Id));
                         }
 
-                        slide.Index = i;
+                        slide.Index = s.Index;
                     }
                 });
         }
@@ -1018,7 +1034,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 {
                     Answer.CurrentIndex = !Answers.Any()
                         ? 0
-                        : Answers.Max(x => x.Index);
+                        : Answers.Max(answer => answer.Index);
                 });
         }
 
@@ -1033,7 +1049,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 {
                     Category.CurrentIndex = !Categories.Any()
                         ? 0
-                        : Categories.Max(x => x.Index);
+                        : Categories.Max(category => category.Index);
                 });
         }
 
@@ -1047,7 +1063,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 () =>
                 {
                     Group.CurrentIndex =
-                        !Groups.Any() ? 0 : Groups.Max(x => x.Index);
+                        !Groups.Any() ? 0 : Groups.Max(group => group.Index);
+                });
+        }
+
+        public void UpdateCurrentRoleIndex()
+        {
+            DoTransaction(
+                () =>
+                {
+                    Role.CurrentIndex =
+                        !Roles.Any() ? 0 : Roles.Max(role => role.Index);
                 });
         }
 

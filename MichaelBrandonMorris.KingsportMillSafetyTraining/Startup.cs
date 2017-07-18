@@ -41,6 +41,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 db.UpdateCurrentAnswerIndex();
                 db.UpdateCurrentCategoryIndex();
                 db.UpdateCurrentGroupIndex();
+                db.UpdateCurrentRoleIndex();
             }
         }
 

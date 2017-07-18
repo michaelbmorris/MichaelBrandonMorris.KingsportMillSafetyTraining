@@ -113,7 +113,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableSorting = false,
             HeaderText = "Image",
             HtmlEncode = false,
-            ValueExpression = (x, y) => y.UrlHelper.Action(
+            ValueExpression = (x, y) => x.ImageBytes == null ? null : y.UrlHelper.Action(
                 "RenderImage",
                 "Slides",
                 new

@@ -97,7 +97,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// <returns>Task&lt;Group&gt;.</returns>
         /// <exception cref="Exception"></exception>
         /// TODO Edit XML Comment Template for GetGroup
-        public async Task<Group> GetRole(string userId)
+        public async Task<Group> GetGroup(string userId)
         {
             var user = await FindByIdAsync(userId);
 
@@ -107,6 +107,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return user.Group;
+        }
+
+        public async void SetCompany(string userId, Company company)
+        {
+            var user = await FindByIdAsync(userId);
+            user.Company = company;
         }
     }
 }

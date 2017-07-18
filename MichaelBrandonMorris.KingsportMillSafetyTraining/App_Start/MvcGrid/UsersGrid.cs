@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -23,20 +23,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
     /// TODO Edit XML Comment Template for UsersGrid
     internal static class UsersGrid
     {
-        /// <summary>
-        ///     Gets the name of the company.
-        /// </summary>
-        /// <value>The name of the company.</value>
-        /// TODO Edit XML Comment Template for CompanyName
-        private static Column CompanyName => new Column
-        {
-            ColumnName = "CompanyName",
-            EnableFiltering = true,
-            EnableSorting = true,
-            HeaderText = "Company",
-            ValueExpression = (x, y) => x.CompanyName
-        };
-
         private static Column ChangeRole => new Column
         {
             ColumnName = "ChangeRole",
@@ -52,7 +38,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                     {
                         id = userViewModel.Id
                     }),
-            ValueTemplate = "<a href='{Value}' class='btn btn-primary' role='button'>Change Role</a>"
+            ValueTemplate =
+                "<a href='{Value}' class='btn btn-primary' role='button'>Change Role</a>"
+        };
+
+        /// <summary>
+        ///     Gets the name of the company.
+        /// </summary>
+        /// <value>The name of the company.</value>
+        /// TODO Edit XML Comment Template for CompanyName
+        private static Column CompanyName => new Column
+        {
+            ColumnName = "CompanyName",
+            EnableFiltering = true,
+            EnableSorting = true,
+            HeaderText = "Company",
+            ValueExpression = (x, y) => x.CompanyName
         };
 
         /// <summary>
@@ -215,8 +216,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         /// TODO Edit XML Comment Template for RetrieveDataMethod
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
-            var sortColumnName = context.QueryOptions.SortColumnName;
-            var sortDirection = context.QueryOptions.SortDirection;
+            var options = context.QueryOptions;
+            var sortColumnName = options.SortColumnName;
+            var sortDirection = options.SortDirection;
             var result = new QueryResult<UserViewModel>();
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
@@ -226,13 +228,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 if (!sortColumnName.IsNullOrWhiteSpace())
                 {
                     result.Items = query.OrderBy(
-                        x => x.GetPropertyValue(sortColumnName),
+                        user => user.GetPropertyValue(sortColumnName),
                         sortDirection);
                 }
                 else
                 {
                     result.Items = query.ToList();
                 }
+
+                var firstName = options.GetFilterString("FirstName");
+                var middleName = options.GetFilterString("MiddleName");
+                var lastName = options.GetFilterString("LastName");
+                var companyName = options.GetFilterString("CompanyName");
+                var email = options.GetFilterString("Email");
+                var phoneNumber = options.GetFilterString("PhoneNumber");
+
+                result.Items = result.Items.Where(
+                    user => user.FirstName.ContainsFilter(firstName)
+                            && user.MiddleName.ContainsFilter(middleName)
+                            && user.LastName.ContainsFilter(lastName)
+                            && user.CompanyName.ContainsFilter(companyName)
+                            && user.Email.ContainsFilter(email));
             }
 
             return result;
@@ -257,8 +273,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(Details);
             grid.AddColumn(Results);
             grid.AddColumn(Edit);
-            grid.AddColumn(ChangeRole);            
+            grid.AddColumn(ChangeRole);
             grid.WithSorting(true, "LastName", SortDirection.Asc);
+            grid.WithFiltering(true);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
             return ("UsersGrid", grid);
         }

@@ -33,7 +33,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Id = category.Id;
             Index = category.Index;
             Roles = category.Groups;
-            Slides = category.Slides;
+            Slides = category.Slides.OrderBy(slide => slide.Index).ToList();
             Title = category.Title;
         }
 

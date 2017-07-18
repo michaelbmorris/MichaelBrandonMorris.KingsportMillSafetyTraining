@@ -1,5 +1,23 @@
-﻿@{
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
+
+@{
     ViewBag.Title = "Users";
 }
+
+<div class="well">
+    <div class="form-inline">
+        @Html.FilterTextBox("FirstName", "First Name")
+        @Html.FilterTextBox("MiddleName", "Middle Name")
+        @Html.FilterTextBox("LastName", "Last Name")
+        @Html.FilterDropDownList("CompanyName", Model.CompanyNameSelectList, "Company")
+        @Html.FilterTextBox("Email", "Email")
+
+        <button class="btn btn-primary"
+                data-mvcgrid-apply-filter="click"
+                type="button">
+            Apply
+        </button>
+    </div>
+</div>
 
 @Html.MvcGrid("UsersGrid")

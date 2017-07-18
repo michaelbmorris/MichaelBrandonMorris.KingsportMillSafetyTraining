@@ -29,14 +29,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             return slide.Answers.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
-        public static IList<Role> GetRoles(this User user)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return user.Roles.Select(userRole => db.GetRole(userRole.RoleId)).ToList();
-            }
-        }
-
         /// <summary>
         ///     Gets the categories.
         /// </summary>

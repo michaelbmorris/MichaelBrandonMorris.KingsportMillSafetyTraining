@@ -3,11 +3,11 @@
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
 
 @{
-    Layout = @Url.Content("~/Views/Shared/_Layout.cshtml");
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
     ViewBag.Title = "Change Role";
 }
 
-@foreach (var role in Model.SystemRoles)
+@foreach (var role in Model.Roles)
 {
     <div class="checkbox">
         <label>
@@ -15,7 +15,7 @@
                    type="checkbox"
                    value="@role.Id"
                    @Html.Attribute("checked", "checked", Model.Roles.Any(userRole => userRole.Id == role.Id))/>
-            @Html.DisplayFor(model => role.Name)
+            @Html.DisplayFor(model => role.Name) - @Html.DisplayFor(model => role.Description)
         </label>
     </div>
 }
