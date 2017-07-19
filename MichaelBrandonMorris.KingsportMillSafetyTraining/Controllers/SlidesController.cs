@@ -218,26 +218,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                var slide = new Slide
-                {
-                    Answers = model.Answers,
-                    Content = model.Content,
-                    CorrectAnswerIndex = model.CorrectAnswerIndex,
-                    Id = model.Id,
-                    ImageBytes =
-                        model.Image == null
+                    Db.EditSlide(
+                        model.Answers,
+                        model.CategoryId,
+                    model.Content,
+                    model.CorrectAnswerIndex,
+                    model.Id,
+                    model.Image == null
                             ? model.ImageBytes
                             : model.Image.ToBytes(),
-                    ImageDescription = model.ImageDescription,
-                    Question = model.Question,
-                    ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
-                    ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
-                    ShouldShowSlideInSlideshow =
-                        model.ShouldShowSlideInSlideshow,
-                    Title = model.Title
-                };
+                    model.ImageDescription,
+                    model.Question,
+                    model.ShouldShowImageOnQuiz,
+                    model.ShouldShowQuestionOnQuiz,
+                    model.ShouldShowSlideInSlideshow,
+                    model.Title
+                );
 
-                Db.Edit(slide, model.CategoryId);
                 return RedirectToAction("Index");
             }
             catch (Exception e)

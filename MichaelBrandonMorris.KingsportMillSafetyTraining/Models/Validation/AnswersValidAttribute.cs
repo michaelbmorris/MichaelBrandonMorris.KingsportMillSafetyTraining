@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Foolproof;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
@@ -9,16 +10,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
 {
     public class AnswersValidAttribute : ModelAwareValidationAttribute
     {
+        private static bool IsValidType(Type type)
+        {
+            return type == typeof(List<Answer>) || type == typeof(IList<Answer>) || type == typeof(Answer[]);
+        }
+
         public override bool IsValid(object value, object container)
         {
-            var list = value as IList<Answer>;
-
-            if (list == null)
-            {
-                throw new ArgumentException(
-                    "Attribute must be applied to a list of answers.");
-            }
-
             var model = container as SlideViewModel;
 
             if (model == null)
@@ -32,6 +30,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
                 return true;
             }
 
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if (!IsValidType(value.GetType()))
+            {
+                throw new ArgumentException(
+                    "Attribute must be applied to a list of answers.");
+            }
+
+            var list = (IList<Answer>) value;
+            
             if (model.Question.IsNullOrWhiteSpace())
             {
                 ErrorMessage = "Question is required.";

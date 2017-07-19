@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
@@ -229,7 +228,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// TODO Edit XML Comment Template for CreateSlide
         public void CreateSlide(Slide slide, int categoryId)
         {
-            Debug.WriteLine("creating slide");
             DoTransaction(
                 () =>
                 {
@@ -358,54 +356,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
-        /// <summary>
-        ///     Edits the specified slide.
-        /// </summary>
-        /// <param name="slide">The slide.</param>
-        /// <param name="categoryId">The category identifier.</param>
-        /// TODO Edit XML Comment Template for Edit
-        public void Edit(Slide slide, int categoryId)
-        {
-            DoTransaction(
-                () =>
-                {
-                    var entry = Entry(slide);
-                    entry.State = EntityState.Modified;
-
-                    entry.Entity.Category =
-                        Categories.Find(categoryId)
-                        ?? throw new KeyNotFoundException(
-                            $"Category with id '{categoryId}' not found.");
-
-                    foreach (var answer in slide.GetAnswers())
-                    {
-                        var originalAnswer =
-                            entry.Entity.Answers.SingleOrDefault(
-                                x => x.Id == answer.Id && x.Id != 0);
-
-                        if (originalAnswer != null)
-                        {
-                            var answerEntry = Entry(originalAnswer);
-                            answerEntry.CurrentValues.SetValues(answer);
-                        }
-                        else
-                        {
-                            answer.Id = 0;
-                            slide.Answers.Add(answer);
-                        }
-                    }
-
-                    foreach (var answer in entry.Entity.GetAnswers(
-                        x => x.Id != 0))
-                    {
-                        if (slide.Answers.All(x => x.Id != answer.Id))
-                        {
-                            Answers.Remove(answer);
-                        }
-                    }
-                });
-        }
-
 
         /// <summary>
         ///     Edits the specified training result.
@@ -428,6 +378,86 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 
                     var trainingResultEntry = Entry(trainingResult);
                     trainingResultEntry.CurrentValues.SetValues(trainingResult);
+                });
+        }
+
+        public void EditSlide(
+            IList<Answer> answers,
+            int categoryId,
+            string content,
+            int correctAnswerIndex,
+            int id,
+            byte[] imageBytes,
+            string imageDescription,
+            string question,
+            bool shouldShowImageOnQuiz,
+            bool shouldShowQuestionOnQuiz,
+            bool shouldShowSlideInSlideshow,
+            string title)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var slide = Slides.Find(id);
+
+                    if (slide == null)
+                    {
+                        throw new KeyNotFoundException(
+                            GetNotFoundMessage<Slide>(id));
+                    }
+
+                    slide.Category = Categories.Find(categoryId)
+                                     ?? throw new KeyNotFoundException(
+                                         GetNotFoundMessage<Category>(
+                                             categoryId));
+
+                    slide.Content = content;
+                    slide.CorrectAnswerIndex = correctAnswerIndex;
+                    slide.ImageBytes = imageBytes ?? slide.ImageBytes;
+                    slide.ImageDescription = imageDescription;
+                    slide.ShouldShowImageOnQuiz = shouldShowImageOnQuiz;
+                    slide.ShouldShowQuestionOnQuiz = shouldShowQuestionOnQuiz;
+
+                    slide.ShouldShowSlideInSlideshow =
+                        shouldShowSlideInSlideshow;
+
+                    slide.Title = title;
+
+                    if (answers == null)
+                    {
+                        foreach (var answer in slide.Answers.ToList())
+                        {
+                            Answers.Remove(answer);
+                        }
+
+                        return;
+                    }
+
+                    foreach (var answer in answers)
+                    {
+                        var originalAnswer =
+                            Answers.SingleOrDefault(
+                                a => a.Id == answer.Id && a.Id != 0);
+
+                        if (originalAnswer == null)
+                        {
+                            answer.Id = 0;
+                            slide.Answers.Add(answer);
+                        }
+                        else
+                        {
+                            var answerEntry = Entry(originalAnswer);
+                            answerEntry.CurrentValues.SetValues(answer);
+                        }
+                    }
+
+                    foreach (var answer in slide.Answers.ToList())
+                    {
+                        if (answers.All(x => x.Id != answer.Id))
+                        {
+                            Answers.Remove(answer);
+                        }
+                    }
                 });
         }
 
