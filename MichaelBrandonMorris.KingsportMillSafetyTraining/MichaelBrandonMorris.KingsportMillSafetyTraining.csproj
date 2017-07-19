@@ -53,8 +53,8 @@
     <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions.CollectionExtensions, Version=1.0.6401.27901, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.CollectionExtensions.1.0.6401.27901\lib\net452\MichaelBrandonMorris.Extensions.CollectionExtensions.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.Collection, Version=1.0.6409.19277, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Collection.1.0.6409.19277\lib\net452\MichaelBrandonMorris.Extensions.Collection.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.Extensions.OtherExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.OtherExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.OtherExtensions.dll</HintPath>
@@ -68,8 +68,8 @@
     <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6409.15420, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6409.15420\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6396.27756, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6396.27756\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6409.24754, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6409.24754\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.MvcGrid, Version=1.0.6408.32079, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.MvcGrid.1.0.6408.32079\lib\net462\MichaelBrandonMorris.MvcGrid.dll</HintPath>
@@ -262,6 +262,7 @@
     <Compile Include="Models\Identity\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="Models\Identity\Manage\SetPasswordViewModel.cs" />
     <Compile Include="Models\Identity\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\SelectGroupViewModel.cs" />
     <Compile Include="Models\UserTrainingResultsViewModel.cs" />
     <Compile Include="Models\TrainingResultViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -844,7 +845,7 @@
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
     <Content Include="Views\Training\SelectRole.cshtml" />
-    <Content Include="Views\Training\Index.cshtml" />
+    <Content Include="Views\Training\Train.cshtml" />
     <Content Include="Views\Groups\Reorder.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
     <Content Include="Views\Training\Quiz.cshtml" />

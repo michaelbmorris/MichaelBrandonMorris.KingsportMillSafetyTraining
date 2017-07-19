@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -69,18 +71,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (role == null)
                 {
-                    throw new InvalidOperationException(
-                        "Cannot confirm user role because no role is selected.");
+                    return RedirectToAction("SelectRole");
                 }
 
-                System.Web.HttpContext.Current.Session["Confirmed"] = 1;
                 return View(role);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -96,31 +94,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 var role = GetCurrentUserRole();
 
-                if (role == null)
-                {
-                    return RedirectToAction("SelectRole");
-                }
-
-                if (System.Web.HttpContext.Current.Session["Confirmed"] == null)
-                {
-                    return RedirectToAction("ConfirmRole");
-                }
-
-                System.Web.HttpContext.Current.Session["Confirmed"] = null;
-                Db.SetUserLatestTrainingStartDateTime(User.GetId());
-
-                var model = role.GetSlides(
-                        OrderCategoriesByIndex,
-                        orderSlidesBy: OrderSlidesByIndex)
-                    .AsViewModels();
-
-                return View(model);
+                return RedirectToAction(
+                    role == null ? "SelectRole" : "ConfirmRole");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -200,6 +179,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
+        private static Func<Group, object> OrderByGroupIndex => group
+            => group.Index;
+
         /// <summary>
         ///     Selects the role.
         /// </summary>
@@ -208,8 +190,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectRole()
         {
-            var model = Db.GetGroups(x => x.Index).AsViewModels();
-            model = model.Take(model.Count - 1);
+
+            var groups = Db.GetGroups(OrderByGroupIndex);
+
+            var model = new SelectGroupViewModel
+            {
+                Groups = groups.SkipLast(1).AsViewModels(),
+                DefaultGroupIndex = groups.Max(group => group.Index)                
+            };
+
             return View(model);
         }
 
@@ -220,10 +209,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for SelectRole
         [HttpPost]
-        public ActionResult SelectRole(int? roleId)
+        public ActionResult SelectRole(int? groupId)
         {
-            Db.SetUserRole(User.GetId(), roleId);
+            Db.SetUserRole(User.GetId(), groupId);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Train()
+        {
+            try
+            {
+                var group = GetCurrentUserRole();
+
+                if (group == null)
+                {
+                    return RedirectToAction("SelectRole");
+                }
+
+                Db.SetUserLatestTrainingStartDateTime(User.GetId());
+
+                var model = group.GetSlides(
+                        OrderCategoriesByIndex,
+                        orderSlidesBy: OrderSlidesByIndex)
+                    .AsViewModels();
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>

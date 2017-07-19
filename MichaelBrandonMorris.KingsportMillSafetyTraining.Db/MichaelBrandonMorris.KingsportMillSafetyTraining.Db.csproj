@@ -38,8 +38,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions.CollectionExtensions, Version=1.0.6390.23789, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.CollectionExtensions.1.0.6390.23789\lib\net452\MichaelBrandonMorris.Extensions.CollectionExtensions.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.CollectionExtensions, Version=1.0.6409.19030, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.CollectionExtensions.1.0.6409.19030\lib\net452\MichaelBrandonMorris.Extensions.CollectionExtensions.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.Extensions.PrimitiveExtensions, Version=1.0.6390.20452, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrimitiveExtensions.1.0.6390.20452\lib\net452\MichaelBrandonMorris.Extensions.PrimitiveExtensions.dll</HintPath>

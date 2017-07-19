@@ -1,4 +1,4 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SelectGroupViewModel
 
 @{
     ViewBag.Title = "Select Group";
@@ -13,23 +13,23 @@
          data-wrap="false"
          id="carousel">
         <div class="carousel-inner">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Groups)
             {
-                <div class="item @(item == Model.First() ? "active" : string.Empty)">
+                <div class="item @(item == Model.Groups.First() ? "active" : string.Empty)">
                     <div class="carousel-content">
                     <p>
-                        @Html.Raw(Html.Encode(item.Question).Replace("\n", "<br />"))
+                        @Html.Raw(item.Question)
                     </p>
                             <button class="btn btn-default"
                                     name="groupId"
                                     value="@item.Id">
                                 Yes
                             </button>
-                            @if (item == Model.Last())
+                            @if (item == Model.Groups.Last())
                             {
                                 <button class="btn btn-default"
                                         name="groupId"
-                                        value="null">
+                                        value="@Model.DefaultGroupIndex">
                                     No
                                 </button>
                             }
@@ -47,7 +47,6 @@
         </div>
     </div>
 }
-
 
 @section Scripts
 {

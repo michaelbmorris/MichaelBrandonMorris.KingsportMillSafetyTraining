@@ -1015,18 +1015,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         ///     Sets the user role.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
-        /// <param name="roleId">The role identifier.</param>
+        /// <param name="groupId">The group identifier.</param>
         /// TODO Edit XML Comment Template for SetUserRole
-        public void SetUserRole(string userId, int? roleId)
+        public void SetUserRole(string userId, int? groupId)
         {
             DoTransaction(
                 () =>
                 {
                     var user = Users.Find(userId);
 
-                    user.Group = roleId == null
-                        ? Groups.MaxBy(x => x.Index)
-                        : Groups.Find(roleId);
+                    user.Group = groupId == null
+                        ? Groups.MaxBy(group => group.Index)
+                        : Groups.Find(groupId);
                 });
         }
 
