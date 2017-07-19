@@ -7,14 +7,8 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Reorder", "Reorder", null, new
-    {
-        @class = "btn btn-primary"
-    })
+    @Html.BootstrapActionLinkButton("Create", "Create", BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Reorder", "Reorder", BootstrapContextualClass.Primary)
 </p>
 
 <table class="table table-bordered table-striped">
@@ -24,7 +18,7 @@
                 @Html.DisplayNameFor(x => Model.Single().Slides.Single().Category)
             </th>
             <th>
-                @Html.DisplayNameFor(x => Model.Single().Slides.Single().Title))
+                @Html.DisplayNameFor(x => Model.Single().Slides.Single().Title)
             </th>
             <th>
                 @Html.DisplayNameFor(x => Model.Single().Slides.Single().ImageBytes)
@@ -38,6 +32,7 @@
             <th>
                 @Html.DisplayNameFor(x => Model.Single().Slides.Single().ShouldShowImageOnQuiz)
             </th>
+            <th></th>
             <th></th>
             <th></th>
             <th></th>
@@ -88,31 +83,28 @@
                     @Html.DisplayFor(model => slide.ShouldShowImageOnQuiz)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new
+                    @Html.BootstrapActionLinkButton("Details", new
                     {
                         id = slide.Id
-                    }, new
-                    {
-                        @class = "btn btn-primary"
-                    })
+                    }, BootstrapContextualClass.Primary)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new
+                    @Html.BootstrapActionLinkButton("Edit", new
                     {
                         id = slide.Id
-                    }, new
-                    {
-                        @class = "btn btn-primary"
-                    })
+                    }, BootstrapContextualClass.Primary)
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "Delete", new
+                    @Html.BootstrapActionLinkButton("View", new
                     {
                         id = slide.Id
-                    }, new
+                    }, BootstrapContextualClass.Primary, TargetAttribute.Blank)
+                </td>
+                <td>
+                    @Html.BootstrapActionLinkButton("Delete", new
                     {
-                        @class = "btn btn-danger"
-                    })
+                        id = slide.Id
+                    }, BootstrapContextualClass.Danger)
                 </td>
             </tr>
         }

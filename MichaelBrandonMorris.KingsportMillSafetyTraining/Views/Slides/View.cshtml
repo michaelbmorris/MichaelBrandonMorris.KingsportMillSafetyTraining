@@ -1,0 +1,41 @@
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+
+@{
+    Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
+    ViewBag.Title = Model.CategoryTitle;
+    ViewBag.Subtitle = Model.Title;
+}
+
+<!DOCTYPE html>
+
+<div class="row">
+    @if (Model.ImageBytes == null)
+    {
+        <div class="col-md-12">
+            @Html.Raw(Model.Content)
+        </div>
+    }
+    else
+    {
+        <div class="col-md-6">
+            @Html.Raw(Model.Content)
+        </div>
+        <div class="col-md-6">
+            <img src="@Url.Action("RenderImage", new
+                      {
+                          id = Model.Id
+                      })"
+                 alt="@Model.ImageDescription"/>
+        </div>
+    }
+
+</div>
+<br/>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-primary form-control"
+                onclick="window.close();return false;">
+            Close Slide
+        </button>
+    </div>
+</div>

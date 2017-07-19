@@ -1,4 +1,5 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -10,23 +11,13 @@
     @Html.DisplayForModel(Model)
 </div>
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new
-    {
-        id = Model.Id
-    }, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Delete", "Delete", new
-    {
-        id = Model.Id
-    }, new
-    {
-        @class = "btn btn-danger"
-    })
-    @Html.ActionLink("View All Slides", "Index", null, new
-    {
-        @class = "btn btn-primary pull-right"
-    })
-</p>
+<div class="row">
+    <div class="col-md-6">
+        @Html.BootstrapActionLinkButton("Edit", Model.Id, BootstrapContextualClass.Primary)
+        @Html.BootstrapActionLinkButton("View", Model.Id, BootstrapContextualClass.Primary, TargetAttribute.Blank)
+        @Html.BootstrapActionLinkButton("Delete", Model.Id, BootstrapContextualClass.Danger)
+    </div>
+    <div class="col-md-6" style="text-align: right;">
+        @Html.BootstrapActionLinkButton("Index", BootstrapContextualClass.Primary)
+    </div>
+</div>

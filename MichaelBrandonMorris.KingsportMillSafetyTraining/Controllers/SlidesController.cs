@@ -328,10 +328,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for ViewSlide
+        /// TODO Edit XML Comment Template for View
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult ViewSlide(int id)
+        public ActionResult View(int id)
         {
             var model = Db.GetSlide(id).AsViewModel();
             return View(model);

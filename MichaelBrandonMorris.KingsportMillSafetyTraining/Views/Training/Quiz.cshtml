@@ -165,7 +165,7 @@
 {
     <script type="text/javascript">
         function viewSlide(slideId) {
-            var url = "@Url.Action("ViewSlide", "Slides", new { id = "_ID_"})";
+            var url = "@Url.Action("View", "Slides", new { id = "_ID_"})";
             
             window.open(url.replace("_ID_", slideId));
             $(".AnswerFor-" + slideId).prop("readonly", false);

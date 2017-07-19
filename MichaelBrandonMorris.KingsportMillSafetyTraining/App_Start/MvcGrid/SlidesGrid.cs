@@ -123,6 +123,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = "<img src='{Value}' alt='{Model.ImageDescription}'>"
         };
 
+        private static Column View => new Column
+        {
+            ColumnName = "View",
+            EnableFiltering = false,
+            EnableSorting = false,
+            HeaderText = string.Empty,
+            HtmlEncode = false,
+            ValueExpression = (slide, context) => context.UrlHelper.Action("View", "Slides", new
+            {
+                id = slide.Id
+            }),
+            ValueTemplate = "<a href='{Value}' class='btn btn-primary' role='button'>View</a>"
+        };
+
         /// <summary>
         ///     Gets the retrieve data method.
         /// </summary>
@@ -229,6 +243,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(ShouldShowImageOnQuiz);
             grid.AddColumn(Details);
             grid.AddColumn(Edit);
+            grid.AddColumn(View);
             grid.AddColumn(Delete);
             grid.WithSorting(true, "Index", SortDirection.Asc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
