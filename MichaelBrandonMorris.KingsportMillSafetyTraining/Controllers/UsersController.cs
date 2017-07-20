@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -23,6 +26,51 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             get;
         } = new KingsportMillSafetyTrainingDbContext();
+
+        [HttpGet]
+        public ActionResult ChangePassword(string id)
+        {
+            try
+            {
+                var user = Db.GetUser(id);
+
+                var model = new ChangePasswordViewModel
+                {
+                    UserId = user.Id,
+                    Email = user.Email
+                };
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(
+            ChangePasswordViewModel model)
+        {
+            try
+            {
+                var manager = HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>();
+
+                var user = await manager.FindByIdAsync(model.UserId);
+
+                user.PasswordHash =
+                    manager.PasswordHasher.HashPassword(model.Password);
+
+                await manager.UpdateSecurityStampAsync(user.Id);
+                await manager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
 
         [HttpGet]
         public ActionResult ChangeRole(string id)

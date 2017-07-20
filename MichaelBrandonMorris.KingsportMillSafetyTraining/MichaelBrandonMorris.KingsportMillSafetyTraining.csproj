@@ -251,6 +251,7 @@
     <Compile Include="Models\AssignCategoriesViewModel.cs" />
     <Compile Include="Models\AssignRolesViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\Identity\Account\ResetPasswordViewModel.cs" />
@@ -867,6 +868,7 @@
     <Content Include="Views\Companies\EditorTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Companies\DisplayTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Users\ChangeRole.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

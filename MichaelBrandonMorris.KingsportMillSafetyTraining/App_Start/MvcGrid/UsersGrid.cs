@@ -42,6 +42,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 "<a href='{Value}' class='btn btn-primary' role='button'>Change Role</a>"
         };
 
+        private static Column ChangePassword => new Column
+        {
+            ColumnName = "ChangePassword",
+            EnableFiltering = false,
+            EnableSorting = false,
+            HeaderText = string.Empty,
+            HtmlEncode = false,
+            ValueExpression = (user, context) => context.UrlHelper.Action("ChangePassword", "Users", new
+            {
+                id = user.Id
+            }),
+            ValueTemplate = "<a href='{Value}' class='btn btn-primary' role='button'>Change Password</a>"
+        };
+
         /// <summary>
         ///     Gets the name of the company.
         /// </summary>
@@ -273,6 +287,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(Details);
             grid.AddColumn(Results);
             grid.AddColumn(Edit);
+            grid.AddColumn(ChangePassword);
             grid.AddColumn(ChangeRole);
             grid.WithSorting(true, "LastName", SortDirection.Asc);
             grid.WithFiltering(true);
