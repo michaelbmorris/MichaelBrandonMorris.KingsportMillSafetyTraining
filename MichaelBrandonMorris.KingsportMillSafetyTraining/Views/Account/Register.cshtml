@@ -13,6 +13,10 @@
 }))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(null, new
+    {
+        @class = "text-danger"
+    })
     @Html.BootstrapHorizontalTextBoxFor(model => model.FirstName, true, "given-name")
     @Html.BootstrapHorizontalTextBoxFor(model => model.MiddleName, false, "additional-name")
     @Html.BootstrapHorizontalTextBoxFor(model => model.LastName, true, "family-name")

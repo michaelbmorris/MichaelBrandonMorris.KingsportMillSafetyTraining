@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MoreLinq;
@@ -35,6 +36,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             Slides = Set<Slide>();
             TrainingResults = Set<TrainingResult>();
             Groups = Set<Group>();
+
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<
+                    KingsportMillSafetyTrainingDbContext, Configuration>());
         }
 
         /// <summary>
