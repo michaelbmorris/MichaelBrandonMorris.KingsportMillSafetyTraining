@@ -65,8 +65,8 @@
     <Reference Include="MichaelBrandonMorris.Extensions.PrincipalExtensions, Version=1.0.6390.23790, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Extensions.PrincipalExtensions.1.0.6390.23790\lib\net452\MichaelBrandonMorris.Extensions.PrincipalExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6409.15420, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6409.15420\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
+    <Reference Include="MichaelBrandonMorris.Extensions.Web, Version=1.0.6410.18696, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MichaelBrandonMorris.Extensions.Web.1.0.6410.18696\lib\net452\MichaelBrandonMorris.Extensions.Web.dll</HintPath>
     </Reference>
     <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6409.24754, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6409.24754\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>

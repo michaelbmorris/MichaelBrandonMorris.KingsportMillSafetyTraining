@@ -22,7 +22,7 @@
 
 </head>
 <body onresize="AdjustPadding();">
-    <script src="~/MVCGridHandler.axd/script.js" ></script>
+    
     <div class="navbar navbar-fixed-top navbar-inverse"
          id="navbar">
         <div class="container">
@@ -206,7 +206,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/MVCGridHandler.axd/script.js"></script>
     <script type="text/javascript">
         AdjustPadding();
 
@@ -214,6 +214,7 @@
             document.body.style.paddingTop = $("#navbar").height() + "px";
         }
     </script>
+    @Scripts.Render("~/bundles/jqueryval")   
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)

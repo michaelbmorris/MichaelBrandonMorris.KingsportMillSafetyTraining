@@ -1,4 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
 
 @{
@@ -10,23 +11,14 @@
 @Html.DisplayForModel(Model)
 
 <div>
-    @Html.BootstrapActionLinkButton("Edit", "Edit", new
-    {
-        id = Model.Id
-    }, BootstrapContextualClass.Primary)
-    @Html.BootstrapActionLinkButton("Assign Groups", "AssignGroups", new
-    {
-        id = Model.Id
-    }, BootstrapContextualClass.Primary)
-    @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", "Slides", new
-    {
-        id = Model.Id
-    }, BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Edit", Model.Id, ContextualColor.Primary)
+    @Html.BootstrapActionLinkButton("Assign Groups", "AssignGroups", Model.Id, ContextualColor.Primary)
+    @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", "Slides", Model.Id, ContextualColor.Primary)
     @Html.BootstrapActionLinkButton("Delete", "Delete", new
     {
         id = Model.Id
-    }, BootstrapContextualClass.Danger)
+    }, ContextualColor.Danger)
 </div>
 <div class="pull-right">
-    @Html.BootstrapActionLinkButton("View All Categories", "Index", BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("View All Categories", "Index", ContextualColor.Primary)
 </div>

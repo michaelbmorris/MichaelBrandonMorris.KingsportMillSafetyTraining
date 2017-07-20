@@ -13,6 +13,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
     /// TODO Edit XML Comment Template for Extensions
     internal static class Extensions
     {
+        internal static bool ContainsFilter(this string s, string filter)
+        {
+            return filter.IsNullOrWhiteSpace()
+                   || s != null && s.ContainsIgnoreCase(filter);
+        }
+
         /// <summary>
         ///     Orders the by.
         /// </summary>
@@ -44,11 +50,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                         sortDirection,
                         null);
             }
-        }
-
-        internal static bool ContainsFilter(this string s, string filter)
-        {
-            return filter.IsNullOrWhiteSpace() || s.ContainsIgnoreCase(filter);
         }
 
         internal static IList<T> OrderByWhere<T>(

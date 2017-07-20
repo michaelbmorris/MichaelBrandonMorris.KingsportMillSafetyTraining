@@ -280,18 +280,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Reorders the specified category identifier.
         /// </summary>
-        /// <param name="categoryId">The category identifier.</param>
+        /// <param name="id">The category identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
         [HttpGet]
-        public ActionResult Reorder(int? categoryId)
+        public ActionResult Reorder(int? id)
         {
-            if (categoryId == null)
+            if (id == null)
             {
                 return RedirectToAction("SelectCategoryToReorder");
             }
 
-            var model = Db.GetSlides(categoryId.Value).AsViewModels();
+            var model = Db.GetSlides(id.Value).AsViewModels();
             return View(model);
         }
 

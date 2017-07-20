@@ -1,4 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
 
 @{
@@ -7,8 +8,8 @@
 }
 
 <p>
-    @Html.BootstrapActionLinkButton("Create", "Create", BootstrapContextualClass.Primary)
-    @Html.BootstrapActionLinkButton("Reorder", "Reorder", BootstrapContextualClass.Primary)
+    @Html.BootstrapActionLinkButton("Create", "Create", ContextualColor.Primary)
+    @Html.BootstrapActionLinkButton("Reorder", "Reorder", ContextualColor.Primary)
 </p>
 
 <table class="table table-bordered table-striped">
@@ -49,15 +50,9 @@
                         rowspan="@category.Slides.Count">
                         @Html.DisplayFor(model => category.Title)
                         <br/>
-                        @Html.BootstrapActionLinkButton("Details", "Details", "Categories", new
-                        {
-                            id = category.Id
-                        }, BootstrapContextualClass.Primary)
+                        @Html.BootstrapActionLinkButton("Details", "Details", "Categories", category.Id, ContextualColor.Primary)
                         <br/>
-                        @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", new
-                        {
-                            categoryId = category.Id
-                        }, BootstrapContextualClass.Primary)
+                        @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", category.Id, ContextualColor.Primary)
                     </td>
                 }
                 <td>
@@ -83,28 +78,16 @@
                     @Html.DisplayFor(model => slide.ShouldShowImageOnQuiz)
                 </td>
                 <td>
-                    @Html.BootstrapActionLinkButton("Details", new
-                    {
-                        id = slide.Id
-                    }, BootstrapContextualClass.Primary)
+                    @Html.BootstrapActionLinkButton("Details", slide.Id, ContextualColor.Primary)
                 </td>
                 <td>
-                    @Html.BootstrapActionLinkButton("Edit", new
-                    {
-                        id = slide.Id
-                    }, BootstrapContextualClass.Primary)
+                    @Html.BootstrapActionLinkButton("Edit", slide.Id, ContextualColor.Primary)
                 </td>
                 <td>
-                    @Html.BootstrapActionLinkButton("View", new
-                    {
-                        id = slide.Id
-                    }, BootstrapContextualClass.Primary, TargetAttribute.Blank)
+                    @Html.BootstrapActionLinkButton("View", slide.Id, ContextualColor.Primary, TargetAttribute.Blank)
                 </td>
                 <td>
-                    @Html.BootstrapActionLinkButton("Delete", new
-                    {
-                        id = slide.Id
-                    }, BootstrapContextualClass.Danger)
+                    @Html.BootstrapActionLinkButton("Delete", slide.Id, ContextualColor.Danger)
                 </td>
             </tr>
         }

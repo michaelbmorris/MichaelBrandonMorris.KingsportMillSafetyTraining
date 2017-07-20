@@ -1,4 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel
 
@@ -19,8 +20,8 @@
 
         <div class="form-group">
             <div class="col-md-10 col-md-offset-2">
-                @Html.BootstrapSubmit("Save", BootstrapContextualClass.Primary)
-                @Html.BootstrapActionLinkButton("Cancel", "Index", null, BootstrapContextualClass.Danger)
+                @Html.BootstrapSubmit("Save", ContextualColor.Primary)
+                @Html.BootstrapActionLinkButton("Cancel", "Index", ContextualColor.Danger)
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.SlideViewModel
 
 @{
@@ -13,11 +14,11 @@
 
 <div class="row">
     <div class="col-md-6">
-        @Html.BootstrapActionLinkButton("Edit", Model.Id, BootstrapContextualClass.Primary)
-        @Html.BootstrapActionLinkButton("View", Model.Id, BootstrapContextualClass.Primary, TargetAttribute.Blank)
-        @Html.BootstrapActionLinkButton("Delete", Model.Id, BootstrapContextualClass.Danger)
+        @Html.BootstrapActionLinkButton("Edit", Model.Id, ContextualColor.Primary)
+        @Html.BootstrapActionLinkButton("View", Model.Id, ContextualColor.Primary, TargetAttribute.Blank)
+        @Html.BootstrapActionLinkButton("Delete", Model.Id, ContextualColor.Danger)
     </div>
     <div class="col-md-6" style="text-align: right;">
-        @Html.BootstrapActionLinkButton("Index", BootstrapContextualClass.Primary)
+        @Html.BootstrapActionLinkButton("Index", ContextualColor.Primary)
     </div>
 </div>
