@@ -1,4 +1,6 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account.LoginViewModel
 @{
     ViewBag.Title = "Log in";
@@ -16,7 +18,7 @@
             }))
             {
                 @Html.AntiForgeryToken()
-                @Html.BootstrapHorizontalTextBoxFor(model => model.Email)
+                @Html.BootstrapHorizontalTextBoxFor(model => model.Email, true)
                 @Html.BootstrapHorizontalPasswordFor(model => model.Password)
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
@@ -26,13 +28,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default"/>
-                    </div>
-                </div>
+                @Html.BootstrapHorizontalSubmit("Log in", ContextualColor.Primary)
                 <p>
-                    @Html.ActionLink("Register as a new user", "Register")
+                    @Html.BootstrapActionLinkButton("Register", ContextualColor.Primary)
                 </p>
             }
         </section>
