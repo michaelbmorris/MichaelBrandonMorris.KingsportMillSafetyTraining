@@ -1,25 +1,70 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Foolproof;
+using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
 {
+    /// <summary>
+    ///     Class OtherCompanyValidAttribute.
+    /// </summary>
+    /// <seealso cref="ModelAwareValidationAttribute" />
+    /// TODO Edit XML Comment Template for OtherCompanyValidAttribute
     public class OtherCompanyValidAttribute : ModelAwareValidationAttribute
     {
+        /// <summary>
+        ///     Returns true if ... is valid.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="container">The container.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified value is valid;
+        ///     otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// TODO Edit XML Comment Template for IsValid
         public override bool IsValid(object value, object container)
         {
             var model = container as RegisterViewModel;
 
             if (model == null)
             {
-                throw new ArgumentException($"Attribute must be applied within a type of {typeof(RegisterViewModel)}");
+                throw new ArgumentException(
+                    $"Attribute must be applied within a type of {typeof(RegisterViewModel)}");
             }
 
-            // TODO Implement other company valid attribute
-            throw new NotImplementedException();
+            Company company;
+
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                try
+                {
+                    company = db.GetCompany(model.CompanyId);
+                }
+                catch (Exception)
+                {
+                    return true;
+                }
+            }
+
+            if (!company.Name.EqualsOrdinalIgnoreCase("Other"))
+            {
+                return true;
+            }
+
+            var otherCompanyName = value as string;
+
+            if (!otherCompanyName.IsNullOrWhiteSpace())
+            {
+                return true;
+            }
+
+            ErrorMessage =
+                "Other Company must not be blank if 'Other' is selected in the Company drop down.";
+
+            return false;
         }
     }
 }

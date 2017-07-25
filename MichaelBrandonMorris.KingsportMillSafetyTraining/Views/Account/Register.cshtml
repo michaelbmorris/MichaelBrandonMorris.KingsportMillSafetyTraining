@@ -13,7 +13,7 @@
 }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(null, new
+    @Html.ValidationSummary(true, null, new
     {
         @class = "text-danger"
     })

@@ -542,6 +542,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             return DoTransaction(() => Companies.OrderByWhere(orderBy, where));
         }
 
+        /// <summary>
+        /// Gets the company.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Company.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
+        /// TODO Edit XML Comment Template for GetCompany
         public Company GetCompany(int? id)
         {
             return DoTransaction(

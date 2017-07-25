@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     Account
@@ -44,13 +45,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             }
         }
 
+        /// <summary>
+        /// Gets or sets the name of the other company.
+        /// </summary>
+        /// <value>The name of the other company.</value>
+        /// TODO Edit XML Comment Template for OtherCompanyName
         [DisplayName("Other Company")]
+        [OtherCompanyValid]
         public string OtherCompanyName
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the company select list.
+        /// </summary>
+        /// <value>The company select list.</value>
+        /// TODO Edit XML Comment Template for CompanySelectList
         public IList<SelectListItem> CompanySelectList => Companies.Select(
             company => new SelectListItem
             {
