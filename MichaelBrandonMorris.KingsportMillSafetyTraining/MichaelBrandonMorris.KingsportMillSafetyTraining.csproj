@@ -237,6 +237,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Extensions.cs" />
+    <Compile Include="Controllers\Helpers\AuthorizeDynamicAttribute.cs" />
     <Compile Include="Controllers\Helpers\ChallengeResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -249,9 +250,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AssignCategoriesViewModel.cs" />
-    <Compile Include="Models\AssignRolesViewModel.cs" />
+    <Compile Include="Models\AssignGroupsViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ChangeRoleViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\Identity\Account\ResetPasswordViewModel.cs" />
@@ -720,7 +722,7 @@
     <Content Include="Views\Categories\Reorder.cshtml" />
     <Content Include="Views\Categories\EditorTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Groups\EditorTemplates\GroupViewModel.cshtml" />
-    <Content Include="Views\Categories\AssignRoles.cshtml" />
+    <Content Include="Views\Categories\AssignGroups.cshtml" />
     <Content Include="Views\Groups\DisplayTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />

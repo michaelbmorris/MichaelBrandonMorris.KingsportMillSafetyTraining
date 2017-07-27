@@ -202,6 +202,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Creates the company.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// TODO Edit XML Comment Template for CreateCompany
         public void CreateCompany(Company company)
         {
             DoTransaction(
@@ -270,6 +275,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             UpdateCurrentCategoryIndex();
         }
 
+        /// <summary>
+        ///     Deletes the company.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// TODO Edit XML Comment Template for DeleteCompany
         public void DeleteCompany(int? id)
         {
             DoTransaction(
@@ -386,6 +396,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Edits the slide.
+        /// </summary>
+        /// <param name="answers">The answers.</param>
+        /// <param name="categoryId">The category identifier.</param>
+        /// <param name="content">The content.</param>
+        /// <param name="correctAnswerIndex">
+        ///     Index of the correct
+        ///     answer.
+        /// </param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="imageBytes">The image bytes.</param>
+        /// <param name="imageDescription">The image description.</param>
+        /// <param name="question">The question.</param>
+        /// <param name="shouldShowImageOnQuiz">
+        ///     if set to <c>true</c>
+        ///     [should show image on quiz].
+        /// </param>
+        /// <param name="shouldShowQuestionOnQuiz">
+        ///     if set to
+        ///     <c>true</c> [should show question on quiz].
+        /// </param>
+        /// <param name="shouldShowSlideInSlideshow">
+        ///     if set to
+        ///     <c>true</c> [should show slide in slideshow].
+        /// </param>
+        /// <param name="title">The title.</param>
+        /// TODO Edit XML Comment Template for EditSlide
         public void EditSlide(
             IList<Answer> answers,
             int categoryId,
@@ -466,6 +504,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Edits the user.
+        /// </summary>
+        /// <param name="companyId">The company identifier.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="firstName">The first name.</param>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="lastName">The last name.</param>
+        /// <param name="middleName">Name of the middle.</param>
+        /// <param name="otherCompanyName">Name of the other company.</param>
+        /// <param name="phoneNumber">The phone number.</param>
+        /// TODO Edit XML Comment Template for EditUser
         public void EditUser(
             int companyId,
             string email,
@@ -535,6 +585,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Gets the companies.
+        /// </summary>
+        /// <param name="orderBy">The order by.</param>
+        /// <param name="where">The where.</param>
+        /// <returns>IList&lt;Company&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetCompanies
         public IList<Company> GetCompanies(
             Func<Company, object> orderBy = null,
             Func<Company, bool> where = null)
@@ -543,7 +600,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        /// Gets the company.
+        ///     Gets the company.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Company.</returns>
@@ -627,11 +684,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             return Groups.OrderByWhere(orderByPredicate, wherePredicate);
         }
 
+        /// <summary>
+        ///     Gets the role.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Role.</returns>
+        /// TODO Edit XML Comment Template for GetRole
         public Role GetRole(string id)
         {
             return Roles.Find(id);
         }
 
+        /// <summary>
+        ///     Gets the roles.
+        /// </summary>
+        /// <param name="orderBy">The order by.</param>
+        /// <param name="where">The where.</param>
+        /// <returns>IList&lt;Role&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetRoles
         public IList<Role> GetRoles(
             Func<Role, object> orderBy = null,
             Func<Role, bool> where = null)
@@ -829,7 +899,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <summary>
         ///     Pairs the category and role.
         /// </summary>
-        /// <param name="categoryAndRoleIds">The category and role ids.</param>
+        /// <param name="categoryAndGroupIds">
+        ///     The category and group
+        ///     ids.
+        /// </param>
         /// TODO Edit XML Comment Template for PairCategoryAndGroup
         public void PairCategoryAndGroup(
             (int CategoryId, int GroupId) categoryAndGroupIds)
@@ -871,6 +944,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Pairs the group and category.
+        /// </summary>
+        /// <param name="groupAndCategoryIds">
+        ///     The group and category
+        ///     ids.
+        /// </param>
+        /// TODO Edit XML Comment Template for PairGroupAndCategory
         public void PairGroupAndCategory(
             (int GroupId, int CategoryId) groupAndCategoryIds)
         {
@@ -879,6 +960,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 groupAndCategoryIds.CategoryId);
         }
 
+        /// <summary>
+        ///     Pairs the group and category.
+        /// </summary>
+        /// <param name="groupId">The group identifier.</param>
+        /// <param name="categoryId">The category identifier.</param>
+        /// TODO Edit XML Comment Template for PairGroupAndCategory
         public void PairGroupAndCategory(int groupId, int categoryId)
         {
             DoTransaction(
@@ -982,6 +1069,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Sets the user company.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="companyId">The company identifier.</param>
+        /// TODO Edit XML Comment Template for SetUserCompany
         public void SetUserCompany(string userId, int companyId)
         {
             DoTransaction(
@@ -1110,6 +1203,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 });
         }
 
+        /// <summary>
+        ///     Updates the index of the current role.
+        /// </summary>
+        /// TODO Edit XML Comment Template for UpdateCurrentRoleIndex
         public void UpdateCurrentRoleIndex()
         {
             DoTransaction(

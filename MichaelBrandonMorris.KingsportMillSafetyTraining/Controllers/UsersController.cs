@@ -27,6 +27,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             get;
         } = new KingsportMillSafetyTrainingDbContext();
 
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ChangePassword
         [HttpGet]
         public ActionResult ChangePassword(string id)
         {
@@ -48,6 +54,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Changes the password.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for ChangePassword
         [HttpPost]
         public async Task<ActionResult> ChangePassword(
             ChangePasswordViewModel model)
@@ -72,12 +84,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Changes the role.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ChangeRole
         [HttpGet]
         public ActionResult ChangeRole(string id)
         {
             try
             {
-                var model = Db.GetUser(id).AsViewModel();
+                var model = new ChangeRoleViewModel(Db.GetUser(id));
                 return View(model);
             }
             catch (Exception e)
@@ -86,8 +104,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
+        /// <summary>
+        /// Changes the role.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for ChangeRole
         [HttpPost]
-        public ActionResult ChangeRole(string[] roleIds)
+        public ActionResult ChangeRole(ChangeRoleViewModel model)
         {
             try
             {

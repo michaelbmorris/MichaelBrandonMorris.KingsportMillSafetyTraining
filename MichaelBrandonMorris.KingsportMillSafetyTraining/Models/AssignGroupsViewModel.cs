@@ -4,52 +4,52 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
     /// <summary>
-    ///     Class AssignRolesViewModel.
+    ///     Class AssignGroupsViewModel.
     /// </summary>
-    /// TODO Edit XML Comment Template for AssignRolesViewModel
-    public class AssignRolesViewModel
+    /// TODO Edit XML Comment Template for AssignGroupsViewModel
+    public class AssignGroupsViewModel
     {
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="AssignRolesViewModel" /> class.
+        ///     <see cref="AssignGroupsViewModel" /> class.
         /// </summary>
         /// TODO Edit XML Comment Template for #ctor
-        public AssignRolesViewModel()
+        public AssignGroupsViewModel()
         {
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="AssignRolesViewModel" /> class.
+        ///     <see cref="AssignGroupsViewModel" /> class.
         /// </summary>
         /// <param name="categories">The categories.</param>
-        /// <param name="roleViewModels">The role view models.</param>
+        /// <param name="groupViewModels">The role view models.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public AssignRolesViewModel(
+        public AssignGroupsViewModel(
             IList<Category> categories,
-            IList<GroupViewModel> roleViewModels)
+            IList<GroupViewModel> groupViewModels)
         {
             Categories = categories;
-            RoleViewModels = roleViewModels;
+            GroupViewModels = groupViewModels;
         }
 
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="AssignRolesViewModel" /> class.
+        ///     <see cref="AssignGroupsViewModel" /> class.
         /// </summary>
         /// <param name="category">The category.</param>
-        /// <param name="roleViewModels">The role view models.</param>
+        /// <param name="groupViewModels">The role view models.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public AssignRolesViewModel(
+        public AssignGroupsViewModel(
             Category category,
-            IList<GroupViewModel> roleViewModels)
+            IList<GroupViewModel> groupViewModels)
         {
             Categories = new List<Category>
             {
                 category
             };
 
-            RoleViewModels = roleViewModels;
+            GroupViewModels = groupViewModels;
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets or sets the role view models.
         /// </summary>
         /// <value>The role view models.</value>
-        /// TODO Edit XML Comment Template for RoleViewModels
-        public IList<GroupViewModel> RoleViewModels
+        /// TODO Edit XML Comment Template for GroupViewModels
+        public IList<GroupViewModel> GroupViewModels
         {
             get;
             set;

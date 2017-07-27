@@ -29,16 +29,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         ///     Gets the assign roles.
         /// </summary>
         /// <value>The assign roles.</value>
-        /// TODO Edit XML Comment Template for AssignRoles
+        /// TODO Edit XML Comment Template for AssignGroups
         private static Column AssignRoles => new Column
         {
-            ColumnName = "AssignRoles",
+            ColumnName = "AssignGroups",
             EnableFiltering = false,
             EnableSorting = false,
             HeaderText = string.Empty,
             HtmlEncode = false,
             ValueExpression = (x, y) => y.UrlHelper.Action(
-                "AssignRoles",
+                "AssignGroups",
                 "Categories",
                 new
                 {

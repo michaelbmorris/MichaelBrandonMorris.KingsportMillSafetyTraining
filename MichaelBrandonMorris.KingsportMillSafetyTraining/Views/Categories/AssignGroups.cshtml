@@ -1,6 +1,6 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper
 @using MichaelBrandonMorris.Math
-@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignRolesViewModel
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.AssignGroupsViewModel
 
 @{
     ViewBag.Title = "Assign Groups";
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var roleViewModel in Model.RoleViewModels)
+            @foreach (var groupViewModel in Model.GroupViewModels)
             {
                 <tr>
                     @foreach (var category in Model.Categories)
@@ -29,9 +29,9 @@
                                 <label>
                                     <input name="categoryGroups"
                                            type="checkbox"
-                                           value="@Cantor.Pair(category.Id, roleViewModel.Id)"
-                                           @Html.Attribute("checked", "checked", roleViewModel.Categories.Contains(category))/>
-                                    @Html.DisplayFor(modelRoleViewModel => roleViewModel.Title)
+                                           value="@Cantor.Pair(category.Id, groupViewModel.Id)"
+                                           @Html.Attribute("checked", "checked", groupViewModel.Categories.Contains(category))/>
+                                    @Html.DisplayFor(modelRoleViewModel => groupViewModel.Title)
                                 </label>
                             </div>
 

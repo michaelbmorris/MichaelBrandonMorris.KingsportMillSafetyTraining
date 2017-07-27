@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -14,7 +15,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for CategoriesController
-    [Authorize(Roles = "Administrator")]
     public class CategoriesController : Controller
     {
         /// <summary>
@@ -39,17 +39,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for AssignRoles
+        /// TODO Edit XML Comment Template for AssignGroups
         [HttpGet]
-        public ActionResult AssignRoles(int? id)
+        [AuthorizeDynamic]
+        public ActionResult AssignGroups(int? id)
         {
             try
             {
                 var model = id == null
-                    ? new AssignRolesViewModel(
+                    ? new AssignGroupsViewModel(
                         Db.GetCategories(),
                         Db.GetGroups().AsViewModels())
-                    : new AssignRolesViewModel(
+                    : new AssignGroupsViewModel(
                         Db.GetCategory(id.Value),
                         Db.GetGroups().AsViewModels());
 
@@ -66,24 +67,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Assigns the roles.
         /// </summary>
-        /// <param name="categoryRoles">The category roles.</param>
+        /// <param name="categoryGroups">The category roles.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for AssignRoles
+        /// TODO Edit XML Comment Template for AssignGroups
         [HttpPost]
-        public ActionResult AssignRoles(IList<int> categoryRoles)
+        public ActionResult AssignGroups(IList<int> categoryGroups)
         {
             try
             {
                 Db.UnpairCategoriesAndGroups();
 
-                if (categoryRoles == null)
+                if (categoryGroups == null)
                 {
                     return RedirectToAction("Index");
                 }
 
-                foreach (var categoryRole in categoryRoles)
+                foreach (var categoryGroup in categoryGroups)
                 {
-                    Db.PairCategoryAndGroup(Cantor.Inverse(categoryRole));
+                    Db.PairCategoryAndGroup(Cantor.Inverse(categoryGroup));
                 }
 
                 return RedirectToAction("Index");

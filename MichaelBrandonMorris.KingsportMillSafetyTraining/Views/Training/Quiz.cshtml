@@ -1,4 +1,6 @@
-﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
 
 @{
     ViewBag.Title = "Quiz";
@@ -141,24 +143,18 @@
                     </div>
                 </div>
             </div>
-            <hr/>
+
+            if (i + 1 != Model.Count)
+            {
+                <hr/>
+            }
         }
 
         if (!Model.All(x => x.IsCorrect()))
         {
-            <input class="btn btn-default"
-                   type="submit"
-                   value="Submit"/>
+            @Html.BootstrapSubmit("Submit", ContextualColor.Primary)
         }
     }
-</div>
-<div class="row">
-    <div class="col-md-12">
-        @if (Model.All(x => x.IsCorrect()))
-        {
-            @Html.ActionLink("Back to List", "Index")
-        }
-    </div>
 </div>
 
 @section Scripts

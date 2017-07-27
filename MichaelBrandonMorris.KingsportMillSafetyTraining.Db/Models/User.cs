@@ -111,6 +111,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        public virtual Role Role
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         ///     Gets or sets the training results.
         /// </summary>
