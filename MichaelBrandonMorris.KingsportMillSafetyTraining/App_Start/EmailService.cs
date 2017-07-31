@@ -1,4 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
@@ -6,8 +10,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     /// <summary>
     ///     Class EmailService.
     /// </summary>
-    /// <seealso
-    ///     cref="Microsoft.AspNet.Identity.IIdentityMessageService" />
+    /// <seealso cref="IIdentityMessageService" />
     /// TODO Edit XML Comment Template for EmailService
     public class EmailService : IIdentityMessageService
     {
@@ -19,8 +22,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for SendAsync
         public Task SendAsync(IdentityMessage message)
         {
-            // TODO: Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            Debug.WriteLine("Sending email...");
+            using (var smtpClient = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+                PickupDirectoryLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "Mail")
+            })
+            {
+                var mailMessage = new MailMessage
+                {
+                    Body = message.Body,
+                    Subject = message.Subject,
+                    To = { message.Destination }
+                };
+
+                Debug.WriteLine("Message body: " + message.Body);
+
+                return smtpClient.SendMailAsync(mailMessage);
+            }
         }
     }
 }

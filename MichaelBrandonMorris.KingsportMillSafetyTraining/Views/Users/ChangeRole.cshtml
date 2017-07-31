@@ -1,4 +1,6 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.ChangeRoleViewModel
 
 @{
@@ -7,3 +9,11 @@
 }
 
 @Html.DisplayFor(model => model.Name)
+
+@using (Html.BeginForm())
+{   
+    @Html.HiddenFor(model => model.UserId)
+    @Html.BootstrapHorizontalDropDownListFor(model => model.RoleId, Model.RoleSelectList, "Select a role...")
+    @Html.BootstrapSubmit("Submit", ContextualColor.Primary)
+}
+

@@ -88,7 +88,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (!User.IsInRole("Administrator"))
+            if (!User.IsInRole("Administrator") && !User.IsInRole("Owner") && User.IsInRole("Security") && User.IsInRole("Supervisor"))
             {
                 return RedirectToAction(
                     "UserResults",
@@ -98,7 +98,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            var model = Db.GetTrainingResultsDescending().AsViewModels();
+            var model = Db.GetUser(User.GetId()).AsViewModel();
             return View(model);
         }
 

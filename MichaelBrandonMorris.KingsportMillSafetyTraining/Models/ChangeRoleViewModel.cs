@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
@@ -30,10 +31,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public ChangeRoleViewModel(User user)
         {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
             Email = user.Email;
+
             Name = user.MiddleName.IsNullOrWhiteSpace()
                 ? $"{user.FirstName} {user.LastName}"
                 : $"{user.FirstName} {user.MiddleName} {user.LastName}";
+
+            RoleId = user.Role?.Id;            
             UserId = user.Id;
         }
 

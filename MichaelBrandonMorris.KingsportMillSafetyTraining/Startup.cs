@@ -1,8 +1,16 @@
-﻿using MichaelBrandonMorris.KingsportMillSafetyTraining;
+﻿using System;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Web;
+using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Owin;
 
@@ -49,30 +57,103 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         ///     Creates the roles.
         /// </summary>
         /// TODO Edit XML Comment Template for CreateRoles
-        private void CreateRoles()
+        private async void CreateRoles()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                var roleManager =
-                    new RoleManager<Role>(
-                        new RoleStore<Role>(db));
+                db.AddOrUpdate<Company>(
+                    new Company
+                    {
+                        Name = "Other"
+                    });
 
-                if (!roleManager.RoleExists("Administrator"))
-                {
-                    roleManager.Create(
-                        new Role
-                        {
-                            Name = "Administrator"
-                        });
-                }
+                db.AddOrUpdate<Role>(
+                    new Role
+                    {
+                        Index = 0,
+                        Name = "User"
+                    }, new Role
+                    {
+                        Index = 1,
+                        Name = "Supervisor"
+                    },
+                    new Role
+                    {
+                        Index = 2,
+                        Name = "Security"
+                    },
+                    new Role
+                    {
+                        Index = 3,
+                        Name = "Collaborator"
+                    },
+                    new Role
+                    {
+                        Index = 4,
+                        Name = "Administrator"
+                    },
+                    new Role
+                    {
+                        Index = 5,
+                        Name = "Owner"
+                    });
 
-                if (!roleManager.RoleExists("User"))
+                var ownerUserName = System.Configuration.ConfigurationManager
+                    .AppSettings["OwnerUserName"];
+
+                // ReSharper disable once InvertIf
+                if (!db.Users.Any(user => user.UserName == ownerUserName))
                 {
-                    roleManager.Create(
-                        new Role
+                    var userManager = new ApplicationUserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db))
+                    {
+                        EmailService = new EmailService()
+                    };
+
+                    var user = new User
+                    {
+                        UserName = ownerUserName,
+                        Email = ownerUserName
+                    };
+
+                    var password =
+                        System.Web.Security.Membership.GeneratePassword(8, 1);
+
+                    IdentityResult createResult = null;
+
+                    try
+                    {
+                        createResult = userManager.Create(user, password);
+                    }
+                    catch (DbEntityValidationException dbEntityValidationException)
+                    {
+                        foreach (var entityValidationError in
+                            dbEntityValidationException.EntityValidationErrors)
                         {
-                            Name = "User"
-                        });
+                            foreach (var validationError in entityValidationError
+                                .ValidationErrors)
+                            {
+                                Debug.WriteLine(validationError.ErrorMessage);
+                            }
+                        }
+                    }
+                    
+
+                    if (createResult.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(user.Id, "Owner");
+
+                        await userManager.SendEmailAsync(
+                            user.Id,
+                            "Password",
+                            password);
+                    }
+                    else
+                    {
+                        foreach (var error in createResult.Errors)
+                        {
+                            Debug.WriteLine(error);
+                        }
+                    }
                 }
             }
         }

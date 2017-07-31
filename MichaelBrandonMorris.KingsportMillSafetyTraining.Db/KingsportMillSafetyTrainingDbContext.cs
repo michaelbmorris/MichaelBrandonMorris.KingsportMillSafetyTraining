@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Linq.Expressions;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MoreLinq;
 
@@ -103,6 +106,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             set;
         }
 
+        private Dictionary<Type, Action<object[]>> AddOrUpdateMapping => new
+            Dictionary<Type, Action<object[]>>
+            {
+                {
+                    typeof(Company), companies =>
+                    {
+                        foreach (Company company in companies)
+                        {
+                            if (Companies.All(
+                                existingCompany => existingCompany.Name
+                                                   != company.Name))
+                            {
+                                Companies.Add(company);
+                            }
+                        }
+                    }
+                },
+                {
+                    typeof(Role), roles =>
+                    {
+                        foreach (Role role in roles)
+                        {
+                            if (Roles.All(
+                                existingRole => existingRole.Name != role.Name))
+                            {
+                                Roles.Add(role);
+                            }
+                        }
+                    }
+                }
+            };
+
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -186,6 +221,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                             Group = user.Group
                         });
                 });
+        }
+
+        /// <summary>
+        /// Adds the or update.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entities">The entities.</param>
+        /// TODO Edit XML Comment Template for AddOrUpdate`1
+        public void AddOrUpdate<T>(
+            params object[] entities)
+        {
+            DoTransaction(
+                () =>
+                {
+                    try
+                    {
+                        var action = AddOrUpdateMapping[typeof(T)];
+                        action(entities);
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        throw new ArgumentException(
+                            "Type of parameter does not exist in database.");
+                    }                   
+                });
+        }
+
+        public Role GetRole(Func<Role, bool> where)
+        {
+            return DoTransaction(() => Roles.Single(where));
         }
 
         /// <summary>
@@ -626,6 +691,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     }
 
                     return company;
+                });
+        }
+
+        /// <summary>
+        ///     Gets the default role.
+        /// </summary>
+        /// <returns>Role.</returns>
+        /// TODO Edit XML Comment Template for GetDefaultRole
+        public Role GetDefaultRole()
+        {
+            return DoTransaction(
+                () =>
+                {
+                    return Roles.OrderBy(role => role.Index).First();
                 });
         }
 
@@ -1235,7 +1314,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 catch (DbEntityValidationException)
                 {
                     transaction.Rollback();
-                    throw;
                 }
                 catch (Exception)
                 {
@@ -1281,7 +1359,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <param name="id">The identifier.</param>
         /// <returns>System.String.</returns>
         /// TODO Edit XML Comment Template for GetNotFoundMessage`1
-        private static string GetNotFoundMessage<T>(int id)
+        private static string GetNotFoundMessage<T>(object id)
         {
             return $"{typeof(T)} with id '{id}' not found.";
         }

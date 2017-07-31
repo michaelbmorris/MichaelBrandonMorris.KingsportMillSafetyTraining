@@ -48,6 +48,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                                         .GenerateUserIdentityAsync(manager))
                     }
                 });
+
             app.UseExternalSignInCookie(
                 DefaultAuthenticationTypes.ExternalCookie);
 

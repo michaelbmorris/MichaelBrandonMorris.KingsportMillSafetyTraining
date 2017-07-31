@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,7 +16,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for UsersController
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Owner, Administrator")]
     public class UsersController : Controller
     {
         /// <summary>
@@ -33,12 +35,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangePassword
+        [Authorize(Roles = "Owner, Administrator, Supervisor")]
         [HttpGet]
         public ActionResult ChangePassword(string id)
         {
             try
             {
                 var user = Db.GetUser(id);
+
+                if (User.IsInRole("Supervisor"))
+                {
+                    var currentUser = Db.GetUser(User.GetId());
+                    var company = currentUser.Company;
+
+                    if (company.GetEmployees().All(employee => employee.Id != user.Id))
+                    {
+                        throw new UnauthorizedAccessException(
+                            "You are not permitted to change the password for this user.");
+                    }
+                }
 
                 var model = new ChangePasswordViewModel
                 {
@@ -90,6 +105,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangeRole
+        [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public ActionResult ChangeRole(string id)
         {
@@ -105,50 +121,93 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Changes the role.
+        ///     Posts the change role view with the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for ChangeRole
+        [Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
-        public ActionResult ChangeRole(ChangeRoleViewModel model)
+        public async Task<ActionResult> ChangeRole(ChangeRoleViewModel model)
         {
             try
             {
+                var roleName = Db.GetRole(model.RoleId).Name;
+
+                if (User.IsInRole("Administrator"))
+                {
+                    if (roleName == "Owner"
+                        || roleName == "Administrator")
+                    {
+                        throw new AccessViolationException(
+                            "You are not permitted to promote users to Owner or Administrator.");
+                    }
+                }
+
+                var userManager = HttpContext.GetOwinContext()
+                    .GetUserManager<ApplicationUserManager>();
+
+                var roles = await userManager.GetRolesAsync(model.UserId);
+
+                await userManager.RemoveFromRolesAsync(
+                    model.UserId,
+                    roles.ToArray());
+
+                await userManager.AddToRoleAsync(
+                    model.UserId,
+                    Db.GetRole(model.RoleId).Name);
+
                 return RedirectToAction("Index");
+            }
+            catch (AccessViolationException e)
+            {
+                return this.CreateError(HttpStatusCode.Forbidden, e);
             }
             catch (Exception e)
             {
+                // TODO Replace general error handling with specific.
                 return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        ///     Detailses the specified identifier.
+        ///     Returns the details view for the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Details
+        [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
         public ActionResult Details(string id)
         {
             try
             {
+                if (User.IsInRole("Supervisor"))
+                {
+                    var currentUser = Db.GetUser(User.GetId());
+                    var company = currentUser.Company;
+
+                    if (company.GetEmployees().All(employee => employee.Id != id))
+                    {
+                        throw new UnauthorizedAccessException(
+                            "You are not permitted to view the details for this user.");
+                    }
+                }
+
                 var model = Db.GetUser(id).AsViewModel();
                 return View(model);
             }
             catch (Exception e)
             {
+                // TODO Replace general error handling with specific.
                 return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        ///     Edits the specified identifier.
+        ///     Gets the edit view for the specified identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Edit
+        [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public ActionResult Edit(string id)
         {
@@ -159,6 +218,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
+                // TODO Replace general error handling with specific.
                 return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
@@ -169,6 +229,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The user.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
+        [Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserViewModel model)
@@ -203,12 +264,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
+        [Authorize(Roles = "Owner,Administrator,Security,Supervisor")]
         [HttpGet]
         public ActionResult Index()
         {
             try
             {
-                return View(new UserViewModel());
+                var model = Db.GetUser(User.GetId()).AsViewModel();
+                return View(model);
             }
             catch (Exception e)
             {

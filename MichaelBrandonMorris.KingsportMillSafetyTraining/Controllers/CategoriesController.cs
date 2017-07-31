@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
@@ -15,6 +14,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for CategoriesController
+    [Authorize(Roles = "Owner, Administrator, Collaborator")]
     public class CategoriesController : Controller
     {
         /// <summary>
@@ -41,7 +41,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
         [HttpGet]
-        [AuthorizeDynamic]
         public ActionResult AssignGroups(int? id)
         {
             try

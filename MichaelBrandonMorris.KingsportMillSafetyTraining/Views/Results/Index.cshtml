@@ -1,6 +1,11 @@
-﻿@{
+﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
+
+@{
     ViewBag.Title = "Training Results";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.MvcGrid("TrainingResultsGrid")
+@Html.MvcGrid("TrainingResultsGrid", new
+{
+    id = Model.Id
+})

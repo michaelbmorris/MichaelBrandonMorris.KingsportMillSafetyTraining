@@ -2,8 +2,11 @@
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Column =
     MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
         KingsportMillSafetyTraining.Models.UserViewModel>;
@@ -23,6 +26,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
     /// TODO Edit XML Comment Template for UsersGrid
     internal static class UsersGrid
     {
+        private static Column ChangePassword => new Column
+        {
+            ColumnName = "ChangePassword",
+            EnableFiltering = false,
+            EnableSorting = false,
+            HeaderText = string.Empty,
+            HtmlEncode = false,
+            ValueExpression = (user, context) => context.UrlHelper.Action(
+                "ChangePassword",
+                "Users",
+                new
+                {
+                    id = user.Id
+                }),
+            ValueTemplate =
+                "<a href='{Value}' class='btn btn-primary' role='button'>Change Password</a>"
+        };
+
         private static Column ChangeRole => new Column
         {
             ColumnName = "ChangeRole",
@@ -40,20 +61,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                     }),
             ValueTemplate =
                 "<a href='{Value}' class='btn btn-primary' role='button'>Change Role</a>"
-        };
-
-        private static Column ChangePassword => new Column
-        {
-            ColumnName = "ChangePassword",
-            EnableFiltering = false,
-            EnableSorting = false,
-            HeaderText = string.Empty,
-            HtmlEncode = false,
-            ValueExpression = (user, context) => context.UrlHelper.Action("ChangePassword", "Users", new
-            {
-                id = user.Id
-            }),
-            ValueTemplate = "<a href='{Value}' class='btn btn-primary' role='button'>Change Password</a>"
         };
 
         /// <summary>
@@ -231,13 +238,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
             var options = context.QueryOptions;
+            var id = options.GetPageParameterString("id");
+            Debug.WriteLine(id);
             var sortColumnName = options.SortColumnName;
             var sortDirection = options.SortDirection;
             var result = new QueryResult<UserViewModel>();
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                var query = db.Users.ToList().AsViewModels();
+                var currentUser = db.GetUser(id);
+
+                var userManager =
+                    new ApplicationUserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db));
+
+                var query = userManager.IsInRole(id, "Supervisor")
+                    ? currentUser.Company.GetEmployees().AsViewModels()
+                    : db.Users.ToList().AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())
                 {
@@ -255,7 +271,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 var lastName = options.GetFilterString("LastName");
                 var companyName = options.GetFilterString("CompanyName");
                 var email = options.GetFilterString("Email");
-                var phoneNumber = options.GetFilterString("PhoneNumber");
 
                 result.Items = result.Items.Where(
                     user => user.FirstName.ContainsFilter(firstName)
@@ -277,6 +292,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         {
             var grid = new Grid();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
+            grid.WithPageParameterNames("Id");
             grid.AddColumn(FirstName);
             grid.AddColumn(MiddleName);
             grid.AddColumn(LastName);

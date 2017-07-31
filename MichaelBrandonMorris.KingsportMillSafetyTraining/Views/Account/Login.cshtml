@@ -14,10 +14,15 @@
                 ViewBag.ReturnUrl
             }, FormMethod.Post, new
             {
-                @class = "form-horizontal", role = "form"
+                @class = "form-horizontal",
+                role = "form"
             }))
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new
+                {
+                    @class = "text-danger"
+                })
                 @Html.BootstrapHorizontalTextBoxFor(model => model.Email, true)
                 @Html.BootstrapHorizontalPasswordFor(model => model.Password)
                 <div class="form-group">

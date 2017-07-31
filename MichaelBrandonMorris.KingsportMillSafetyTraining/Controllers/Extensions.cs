@@ -4,6 +4,7 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 #endif
 using System.Net;
+using System.Runtime.ExceptionServices;
 using System.Web;
 using System.Web.Mvc;
 
@@ -35,9 +36,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var dbEntityValidationException =
                 exception as DbEntityValidationException;
 
+            ExceptionDispatchInfo exceptionDispatchInfo;
+
             if (dbEntityValidationException == null)
             {
-                throw exception;
+                exceptionDispatchInfo =
+                    ExceptionDispatchInfo.Capture(exception);
+
+                exceptionDispatchInfo.Throw();
             }
 
             foreach (var entityValidationError in
@@ -50,7 +56,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
             }
 
-            throw exception;
+            exceptionDispatchInfo =
+                ExceptionDispatchInfo.Capture(dbEntityValidationException);
+
+            exceptionDispatchInfo.Throw();
+            throw new Exception("Error handling failed.");
         }
 #else
         /// <summary>

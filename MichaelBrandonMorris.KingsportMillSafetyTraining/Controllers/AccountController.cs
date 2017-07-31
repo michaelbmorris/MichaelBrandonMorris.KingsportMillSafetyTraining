@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,7 +15,7 @@ using Microsoft.Owin.Security;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
-    /// Class AccountController.
+    ///     Class AccountController.
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for AccountController
@@ -24,23 +23,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     public class AccountController : Controller
     {
         /// <summary>
-        /// The sign in manager
+        ///     The sign in manager
         /// </summary>
         /// TODO Edit XML Comment Template for _signInManager
         private ApplicationSignInManager _signInManager;
+
         /// <summary>
-        /// The user manager
+        ///     The user manager
         /// </summary>
         /// TODO Edit XML Comment Template for _userManager
         private ApplicationUserManager _userManager;
 
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="AccountController" /> class.
         /// </summary>
         /// TODO Edit XML Comment Template for #ctor
         public AccountController()
@@ -48,7 +44,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AccountController"/> class.
+        ///     Initializes a new instance of the
+        ///     <see cref="AccountController" /> class.
         /// </summary>
         /// <param name="userManager">The user manager.</param>
         /// <param name="signInManager">The sign in manager.</param>
@@ -62,7 +59,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Gets the sign in manager.
+        ///     Gets the sign in manager.
         /// </summary>
         /// <value>The sign in manager.</value>
         /// TODO Edit XML Comment Template for SignInManager
@@ -75,7 +72,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Gets the user manager.
+        ///     Gets the user manager.
         /// </summary>
         /// <value>The user manager.</value>
         /// TODO Edit XML Comment Template for UserManager
@@ -88,7 +85,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Confirms the email.
+        ///     Gets the authentication manager.
+        /// </summary>
+        /// <value>The authentication manager.</value>
+        /// TODO Edit XML Comment Template for AuthenticationManager
+        private IAuthenticationManager AuthenticationManager => HttpContext
+            .GetOwinContext()
+            .Authentication;
+
+        private KingsportMillSafetyTrainingDbContext Db
+        {
+            get;
+        } = new KingsportMillSafetyTrainingDbContext();
+
+        /// <summary>
+        ///     Confirms the email.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <param name="code">The code.</param>
@@ -111,14 +122,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        /// Externals the login.
+        ///     Externals the login.
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="returnUrl">The return URL.</param>
@@ -143,14 +152,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        /// Externals the login callback.
+        ///     Externals the login callback.
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -199,14 +206,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        /// Externals the login confirmation.
+        ///     Externals the login confirmation.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="returnUrl">The return URL.</param>
@@ -228,8 +233,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var info =
-                        await AuthenticationManager.GetExternalLoginInfoAsync();
+                    var info = await AuthenticationManager
+                        .GetExternalLoginInfoAsync();
 
                     if (info == null)
                     {
@@ -247,7 +252,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     if (result.Succeeded)
                     {
                         result =
-                            await UserManager.AddLoginAsync(user.Id, info.Login);
+                            await UserManager.AddLoginAsync(
+                                user.Id,
+                                info.Login);
 
                         if (result.Succeeded)
                         {
@@ -264,14 +271,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }      
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Externals the login failure.
+        ///     Externals the login failure.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ExternalLoginFailure
@@ -285,14 +290,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        /// Forgots the password.
+        ///     Forgots the password.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ForgotPassword
@@ -306,14 +309,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }         
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Forgots the password.
+        ///     Forgots the password.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -343,14 +344,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }          
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Forgots the password confirmation.
+        ///     Forgots the password confirmation.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ForgotPasswordConfirmation
@@ -364,14 +363,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }       
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Logins the specified return URL.
+        ///     Logins the specified return URL.
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns>ActionResult.</returns>
@@ -387,14 +384,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }     
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Logins the specified model.
+        ///     Logins the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="returnUrl">The return URL.</param>
@@ -422,7 +417,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 switch (result)
                 {
-                    case SignInStatus.Success: return RedirectToLocal(returnUrl);
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
                     case SignInStatus.LockedOut: return View("Lockout");
                     case SignInStatus.RequiresVerification:
                         return RedirectToAction(
@@ -440,14 +436,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }           
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Logs the off.
+        ///     Logs the off.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for LogOff
@@ -464,14 +458,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }     
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Registers this instance.
+        ///     Registers this instance.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Register
@@ -486,14 +478,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }        
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Registers the specified model.
+        ///     Registers the specified model.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -521,10 +511,37 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     UserName = model.Email
                 };
 
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result =
+                    await UserManager.CreateAsync(user, model.Password);
+                await UserManager.AddToRoleAsync(user.Id, "User");
 
                 if (result.Succeeded)
                 {
+                    var code = await UserManager
+                        .GenerateEmailConfirmationTokenAsync(user.Id);
+
+                    if (Request.Url == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    var callbackUrl = Url.Action(
+                        "ConfirmEmail",
+                        "Account",
+                        new
+                        {
+                            userId = user.Id,
+                            code
+                        },
+                        Request.Url.Scheme);
+
+                    await UserManager.SendEmailAsync(
+                        user.Id,
+                        "Confirm your account",
+                        "Please confirm your account by clicking <a href=\""
+                        + callbackUrl
+                        + "\">here</a>");
+
                     Db.SetUserCompany(user.Id, model.CompanyId);
                     await SignInManager.SignInAsync(user, false, false);
                     return RedirectToAction("Index", "Home");
@@ -535,14 +552,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }          
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Resets the password.
+        ///     Resets the password.
         /// </summary>
         /// <param name="code">The code.</param>
         /// <returns>ActionResult.</returns>
@@ -557,14 +572,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }        
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Resets the password.
+        ///     Resets the password.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -586,7 +599,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (user == null)
                 {
-                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                    return RedirectToAction(
+                        "ResetPasswordConfirmation",
+                        "Account");
                 }
 
                 var result = await UserManager.ResetPasswordAsync(
@@ -596,7 +611,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                    return RedirectToAction(
+                        "ResetPasswordConfirmation",
+                        "Account");
                 }
 
                 AddErrors(result);
@@ -604,14 +621,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }          
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Resets the password confirmation.
+        ///     Resets the password confirmation.
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ResetPasswordConfirmation
@@ -625,17 +640,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }        
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Sends the code.
+        ///     Sends the code.
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
-        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <param name="rememberMe">
+        ///     if set to <c>true</c> [remember
+        ///     me].
+        /// </param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for SendCode
         [AllowAnonymous]
@@ -674,14 +690,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }         
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Sends the code.
+        ///     Sends the code.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -715,18 +729,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }        
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Verifies the code.
+        ///     Verifies the code.
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <param name="returnUrl">The return URL.</param>
-        /// <param name="rememberMe">if set to <c>true</c> [remember me].</param>
+        /// <param name="rememberMe">
+        ///     if set to <c>true</c> [remember
+        ///     me].
+        /// </param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for VerifyCode
         [AllowAnonymous]
@@ -753,14 +768,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            }        
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Verifies the code.
+        ///     Verifies the code.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -797,16 +810,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
-            } 
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        /// Releases unmanaged resources and optionally releases managed resources.
+        ///     Releases unmanaged resources and optionally releases
+        ///     managed resources.
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        /// <param name="disposing">
+        ///     true to release both managed and unmanaged resources;
+        ///     false to release only unmanaged resources.
+        /// </param>
         /// TODO Edit XML Comment Template for Dispose
         protected override void Dispose(bool disposing)
         {
@@ -827,18 +842,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             base.Dispose(disposing);
         }
-        
-        /// <summary>
-        /// Gets the authentication manager.
-        /// </summary>
-        /// <value>The authentication manager.</value>
-        /// TODO Edit XML Comment Template for AuthenticationManager
-        private IAuthenticationManager AuthenticationManager => HttpContext
-            .GetOwinContext()
-            .Authentication;
 
         /// <summary>
-        /// Adds the errors.
+        ///     Adds the errors.
         /// </summary>
         /// <param name="result">The result.</param>
         /// TODO Edit XML Comment Template for AddErrors
@@ -851,7 +857,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Redirects to local.
+        ///     Redirects to local.
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns>ActionResult.</returns>

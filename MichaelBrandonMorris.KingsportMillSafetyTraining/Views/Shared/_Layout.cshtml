@@ -53,115 +53,125 @@
                 @Html.Partial("_LoginPartial")
             </div>
             @if (User.Identity.IsAuthenticated
-                 && User.IsInRole("Administrator"))
+                 && (User.IsInRole("Administrator") || User.IsInRole("Owner") || User.IsInRole("Collaborator") || User.IsInRole("Security")) || User.IsInRole("Supervisor"))
             {
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Categories <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Categories")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Categories")
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Reorder", "Reorder", "Categories")
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Assign Groups", "AssignGroups", "Categories")
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Groups <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Groups")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Groups")
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Reorder", "Reorder", "Groups")
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Assign Categories", "AssignCategories", "Groups")
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Slides <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Slides")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Slides")
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Reorder", "Reorder", "Slides")
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    @if (User.IsInRole("Administrator")
+                         || User.IsInRole("Owner")
+                         || User.IsInRole("Collaborator"))
+
+                    {
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Categories <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Categories")
+                                    </li>
+                                    <li class="divider"
+                                        role="separator">
+                                    </li>
+                                    <li class="dropdown-header">Actions</li>
+                                    <li>
+                                        @Html.ActionLink("Create", "Create", "Categories")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Reorder", "Reorder", "Categories")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Assign Groups", "AssignGroups", "Categories")
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Groups <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Groups")
+                                    </li>
+                                    <li class="divider"
+                                        role="separator">
+                                    </li>
+                                    <li class="dropdown-header">Actions</li>
+                                    <li>
+                                        @Html.ActionLink("Create", "Create", "Groups")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Reorder", "Reorder", "Groups")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Assign Categories", "AssignCategories", "Groups")
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Slides <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Slides")
+                                    </li>
+                                    <li class="divider"
+                                        role="separator">
+                                    </li>
+                                    <li class="dropdown-header">Actions</li>
+                                    <li>
+                                        @Html.ActionLink("Create", "Create", "Slides")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Reorder", "Reorder", "Slides")
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Companies <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Companies")
-                                </li>
-                                <li class="divider"
-                                    role="separator">
-                                </li>
-                                <li class="dropdown-header">Actions</li>
-                                <li>
-                                    @Html.ActionLink("Create", "Create", "Companies")
-                                </li>
-                            </ul>
-                        </li>
+                        @if (User.IsInRole("Owner")
+                             || User.IsInRole("Administrator"))
+                        {
+                            <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Companies <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Companies")
+                                    </li>
+                                    <li class="divider"
+                                        role="separator">
+                                    </li>
+                                    <li class="dropdown-header">Actions</li>
+                                    <li>
+                                        @Html.ActionLink("Create", "Create", "Companies")
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                         <li>
                             <a aria-expanded="false"
                                aria-haspopup="true"

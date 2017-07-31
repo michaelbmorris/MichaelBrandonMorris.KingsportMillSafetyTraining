@@ -237,7 +237,6 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\Extensions.cs" />
-    <Compile Include="Controllers\Helpers\AuthorizeDynamicAttribute.cs" />
     <Compile Include="Controllers\Helpers\ChallengeResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
