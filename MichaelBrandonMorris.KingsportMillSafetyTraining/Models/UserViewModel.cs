@@ -37,10 +37,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             FirstName = user.FirstName;
             Id = user.Id;
             LastName = user.LastName;
+            LastLogonDateTime = user.LastLogonDateTime;
             LastTrainingStartDateTime = user.LatestTrainingStartDateTime;
             MiddleName = user.MiddleName;
             OtherCompanyName = user.OtherCompanyName;
             PhoneNumber = user.PhoneNumber;
+            Role = GetRole(user.Roles.Single().RoleId);
 
             if (user.Company != null)
             {
@@ -116,14 +118,37 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             });
 
         /// <summary>
+        /// Gets the last logon date time string.
+        /// </summary>
+        /// <value>The last logon date time string.</value>
+        /// TODO Edit XML Comment Template for LastLogonDateTimeString
+        [DisplayName("Last Logged On")]
+        public string LastLogonDateTimeString => LastLogonDateTime == null
+            ? "User has not logged on."
+            : LastLogonDateTime.ToString();
+
+        /// <summary>
         ///     Gets the last training start date time string.
         /// </summary>
         /// <value>The last training start date time string.</value>
         /// TODO Edit XML Comment Template for LastTrainingStartDateTimeString
+        [DisplayName("Last Training Started On")]
         public string LastTrainingStartDateTimeString =>
             LastTrainingStartDateTime == null
                 ? "Training not started"
                 : LastTrainingStartDateTime.ToString();
+
+        /// <summary>
+        /// Gets the role name select list.
+        /// </summary>
+        /// <value>The role name select list.</value>
+        /// TODO Edit XML Comment Template for RoleNameSelectList
+        public IList<SelectListItem> RoleNameSelectList => Roles.Select(
+            role => new SelectListItem
+            {
+                Value = role.Name,
+                Text = role.Name
+            });
 
         /// <summary>
         ///     Gets the roles.
@@ -189,6 +214,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The identifier.</value>
         /// TODO Edit XML Comment Template for Id
         public string Id
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the last logon date time.
+        /// </summary>
+        /// <value>The last logon date time.</value>
+        /// TODO Edit XML Comment Template for LastLogonDateTime
+        public DateTime? LastLogonDateTime
         {
             get;
             set;
@@ -277,6 +313,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the role.
+        /// </summary>
+        /// <value>The role.</value>
+        /// TODO Edit XML Comment Template for Role
+        public Role Role
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the companies.
+        /// </summary>
+        /// <returns>IList&lt;Company&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetCompanies
         private static IList<Company> GetCompanies()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
@@ -285,6 +337,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
+        /// <summary>
+        /// Gets the groups.
+        /// </summary>
+        /// <returns>IList&lt;Group&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetGroups
         private static IList<Group> GetGroups()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
@@ -293,11 +350,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
+        /// <summary>
+        /// Gets the roles.
+        /// </summary>
+        /// <returns>IList&lt;Role&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetRoles
         private static IList<Role> GetRoles()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 return db.GetRoles(role => role.Index);
+            }
+        }
+
+        /// <summary>
+        /// Gets the role.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Role.</returns>
+        /// TODO Edit XML Comment Template for GetRole
+        private static Role GetRole(string id)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetRole(id);
             }
         }
     }

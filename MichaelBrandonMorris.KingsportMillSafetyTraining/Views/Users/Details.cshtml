@@ -10,7 +10,7 @@
 }
 
 <div>
-    @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.MiddleName, model => model.LastName, model => model.CompanyName, model => model.OtherCompanyName, model => model.Email, model => model.PhoneNumber, model => model.LastTrainingStartDateTimeString)
+    @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.MiddleName, model => model.LastName, model => model.CompanyName, model => model.OtherCompanyName, model => model.Email, model => model.PhoneNumber, model => model.LastLogonDateTimeString, model => model.LastTrainingStartDateTimeString)
 </div>
 <p>
     @Html.BootstrapActionLinkButton("Edit", "Edit", Model.Id, ContextualColor.Primary)

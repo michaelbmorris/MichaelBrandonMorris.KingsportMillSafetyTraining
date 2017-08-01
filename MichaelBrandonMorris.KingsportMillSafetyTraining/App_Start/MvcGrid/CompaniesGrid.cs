@@ -44,6 +44,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             ValueTemplate = MvcGridConfig.DeleteValueTemplate
         };
 
+        private static Column Supervisors => new Column
+        {
+            ColumnName = "Supervisors",
+            EnableFiltering = false,
+            EnableSorting = false,
+            HeaderText = "Supervisors",
+            HtmlEncode = false,
+            ValueExpression = (company, context) =>
+            {
+                return company.Supervisors.Aggregate(string.Empty, (current, supervisor) => current + supervisor.FirstName + supervisor.LastName + "<br />");
+            }
+        };
+
         /// <summary>
         ///     Gets the details.
         /// </summary>
@@ -140,6 +153,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var grid = new Grid();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
             grid.AddColumn(Name);
+            grid.AddColumn(Supervisors);
             grid.AddColumn(Details);
             grid.AddColumn(Edit);
             grid.AddColumn(Delete);

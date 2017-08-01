@@ -304,6 +304,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(TimeToComplete);
             grid.AddColumn(QuizAttemptsCount);
             grid.AddColumn(Details);
+            grid.WithFiltering(true);
             grid.WithSorting(true, "CompletionDateTime", SortDirection.Dsc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);
             return ("TrainingResultsGrid", grid);

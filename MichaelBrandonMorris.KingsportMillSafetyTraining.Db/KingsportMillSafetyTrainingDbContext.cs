@@ -42,6 +42,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     KingsportMillSafetyTrainingDbContext, Configuration>());
         }
 
+        public void UpdateUserLastLogon(string userName)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var user = Users.Single(u => u.UserName == userName);
+                    user.LastLogonDateTime = DateTime.Now;
+                });
+        }
+
         /// <summary>
         ///     Gets or sets the answers.
         /// </summary>

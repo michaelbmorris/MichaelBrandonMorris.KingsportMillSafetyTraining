@@ -49,6 +49,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
+        public DateTime? LastLogonDateTime
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         ///     Gets or sets the last name.
         /// </summary>

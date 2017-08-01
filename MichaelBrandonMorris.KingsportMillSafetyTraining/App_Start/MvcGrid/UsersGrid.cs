@@ -44,6 +44,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 "<a href='{Value}' class='btn btn-primary' role='button'>Change Password</a>"
         };
 
+        private static Column LastLogonDateTime => new Column
+        {
+            ColumnName = "LastLogonDateTime",
+            EnableSorting = true,
+            EnableFiltering = true,
+            HeaderText = "Last Logon",
+            ValueExpression = (user, context) => user.LastLogonDateTimeString
+        };
+
         private static Column ChangeRole => new Column
         {
             ColumnName = "ChangeRole",
@@ -179,32 +188,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                           ?? "Training not completed."
         };
 
-        /// <summary>
-        ///     Gets the name of the middle.
-        /// </summary>
-        /// <value>The name of the middle.</value>
-        /// TODO Edit XML Comment Template for MiddleName
-        private static Column MiddleName => new Column
+        private static Column Role => new Column
         {
-            ColumnName = "MiddleName",
+            ColumnName = "Role",
             EnableFiltering = true,
             EnableSorting = true,
-            HeaderText = "Middle Name",
-            ValueExpression = (x, y) => x.MiddleName
-        };
-
-        /// <summary>
-        ///     Gets the phone number.
-        /// </summary>
-        /// <value>The phone number.</value>
-        /// TODO Edit XML Comment Template for PhoneNumber
-        private static Column PhoneNumber => new Column
-        {
-            ColumnName = "PhoneNumber",
-            EnableFiltering = true,
-            EnableSorting = true,
-            HeaderText = "Phone Number",
-            ValueExpression = (x, y) => x.PhoneNumber
+            HeaderText = "Role",
+            ValueExpression = (user, context) => user.Role.Name
         };
 
         /// <summary>
@@ -270,13 +260,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 var lastName = options.GetFilterString("LastName");
                 var companyName = options.GetFilterString("CompanyName");
                 var email = options.GetFilterString("Email");
+                var role = options.GetFilterString("Role");
 
                 result.Items = result.Items.Where(
                     user => user.FirstName.ContainsFilter(firstName)
                             && user.MiddleName.ContainsFilter(middleName)
                             && user.LastName.ContainsFilter(lastName)
                             && user.CompanyName.ContainsFilter(companyName)
-                            && user.Email.ContainsFilter(email));
+                            && user.Email.ContainsFilter(email)
+                            && user.Role.Name.ContainsFilter(role));
             }
 
             return result;
@@ -293,16 +285,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.WithAuthorizationType(AuthorizationType.Authorized);
             grid.WithPageParameterNames("Id");
             grid.AddColumn(FirstName);
-            grid.AddColumn(MiddleName);
             grid.AddColumn(LastName);
             grid.AddColumn(CompanyName);
             grid.AddColumn(Email);
-            grid.AddColumn(PhoneNumber);
+            grid.AddColumn(Role);
+            grid.AddColumn(LastLogonDateTime);
             grid.AddColumn(LastTrainingDateTime);
             grid.AddColumn(Details);
             grid.AddColumn(Results);
-            grid.AddColumn(Edit);
             grid.AddColumn(ChangePassword);
+            grid.AddColumn(Edit);      
             grid.AddColumn(ChangeRole);
             grid.WithSorting(true, "LastName", SortDirection.Asc);
             grid.WithFiltering(true);

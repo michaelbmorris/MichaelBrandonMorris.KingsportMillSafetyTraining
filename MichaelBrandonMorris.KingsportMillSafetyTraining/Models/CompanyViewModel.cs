@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
@@ -33,6 +34,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets the supervisors.
+        /// </summary>
+        /// <value>The supervisors.</value>
+        /// TODO Edit XML Comment Template for Supervisors
+        public IList<UserViewModel> Supervisors => Employees.Where(
+            employee => employee.Role.Name == "Supervisor").ToList();
 
         /// <summary>
         ///     Gets or sets the identifier.

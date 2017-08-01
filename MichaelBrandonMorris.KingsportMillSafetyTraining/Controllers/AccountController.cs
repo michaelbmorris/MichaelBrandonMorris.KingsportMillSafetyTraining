@@ -444,6 +444,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        Db.UpdateUserLastLogon(model.Email);
                         return RedirectToLocal(returnUrl);
                     case SignInStatus.LockedOut: return View("Lockout");
                     case SignInStatus.RequiresVerification:

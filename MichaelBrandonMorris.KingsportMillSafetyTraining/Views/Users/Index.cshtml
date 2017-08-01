@@ -11,6 +11,7 @@
         @Html.FilterTextBox("LastName", "Last Name")
         @Html.FilterDropDownList("CompanyName", Model.CompanyNameSelectList, "Company")
         @Html.FilterTextBox("Email", "Email")
+        @Html.FilterDropDownList("Role", Model.RoleNameSelectList, "Role")
 
         <button class="btn btn-primary"
                 data-mvcgrid-apply-filter="click"
