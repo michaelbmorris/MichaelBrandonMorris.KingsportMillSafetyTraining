@@ -435,19 +435,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                var user = await UserManager.FindByNameAsync(model.Email);
-
-                if (user != null)
-                {
-                    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
-                    {
-                        return this.CreateError(
-                            HttpStatusCode.Forbidden,
-                            new Exception(
-                                "You must confirm your email address to log in."));
-                    }
-                }
-
                 var result = await SignInManager.PasswordSignInAsync(
                     model.Email,
                     model.Password,

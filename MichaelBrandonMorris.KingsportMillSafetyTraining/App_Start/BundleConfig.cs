@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System;
+using System.Web.Optimization;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
@@ -6,7 +7,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     ///     Class BundleConfig.
     /// </summary>
     /// TODO Edit XML Comment Template for BundleConfig
-    public class BundleConfig
+    public static class BundleConfig
     {
         /// <summary>
         ///     Registers the bundles.
@@ -15,6 +16,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for RegisterBundles
         public static void RegisterBundles(BundleCollection bundles)
         {
+            if (bundles == null)
+            {
+                throw new ArgumentNullException(nameof(bundles));
+            }
+
             bundles.Add(
                 new ScriptBundle("~/bundles/jquery").Include(
                     "~/Scripts/jquery-{version}.js"));

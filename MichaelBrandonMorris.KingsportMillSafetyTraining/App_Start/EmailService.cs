@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
@@ -19,17 +20,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for SendAsync
         public Task SendAsync(IdentityMessage message)
         {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
             using (var smtpClient = new SmtpClient())
             {
-                var mailMessage = new MailMessage
+                using (var mailMessage = new MailMessage
                 {
                     Body = message.Body,
                     IsBodyHtml = true,
                     Subject = message.Subject,
-                    To = { message.Destination }
-                };
-
-                return smtpClient.SendMailAsync(mailMessage);
+                    To =
+                    {
+                        message.Destination
+                    }
+                })
+                {
+                    return smtpClient.SendMailAsync(mailMessage);
+                }
             }
         }
     }

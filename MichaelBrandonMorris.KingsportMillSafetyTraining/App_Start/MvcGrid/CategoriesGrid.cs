@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -125,7 +126,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Index",
-            ValueExpression = (x, y) => x.Index.ToString()
+            ValueExpression = (x, y) => x.Index.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>
@@ -184,7 +185,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Groups",
-            ValueExpression = (x, y) => x.Roles.Count.ToString()
+            ValueExpression = (x, y) => x.Roles.Count.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>

@@ -27,10 +27,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            CreateRoles();
+            CreateOwner();
             UpdateCurrentIndices();
-            app.CreatePerOwinContext<ApplicationUserManager>(
-                ApplicationUserManager.Create);
         }
 
         /// <summary>
@@ -49,84 +47,52 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
-        ///     Creates the roles.
+        ///     Creates the owner account.
         /// </summary>
         /// TODO Edit XML Comment Template for CreateRoles
-        private async void CreateRoles()
+        private async void CreateOwner()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                db.AddOrUpdate<Company>(
-                    new Company
-                    {
-                        Name = "Other"
-                    });
-
-                db.AddOrUpdate<Role>(
-                    new Role
-                    {
-                        Index = 0,
-                        Name = "User"
-                    },
-                    new Role
-                    {
-                        Index = 1,
-                        Name = "Supervisor"
-                    },
-                    new Role
-                    {
-                        Index = 2,
-                        Name = "Security"
-                    },
-                    new Role
-                    {
-                        Index = 3,
-                        Name = "Collaborator"
-                    },
-                    new Role
-                    {
-                        Index = 4,
-                        Name = "Administrator"
-                    },
-                    new Role
-                    {
-                        Index = 5,
-                        Name = "Owner"
-                    });
-
                 var ownerUserName =
                     ConfigurationManager.AppSettings["OwnerUserName"];
 
-                // ReSharper disable once InvertIf
-                if (!db.Users.Any(user => user.UserName == ownerUserName))
-                {
-                    var userManager =
-                        new ApplicationUserManager(
-                            new UserStore<User, Role, string, IdentityUserLogin,
-                                IdentityUserRole, IdentityUserClaim>(db))
-                        {
-                            EmailService = new EmailService()
-                        };
-
-                    var user = new User
+                var userManager =
+                    new ApplicationUserManager(
+                        new UserStore<User, Role, string, IdentityUserLogin,
+                            IdentityUserRole, IdentityUserClaim>(db))
                     {
-                        UserName = ownerUserName,
-                        Email = ownerUserName
+                        EmailService = new EmailService()
                     };
 
-                    var password = Membership.GeneratePassword(8, 1);
-                    await userManager.AddToRoleAsync(user.Id, "Owner");
+                userManager.RegisterTwoFactorProvider("Email Code", new
+                    EmailTokenProvider<User>
+                    {
+                        Subject = "Security Code", BodyFormat =
+                            "Your security code is {0}"
+                    });
 
-                    await userManager.SendEmailAsync(
-                        user.Id,
-                        "Password",
-                        password);
+                var user = await userManager.FindByNameAsync(ownerUserName);
 
-                    var code = await userManager
-                        .GenerateEmailConfirmationTokenAsync(user.Id);
-
-                    await userManager.ConfirmEmailAsync(user.Id, code);
+                if (user != null)
+                {
+                    return;
                 }
+
+                user = new User
+                {
+                    UserName = ownerUserName,
+                    Email = ownerUserName
+                };
+
+                var password = Membership.GeneratePassword(8, 1);
+                await userManager.CreateAsync(user, password);
+                await userManager.AddToRoleAsync(user.Id, "Owner");
+
+                await userManager.SendEmailAsync(
+                    user.Id,
+                    "Password",
+                    password);
             }
         }
     }

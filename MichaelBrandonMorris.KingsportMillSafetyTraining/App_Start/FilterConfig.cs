@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
@@ -6,7 +7,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
     ///     Class FilterConfig.
     /// </summary>
     /// TODO Edit XML Comment Template for FilterConfig
-    public class FilterConfig
+    public static class FilterConfig
     {
         /// <summary>
         ///     Registers the global filters.
@@ -15,6 +16,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for RegisterGlobalFilters
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            if (filters == null)
+            {
+                throw new ArgumentNullException(nameof(filters));
+            }
+
             filters.Add(new HandleErrorAttribute());
         }
     }
