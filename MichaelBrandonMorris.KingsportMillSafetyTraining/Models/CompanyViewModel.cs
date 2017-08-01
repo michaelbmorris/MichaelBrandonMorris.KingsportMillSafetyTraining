@@ -4,8 +4,18 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    /// <summary>
+    ///     Class CompanyViewModel.
+    /// </summary>
+    /// TODO Edit XML Comment Template for CompanyViewModel
     public class CompanyViewModel
     {
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="CompanyViewModel" /> class.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// TODO Edit XML Comment Template for #ctor
         public CompanyViewModel(Company company)
         {
             Employees = company.GetEmployees().AsViewModels();
@@ -13,18 +23,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Name = company.Name;
         }
 
+        /// <summary>
+        ///     Gets or sets the employees.
+        /// </summary>
+        /// <value>The employees.</value>
+        /// TODO Edit XML Comment Template for Employees
         public IList<UserViewModel> Employees
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
         public int Id
         {
             get;
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        /// TODO Edit XML Comment Template for Name
         public string Name
         {
             get;

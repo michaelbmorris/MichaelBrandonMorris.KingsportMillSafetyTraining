@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -20,6 +19,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         private const string RequiredErrorMessage = "This field is required.";
 
         /// <summary>
+        ///     Gets the companies.
+        /// </summary>
+        /// <value>The companies.</value>
+        /// TODO Edit XML Comment Template for Companies
+        public IList<Company> Companies
+        {
+            get;
+        } = GetCompanies();
+
+        /// <summary>
+        ///     Gets the company select list.
+        /// </summary>
+        /// <value>The company select list.</value>
+        /// TODO Edit XML Comment Template for CompanySelectList
+        public IList<SelectListItem> CompanySelectList => Companies.Select(
+            company => new SelectListItem
+            {
+                Value = company.Id.ToString(),
+                Text = company.Name
+            });
+
+        /// <summary>
         ///     Gets or sets the company identifier.
         /// </summary>
         /// <value>The identifier of the company.</value>
@@ -31,44 +52,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
             get;
             set;
         }
-
-        public IList<Company> Companies
-        {
-            get;
-        } = GetCompanies();
-
-        private static IList<Company> GetCompanies()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetCompanies(company => company.Name);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the name of the other company.
-        /// </summary>
-        /// <value>The name of the other company.</value>
-        /// TODO Edit XML Comment Template for OtherCompanyName
-        [DisplayName("Other Company")]
-        [OtherCompanyValid]
-        public string OtherCompanyName
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the company select list.
-        /// </summary>
-        /// <value>The company select list.</value>
-        /// TODO Edit XML Comment Template for CompanySelectList
-        public IList<SelectListItem> CompanySelectList => Companies.Select(
-            company => new SelectListItem
-            {
-                Value = company.Id.ToString(),
-                Text = company.Name
-            });
 
         /// <summary>
         ///     Gets or sets the confirm password.
@@ -140,6 +123,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         }
 
         /// <summary>
+        ///     Gets or sets the name of the other company.
+        /// </summary>
+        /// <value>The name of the other company.</value>
+        /// TODO Edit XML Comment Template for OtherCompanyName
+        [DisplayName("Other Company")]
+        [OtherCompanyValid]
+        public string OtherCompanyName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         ///     Gets or sets the password.
         /// </summary>
         /// <value>The password.</value>
@@ -172,6 +168,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         {
             get;
             set;
+        }
+
+        /// <summary>
+        ///     Gets the companies.
+        /// </summary>
+        /// <returns>IList&lt;Company&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetCompanies
+        private static IList<Company> GetCompanies()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetCompanies(company => company.Name);
+            }
         }
     }
 }

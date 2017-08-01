@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Foolproof;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
@@ -8,13 +7,29 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
 {
+    /// <summary>
+    ///     Class AnswersValidAttribute.
+    /// </summary>
+    /// <seealso cref="ModelAwareValidationAttribute" />
+    /// TODO Edit XML Comment Template for AnswersValidAttribute
     public class AnswersValidAttribute : ModelAwareValidationAttribute
     {
-        private static bool IsValidType(Type type)
-        {
-            return type == typeof(List<Answer>) || type == typeof(IList<Answer>) || type == typeof(Answer[]);
-        }
-
+        /// <summary>
+        ///     Returns true if ... is valid.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="container">The container.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified value is valid;
+        ///     otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentException">
+        ///     Attribute must be applied within a slide view model.
+        ///     or
+        ///     Attribute must be applied to a list of answers.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">value</exception>
+        /// TODO Edit XML Comment Template for IsValid
         public override bool IsValid(object value, object container)
         {
             var model = container as SlideViewModel;
@@ -42,7 +57,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
             }
 
             var list = (IList<Answer>) value;
-            
+
             if (model.Question.IsNullOrWhiteSpace())
             {
                 ErrorMessage = "Question is required.";
@@ -55,7 +70,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
                 return false;
             }
 
-            if(list.Any(answer => answer.Title.IsNullOrWhiteSpace()))
+            if (list.Any(answer => answer.Title.IsNullOrWhiteSpace()))
             {
                 ErrorMessage = "No answer may be blank.";
                 return false;
@@ -69,6 +84,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
             }
 
             return true;
+        }
+
+        /// <summary>
+        ///     Determines whether [is valid type] [the specified
+        ///     type].
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///     <c>true</c> if [is valid type] [the specified
+        ///     type]; otherwise, <c>false</c>.
+        /// </returns>
+        /// TODO Edit XML Comment Template for IsValidType
+        private static bool IsValidType(Type type)
+        {
+            return type == typeof(List<Answer>)
+                   || type == typeof(IList<Answer>)
+                   || type == typeof(Answer[]);
         }
     }
 }

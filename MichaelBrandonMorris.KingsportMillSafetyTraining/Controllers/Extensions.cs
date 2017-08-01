@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Data.Entity.Validation;
-#if DEBUG
-using System.Diagnostics;
-#endif
+using System.Linq;
 using System.Net;
 using System.Runtime.ExceptionServices;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.PrincipalExtensions;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+#if DEBUG
+using System.Diagnostics;
+
+#endif
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -46,8 +51,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 exceptionDispatchInfo.Throw();
             }
 
-            foreach (var entityValidationError in
-                dbEntityValidationException.EntityValidationErrors)
+            foreach (var entityValidationError in dbEntityValidationException
+                .EntityValidationErrors)
             {
                 foreach (var validationError in entityValidationError
                     .ValidationErrors)
@@ -62,15 +67,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             exceptionDispatchInfo.Throw();
             throw new Exception("Error handling failed.");
         }
-#else
-        /// <summary>
-        ///     Creates the error.
-        /// </summary>
-        /// <param name="controller">The controller.</param>
-        /// <param name="code">The code.</param>
-        /// <param name="exception">The exception.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for CreateError
+#else /// <summary>
+///     Creates the error.
+/// </summary>
+/// <param name="controller">The controller.</param>
+/// <param name="code">The code.</param>
+/// <param name="exception">The exception.</param>
+/// <returns>ActionResult.</returns>
+/// TODO Edit XML Comment Template for CreateError
         internal static ActionResult CreateError(
             this IController controller,
             HttpStatusCode code,
@@ -105,6 +109,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
             HttpContext.Current.Session["Error"] = null;
             return ((HttpStatusCode, string)) error;
+        }
+
+        internal static bool IsEmployeeTrainingResult(
+            this IPrincipal user,
+            int id)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetUser(user.GetId())
+                    .Company.Employees
+                    .SelectMany(employee => employee.TrainingResults)
+                    .Any(trainingResult => trainingResult.Id == id);
+            }
+        }
+
+        public static bool IsOwnTrainingResult(this IPrincipal user, int id)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetUser(user.GetId())
+                    .TrainingResults
+                    .Any(trainingResult => trainingResult.Id == id);
+            }
+        }
+
+        internal static bool IsEmployee(this IPrincipal user, string id)
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetUser(user.GetId())
+                    .Company.Employees.Any(employee => employee.Id == id);
+            }
         }
     }
 }

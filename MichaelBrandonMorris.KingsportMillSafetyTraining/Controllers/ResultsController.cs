@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
@@ -50,15 +51,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                if (!User.IsInRole("Administrator")
-                    && !Db.IsUserTrainingResult(User.GetId(), id.Value))
+                var model = Db.GetTrainingResult(id.Value).AsViewModel();
+
+                if (User.IsInRole("Owner")
+                    || User.IsInRole("Administrator")
+                    || User.IsInRole("Security")
+                    || User.IsInRole("Supervisor") 
+                    && User.IsEmployeeTrainingResult(id.Value)
+                    || User.IsOwnTrainingResult(id.Value))
                 {
-                    throw new UnauthorizedAccessException(
-                        "You do not have permission to view this.");
+                    return View(model);
                 }
 
-                var model = Db.GetTrainingResult(id.Value).AsViewModel();
-                return View(model);
+                return this.CreateError(
+                    HttpStatusCode.Forbidden,
+                    new Exception("You are not permitted to access this."));
             }
             catch (UnauthorizedAccessException e)
             {
@@ -117,7 +124,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// TODO Edit XML Comment Template for UserResults
         [HttpGet]
-        public ActionResult UserResults(string id = null)
+        public ActionResult UserResults(string id)
         {
             try
             {
@@ -127,17 +134,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nName: 'id'\nType: 'string'");
                 }
 
-                if (!User.IsInRole("Administrator")
-                    && !User.GetId().Equals(id))
+                var model = Db.GetUser(id).AsViewModel();
+
+                if (User.IsInRole("Owner")
+                    || User.IsInRole("Administrator")
+                    || User.IsInRole("Security")
+                    || User.IsInRole("Supervisor") && User.IsEmployee(id)
+                    || User.GetId() == id)
                 {
-                    throw new UnauthorizedAccessException(
-                        "You do not have permission to view this.");
+                    return View(model);
                 }
 
-                var model = new UserTrainingResultsViewModel(
-                    Db.GetUser(id).AsViewModel(),
-                    Db.GetTrainingResultsDescending().AsViewModels());
-                return View(model);
+                return this.CreateError(
+                    HttpStatusCode.Forbidden,
+                    new Exception("You are not permitted to access this."));
             }
             catch (UnauthorizedAccessException e)
             {

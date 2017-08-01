@@ -14,7 +14,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for CategoriesController
-    [Authorize(Roles = "Owner, Administrator, Collaborator")]
     public class CategoriesController : Controller
     {
         /// <summary>
@@ -40,6 +39,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult AssignGroups(int? id)
         {
@@ -69,6 +69,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="categoryGroups">The category roles.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         public ActionResult AssignGroups(IList<int> categoryGroups)
         {
@@ -101,6 +102,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -122,6 +124,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The model.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryViewModel model)
@@ -162,6 +165,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for Delete
+        [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public ActionResult Delete(int? id)
         {
@@ -198,6 +202,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for DeleteConfirmed
+        [Authorize(Roles = "Owner, Administrator")]
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -248,6 +253,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     missing.\nType: 'int'\nName: 'id'
         /// </exception>
         /// TODO Edit XML Comment Template for Details
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -288,6 +294,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     missing.\nType: 'int'\nName: 'id'
         /// </exception>
         /// TODO Edit XML Comment Template for Edit
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -324,6 +331,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The category.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(CategoryViewModel model)
@@ -360,6 +368,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Index()
         {
@@ -381,6 +390,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Reorder()
         {
@@ -403,6 +413,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="categories">The categories.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         public ActionResult Reorder(IList<Category> categories)
         {

@@ -71,7 +71,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (role == null)
                 {
-                    return RedirectToAction("SelectRole");
+                    return RedirectToAction("SelectGroup");
                 }
 
                 return View(role);
@@ -95,7 +95,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var role = GetCurrentUserRole();
 
                 return RedirectToAction(
-                    role == null ? "SelectRole" : "ConfirmRole");
+                    role == null ? "SelectGroup" : "ConfirmRole");
             }
             catch (Exception e)
             {
@@ -186,9 +186,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     Selects the role.
         /// </summary>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for SelectRole
+        /// TODO Edit XML Comment Template for SelectGroup
         [HttpGet]
-        public ActionResult SelectRole()
+        public ActionResult SelectGroup()
         {
 
             var groups = Db.GetGroups(OrderByGroupIndex);
@@ -205,13 +205,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Selects the role.
         /// </summary>
-        /// <param name="roleId">The role identifier.</param>
+        /// <param name="groupId">The group identifier.</param>
         /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for SelectRole
+        /// TODO Edit XML Comment Template for SelectGroup
         [HttpPost]
-        public ActionResult SelectRole(int? groupId)
+        public ActionResult SelectGroup(int? groupId)
         {
-            Db.SetUserRole(User.GetId(), groupId);
+            Db.SetUserGroup(User.GetId(), groupId);
             return RedirectToAction("Index");
         }
 
@@ -223,7 +223,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 if (group == null)
                 {
-                    return RedirectToAction("SelectRole");
+                    return RedirectToAction("SelectGroup");
                 }
 
                 Db.SetUserLatestTrainingStartDateTime(User.GetId());

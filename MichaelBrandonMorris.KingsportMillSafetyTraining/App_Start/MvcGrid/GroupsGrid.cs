@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -59,7 +60,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Categories",
-            ValueExpression = (x, y) => x.CategoriesCount.ToString()
+            ValueExpression = (x, y) => x.CategoriesCount.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>
@@ -139,7 +140,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Index",
-            ValueExpression = (x, y) => x.Index.ToString()
+            ValueExpression = (x, y) => x.Index.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>

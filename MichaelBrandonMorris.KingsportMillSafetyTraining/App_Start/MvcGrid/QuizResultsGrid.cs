@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
@@ -33,7 +34,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Attempt Number",
-            ValueExpression = (x, y) => x.AttemptNumber.ToString()
+            ValueExpression = (x, y) => x.AttemptNumber.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Questions Correct",
-            ValueExpression = (x, y) => x.QuestionsCorrect.ToString(),
+            ValueExpression = (x, y) => x.QuestionsCorrect.ToString(CultureInfo.InvariantCulture),
             ValueTemplate = "{Value} / {Model.TotalQuestions}"
         };
 

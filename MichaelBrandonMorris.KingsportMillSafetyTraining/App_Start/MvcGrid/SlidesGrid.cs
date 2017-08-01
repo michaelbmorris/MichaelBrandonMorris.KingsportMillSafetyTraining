@@ -1,4 +1,5 @@
-﻿using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+﻿using System.Globalization;
+using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
@@ -32,7 +33,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Index",
-            ValueExpression = (x, y) => x.Index.ToString()
+            ValueExpression = (x, y) => x.Index.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>

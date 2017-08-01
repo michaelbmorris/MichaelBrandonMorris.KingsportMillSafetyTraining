@@ -25,13 +25,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
         }
 
-        public IList<SelectListItem> CategorySelectList => Categories.Select(
-            category => new SelectListItem
-            {
-                Value = category.Id.ToString(),
-                Text = category.Title
-            });
-
         /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="SlideViewModel" /> class.
@@ -61,13 +54,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Question = slide.Question;
         }
 
-        private static IList<Category> GetCategories()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
+        /// <summary>
+        ///     Gets the category select list.
+        /// </summary>
+        /// <value>The category select list.</value>
+        /// TODO Edit XML Comment Template for CategorySelectList
+        public IList<SelectListItem> CategorySelectList => Categories.Select(
+            category => new SelectListItem
             {
-                return db.GetCategories();
-            }
-        }
+                Value = category.Id.ToString(),
+                Text = category.Title
+            });
 
         /// <summary>
         ///     Gets or sets the answers.
@@ -181,7 +178,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The image description.</value>
         /// TODO Edit XML Comment Template for ImageDescription
         [Display(Name = "Image Description")]
-        [RequiredIfNot("Image", null, ErrorMessage = "This field is required if there is an image.")]
+        [RequiredIfNot(
+            "Image",
+            null,
+            ErrorMessage = "This field is required if there is an image.")]
         public string ImageDescription
         {
             get;
@@ -204,7 +204,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The question.</value>
         /// TODO Edit XML Comment Template for Question
-        [RequiredIfTrue("ShouldShowQuestionOnQuiz", ErrorMessage = "This field is required if \"Show Question on Quiz?\" is checked.")]
+        [RequiredIfTrue(
+            "ShouldShowQuestionOnQuiz",
+            ErrorMessage =
+                "This field is required if \"Show Question on Quiz?\" is checked.")]
         public string Question
         {
             get;
@@ -269,6 +272,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
+        }
+
+        private static IList<Category> GetCategories()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetCategories();
+            }
         }
     }
 }

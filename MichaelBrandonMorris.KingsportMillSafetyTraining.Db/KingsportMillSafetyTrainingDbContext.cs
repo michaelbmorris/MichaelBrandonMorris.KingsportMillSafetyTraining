@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Linq.Expressions;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MoreLinq;
 
@@ -67,6 +64,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the companies.
+        /// </summary>
+        /// <value>The companies.</value>
+        /// TODO Edit XML Comment Template for Companies
         internal DbSet<Company> Companies
         {
             get;
@@ -149,6 +151,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
+        ///     Adds the or update.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entities">The entities.</param>
+        /// TODO Edit XML Comment Template for AddOrUpdate`1
+        public void AddOrUpdate<T>(params object[] entities)
+        {
+            DoTransaction(
+                () =>
+                {
+                    try
+                    {
+                        var action = AddOrUpdateMapping[typeof(T)];
+                        action(entities);
+                    }
+                    catch (KeyNotFoundException)
+                    {
+                        throw new ArgumentException(
+                            "Type of parameter does not exist in database.");
+                    }
+                });
+        }
+
+        /// <summary>
         ///     Adds the quiz result.
         /// </summary>
         /// <param name="trainingResultId">
@@ -221,36 +247,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                             Group = user.Group
                         });
                 });
-        }
-
-        /// <summary>
-        /// Adds the or update.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entities">The entities.</param>
-        /// TODO Edit XML Comment Template for AddOrUpdate`1
-        public void AddOrUpdate<T>(
-            params object[] entities)
-        {
-            DoTransaction(
-                () =>
-                {
-                    try
-                    {
-                        var action = AddOrUpdateMapping[typeof(T)];
-                        action(entities);
-                    }
-                    catch (KeyNotFoundException)
-                    {
-                        throw new ArgumentException(
-                            "Type of parameter does not exist in database.");
-                    }                   
-                });
-        }
-
-        public Role GetRole(Func<Role, bool> where)
-        {
-            return DoTransaction(() => Roles.Single(where));
         }
 
         /// <summary>
@@ -766,6 +762,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         /// <summary>
         ///     Gets the role.
         /// </summary>
+        /// <param name="where">The where.</param>
+        /// <returns>Role.</returns>
+        /// TODO Edit XML Comment Template for GetRole
+        public Role GetRole(Func<Role, bool> where)
+        {
+            return DoTransaction(() => Roles.Single(where));
+        }
+
+        /// <summary>
+        ///     Gets the role.
+        /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>Role.</returns>
         /// TODO Edit XML Comment Template for GetRole
@@ -869,6 +876,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         public TrainingResult GetTrainingResult(int id)
         {
             return DoTransaction(() => TrainingResults.Find(id));
+        }
+
+        /// <summary>
+        ///     Gets the training results.
+        /// </summary>
+        /// <returns>IList&lt;TrainingResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetTrainingResults
+        public IList<TrainingResult> GetTrainingResults()
+        {
+            return TrainingResults.ToList();
         }
 
         /// <summary>
@@ -1167,6 +1184,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
+        ///     Sets the user role.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="groupId">The group identifier.</param>
+        /// TODO Edit XML Comment Template for SetUserGroup
+        public void SetUserGroup(string userId, int? groupId)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var user = Users.Find(userId);
+
+                    user.Group = groupId == null
+                        ? Groups.MaxBy(group => group.Index)
+                        : Groups.Find(groupId);
+                });
+        }
+
+        /// <summary>
         ///     Sets the user latest quiz start date time.
         /// </summary>
         /// <param name="userId">The user identifier.</param>
@@ -1193,25 +1229,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 {
                     var user = Users.Find(userId);
                     user.LatestTrainingStartDateTime = DateTime.Now;
-                });
-        }
-
-        /// <summary>
-        ///     Sets the user role.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="groupId">The group identifier.</param>
-        /// TODO Edit XML Comment Template for SetUserRole
-        public void SetUserRole(string userId, int? groupId)
-        {
-            DoTransaction(
-                () =>
-                {
-                    var user = Users.Find(userId);
-
-                    user.Group = groupId == null
-                        ? Groups.MaxBy(group => group.Index)
-                        : Groups.Find(groupId);
                 });
         }
 

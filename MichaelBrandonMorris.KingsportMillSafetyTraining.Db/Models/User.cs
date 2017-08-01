@@ -15,6 +15,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// TODO Edit XML Comment Template for User
     public class User : IdentityUser
     {
+        /// <summary>
+        ///     Gets or sets the company.
+        /// </summary>
+        /// <value>The company.</value>
+        /// TODO Edit XML Comment Template for Company
         public virtual Company Company
         {
             get;
@@ -28,6 +33,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// TODO Edit XML Comment Template for FirstName
         [DisplayName("First Name")]
         public string FirstName
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     Gets or sets the role.
+        /// </summary>
+        /// <value>The role.</value>
+        /// TODO Edit XML Comment Template for Group
+        public virtual Group Group
         {
             get;
             set;
@@ -81,18 +97,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
-
         /// <summary>
-        ///     PhoneNumber for the user
+        ///     Gets or sets the name of the other company.
         /// </summary>
-        /// <value>The phone number.</value>
-        /// TODO Edit XML Comment Template for PhoneNumber
-        public new string PhoneNumber
-        {
-            get;
-            set;
-        }
-
+        /// <value>The name of the other company.</value>
+        /// TODO Edit XML Comment Template for OtherCompanyName
         [DisplayName("Other Company")]
         public string OtherCompanyName
         {
@@ -100,18 +109,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
-        /// <summary>
-        ///     Gets or sets the role.
-        /// </summary>
-        /// <value>The role.</value>
-        /// TODO Edit XML Comment Template for Group
-        public virtual Group Group
-        {
-            get;
-            set;
-        }
 
-        public virtual Role Role
+        /// <summary>
+        ///     PhoneNumber for the user
+        /// </summary>
+        /// <value>The phone number.</value>
+        /// TODO Edit XML Comment Template for PhoneNumber
+        public new string PhoneNumber
         {
             get;
             set;

@@ -42,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 ? $"{user.FirstName} {user.LastName}"
                 : $"{user.FirstName} {user.MiddleName} {user.LastName}";
 
-            RoleId = user.Role?.Id;            
+            RoleId = user.Roles.Single().RoleId;           
             UserId = user.Id;
         }
 

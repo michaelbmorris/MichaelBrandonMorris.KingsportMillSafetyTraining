@@ -37,6 +37,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             FirstName = user.FirstName;
             Id = user.Id;
             LastName = user.LastName;
+            LastTrainingStartDateTime = user.LatestTrainingStartDateTime;
             MiddleName = user.MiddleName;
             OtherCompanyName = user.OtherCompanyName;
             PhoneNumber = user.PhoneNumber;
@@ -58,11 +59,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             LastTrainingResultId = lastTrainingResult.Id;
         }
 
+        /// <summary>
+        ///     Gets the companies.
+        /// </summary>
+        /// <value>The companies.</value>
+        /// TODO Edit XML Comment Template for Companies
         public IList<Company> Companies
         {
             get;
         } = GetCompanies();
 
+        /// <summary>
+        ///     Gets the company identifier select list.
+        /// </summary>
+        /// <value>The company identifier select list.</value>
+        /// TODO Edit XML Comment Template for CompanyIdSelectList
         public IList<SelectListItem> CompanyIdSelectList => Companies.Select(
             company => new SelectListItem
             {
@@ -70,6 +81,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 Text = company.Name
             });
 
+        /// <summary>
+        ///     Gets the company name select list.
+        /// </summary>
+        /// <value>The company name select list.</value>
+        /// TODO Edit XML Comment Template for CompanyNameSelectList
         public IList<SelectListItem> CompanyNameSelectList => Companies.Select(
             company => new SelectListItem
             {
@@ -77,6 +93,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 Text = company.Name
             });
 
+        /// <summary>
+        ///     Gets the groups.
+        /// </summary>
+        /// <value>The groups.</value>
+        /// TODO Edit XML Comment Template for Groups
+        public IList<Group> Groups
+        {
+            get;
+        } = GetGroups();
+
+        /// <summary>
+        ///     Gets the group title select list.
+        /// </summary>
+        /// <value>The group title select list.</value>
+        /// TODO Edit XML Comment Template for GroupTitleSelectList
         public IList<SelectListItem> GroupTitleSelectList => Groups.Select(
             group => new SelectListItem
             {
@@ -84,6 +115,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 Text = group.Title
             });
 
+        /// <summary>
+        ///     Gets the last training start date time string.
+        /// </summary>
+        /// <value>The last training start date time string.</value>
+        /// TODO Edit XML Comment Template for LastTrainingStartDateTimeString
+        public string LastTrainingStartDateTimeString =>
+            LastTrainingStartDateTime == null
+                ? "Training not started"
+                : LastTrainingStartDateTime.ToString();
+
+        /// <summary>
+        ///     Gets the roles.
+        /// </summary>
+        /// <value>The roles.</value>
+        /// TODO Edit XML Comment Template for Roles
         public IList<Role> Roles
         {
             get;
@@ -137,11 +183,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
-        public IList<Group> Groups
-        {
-            get;
-        } = GetGroups();
-
         /// <summary>
         ///     Gets or sets the identifier.
         /// </summary>
@@ -189,6 +230,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
+        ///     Gets or sets the last training start date time.
+        /// </summary>
+        /// <value>The last training start date time.</value>
+        /// TODO Edit XML Comment Template for LastTrainingStartDateTime
+        [DisplayName("Last Training Started On")]
+        public DateTime? LastTrainingStartDateTime
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         ///     Gets or sets the name of the middle.
         /// </summary>
         /// <value>The name of the middle.</value>
@@ -200,6 +253,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             set;
         }
 
+        /// <summary>
+        ///     Gets or sets the name of the other company.
+        /// </summary>
+        /// <value>The name of the other company.</value>
+        /// TODO Edit XML Comment Template for OtherCompanyName
         [DisplayName("Other Company Name")]
         public string OtherCompanyName
         {
@@ -227,19 +285,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
-        private static IList<Role> GetRoles()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetRoles(role => role.Index);
-            }
-        }
-
         private static IList<Group> GetGroups()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 return db.GetGroups(group => group.Index);
+            }
+        }
+
+        private static IList<Role> GetRoles()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetRoles(role => role.Index);
             }
         }
     }

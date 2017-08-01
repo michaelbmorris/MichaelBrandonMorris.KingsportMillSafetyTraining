@@ -38,6 +38,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)
         {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
             var manager = new ApplicationUserManager(
                 new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
@@ -109,6 +114,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             return user.Group;
         }
 
+        /// <summary>
+        /// Sets the company.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="company">The company.</param>
+        /// TODO Edit XML Comment Template for SetCompany
         public async void SetCompany(string userId, Company company)
         {
             var user = await FindByIdAsync(userId);

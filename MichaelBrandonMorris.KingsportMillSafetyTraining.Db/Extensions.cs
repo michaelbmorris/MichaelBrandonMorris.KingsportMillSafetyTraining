@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 {
@@ -47,6 +46,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 wherePredicate);
         }
 
+        /// <summary>
+        ///     Gets the employees.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <param name="orderBy">The order by.</param>
+        /// <param name="where">The where.</param>
+        /// <returns>IList&lt;User&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetEmployees
         public static IList<User> GetEmployees(
             this Company company,
             Func<User, object> orderBy = null,
@@ -143,6 +150,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                         .GetCategories(orderCategoriesBy, categoriesWhere)
                         .GetSlides(orderSlidesBy, slidesWhere));
             }
+        }
+
+        /// <summary>
+        ///     Gets the training results.
+        /// </summary>
+        /// <param name="users">The users.</param>
+        /// <returns>IList&lt;TrainingResult&gt;.</returns>
+        /// TODO Edit XML Comment Template for GetTrainingResults
+        public static IList<TrainingResult> GetTrainingResults(
+            this IList<User> users)
+        {
+            return users.SelectMany(user => user.GetTrainingResults()).ToList();
         }
 
         /// <summary>

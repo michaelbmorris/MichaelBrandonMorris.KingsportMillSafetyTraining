@@ -38,7 +38,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             {
                 return;
             }
-            
+
             Email = user.Email;
             FirstName = user.FirstName;
             LastName = user.LastName;
@@ -53,12 +53,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
+        ///     Gets the completion date time string.
+        /// </summary>
+        /// <value>The completion date time string.</value>
+        /// TODO Edit XML Comment Template for CompletionDateTimeString
+        [DisplayName("Completed On")]
+        public string CompletionDateTimeString => CompletionDateTime == null
+            ? "Training not completed."
+            : CompletionDateTime.ToString();
+
+        /// <summary>
         ///     Gets the quiz attempts count.
         /// </summary>
         /// <value>The quiz attempts count.</value>
         /// TODO Edit XML Comment Template for QuizAttemptsCount
         [DisplayName("Number of Quiz Attempts")]
-        public int QuizAttemptsCount => QuizResults.Count;
+        public string QuizAttemptsCount => QuizResults.Count.ToString();
 
         /// <summary>
         ///     Gets the time to complete string.
@@ -116,6 +126,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
+        ///     Gets or sets the role title.
+        /// </summary>
+        /// <value>The role title.</value>
+        /// TODO Edit XML Comment Template for GroupTitle
+        [DisplayName("Group")]
+        public string GroupTitle
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         ///     Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
@@ -157,18 +179,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for QuizResults
         [DisplayName("Quiz Results")]
         public IList<QuizResult> QuizResults
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        ///     Gets or sets the role title.
-        /// </summary>
-        /// <value>The role title.</value>
-        /// TODO Edit XML Comment Template for GroupTitle
-        [DisplayName("Group")]
-        public string GroupTitle
         {
             get;
             set;

@@ -1,5 +1,6 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+@using MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 @model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
 
 @{
@@ -7,9 +8,22 @@
     ViewBag.Title = "Slides";
 }
 
-<p>
+<p class="pull-left">
     @Html.BootstrapActionLinkButton("Create", "Create", ContextualColor.Primary)
     @Html.BootstrapActionLinkButton("Reorder", "Reorder", ContextualColor.Primary)
+</p>
+<p class="pull-right">
+    @using (var db = new KingsportMillSafetyTrainingDbContext())
+    {
+        foreach (var group in db.GetGroups(group => group.Index))
+        {
+            @Html.BootstrapActionLinkButton(group.Title, "Index", new
+            {
+                id = group.Id
+            }, ContextualColor.Primary)
+            <span>&nbsp;</span>
+        }
+    }
 </p>
 
 <table class="table table-bordered table-striped">
@@ -48,8 +62,13 @@
                 {
                     <td class="rowspan"
                         rowspan="@category.Slides.Count">
-                        @Html.DisplayFor(model => category.Title)
-                        <br/>
+                        <h4>@Html.DisplayFor(model => category.Title)</h4>
+                        <ul>
+                            @foreach (var group in category.Roles)
+                            {
+                                <li>@group.Title</li>
+                            }
+                        </ul>
                         @Html.BootstrapActionLinkButton("Details", "Details", "Categories", category.Id, ContextualColor.Primary)
                         <br/>
                         @Html.BootstrapActionLinkButton("Reorder Slides", "Reorder", category.Id, ContextualColor.Primary)

@@ -76,7 +76,7 @@ td.rowspan {
     text-align: center;
 }
 
-td.rowspan * {
+td.rowspan .btn {
     margin-bottom: 12px;
 }
 
@@ -108,4 +108,8 @@ ul li:last-child .btn {
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='20px' width='20px'><text x='5' y='20' fill='red' font-size='20'>*</text></svg>");
     background-repeat: no-repeat;
     background-position: right top;
+}
+
+td ul li {
+    margin-bottom: 0;
 }

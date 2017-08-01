@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -33,16 +34,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
-        ///     Creates the specified options.
+        /// Creates the specified options.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <param name="context">The context.</param>
         /// <returns>ApplicationSignInManager.</returns>
+        /// <exception cref="ArgumentNullException">context</exception>
         /// TODO Edit XML Comment Template for Create
         public static ApplicationSignInManager Create(
             IdentityFactoryOptions<ApplicationSignInManager> options,
             IOwinContext context)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             return new ApplicationSignInManager(
                 context.GetUserManager<ApplicationUserManager>(),
                 context.Authentication);
@@ -57,6 +64,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for CreateUserIdentityAsync
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(User user)
         {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
             return user.GenerateUserIdentityAsync(
                 (ApplicationUserManager) UserManager);
         }

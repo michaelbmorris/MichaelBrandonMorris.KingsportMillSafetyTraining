@@ -23,17 +23,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return slides.Select(x => new QuizSlideViewModel(x));
         }
 
-        public static IList<CompanyViewModel> AsViewModels(
-            this IList<Company> companies)
-        {
-            return companies.Select(company => company.AsViewModel());
-        }
-
         /// <summary>
         ///     Ases the view model.
         /// </summary>
         /// <param name="slide">The slide.</param>
-        /// <param name="categories">The categories.</param>
         /// <returns>SlideViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
@@ -54,8 +47,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <returns>UserViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// TODO Edit XML Comment Template for AsViewModel
-        public static UserViewModel AsViewModel(
-            this User user)
+        public static UserViewModel AsViewModel(this User user)
         {
             if (user == null)
             {
@@ -117,6 +109,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             return new TrainingResultViewModel(trainingResult);
         }
 
+        /// <summary>
+        ///     Ases the view model.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <returns>CompanyViewModel.</returns>
+        /// <exception cref="ArgumentNullException">company</exception>
+        /// TODO Edit XML Comment Template for AsViewModel
         public static CompanyViewModel AsViewModel(this Company company)
         {
             if (company == null)
@@ -125,6 +124,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
 
             return new CompanyViewModel(company);
+        }
+
+        /// <summary>
+        ///     Ases the view models.
+        /// </summary>
+        /// <param name="companies">The companies.</param>
+        /// <returns>IList&lt;CompanyViewModel&gt;.</returns>
+        /// TODO Edit XML Comment Template for AsViewModels
+        public static IList<CompanyViewModel> AsViewModels(
+            this IList<Company> companies)
+        {
+            return companies.Select(company => company.AsViewModel());
         }
 
         /// <summary>
@@ -156,7 +167,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <param name="roles">The roles.</param>
         /// <returns>IList&lt;GroupViewModel&gt;.</returns>
         /// TODO Edit XML Comment Template for AsViewModels
-        public static IList<GroupViewModel> AsViewModels(this IList<Group> roles)
+        public static IList<GroupViewModel> AsViewModels(
+            this IList<Group> roles)
         {
             return roles.Select(x => new GroupViewModel(x));
         }

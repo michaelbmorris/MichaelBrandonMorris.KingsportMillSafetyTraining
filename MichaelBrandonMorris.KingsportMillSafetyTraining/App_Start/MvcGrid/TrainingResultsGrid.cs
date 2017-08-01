@@ -1,10 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.MvcGrid.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Column =
     MichaelBrandonMorris.MvcGrid.Models.GridColumn<MichaelBrandonMorris.
         KingsportMillSafetyTraining.Models.TrainingResultViewModel>;
@@ -76,10 +78,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                         gridContext.CurrentHttpContext.Request.Url
                             .AbsoluteUri)
                     {
-                        Path = gridContext.UrlHelper.Action("Details", "Results", new
-                                {
-                                    id = trainingResultViewModel.Id
-                                }),
+                        Path = gridContext.UrlHelper.Action(
+                            "Details",
+                            "Results",
+                            new
+                            {
+                                id = trainingResultViewModel.Id
+                            }),
                         Query = null
                     };
 
@@ -178,11 +183,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                     trainingResultViewModel.QuizAttemptsCount.ToString()
         };
 
-        /// <summary>
-        ///     Gets the retrieve data method.
-        /// </summary>
-        /// <value>The retrieve data method.</value>
-        /// TODO Edit XML Comment Template for RetrieveDataMethod
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
             var options = context.QueryOptions;
@@ -193,9 +193,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
-                var query = (id.IsNullOrWhiteSpace()
-                    ? db.GetTrainingResultsDescending()
-                    : db.GetTrainingResultsDescending(id)).AsViewModels();
+                var currentUser = db.GetUser(id);
+
+                var userManager =
+                    new ApplicationUserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db));
+
+                var query = userManager.IsInRole(id, "Supervisor")
+                    ? currentUser.Company.GetEmployees().GetTrainingResults().AsViewModels()
+                    : db.GetTrainingResults().AsViewModels();
 
                 if (!sortColumnName.IsNullOrWhiteSpace())
                 {
@@ -240,10 +245,56 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                         : $"{trainingResultViewModel.TimeToComplete.TotalMinutes:#.##} Minutes"
         };
 
+        /// <summary>
+        ///     Gets the retrieve data method.
+        /// </summary>
+        /// <value>The retrieve data method.</value>
+        /// TODO Edit XML Comment Template for RetrieveDataMethod
+        private static RetrieveDataMethod UserRetrieveDataMethod => context =>
+        {
+            var options = context.QueryOptions;
+            var sortColumnName = options.SortColumnName;
+            var sortDirection = options.SortDirection;
+            var id = options.GetPageParameterString("id");
+            var result = new QueryResult<TrainingResultViewModel>();
+
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                var query = (id.IsNullOrWhiteSpace()
+                    ? db.GetTrainingResultsDescending()
+                    : db.GetTrainingResultsDescending(id)).AsViewModels();
+
+                if (!sortColumnName.IsNullOrWhiteSpace())
+                {
+                    query = query.OrderBy(
+                        x => x.GetPropertyValue(sortColumnName),
+                        sortDirection);
+                }
+
+                result.Items = query.ToList();
+
+                var firstName = options.GetFilterString("FirstName");
+                var lastName = options.GetFilterString("LastName");
+                var companyName = options.GetFilterString("CompanyName");
+                var groupTitle = options.GetFilterString("GroupTitle");
+                var email = options.GetFilterString("Email");
+
+                result.Items = result.Items.Where(
+                    user => user.FirstName.ContainsFilter(firstName)
+                            && user.LastName.ContainsFilter(lastName)
+                            && user.CompanyName.ContainsFilter(companyName)
+                            && user.GroupTitle.ContainsFilter(groupTitle)
+                            && user.Email.ContainsFilter(email));
+            }
+
+            return result;
+        };
+
         internal static (string Title, Grid Grid) GetTrainingResultsGrid()
         {
             var grid = new Grid();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
+            grid.WithPageParameterNames("Id");
             grid.AddColumn(FirstName);
             grid.AddColumn(LastName);
             grid.AddColumn(CompanyName);
@@ -269,7 +320,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(QuizAttemptsCount);
             grid.AddColumn(Details);
             grid.WithSorting(true, "CompletionDateTime", SortDirection.Dsc);
-            grid.WithRetrieveDataMethod(RetrieveDataMethod);
+            grid.WithRetrieveDataMethod(UserRetrieveDataMethod);
             return ("UserTrainingResultsGrid", grid);
         }
     }

@@ -288,6 +288,7 @@
     <Compile Include="Models\Validation\OtherCompanyValidAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ckeditor\adapters\jquery.js" />
@@ -728,7 +729,7 @@
     <Content Include="Views\Groups\DisplayTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
-    <Content Include="Views\Training\SelectRole.cshtml" />
+    <Content Include="Views\Training\SelectGroup.cshtml" />
     <Content Include="Views\Training\Train.cshtml" />
     <Content Include="Views\Groups\Reorder.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
