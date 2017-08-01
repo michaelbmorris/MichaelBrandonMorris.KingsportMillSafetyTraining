@@ -10,6 +10,7 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -65,9 +66,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for SignInManager
         public ApplicationSignInManager SignInManager
         {
-            get => _signInManager
-                   ?? HttpContext.GetOwinContext()
-                       .Get<ApplicationSignInManager>();
+            get => _signInManager ?? OwinContext.Get<ApplicationSignInManager>();
             private set => _signInManager = value;
         }
 
@@ -78,11 +77,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for UserManager
         public ApplicationUserManager UserManager
         {
-            get => _userManager
-                   ?? HttpContext.GetOwinContext()
-                       .GetUserManager<ApplicationUserManager>();
+            get => _userManager ?? OwinContext.GetUserManager<ApplicationUserManager>();
             private set => _userManager = value;
         }
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
         /// <summary>
         ///     Gets the authentication manager.
@@ -340,7 +339,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
 
-                return View(model);
+                var code =
+                    await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+                if (Request.Url == null)
+                {
+                    throw new Exception();
+                }
+
+                var callbackUrl = Url.Action(
+                    "ResetPassword",
+                    "Account",
+                    new
+                    {
+                        userId = user.Id,
+                        code
+                    },
+                    Request.Url.Scheme);
+
+                await UserManager.SendEmailAsync(
+                    user.Id,
+                    "Reset Password",
+                    "Please reset your password by clicking <a href=\""
+                    + callbackUrl
+                    + "\">here</a>");
+
+                return RedirectToAction(
+                    "ForgotPasswordConfirmation",
+                    "Account");
             }
             catch (Exception e)
             {
@@ -407,6 +433,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (!ModelState.IsValid)
                 {
                     return View(model);
+                }
+
+                var user = await UserManager.FindByNameAsync(model.Email);
+
+                if (user != null)
+                {
+                    if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                    {
+                        return this.CreateError(
+                            HttpStatusCode.Forbidden,
+                            new Exception(
+                                "You must confirm your email address to log in."));
+                    }
                 }
 
                 var result = await SignInManager.PasswordSignInAsync(
@@ -513,6 +552,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var result =
                     await UserManager.CreateAsync(user, model.Password);
+
                 await UserManager.AddToRoleAsync(user.Id, "User");
 
                 if (result.Succeeded)
@@ -543,8 +583,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         + "\">here</a>");
 
                     Db.SetUserCompany(user.Id, model.CompanyId);
-                    await SignInManager.SignInAsync(user, false, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ConfirmEmail");
                 }
 
                 AddErrors(result);

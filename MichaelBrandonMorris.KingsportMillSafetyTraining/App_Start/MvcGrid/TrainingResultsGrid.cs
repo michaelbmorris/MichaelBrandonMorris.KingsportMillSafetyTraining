@@ -134,7 +134,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         ///     Gets the role title.
         /// </summary>
         /// <value>The role title.</value>
-        /// TODO Edit XML Comment Template for RoleTitle
+        /// TODO Edit XML Comment Template for GroupTitle
         private static Column GroupTitle => new Column
         {
             ColumnName = "GroupTitle",
@@ -143,7 +143,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HeaderText = "Group",
             ValueExpression =
                 (trainingResultViewModel, gridContext) =>
-                    trainingResultViewModel.RoleTitle
+                    trainingResultViewModel.GroupTitle
         };
 
         /// <summary>
@@ -185,9 +185,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         /// TODO Edit XML Comment Template for RetrieveDataMethod
         private static RetrieveDataMethod RetrieveDataMethod => context =>
         {
-            var sortColumnName = context.QueryOptions.SortColumnName;
-            var sortDirection = context.QueryOptions.SortDirection;
-            var id = context.QueryOptions.GetPageParameterString("id");
+            var options = context.QueryOptions;
+            var sortColumnName = options.SortColumnName;
+            var sortDirection = options.SortDirection;
+            var id = options.GetPageParameterString("id");
             var result = new QueryResult<TrainingResultViewModel>();
 
             using (var db = new KingsportMillSafetyTrainingDbContext())
@@ -204,6 +205,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 }
 
                 result.Items = query.ToList();
+
+                var firstName = options.GetFilterString("FirstName");
+                var lastName = options.GetFilterString("LastName");
+                var companyName = options.GetFilterString("CompanyName");
+                var groupTitle = options.GetFilterString("GroupTitle");
+                var email = options.GetFilterString("Email");
+
+                result.Items = result.Items.Where(
+                    user => user.FirstName.ContainsFilter(firstName)
+                            && user.LastName.ContainsFilter(lastName)
+                            && user.CompanyName.ContainsFilter(companyName)
+                            && user.GroupTitle.ContainsFilter(groupTitle)
+                            && user.Email.ContainsFilter(email));
             }
 
             return result;

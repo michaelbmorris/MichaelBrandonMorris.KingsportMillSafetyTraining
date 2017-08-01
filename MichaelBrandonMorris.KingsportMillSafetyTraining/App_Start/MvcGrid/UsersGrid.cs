@@ -239,7 +239,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         {
             var options = context.QueryOptions;
             var id = options.GetPageParameterString("id");
-            Debug.WriteLine(id);
             var sortColumnName = options.SortColumnName;
             var sortDirection = options.SortDirection;
             var result = new QueryResult<UserViewModel>();

@@ -30,7 +30,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             CompletionDateTime = trainingResult.CompletionDateTime;
             Id = trainingResult.Id;
             QuizResults = trainingResult.QuizResults;
-            RoleTitle = trainingResult.Group.Title;
+            GroupTitle = trainingResult.Group.Title;
             TimeToComplete = trainingResult.TimeToComplete;
             var user = trainingResult.User;
 
@@ -166,9 +166,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets or sets the role title.
         /// </summary>
         /// <value>The role title.</value>
-        /// TODO Edit XML Comment Template for RoleTitle
+        /// TODO Edit XML Comment Template for GroupTitle
         [DisplayName("Group")]
-        public string RoleTitle
+        public string GroupTitle
         {
             get;
             set;

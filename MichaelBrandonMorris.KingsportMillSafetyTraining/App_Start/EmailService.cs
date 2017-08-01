@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -22,7 +21,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for SendAsync
         public Task SendAsync(IdentityMessage message)
         {
-            Debug.WriteLine("Sending email...");
             using (var smtpClient = new SmtpClient
             {
                 DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
@@ -32,11 +30,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 var mailMessage = new MailMessage
                 {
                     Body = message.Body,
+                    IsBodyHtml = true,
                     Subject = message.Subject,
                     To = { message.Destination }
                 };
-
-                Debug.WriteLine("Message body: " + message.Body);
 
                 return smtpClient.SendMailAsync(mailMessage);
             }
