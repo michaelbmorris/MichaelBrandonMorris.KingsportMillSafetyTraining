@@ -750,6 +750,7 @@
     <Content Include="Views\Companies\DisplayTemplates\CompanyViewModel.cshtml" />
     <Content Include="Views\Users\ChangeRole.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

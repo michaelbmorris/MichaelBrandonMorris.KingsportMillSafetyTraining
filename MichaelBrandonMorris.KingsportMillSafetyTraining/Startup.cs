@@ -1,16 +1,11 @@
-﻿using System;
-using System.Data.Entity.Migrations;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
+﻿using System.Configuration;
 using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Web;
+using System.Web.Security;
 using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Owin;
 
@@ -72,7 +67,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     {
                         Index = 0,
                         Name = "User"
-                    }, new Role
+                    },
+                    new Role
                     {
                         Index = 1,
                         Name = "Supervisor"
@@ -98,16 +94,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         Name = "Owner"
                     });
 
-                var ownerUserName = System.Configuration.ConfigurationManager
-                    .AppSettings["OwnerUserName"];
+                var ownerUserName =
+                    ConfigurationManager.AppSettings["OwnerUserName"];
 
                 // ReSharper disable once InvertIf
                 if (!db.Users.Any(user => user.UserName == ownerUserName))
                 {
-                    var userManager = new ApplicationUserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db))
-                    {
-                        EmailService = new EmailService()
-                    };
+                    var userManager =
+                        new ApplicationUserManager(
+                            new UserStore<User, Role, string, IdentityUserLogin,
+                                IdentityUserRole, IdentityUserClaim>(db))
+                        {
+                            EmailService = new EmailService()
+                        };
 
                     var user = new User
                     {
@@ -115,45 +114,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                         Email = ownerUserName
                     };
 
-                    var password =
-                        System.Web.Security.Membership.GeneratePassword(8, 1);
+                    var password = Membership.GeneratePassword(8, 1);
+                    await userManager.AddToRoleAsync(user.Id, "Owner");
 
-                    IdentityResult createResult = null;
+                    await userManager.SendEmailAsync(
+                        user.Id,
+                        "Password",
+                        password);
 
-                    try
-                    {
-                        createResult = userManager.Create(user, password);
-                    }
-                    catch (DbEntityValidationException dbEntityValidationException)
-                    {
-                        foreach (var entityValidationError in
-                            dbEntityValidationException.EntityValidationErrors)
-                        {
-                            foreach (var validationError in entityValidationError
-                                .ValidationErrors)
-                            {
-                                Debug.WriteLine(validationError.ErrorMessage);
-                            }
-                        }
-                    }
-                    
+                    var code = await userManager
+                        .GenerateEmailConfirmationTokenAsync(user.Id);
 
-                    if (createResult.Succeeded)
-                    {
-                        await userManager.AddToRoleAsync(user.Id, "Owner");
-
-                        await userManager.SendEmailAsync(
-                            user.Id,
-                            "Password",
-                            password);
-                    }
-                    else
-                    {
-                        foreach (var error in createResult.Errors)
-                        {
-                            Debug.WriteLine(error);
-                        }
-                    }
+                    await userManager.ConfirmEmailAsync(user.Id, code);
                 }
             }
         }

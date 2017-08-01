@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
@@ -21,11 +19,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for SendAsync
         public Task SendAsync(IdentityMessage message)
         {
-            using (var smtpClient = new SmtpClient
-            {
-                DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
-                PickupDirectoryLocation = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App_Data", "Mail")
-            })
+            using (var smtpClient = new SmtpClient())
             {
                 var mailMessage = new MailMessage
                 {

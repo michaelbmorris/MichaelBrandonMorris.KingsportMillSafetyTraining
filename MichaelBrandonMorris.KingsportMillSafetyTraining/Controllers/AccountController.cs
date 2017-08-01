@@ -583,7 +583,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         + "\">here</a>");
 
                     Db.SetUserCompany(user.Id, model.CompanyId);
-                    return RedirectToAction("ConfirmEmail");
+
+                    ViewBag.Message =
+                        "Check your email and confirm your account. You must be confirmed before you can log in.";
+
+                    return View("Info");
                 }
 
                 AddErrors(result);
