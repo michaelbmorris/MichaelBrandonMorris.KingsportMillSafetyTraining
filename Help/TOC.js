@@ -225,7 +225,7 @@ function GetCurrentUrl()
         if(isChrome && base.substr(0, 5) == "file:")
         {
             alert("Chrome security prevents access to file-based frame URLs.  As such, the TOC will not work " +
-                "with Index.html.  Either run this website on a web server, run Chrome with the " +
+                "with index.html.  Either run this website on a web server, run Chrome with the " +
                 "'--disable-web-security' command line option, or use FireFox or Internet Explorer.");
 
             return "";
@@ -235,7 +235,7 @@ function GetCurrentUrl()
             base = base.replace("file://", "file:///");
 
         if(base.substr(0, 5) == "file:")
-            top.location.href = base + "Index.html";
+            top.location.href = base + "index.html";
         else
             top.location.href = base + "index" + pageExtension; // Use lowercase on name for case-sensitive servers
     }

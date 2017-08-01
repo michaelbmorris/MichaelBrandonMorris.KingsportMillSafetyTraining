@@ -103,7 +103,7 @@ foreach($nodes as $node)
 
 <div id="TOCSizer" class="TOCSizer" onmousedown="OnMouseDown(event)" onselectstart="javascript: return false;"></div>
 
-<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/n-michaelbrandonmorris.kingsportmillsafetytraining.htm">
+<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/N-MichaelBrandonMorris.KingsportMillSafetyTraining.htm">
 This page uses an IFRAME but your browser does not support it.
 </iframe>
 
