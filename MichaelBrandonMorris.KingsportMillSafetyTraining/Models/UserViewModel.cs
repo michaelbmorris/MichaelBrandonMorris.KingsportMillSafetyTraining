@@ -77,6 +77,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 Text = company.Name
             });
 
+        public IList<SelectListItem> GroupTitleSelectList => Groups.Select(
+            group => new SelectListItem
+            {
+                Value = group.Title,
+                Text = group.Title
+            });
+
         public IList<Role> Roles
         {
             get;
@@ -129,6 +136,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             get;
             set;
         }
+
+        public IList<Group> Groups
+        {
+            get;
+        } = GetGroups();
 
         /// <summary>
         ///     Gets or sets the identifier.
@@ -220,6 +232,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             using (var db = new KingsportMillSafetyTrainingDbContext())
             {
                 return db.GetRoles(role => role.Index);
+            }
+        }
+
+        private static IList<Group> GetGroups()
+        {
+            using (var db = new KingsportMillSafetyTrainingDbContext())
+            {
+                return db.GetGroups(group => group.Index);
             }
         }
     }

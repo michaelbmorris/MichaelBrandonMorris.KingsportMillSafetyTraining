@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
@@ -68,6 +69,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableSorting = false,
             HeaderText = string.Empty,
             HtmlEncode = false,
+            PlainTextValueExpression = (trainingResultViewModel, gridContext) =>
+            {
+                var urlBuilder =
+                    new UriBuilder(
+                        gridContext.CurrentHttpContext.Request.Url
+                            .AbsoluteUri)
+                    {
+                        Path = gridContext.UrlHelper.Action("Details", "Results", new
+                                {
+                                    id = trainingResultViewModel.Id
+                                }),
+                        Query = null
+                    };
+
+                return urlBuilder.Uri.ToString();
+            },
             ValueExpression =
                 (trainingResultViewModel, gridContext) => gridContext.UrlHelper
                     .Action(
@@ -220,6 +237,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             grid.AddColumn(GroupTitle);
             grid.AddColumn(CompletionDateTime);
             grid.AddColumn(TimeToComplete);
+            grid.AddColumn(QuizAttemptsCount);
             grid.AddColumn(Details);
             grid.WithSorting(true, "CompletionDateTime", SortDirection.Dsc);
             grid.WithRetrieveDataMethod(RetrieveDataMethod);

@@ -16,7 +16,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// </summary>
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for UsersController
-    [Authorize(Roles = "Owner, Administrator")]
     public class UsersController : Controller
     {
         /// <summary>
@@ -75,6 +74,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for ChangePassword
+        [Authorize(Roles = "Owner, Administrator, Supervisor")]
         [HttpPost]
         public async Task<ActionResult> ChangePassword(
             ChangePasswordViewModel model)
@@ -264,7 +264,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
-        [Authorize(Roles = "Owner,Administrator,Security,Supervisor")]
+        [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
         public ActionResult Index()
         {

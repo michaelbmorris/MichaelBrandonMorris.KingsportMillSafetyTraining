@@ -5,7 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="well">
+    <div class="form-inline">
+        @Html.FilterTextBox("FirstName", "First Name")
+        @Html.FilterTextBox("LastName", "Last Name")
+        @Html.FilterDropDownList("CompanyName", Model.CompanyNameSelectList, "Company")
+        @Html.FilterDropDownList("GroupName", Model.GroupTitleSelectList, "Group")
+        @Html.FilterTextBox("Email", "Email")
+
+        <button class="btn btn-primary"
+                data-mvcgrid-apply-filter="click"
+                type="button">
+            Apply
+        </button>
+        <button class="btn btn-default" id="exportButton" style="float: right;">
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Export
+        </button>
+    </div>
+</div>
+
 @Html.MvcGrid("TrainingResultsGrid", new
 {
     id = Model.Id
 })
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#exportButton').click(function () {
+// ReSharper disable once UseOfImplicitGlobalInFunctionScope
+                location.href = MVCGrid.getExportUrl("TrainingResultsGrid");
+            });
+        });
+    </script>
+}
