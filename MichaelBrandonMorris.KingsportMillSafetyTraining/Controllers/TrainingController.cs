@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -9,7 +8,6 @@ using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MoreLinq;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -21,6 +19,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
+        private static Func<Group, object> OrderByGroupIndex => group => group
+            .Index;
+
         /// <summary>
         ///     Gets the index of the order categories by.
         /// </summary>
@@ -179,9 +180,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        private static Func<Group, object> OrderByGroupIndex => group
-            => group.Index;
-
         /// <summary>
         ///     Selects the role.
         /// </summary>
@@ -190,13 +188,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult SelectGroup()
         {
-
             var groups = Db.GetGroups(OrderByGroupIndex);
 
             var model = new SelectGroupViewModel
             {
                 Groups = groups.SkipLast(1).AsViewModels(),
-                DefaultGroupIndex = groups.Max(group => group.Index)                
+                DefaultGroupIndex = groups.Max(group => group.Index)
             };
 
             return View(model);
@@ -215,6 +212,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        ///     Trains this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Train
         public ActionResult Train()
         {
             try

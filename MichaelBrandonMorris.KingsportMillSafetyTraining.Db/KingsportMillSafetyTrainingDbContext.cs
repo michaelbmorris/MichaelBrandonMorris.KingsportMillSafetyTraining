@@ -42,16 +42,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                     KingsportMillSafetyTrainingDbContext, Configuration>());
         }
 
-        public void UpdateUserLastLogon(string userName)
-        {
-            DoTransaction(
-                () =>
-                {
-                    var user = Users.Single(u => u.UserName == userName);
-                    user.LastLogonDateTime = DateTime.Now;
-                });
-        }
-
         /// <summary>
         ///     Gets or sets the answers.
         /// </summary>
@@ -1320,6 +1310,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 {
                     Role.CurrentIndex =
                         !Roles.Any() ? 0 : Roles.Max(role => role.Index);
+                });
+        }
+
+        /// <summary>
+        ///     Updates the user last logon.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// TODO Edit XML Comment Template for UpdateUserLastLogon
+        public void UpdateUserLastLogon(string userName)
+        {
+            DoTransaction(
+                () =>
+                {
+                    var user = Users.Single(u => u.UserName == userName);
+                    user.LastLogOnDateTime = DateTime.Now;
                 });
         }
 

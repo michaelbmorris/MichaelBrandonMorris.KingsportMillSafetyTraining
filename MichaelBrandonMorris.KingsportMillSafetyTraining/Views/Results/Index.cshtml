@@ -18,8 +18,12 @@
                 type="button">
             Apply
         </button>
-        <button class="btn btn-default" id="exportButton" style="float: right;">
-            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Export
+        <button class="btn btn-default"
+                id="exportButton"
+                style="float: right;">
+            <span aria-hidden="true"
+                  class="glyphicon glyphicon-download-alt">
+            </span> Export
         </button>
     </div>
 </div>
@@ -32,9 +36,10 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(function () {
-            $('#exportButton').click(function () {
+        $(function() {
+            $('#exportButton').click(function() {
 // ReSharper disable once UseOfImplicitGlobalInFunctionScope
+// ReSharper disable once PossiblyUnassignedProperty
                 location.href = MVCGrid.getExportUrl("TrainingResultsGrid");
             });
         });

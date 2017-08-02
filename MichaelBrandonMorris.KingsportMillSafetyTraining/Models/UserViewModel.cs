@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
@@ -37,7 +38,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             FirstName = user.FirstName;
             Id = user.Id;
             LastName = user.LastName;
-            LastLogonDateTime = user.LastLogonDateTime;
+            LastLogOnDateTime = user.LastLogOnDateTime;
             LastTrainingStartDateTime = user.LatestTrainingStartDateTime;
             MiddleName = user.MiddleName;
             OtherCompanyName = user.OtherCompanyName;
@@ -79,7 +80,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public IList<SelectListItem> CompanyIdSelectList => Companies.Select(
             company => new SelectListItem
             {
-                Value = company.Id.ToString(),
+                Value = company.Id.ToString(CultureInfo.InvariantCulture),
                 Text = company.Name
             });
 
@@ -123,9 +124,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The last logon date time string.</value>
         /// TODO Edit XML Comment Template for LastLogonDateTimeString
         [DisplayName("Last Logged On")]
-        public string LastLogonDateTimeString => LastLogonDateTime == null
+        public string LastLogonDateTimeString => LastLogOnDateTime == null
             ? "User has not logged on."
-            : LastLogonDateTime.ToString();
+            : LastLogOnDateTime.ToString();
 
         /// <summary>
         ///     Gets the last training start date time string.
@@ -223,8 +224,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// Gets or sets the last logon date time.
         /// </summary>
         /// <value>The last logon date time.</value>
-        /// TODO Edit XML Comment Template for LastLogonDateTime
-        public DateTime? LastLogonDateTime
+        /// TODO Edit XML Comment Template for LastLogOnDateTime
+        public DateTime? LastLogOnDateTime
         {
             get;
             set;

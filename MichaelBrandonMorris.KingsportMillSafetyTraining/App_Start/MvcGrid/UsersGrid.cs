@@ -46,7 +46,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
 
         private static Column LastLogonDateTime => new Column
         {
-            ColumnName = "LastLogonDateTime",
+            ColumnName = "LastLogOnDateTime",
             EnableSorting = true,
             EnableFiltering = true,
             HeaderText = "Last Logon",

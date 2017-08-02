@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -68,7 +69,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The quiz attempts count.</value>
         /// TODO Edit XML Comment Template for QuizAttemptsCount
         [DisplayName("Number of Quiz Attempts")]
-        public string QuizAttemptsCount => QuizResults.Count.ToString();
+        public string QuizAttemptsCount => QuizResults.Count.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         ///     Gets the time to complete string.

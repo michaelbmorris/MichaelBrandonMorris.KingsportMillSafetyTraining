@@ -28,6 +28,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         protected override void HandleUnauthorizedRequest(
             AuthorizationContext filterContext)
         {
+            if (filterContext == null)
+            {
+                throw new ArgumentNullException(nameof(filterContext));
+            }
+
             if (filterContext.HttpContext.Request.IsAuthenticated)
             {
                 filterContext.Result =

@@ -136,6 +136,51 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         };
 
         /// <summary>
+        /// Gets the first name of the user.
+        /// </summary>
+        /// <value>The first name of the user.</value>
+        /// TODO Edit XML Comment Template for UserFirstName
+        private static Column UserFirstName => new Column
+        {
+            ColumnName = "UserFirstName",
+            CellCssClassExpression = (trainingResult, gridContext) => "hidden",
+            EnableFiltering = true,
+            EnableSorting = true,
+            HeaderText = "First Name",
+            ValueExpression = (trainingResult, gridContext) => trainingResult.FirstName
+        };
+
+        /// <summary>
+        /// Gets the last name of the user.
+        /// </summary>
+        /// <value>The last name of the user.</value>
+        /// TODO Edit XML Comment Template for UserLastName
+        private static Column UserLastName => new Column
+        {
+            ColumnName = "UserLastName",
+            CellCssClassExpression = (trainingResult, gridContext) => "hidden",
+            EnableFiltering = true,
+            EnableSorting = true,
+            HeaderText = "Last Name",
+            ValueExpression = (trainingResult, gridContext) => trainingResult.LastName
+        };
+
+        /// <summary>
+        /// Gets the user email.
+        /// </summary>
+        /// <value>The user email.</value>
+        /// TODO Edit XML Comment Template for UserEmail
+        private static Column UserEmail => new Column
+        {
+            ColumnName = "UserEmail",
+            CellCssClassExpression = (trainingResult, gridContext) => "hidden",
+            EnableFiltering = true,
+            EnableSorting = true,
+            HeaderText = "Email",
+            ValueExpression = (trainingResult, gridContext) => trainingResult.Email
+        };
+
+        /// <summary>
         ///     Gets the role title.
         /// </summary>
         /// <value>The role title.</value>
@@ -236,7 +281,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
         {
             ColumnName = "TimeToComplete",
             EnableFiltering = true,
-            EnableSorting = true,
+            EnableSorting = false,
             HeaderText = "Time to Complete",
             ValueExpression =
                 (trainingResultViewModel, gridContext) =>
@@ -315,11 +360,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             var grid = new Grid();
             grid.WithAuthorizationType(AuthorizationType.Authorized);
             grid.WithPageParameterNames("Id");
+            grid.AddColumn(UserFirstName);
+            grid.AddColumn(UserLastName);
+            grid.AddColumn(UserEmail);
             grid.AddColumn(GroupTitle);
             grid.AddColumn(CompletionDateTime);
             grid.AddColumn(TimeToComplete);
             grid.AddColumn(QuizAttemptsCount);
             grid.AddColumn(Details);
+            grid.WithFiltering(true);
             grid.WithSorting(true, "CompletionDateTime", SortDirection.Dsc);
             grid.WithRetrieveDataMethod(UserRetrieveDataMethod);
             return ("UserTrainingResultsGrid", grid);

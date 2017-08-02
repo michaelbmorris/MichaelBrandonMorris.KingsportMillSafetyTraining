@@ -49,7 +49,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             set;
         }
 
-        public DateTime? LastLogonDateTime
+        /// <summary>
+        /// Gets or sets the last log on date time.
+        /// </summary>
+        /// <value>The last log on date time.</value>
+        /// TODO Edit XML Comment Template for LastLogOnDateTime
+        public DateTime? LastLogOnDateTime
         {
             get;
             set;

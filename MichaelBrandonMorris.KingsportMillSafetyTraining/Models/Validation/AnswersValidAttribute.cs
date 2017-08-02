@@ -12,7 +12,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
     /// </summary>
     /// <seealso cref="ModelAwareValidationAttribute" />
     /// TODO Edit XML Comment Template for AnswersValidAttribute
-    public class AnswersValidAttribute : ModelAwareValidationAttribute
+    public sealed class AnswersValidAttribute : ModelAwareValidationAttribute
     {
         /// <summary>
         ///     Returns true if ... is valid.

@@ -199,7 +199,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             EnableFiltering = true,
             EnableSorting = true,
             HeaderText = "Number of Slides",
-            ValueExpression = (x, y) => x.Slides.Count.ToString()
+            ValueExpression = (x, y) => x.Slides.Count.ToString(CultureInfo.InvariantCulture)
         };
 
         /// <summary>

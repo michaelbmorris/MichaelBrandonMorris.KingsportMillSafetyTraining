@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
@@ -56,7 +55,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (User.IsInRole("Owner")
                     || User.IsInRole("Administrator")
                     || User.IsInRole("Security")
-                    || User.IsInRole("Supervisor") 
+                    || User.IsInRole("Supervisor")
                     && User.IsEmployeeTrainingResult(id.Value)
                     || User.IsOwnTrainingResult(id.Value))
                 {
@@ -81,9 +80,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -95,7 +92,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (!User.IsInRole("Administrator") && !User.IsInRole("Owner") && User.IsInRole("Security") && User.IsInRole("Supervisor"))
+            if (!User.IsInRole("Administrator")
+                && !User.IsInRole("Owner")
+                && User.IsInRole("Security")
+                && User.IsInRole("Supervisor"))
             {
                 return RedirectToAction(
                     "UserResults",
@@ -163,9 +163,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
