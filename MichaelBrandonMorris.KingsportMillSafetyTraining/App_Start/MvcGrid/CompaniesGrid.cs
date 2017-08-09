@@ -53,7 +53,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
             HtmlEncode = false,
             ValueExpression = (company, context) =>
             {
-                return company.Supervisors.Aggregate(string.Empty, (current, supervisor) => current + supervisor.FirstName + supervisor.LastName + "<br />");
+                return company.Supervisors.Aggregate(string.Empty, (current, supervisor) => current + supervisor.FirstName + " " + supervisor.LastName + "<br />");
             }
         };
 

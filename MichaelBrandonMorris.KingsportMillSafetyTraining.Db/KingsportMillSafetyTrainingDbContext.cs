@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations;

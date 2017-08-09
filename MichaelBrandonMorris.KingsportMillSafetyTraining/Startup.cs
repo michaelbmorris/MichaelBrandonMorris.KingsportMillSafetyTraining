@@ -20,7 +20,7 @@ using UserStore =
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     /// <summary>
-    /// Class Startup.
+    ///     Class Startup.
     /// </summary>
     /// TODO Edit XML Comment Template for Startup
     public partial class Startup
@@ -84,13 +84,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
                 var password = Membership.GeneratePassword(8, 1);
                 await manager.CreateAsync(user, password);
+                user = await manager.FindByEmailAsync(user.Email);
                 await manager.AddToRoleAsync(user.Id, "Owner");
                 await manager.SendEmailAsync(user.Id, "Password", password);
             }
         }
 
         /// <summary>
-        /// Updates the user roles.
+        ///     Updates the user roles.
         /// </summary>
         /// TODO Edit XML Comment Template for UpdateUserRoles
         private async void UpdateUserRoles()

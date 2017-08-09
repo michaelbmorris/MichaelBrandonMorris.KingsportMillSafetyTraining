@@ -273,6 +273,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Db.Edit(
                     new Group
                     {
+                        Id = model.Id,
                         Title = model.Title,
                         Description = model.Description,
                         Question = model.Question,
