@@ -18,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// <param name="message">The message.</param>
         /// <returns>Task.</returns>
         /// TODO Edit XML Comment Template for SendAsync
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
             if (message == null)
             {
@@ -38,7 +38,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     }
                 })
                 {
-                    return smtpClient.SendMailAsync(mailMessage);
+                    await smtpClient.SendMailAsync(mailMessage);
                 }
             }
         }
