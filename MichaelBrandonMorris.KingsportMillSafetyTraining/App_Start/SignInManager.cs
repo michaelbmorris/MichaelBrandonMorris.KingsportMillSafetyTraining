@@ -9,16 +9,16 @@ using Microsoft.Owin.Security;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     /// <summary>
-    ///     Class ApplicationSignInManager.
+    ///     Class SignInManager.
     /// </summary>
     /// <seealso cref="SignInManager{TUser,TKey}" />
     /// <seealso cref="User" />
-    /// TODO Edit XML Comment Template for ApplicationSignInManager
-    public class ApplicationSignInManager : SignInManager<User, string>
+    /// TODO Edit XML Comment Template for SignInManager
+    public class SignInManager : SignInManager<User, string>
     {
         /// <summary>
         ///     Initializes a new instance of the
-        ///     <see cref="ApplicationSignInManager" /> class.
+        ///     <see cref="SignInManager" /> class.
         /// </summary>
         /// <param name="userManager">The user manager.</param>
         /// <param name="authenticationManager">
@@ -26,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         ///     manager.
         /// </param>
         /// TODO Edit XML Comment Template for #ctor
-        public ApplicationSignInManager(
+        public SignInManager(
             UserManager userManager,
             IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
@@ -38,11 +38,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// </summary>
         /// <param name="options">The options.</param>
         /// <param name="context">The context.</param>
-        /// <returns>ApplicationSignInManager.</returns>
+        /// <returns>SignInManager.</returns>
         /// <exception cref="ArgumentNullException">context</exception>
         /// TODO Edit XML Comment Template for Create
-        public static ApplicationSignInManager Create(
-            IdentityFactoryOptions<ApplicationSignInManager> options,
+        public static SignInManager Create(
+            IdentityFactoryOptions<SignInManager> options,
             IOwinContext context)
         {
             if (context == null)
@@ -50,7 +50,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 throw new ArgumentNullException(nameof(context));
             }
 
-            return new ApplicationSignInManager(
+            return new SignInManager(
                 context.GetUserManager<UserManager>(),
                 context.Authentication);
         }

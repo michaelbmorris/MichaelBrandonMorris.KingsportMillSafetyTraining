@@ -28,8 +28,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             app.CreatePerOwinContext<UserManager>(
                 UserManager.Create);
 
-            app.CreatePerOwinContext<ApplicationSignInManager>(
-                ApplicationSignInManager.Create);
+            app.CreatePerOwinContext<SignInManager>(
+                SignInManager.Create);
 
             app.CreatePerOwinContext<CompanyManager>(CompanyManager.Create);
 

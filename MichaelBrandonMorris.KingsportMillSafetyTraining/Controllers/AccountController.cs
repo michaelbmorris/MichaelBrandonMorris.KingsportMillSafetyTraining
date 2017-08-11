@@ -26,7 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     The sign in manager
         /// </summary>
         /// TODO Edit XML Comment Template for _signInManager
-        private ApplicationSignInManager _signInManager;
+        private SignInManager _signInManager;
 
         /// <summary>
         ///     The user manager
@@ -52,7 +52,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for #ctor
         public AccountController(
             UserManager userManager,
-            ApplicationSignInManager signInManager)
+            SignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -63,9 +63,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <value>The sign in manager.</value>
         /// TODO Edit XML Comment Template for SignInManager
-        public ApplicationSignInManager SignInManager
+        public SignInManager SignInManager
         {
-            get => _signInManager ?? OwinContext.Get<ApplicationSignInManager>();
+            get => _signInManager ?? OwinContext.Get<SignInManager>();
             private set => _signInManager = value;
         }
 

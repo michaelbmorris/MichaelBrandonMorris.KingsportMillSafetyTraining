@@ -217,7 +217,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationSignInManager.cs" />
+    <Compile Include="App_Start\SignInManager.cs" />
     <Compile Include="App_Start\CompanyManager.cs" />
     <Compile Include="App_Start\UserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

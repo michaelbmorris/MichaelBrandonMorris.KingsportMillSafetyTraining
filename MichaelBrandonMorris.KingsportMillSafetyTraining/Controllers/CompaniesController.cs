@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
     /// <summary>
     ///     Class CompaniesController.
     /// </summary>
-    /// <seealso cref="System.Web.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for CompaniesController
     public class CompaniesController : Controller
     {
-        /// <summary>
-        ///     Gets the database.
-        /// </summary>
-        /// <value>The database.</value>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private CompanyManager CompanyManager =>
+            OwinContext.Get<CompanyManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
         /// <summary>
         ///     Creates this instance.
@@ -46,22 +45,27 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Creates the specified company.
         /// </summary>
-        /// <param name="company">The company.</param>
+        /// <param name="model"></param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
         [Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Company company)
+        public async Task<ActionResult> Create(CompanyViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(company);
+                    return View(model);
                 }
 
-                Db.CreateCompany(company);
+                await CompanyManager.CreateAsync(
+                    new Company
+                    {
+                        Name = model.Name
+                    });
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -78,11 +82,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Delete
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                var model = Db.GetCompany(id).AsViewModel();
+                var company = await CompanyManager.FindByIdAsync(id);
+                var model = company.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -109,11 +114,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
             {
-                Db.DeleteCompany(id);
+                var company = await CompanyManager.FindByIdAsync(id);
+                await CompanyManager.DeleteAsync(company);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -129,11 +135,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Details
         [Authorize(Roles = "Owner, Administrator")]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int id)
         {
             try
             {
-                var model = Db.GetCompany(id).AsViewModel();
+                var company = await CompanyManager.FindByIdAsync(id);
+                var model = company.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -157,11 +164,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator")]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int id)
         {
             try
             {
-                var model = Db.GetCompany(id).AsViewModel();
+                var company = await CompanyManager.FindByIdAsync(id);
+                var model = company.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -181,22 +189,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Edits the specified company.
         /// </summary>
-        /// <param name="company">The company.</param>
+        /// <param name="model">The company.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Company company)
+        public async Task<ActionResult> Edit(CompanyViewModel model)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(company);
+                    return View(model);
                 }
 
-                Db.Edit(company);
+                var company = await CompanyManager.FindByIdAsync(model.Id);
+                company.Name = model.Name;
+                await CompanyManager.UpdateAsync(company);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -211,11 +221,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
         [Authorize(Roles = "Owner, Administrator")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
-                var model = Db.GetCompanies().AsViewModels();
+                var companies = await CompanyManager.Companies
+                    .Include(company => company.Employees)
+                    .ToListAsync();
+
+                var model = companies.AsViewModels();
                 return View(model);
             }
             catch (Exception e)
@@ -237,7 +251,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                CompanyManager?.Dispose();
             }
 
             base.Dispose(disposing);

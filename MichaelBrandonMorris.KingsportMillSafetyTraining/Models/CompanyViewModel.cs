@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -19,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public CompanyViewModel(Company company)
         {
-            Employees = company.GetEmployees().AsViewModels();
+            Employees = company.Employees.AsViewModels();
             Id = company.Id;
             Name = company.Name;
         }

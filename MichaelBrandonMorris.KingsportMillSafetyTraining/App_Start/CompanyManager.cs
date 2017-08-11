@@ -28,6 +28,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
+        ///     Gets the companies.
+        /// </summary>
+        /// <value>The companies.</value>
+        /// TODO Edit XML Comment Template for Companies
+        public virtual IQueryable<Company> Companies => Store.Companies;
+
+        /// <summary>
         ///     Gets or sets the store.
         /// </summary>
         /// <value>The store.</value>
@@ -97,6 +104,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public virtual Task<Company> FindByIdAsync(int id)
         {
             return Store.FindByIdAsync(id);
+        }
+
+        /// <summary>
+        ///     Updates the asynchronous.
+        /// </summary>
+        /// <param name="company">The company.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for UpdateAsync
+        public virtual Task UpdateAsync(Company company)
+        {
+            return Store.UpdateAsync(company);
         }
     }
 
