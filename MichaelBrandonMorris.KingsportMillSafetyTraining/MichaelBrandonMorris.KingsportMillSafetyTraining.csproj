@@ -220,7 +220,6 @@
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MvcGrid\CategoriesGrid.cs" />
     <Compile Include="App_Start\MvcGrid\CompaniesGrid.cs" />
@@ -231,7 +230,6 @@
     <Compile Include="App_Start\MvcGrid\SlidesGrid.cs" />
     <Compile Include="App_Start\MvcGrid\TrainingResultsGrid.cs" />
     <Compile Include="App_Start\MvcGrid\UsersGrid.cs" />
-    <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="AuthorizeAttribute.cs" />

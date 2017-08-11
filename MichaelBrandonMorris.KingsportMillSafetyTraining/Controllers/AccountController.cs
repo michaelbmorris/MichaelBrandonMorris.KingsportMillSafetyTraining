@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers.Helpers;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
@@ -98,202 +97,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
-        ///     Confirms the email.
-        /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="code">The code.</param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for ConfirmEmail
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            try
-            {
-                if (userId == null
-                    || code == null)
-                {
-                    return View("Error");
-                }
-
-                var result = await UserManager.ConfirmEmailAsync(userId, code);
-                return View(result.Succeeded ? "ConfirmEmail" : "Error");
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Externals the login.
-        /// </summary>
-        /// <param name="provider">The provider.</param>
-        /// <param name="returnUrl">The return URL.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for ExternalLogin
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            try
-            {
-                return new ChallengeResult(
-                    provider,
-                    Url.Action(
-                        "ExternalLoginCallback",
-                        "Account",
-                        new
-                        {
-                            ReturnUrl = returnUrl
-                        }));
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Externals the login callback.
-        /// </summary>
-        /// <param name="returnUrl">The return URL.</param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for ExternalLoginCallback
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        {
-            try
-            {
-                var loginInfo = await AuthenticationManager
-                    .GetExternalLoginInfoAsync();
-
-                if (loginInfo == null)
-                {
-                    return RedirectToAction("Login");
-                }
-
-                var result =
-                    await SignInManager.ExternalSignInAsync(loginInfo, false);
-
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut: return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction(
-                            "SendCode",
-                            new
-                            {
-                                ReturnUrl = returnUrl,
-                                RememberMe = false
-                            });
-                    case SignInStatus.Failure: goto default;
-                    default:
-                        ViewBag.ReturnUrl = returnUrl;
-                        ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                        return View(
-                            "ExternalLoginConfirmation",
-                            new ExternalLoginConfirmationViewModel
-                            {
-                                Email = loginInfo.Email
-                            });
-                }
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Externals the login confirmation.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <param name="returnUrl">The return URL.</param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for ExternalLoginConfirmation
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(
-            ExternalLoginConfirmationViewModel model,
-            string returnUrl)
-        {
-            try
-            {
-                if (User.Identity.IsAuthenticated)
-                {
-                    return RedirectToAction("Index", "Manage");
-                }
-
-                if (ModelState.IsValid)
-                {
-                    var info = await AuthenticationManager
-                        .GetExternalLoginInfoAsync();
-
-                    if (info == null)
-                    {
-                        return View("ExternalLoginFailure");
-                    }
-
-                    var user = new User
-                    {
-                        UserName = model.Email,
-                        Email = model.Email
-                    };
-
-                    var result = await UserManager.CreateAsync(user);
-
-                    if (result.Succeeded)
-                    {
-                        result =
-                            await UserManager.AddLoginAsync(
-                                user.Id,
-                                info.Login);
-
-                        if (result.Succeeded)
-                        {
-                            await SignInManager.SignInAsync(user, false, false);
-                            return RedirectToLocal(returnUrl);
-                        }
-                    }
-
-                    AddErrors(result);
-                }
-
-                ViewBag.ReturnUrl = returnUrl;
-                return View(model);
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Externals the login failure.
-        /// </summary>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for ExternalLoginFailure
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult ExternalLoginFailure()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
         ///     Forgots the password.
         /// </summary>
         /// <returns>ActionResult.</returns>
@@ -333,8 +136,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var user = await UserManager.FindByNameAsync(model.Email);
 
-                if (user == null
-                    || !await UserManager.IsEmailConfirmedAsync(user.Id))
+                if (user == null)
                 {
                     return View("ForgotPasswordConfirmation");
                 }
@@ -357,12 +159,25 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     },
                     Request.Url.Scheme);
 
-                await UserManager.SendEmailAsync(
-                    user.Id,
-                    "Reset Password",
-                    "Please reset your password by clicking <a href=\""
-                    + callbackUrl
-                    + "\">here</a>");
+                using (var smtpClient = new SmtpClient())
+                {
+                    using (var mailMessage = new MailMessage
+                    {
+                        Body =
+                            $"Please reset your password by clicking <a href=\"{callbackUrl}\">here</a>",
+                        IsBodyHtml = true,
+                        Subject = "Reset Password"
+                    })
+                    {
+                        var toAddress = 
+                            new MailAddress(
+                                user.Email,
+                                $"{user.FirstName} {user.LastName}");
+
+                        mailMessage.To.Add(toAddress);
+                        smtpClient.Send(mailMessage);
+                    }
+                }
 
                 return RedirectToAction(
                     "ForgotPasswordConfirmation",
@@ -447,14 +262,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         Db.UpdateUserLastLogon(model.Email);
                         return RedirectToLocal(returnUrl);
                     case SignInStatus.LockedOut: return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction(
-                            "SendCode",
-                            new
-                            {
-                                ReturnUrl = returnUrl,
-                                model.RememberMe
-                            });
+                    case SignInStatus.RequiresVerification: goto default;
                     case SignInStatus.Failure: goto default;
                     default:
                         ModelState.AddModelError("", "Invalid login attempt.");
@@ -541,41 +349,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var result =
                     await UserManager.CreateAsync(user, model.Password);
 
-                await UserManager.AddToRoleAsync(user.Id, "User");
-
                 if (result.Succeeded)
                 {
-                    var code = await UserManager
-                        .GenerateEmailConfirmationTokenAsync(user.Id);
-
-                    if (Request.Url == null)
-                    {
-                        throw new Exception();
-                    }
-
-                    var callbackUrl = Url.Action(
-                        "ConfirmEmail",
-                        "Account",
-                        new
-                        {
-                            userId = user.Id,
-                            code
-                        },
-                        Request.Url.Scheme);
-
-                    await UserManager.SendEmailAsync(
-                        user.Id,
-                        "Confirm your account",
-                        "Please confirm your account by clicking <a href=\""
-                        + callbackUrl
-                        + "\">here</a>");
-
+                    user = await UserManager.FindByEmailAsync(user.Email);
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     Db.SetUserCompany(user.Id, model.CompanyId);
-
-                    ViewBag.Message =
-                        "Check your email and confirm your account. You may log in without confirming your email, but will be unable to recover your password if you forget.";
-
-                    return View("Info");
+                    return RedirectToAction("Index", "Training");
                 }
 
                 AddErrors(result);
@@ -668,176 +447,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 return View();
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Sends the code.
-        /// </summary>
-        /// <param name="returnUrl">The return URL.</param>
-        /// <param name="rememberMe">
-        ///     if set to <c>true</c> [remember
-        ///     me].
-        /// </param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for SendCode
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> SendCode(
-            string returnUrl,
-            bool rememberMe)
-        {
-            try
-            {
-                var userId = await SignInManager.GetVerifiedUserIdAsync();
-
-                if (userId == null)
-                {
-                    return View("Error");
-                }
-
-                var userFactors =
-                    await UserManager.GetValidTwoFactorProvidersAsync(userId);
-
-                var factorOptions = userFactors.Select(
-                        purpose => new SelectListItem
-                        {
-                            Text = purpose,
-                            Value = purpose
-                        })
-                    .ToList();
-
-                return View(
-                    new SendCodeViewModel
-                    {
-                        Providers = factorOptions,
-                        ReturnUrl = returnUrl,
-                        RememberMe = rememberMe
-                    });
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Sends the code.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for SendCode
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return View();
-                }
-
-                if (!await SignInManager.SendTwoFactorCodeAsync(
-                    model.SelectedProvider))
-                {
-                    return View("Error");
-                }
-
-                return RedirectToAction(
-                    "VerifyCode",
-                    new
-                    {
-                        Provider = model.SelectedProvider,
-                        model.ReturnUrl,
-                        model.RememberMe
-                    });
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Verifies the code.
-        /// </summary>
-        /// <param name="provider">The provider.</param>
-        /// <param name="returnUrl">The return URL.</param>
-        /// <param name="rememberMe">
-        ///     if set to <c>true</c> [remember
-        ///     me].
-        /// </param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for VerifyCode
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> VerifyCode(
-            string provider,
-            string returnUrl,
-            bool rememberMe)
-        {
-            try
-            {
-                if (!await SignInManager.HasBeenVerifiedAsync())
-                {
-                    return View("Error");
-                }
-
-                return View(
-                    new VerifyCodeViewModel
-                    {
-                        Provider = provider,
-                        ReturnUrl = returnUrl,
-                        RememberMe = rememberMe
-                    });
-            }
-            catch (Exception e)
-            {
-                return this.CreateError(HttpStatusCode.InternalServerError, e);
-            }
-        }
-
-        /// <summary>
-        ///     Verifies the code.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>Task&lt;ActionResult&gt;.</returns>
-        /// TODO Edit XML Comment Template for VerifyCode
-        [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-
-                var result = await SignInManager.TwoFactorSignInAsync(
-                    model.Provider,
-                    model.Code,
-                    model.RememberMe,
-                    model.RememberBrowser);
-
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(model.ReturnUrl);
-                    case SignInStatus.LockedOut: return View("Lockout");
-                    case SignInStatus.RequiresVerification: goto default;
-                    case SignInStatus.Failure: goto default;
-                    default:
-                        ModelState.AddModelError("", "Invalid code.");
-                        return View(model);
-                }
             }
             catch (Exception e)
             {

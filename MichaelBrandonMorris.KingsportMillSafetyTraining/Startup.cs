@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Web.Security;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining;
@@ -61,10 +62,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             using (var store = new UserStore(db))
-            using (var manager = new ApplicationUserManager(store)
-            {
-                EmailService = new EmailService()
-            })
+            using (var manager = new ApplicationUserManager(store))
             {
                 var ownerUserName =
                     ConfigurationManager.AppSettings["OwnerUserName"];
@@ -86,7 +84,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 await manager.CreateAsync(user, password);
                 user = await manager.FindByEmailAsync(user.Email);
                 await manager.AddToRoleAsync(user.Id, "Owner");
-                await manager.SendEmailAsync(user.Id, "Password", password);
+
+                using (var smtpClient = new SmtpClient())
+                {
+                    using (var mailMessage = new MailMessage
+                    {
+                        Body = password,
+                        Subject = "Kingsport Mill Safety Training Owner Password"
+                    })
+                    {
+                        var toAddress = new MailAddress(user.Email);
+                        mailMessage.To.Add(toAddress);
+                        smtpClient.Send(mailMessage);
+                    }
+                }
             }
         }
 
