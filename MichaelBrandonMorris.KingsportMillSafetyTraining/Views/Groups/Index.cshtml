@@ -1,24 +1,17 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+
+@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.GroupViewModel>
 
 @{
     ViewBag.Title = "Groups";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Reorder", "Reorder", null, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Assign Categories", "AssignCategories", null, new
-    {
-        @class = "btn btn-primary"
-    })
-</p>
+
+@Html.BootstrapActionLinkButton("Create", ContextualColor.Primary)
+@Html.BootstrapActionLinkButton("Reorder", ContextualColor.Primary)
+@Html.BootstrapActionLinkButton("Assign Categories", "AssignCategories", ContextualColor.Primary)
 
 <p class="bg-info">
     On the group selection page, the group questions will be shown in ascending index order.<br />
@@ -26,4 +19,25 @@
     The last (highest index) group's question will not be displayed, and if the user answers "No" to all questions, they will be placed in that group.<br />
 </p>
 
-@Html.MvcGrid("GroupsGrid")
+@Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
+    columns.Add(model => model.Title).Titled("Title");
+    columns.Add(model => model.Categories.Count).Titled("Number of Categories");
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Groups</a>", Url.Action("AssignCategories", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+}).Filterable().Sortable()

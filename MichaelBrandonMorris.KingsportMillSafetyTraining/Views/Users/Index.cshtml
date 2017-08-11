@@ -1,27 +1,36 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
+﻿@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel>
 
 @{
     ViewBag.Title = "Users";
 }
 
-<div class="well">
-    <div class="form-inline">
-        @Html.FilterTextBox("FirstName", "First Name")
-        @Html.FilterTextBox("MiddleName", "Middle Name")
-        @Html.FilterTextBox("LastName", "Last Name")
-        @Html.FilterDropDownList("CompanyName", Model.CompanyNameSelectList, "Company")
-        @Html.FilterTextBox("Email", "Email")
-        @Html.FilterDropDownList("Role", Model.RoleNameSelectList, "Role")
-
-        <button class="btn btn-primary"
-                data-mvcgrid-apply-filter="click"
-                type="button">
-            Apply
-        </button>
-    </div>
-</div>
-
-@Html.MvcGrid("UsersGrid", new
-{
-    id = Model.Id
-})
+@(Html.Grid(Model).Build(columns =>
+  {
+      columns.Add(model => model.FirstName).Titled("First Name");
+      columns.Add(model => model.LastName).Titled("Last Name").InitialSort(GridSortOrder.Asc);
+      columns.Add(model => model.CompanyName).Titled("Company");
+      columns.Add(model => model.Email).Titled("Email");
+      columns.Add(model => model.Role.Name).Titled("Role");
+      columns.Add(model => model.LastLogOnDateTime).Titled("Last Log On");
+      columns.Add(model => model.LastTrainingResultDateTime).Titled("Last Training Completed");
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Results</a>", Url.Action("UserResults", "Results", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Change Password</a>", Url.Action("ChangePassword", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Change Role</a>", Url.Action("ChangeRole", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+  }).Filterable().Sortable())

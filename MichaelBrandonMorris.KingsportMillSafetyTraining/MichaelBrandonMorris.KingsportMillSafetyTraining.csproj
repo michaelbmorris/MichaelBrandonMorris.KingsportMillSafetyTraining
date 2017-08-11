@@ -73,9 +73,6 @@
     <Reference Include="MichaelBrandonMorris.Math, Version=1.0.6409.24754, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MichaelBrandonMorris.Math.1.0.6409.24754\lib\net462\MichaelBrandonMorris.Math.dll</HintPath>
     </Reference>
-    <Reference Include="MichaelBrandonMorris.MvcGrid, Version=1.0.6408.32079, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MichaelBrandonMorris.MvcGrid.1.0.6408.32079\lib\net462\MichaelBrandonMorris.MvcGrid.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -133,6 +130,9 @@
     </Reference>
     <Reference Include="MoreLinq, Version=2.6.20831.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
       <HintPath>..\packages\morelinq.2.6.0\lib\net40\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.Grid.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NonFactors.Grid.Core.Mvc5.4.0.0\lib\net45\Mvc.Grid.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -222,17 +222,9 @@
     <Compile Include="App_Start\UserManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\MvcGrid\CategoriesGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\CompaniesGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\MvcGridConfig.cs" />
-    <Compile Include="App_Start\MvcGrid\Extensions.cs" />
-    <Compile Include="App_Start\MvcGrid\QuizResultsGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\GroupsGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\SlidesGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\TrainingResultsGrid.cs" />
-    <Compile Include="App_Start\MvcGrid\UsersGrid.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UserStore.cs" />
     <Compile Include="AuthorizeAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -459,7 +451,7 @@
     <Content Include="Content\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
     <Content Include="Content\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
     <Content Include="Content\ckeditor\styles.js" />
-    <Content Include="icon.ico" />
+    <Content Include="Content\MvcGrid\mvc-grid.css" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.js" />
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="Scripts\MvcFoolproofJQueryValidation.js" />
@@ -638,6 +630,7 @@
     <Content Include="Content\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Content\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Content\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Content\MvcGrid\Fonts\GridGlyphs.woff" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
@@ -662,6 +655,8 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\MvcGrid\mvc-grid.js" />
+    <Content Include="Scripts\MvcGrid\mvc-grid.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -753,6 +748,9 @@
     <Content Include="Views\Users\ChangeRole.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
     <Content Include="Views\Shared\Info.cshtml" />
+    <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
+    <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
+    <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

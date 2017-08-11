@@ -1,4 +1,6 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
 @using MichaelBrandonMorris.KingsportMillSafetyTraining.Views
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel
 
@@ -8,15 +10,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.BootstrapHorizontalDefinitionListFor(
-    model => model.FirstName,
-    model => model.LastName,
-    model => model.CompanyName,
-    model => model.Email,
-    model => model.PhoneNumber,
-    model => model.GroupTitle,
-    model => model.CompletionDateTimeString,
-    model => model.TimeToCompleteString)
+@Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.LastName, model => model.CompanyName, model => model.Email, model => model.PhoneNumber, model => model.GroupTitle, model => model.CompletionDateTimeString, model => model.TimeToCompleteString)
 
 <dl class="dl-horizontal">
     <dt>
@@ -24,10 +18,13 @@
     </dt>
 
     <dd>
-        @Html.MvcGrid("QuizResultsGrid", new
+        @Html.Grid(Model.QuizResults).Build(columns =>
         {
-            id = Model.Id
-        })
+            columns.Add(model => model.AttemptNumber).Titled("Attempt Number").InitialSort(GridSortOrder.Asc);
+            columns.Add(model => model.QuestionsCorrect).Titled("Questions Correct");
+            columns.Add(model => model.Score).Titled("Score");
+            columns.Add(model => model.TimeToComplete).RenderedAs(model => new DateTime(model.TimeToComplete.Ticks).ToString("mm:ss")).Titled("Time to Complete");
+        }).Filterable().Sortable()
     </dd>
 </dl>
 
@@ -35,23 +32,17 @@
     <div class="col-md-6">
         @if (User.IsOwnTrainingResult(Model.Id))
         {
-            @Html.ActionLink("View All Your Results", "UserResults", new
+            @Html.BootstrapActionLinkButton("View All Your Results", "UserResults", new
             {
-                id = Model.UserId
-            }, new
-            {
-                @class = "btn btn-primary"
-            })
+                id = Model.Id
+            }, ContextualColor.Primary)
         }
         else
         {
-            @Html.ActionLink("View All User's Results", "UserResults", new
+            @Html.BootstrapActionLinkButton("View All Results For This User", "UserResults", new
             {
-                id = Model.UserId
-            }, new
-            {
-                @class = "btn btn-primary"
-            })
+                id = Model.Id
+            }, ContextualColor.Primary)
         }
     </div>
 
@@ -61,10 +52,7 @@
          || User.IsInRole("Supervisor"))
     {
         <div class="col-md-6 text-right">
-            @Html.ActionLink("View All Results", "Index", null, new
-            {
-                @class = "btn btn-primary"
-            })
+            @Html.BootstrapActionLinkButton("View All Results", "Index", ContextualColor.Primary)
             @Html.ActionLink("View All Users", "Index", "Users", null, new
             {
                 @class = "btn btn-primary"

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
@@ -69,7 +68,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The quiz attempts count.</value>
         /// TODO Edit XML Comment Template for QuizAttemptsCount
         [DisplayName("Number of Quiz Attempts")]
-        public string QuizAttemptsCount => QuizResults.Count.ToString(CultureInfo.InvariantCulture);
+        public int QuizAttemptsCount => QuizResults.Count;
 
         /// <summary>
         ///     Gets the time to complete string.
@@ -77,7 +76,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The time to complete string.</value>
         [DisplayName("Time to Complete")]
         public string TimeToCompleteString =>
-            $"{TimeToComplete.TotalMinutes:#.##} Minutes";
+            new DateTime(TimeToComplete.Ticks).ToString("mm:ss");
 
         /// <summary>
         ///     Gets or sets the name of the company.
@@ -200,7 +199,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The time to complete.</value>
         /// TODO Edit XML Comment Template for TimeToComplete
-        internal TimeSpan TimeToComplete
+        public TimeSpan TimeToComplete
         {
             get;
             set;

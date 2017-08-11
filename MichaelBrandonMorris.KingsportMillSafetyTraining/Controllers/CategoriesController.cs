@@ -349,7 +349,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     Description = model.Description,
                     Index = model.Index,
                     Id = model.Id,
-                    Groups = model.Roles,
+                    Groups = model.Groups,
                     Slides = model.Slides
                 });
 

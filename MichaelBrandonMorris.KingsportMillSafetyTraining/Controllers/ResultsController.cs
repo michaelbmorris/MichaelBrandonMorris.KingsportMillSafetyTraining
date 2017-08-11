@@ -105,7 +105,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            var model = Db.GetUser(User.GetId()).AsViewModel();
+            var model = Db.GetTrainingResults().AsViewModels();
             return View(model);
         }
 
@@ -134,20 +134,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nName: 'id'\nType: 'string'");
                 }
 
-                var model = Db.GetUser(id).AsViewModel();
-
-                if (User.IsInRole("Owner")
-                    || User.IsInRole("Administrator")
-                    || User.IsInRole("Security")
-                    || User.IsInRole("Supervisor") && User.IsEmployee(id)
-                    || User.GetId() == id)
+                if (!User.IsInRole("Owner")
+                    && !User.IsInRole("Administrator")
+                    && !User.IsInRole("Security")
+                    && (!User.IsInRole("Supervisor") || !User.IsEmployee(id))
+                    && User.GetId() != id)
                 {
-                    return View(model);
+                    return this.CreateError(
+                        HttpStatusCode.Forbidden,
+                        new Exception("You are not permitted to access this."));
                 }
 
-                return this.CreateError(
-                    HttpStatusCode.Forbidden,
-                    new Exception("You are not permitted to access this."));
+                var user = Db.GetUser(id);
+
+                var model = new UserTrainingResultsViewModel(
+                    user.AsViewModel(),
+                    user.GetTrainingResults().AsViewModels());
+
+                return View(model);
             }
             catch (UnauthorizedAccessException e)
             {

@@ -50,7 +50,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        /// TODO Edit XML Comment Template for Roles
+        /// TODO Edit XML Comment Template for Groups
         public IList<Role> Roles
         {
             get;

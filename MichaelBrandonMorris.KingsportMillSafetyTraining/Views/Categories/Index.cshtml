@@ -1,21 +1,37 @@
-﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+
+@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
 
 @{
     ViewBag.Title = "Categories";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
-@Html.ActionLink("Create New", "Create", null, new
-{
-    @class = "btn btn-primary"
-})
-@Html.ActionLink("Reorder", "Reorder", null, new
-{
-    @class = "btn btn-primary"
-})
-@Html.ActionLink("Assign Groups", "AssignGroups", null, new
-{
-    @class = "btn btn-primary"
-})
+@Html.BootstrapActionLinkButton("Create", ContextualColor.Primary)
+@Html.BootstrapActionLinkButton("Reorder", ContextualColor.Primary)
+@Html.BootstrapActionLinkButton("Assign Groups", "AssignGroups", ContextualColor.Primary)
 
-@Html.MvcGrid("CategoriesGrid")
+@Html.Grid(Model).Build(columns =>
+  {
+      columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
+      columns.Add(model => model.Title).Titled("Title");
+      columns.Add(model => model.Slides.Count).Titled("Number of Slides");
+      columns.Add(model => model.Groups.Count).Titled("Number of Groups");
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Groups</a>", Url.Action("AssignGroups", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+      columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+      {
+          id = model.Id
+      }))).Encoded(false);
+  }).Filterable().Sortable()

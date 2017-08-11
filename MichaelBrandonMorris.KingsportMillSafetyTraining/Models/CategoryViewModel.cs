@@ -32,7 +32,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             Description = category.Description;
             Id = category.Id;
             Index = category.Index;
-            Roles = category.Groups;
+            Groups = category.Groups;
             Slides = category.Slides.OrderBy(slide => slide.Index).ToList();
             Title = category.Title;
         }
@@ -42,7 +42,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The roles list.</value>
         /// TODO Edit XML Comment Template for RolesList
-        public string RolesList => Roles.Aggregate(
+        public string RolesList => Groups.Aggregate(
             string.Empty,
             (current, role) => current + "<li>" + role.Title + "</li>");
 
@@ -85,7 +85,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The roles.</value>
         /// TODO Edit XML Comment Template for Groups
-        public IList<Group> Roles
+        public IList<Group> Groups
         {
             get;
             set;

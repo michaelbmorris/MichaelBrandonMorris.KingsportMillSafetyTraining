@@ -1,4 +1,6 @@
-﻿@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,23 +11,11 @@
 <div>
     @Html.DisplayForModel(Model)
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new
-    {
-        id = Model.Id
-    }, new
-    {
-        @class = "btn btn-primary"
-    })
-    @Html.ActionLink("Delete", "Delete", new
-    {
-        id = Model.Id
-    }, new
-    {
-        @class = "btn btn-danger"
-    })
-    @Html.ActionLink("View All Companies", "Index", null, new
-    {
-        @class = "btn btn-primary"
-    })
-</p>
+<div class="pull-left">
+    @Html.BootstrapActionLinkButton("Edit", Model.Id, ContextualColor.Primary)
+    @Html.BootstrapActionLinkButton("Delete", Model.Id, ContextualColor.Danger)
+</div>
+<div class="pull-right">
+    @Html.BootstrapActionLinkButton("View All Companies", "Index", ContextualColor.Primary)
+</div>
+<div class="clearfix"></div>

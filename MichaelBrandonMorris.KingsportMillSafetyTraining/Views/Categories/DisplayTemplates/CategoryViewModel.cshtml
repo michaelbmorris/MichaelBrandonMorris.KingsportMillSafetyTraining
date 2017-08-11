@@ -21,12 +21,29 @@
         <dt>
             Groups
         </dt>
-        
-        <dd>
-            @Html.MvcGrid("GroupsGrid", new
+        @Html.Grid(Model.Groups).Build(columns =>
+        {
+            columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
+            columns.Add(model => model.Title).Titled("Title");
+            columns.Add(model => model.Categories.Count).Titled("Number of Categories");
+            columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
             {
-                id = Model.Id
-            })
+                id = model.Id
+            }))).Encoded(false);
+            columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+            {
+                id = model.Id
+            }))).Encoded(false);
+            columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Groups</a>", Url.Action("AssignCategories", "Groups", new
+            {
+                id = model.Id
+            }))).Encoded(false);
+            columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+            {
+                id = model.Id
+            }))).Encoded(false);
+        }).Filterable().Sortable().Named("Groups")
+        <dd>
         </dd>
 
         <dt>
@@ -34,10 +51,34 @@
         </dt>
 
         <dd>
-            @Html.MvcGrid("SlidesGrid", new
+            @Html.Grid(Model.Slides).Build(columns =>
             {
-                id = Model.Id
-            })
+                columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
+                columns.Add(model => model.Title).Titled("Title");
+                columns.Add(model => string.Format("<img src=\"{0} alt=\"{1}\"", Url.Action("RenderImage", "Slides", new
+                {
+                    id = model.Id
+                }), model.ImageDescription)).Titled("Image");
+                columns.Add(model => model.ShouldShowSlideInSlideshow).Titled("Show Slide in Slideshow?");
+                columns.Add(model => model.ShouldShowQuestionOnQuiz).Titled("Show Question on Quiz?");
+                columns.Add(model => model.ShouldShowImageOnQuiz).Titled("Show Image on Quiz?");
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+                {
+                    id = model.Id
+                }))).Encoded(false);
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+                {
+                    id = model.Id
+                }))).Encoded(false);
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">View</a>", Url.Action("View", "Slides", new
+                {
+                    id = model.Id
+                }))).Encoded(false);
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+                {
+                    id = model.Id
+                }))).Encoded(false);
+            }).Filterable().Sortable().Named("Slides")
         </dd>
     </dl>
 </div>

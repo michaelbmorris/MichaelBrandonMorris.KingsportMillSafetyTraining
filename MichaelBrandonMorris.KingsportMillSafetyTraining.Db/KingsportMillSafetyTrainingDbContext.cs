@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.Diagnostics;
 using System.Linq;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations;
@@ -563,43 +562,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                             Answers.Remove(answer);
                         }
                     }
-                });
-        }
-
-        /// <summary>
-        ///     Edits the user.
-        /// </summary>
-        /// <param name="companyId">The company identifier.</param>
-        /// <param name="email">The email.</param>
-        /// <param name="firstName">The first name.</param>
-        /// <param name="userId">The user identifier.</param>
-        /// <param name="lastName">The last name.</param>
-        /// <param name="middleName">Name of the middle.</param>
-        /// <param name="otherCompanyName">Name of the other company.</param>
-        /// <param name="phoneNumber">The phone number.</param>
-        /// TODO Edit XML Comment Template for EditUser
-        public void EditUser(
-            int companyId,
-            string email,
-            string firstName,
-            string userId,
-            string lastName,
-            string middleName,
-            string otherCompanyName,
-            string phoneNumber)
-        {
-            DoTransaction(
-                () =>
-                {
-                    var user = Users.Find(userId);
-                    user.Company = Companies.Find(companyId);
-                    user.Email = email;
-                    user.FirstName = firstName;
-                    user.LastName = lastName;
-                    user.MiddleName = middleName;
-                    user.OtherCompanyName = otherCompanyName;
-                    user.PhoneNumber = phoneNumber;
-                    user.UserName = email;
                 });
         }
 

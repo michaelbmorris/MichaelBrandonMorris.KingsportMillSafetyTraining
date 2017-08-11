@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CompanyViewModel>
+
+@{
     ViewBag.Title = "Companies";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -10,4 +12,20 @@
     })
 </p>
 
-@Html.MvcGrid("CompaniesGrid")
+@Html.Grid(Model).Build(columns =>
+{
+    columns.Add(model => model.Name).Titled("Name").InitialSort(GridSortOrder.Asc);
+    columns.Add(model => model.Supervisors).RenderedAs(model => string.Join("<br />", model.Supervisors.Select(supervisor => string.Format("{0} {1}", supervisor.FirstName, supervisor.LastName)))).Filterable(false).Sortable(false).Titled("Supervisors");
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+    columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+}).Filterable().Sortable()

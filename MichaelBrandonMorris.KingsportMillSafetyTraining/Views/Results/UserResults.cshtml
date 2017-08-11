@@ -1,12 +1,12 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
-@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserTrainingResultsViewModel
 
 @{
     ViewBag.Title = "User Results";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.BootstrapHorizontalDefinitionListFor(model => Model.FirstName, model => Model.LastName, model => Model.CompanyName, model => Model.Email, model => Model.PhoneNumber)
+@Html.BootstrapHorizontalDefinitionListFor(model => Model.User.FirstName, model => Model.User.LastName, model => Model.User.CompanyName, model => Model.User.Email, model => Model.User.PhoneNumber)
 
 @if (User.IsInRole("Owner") || User.IsInRole("Administrator") || User.IsInRole("Security") || User.IsInRole("Supervisor"))
 {
@@ -14,50 +14,21 @@
         <a class="btn btn-primary"
            href="@Url.Action("Details", "Users", new
                  {
-                     id = Model.Id
+                     id = Model.User.Id
                  })">
             View User Details
         </a>
     </p>    
 }
 
-<div class="well">
-    <div class="form-inline">
-        @Html.FilterDropDownList("GroupTitle", Model.GroupTitleSelectList, "Group")
-        <button class="btn btn-primary"
-                data-mvcgrid-apply-filter="click"
-                type="button">
-            Apply
-        </button>
-
-        <button class="btn btn-default" id="exportButton" style="float: right;">
-            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Export
-        </button>
-    </div>
-</div>
-
-@Html.MvcGrid("UserTrainingResultsGrid", new
+@Html.Grid(Model.TrainingResults).Build(columns =>
 {
-    id = Model.Id
-})
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $(function() {
-            $('#exportButton').click(function() {
-// ReSharper disable once UseOfImplicitGlobalInFunctionScope
-// ReSharper disable once PossiblyUnassignedProperty
-                location.href = MVCGrid.getExportUrl("UserTrainingResultsGrid");
-            });
-        });
-    </script>
-    
-    <script type="text/javascript">
-        $("th").each(function(i) {
-            if (i < 3) {
-                $(this).hide();
-            }
-        })
-    </script>
-}
+    columns.Add(model => model.GroupTitle).Titled("Group");
+    columns.Add(model => model.CompletionDateTime).Titled("Completed");
+    columns.Add(model => model.TimeToComplete).RenderedAs(model => model.TimeToCompleteString).Filterable(false).Titled("Time to Complete");
+    columns.Add(model => model.QuizAttemptsCount).Titled("Number of Quiz Attempts");
+    columns.Add(model => string.Format("<a href=\"{0}\" class=\"btn btn-primary\">Details</a>", Url.Action("Details", new
+    {
+        id = model.Id
+    }))).Encoded(false);
+}).Filterable().Sortable()

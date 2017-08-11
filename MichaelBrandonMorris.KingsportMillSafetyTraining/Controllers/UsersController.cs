@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -317,8 +318,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var user = await UserManager.FindByIdAsync(User.GetId());
-                var model = user.AsViewModel();
+                var users = await UserManager.Users.ToListAsync();
+                var model = users.Select(user => new UserViewModel(user)).ToList();
                 return View(model);
             }
             catch (Exception e)

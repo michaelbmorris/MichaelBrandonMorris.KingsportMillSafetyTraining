@@ -31,10 +31,29 @@
         </dt>
 
         <dd>
-            @Html.MvcGrid("CategoriesGrid", new
-            {
-                id = Model.Id
-            })
+            @Html.Grid(Model.Categories).Build(columns =>
+              {
+                  columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
+                  columns.Add(model => model.Title).Titled("Title");
+                  columns.Add(model => model.Slides.Count).Titled("Number of Slides");
+                  columns.Add(model => model.Groups.Count).Titled("Number of Groups");
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+                  {
+                      id = model.Id
+                  }))).Encoded(false);
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+                  {
+                      id = model.Id
+                  }))).Encoded(false);
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Groups</a>", Url.Action("AssignGroups", new
+                  {
+                      id = model.Id
+                  }))).Encoded(false);
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+                  {
+                      id = model.Id
+                  }))).Encoded(false);
+              }).Filterable().Sortable()
         </dd>
     </dl>
 </div>

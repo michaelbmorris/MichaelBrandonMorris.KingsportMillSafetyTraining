@@ -30,7 +30,7 @@
                                     <input name="groupCategories"
                                            type="checkbox"
                                            value="@Cantor.Pair(role.Id, categoryViewModel.Id)"
-                                           @Html.Attribute("checked", "checked", categoryViewModel.Roles.Contains(role))/>
+                                           @Html.Attribute("checked", "checked", categoryViewModel.Groups.Contains(role))/>
                                     @Html.DisplayFor(modelCategoryViewModel => categoryViewModel.Title)
                                 </label>
                             </div>

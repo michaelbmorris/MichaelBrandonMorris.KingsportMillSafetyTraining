@@ -65,7 +65,7 @@
                         rowspan="@category.Slides.Count">
                         <h4>@Html.DisplayFor(model => category.Title)</h4>
                         <ul>
-                            @foreach (var group in category.Roles)
+                            @foreach (var group in category.Groups)
                             {
                                 <li>@group.Title</li>
                             }
