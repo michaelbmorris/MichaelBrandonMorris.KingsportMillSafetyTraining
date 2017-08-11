@@ -6,7 +6,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     ///     Class Company.
     /// </summary>
     /// TODO Edit XML Comment Template for Company
-    public class Company
+    public class Company : IEntity<int>
     {
         /// <summary>
         ///     Gets or sets the employees.

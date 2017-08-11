@@ -74,6 +74,7 @@
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\QuizResult.cs" />
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Role.cs" />

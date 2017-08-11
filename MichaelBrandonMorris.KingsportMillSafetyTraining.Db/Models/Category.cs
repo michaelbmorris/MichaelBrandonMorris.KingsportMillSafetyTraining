@@ -6,7 +6,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     ///     Class Category.
     /// </summary>
     /// TODO Edit XML Comment Template for Category
-    public class Category
+    public class Category : IEntity<int>
     {
         /// <summary>
         ///     Gets or sets the description.

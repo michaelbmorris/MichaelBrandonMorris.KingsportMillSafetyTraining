@@ -6,6 +6,11 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.Math;
+using Microsoft.Owin;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -24,14 +29,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private static Func<Category, object> OrderByIndex => category =>
             category.Index;
 
-        /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private CategoryManager CategoryManager =>
+            OwinContext.Get<CategoryManager>();
+
+        private GroupManager GroupManager =>
+            OwinContext.Get<GroupManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
         /// <summary>
         ///     Assigns the roles.
@@ -41,17 +45,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for AssignGroups
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult AssignGroups(int? id)
+        public async Task<ActionResult> AssignGroups(int? id)
         {
             try
             {
-                var model = id == null
-                    ? new AssignGroupsViewModel(
-                        Db.GetCategories(),
-                        Db.GetGroups().AsViewModels())
-                    : new AssignGroupsViewModel(
-                        Db.GetCategory(id.Value),
-                        Db.GetGroups().AsViewModels());
+                AssignGroupsViewModel model;
+                var groups = (await GroupManager.Groups.ToListAsync()).AsViewModels();
+
+                if (id == null)
+                {
+                    var categories = await CategoryManager.Categories.ToListAsync();
+                    model = new AssignGroupsViewModel(categories, groups);
+                }
+                else
+                {
+                    var category = await CategoryManager.FindByIdAsync(id.Value);
+                    model = new AssignGroupsViewModel(category, groups);
+                }
 
                 return View(model);
             }
@@ -75,7 +85,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                Db.UnpairCategoriesAndGroups();
+                CategoryManager.RemoveGroups();
 
                 if (categoryGroups == null)
                 {
