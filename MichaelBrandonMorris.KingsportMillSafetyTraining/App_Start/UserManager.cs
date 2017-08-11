@@ -10,19 +10,19 @@ using Microsoft.Owin;
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
     /// <summary>
-    ///     Class ApplicationUserManager.
+    ///     Class UserManager.
     /// </summary>
     /// <seealso cref="UserManager{TUser}" />
     /// <seealso cref="User" />
-    /// TODO Edit XML Comment Template for ApplicationUserManager
-    public class ApplicationUserManager : UserManager<User, string>
+    /// TODO Edit XML Comment Template for UserManager
+    public class UserManager : UserManager<User, string>
     {
         /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="store">The store.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public ApplicationUserManager(IUserStore<User, string> store)
+        public UserManager(IUserStore<User, string> store)
             : base(store)
         {
         }
@@ -32,10 +32,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// </summary>
         /// <param name="options">The options.</param>
         /// <param name="context">The context.</param>
-        /// <returns>ApplicationUserManager.</returns>
+        /// <returns>UserManager.</returns>
         /// TODO Edit XML Comment Template for Create
-        public static ApplicationUserManager Create(
-            IdentityFactoryOptions<ApplicationUserManager> options,
+        public static UserManager Create(
+            IdentityFactoryOptions<UserManager> options,
             IOwinContext context)
         {
             if (options == null)
@@ -43,7 +43,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 throw new ArgumentNullException(nameof(options));
             }
 
-            var manager = new ApplicationUserManager(
+            var manager = new UserManager(
                 new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 

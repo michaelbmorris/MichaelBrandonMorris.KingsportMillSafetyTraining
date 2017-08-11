@@ -25,11 +25,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             app.CreatePerOwinContext(
                 KingsportMillSafetyTrainingDbContext.Create);
 
-            app.CreatePerOwinContext<ApplicationUserManager>(
-                ApplicationUserManager.Create);
+            app.CreatePerOwinContext<UserManager>(
+                UserManager.Create);
 
             app.CreatePerOwinContext<ApplicationSignInManager>(
                 ApplicationSignInManager.Create);
+
+            app.CreatePerOwinContext<CompanyManager>(CompanyManager.Create);
 
             app.UseCookieAuthentication(
                 new CookieAuthenticationOptions
@@ -41,7 +43,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     {
                         OnValidateIdentity =
                             SecurityStampValidator
-                                .OnValidateIdentity<ApplicationUserManager, User
+                                .OnValidateIdentity<UserManager, User
                                 >(
                                     TimeSpan.FromMinutes(30),
                                     (manager, user) => user

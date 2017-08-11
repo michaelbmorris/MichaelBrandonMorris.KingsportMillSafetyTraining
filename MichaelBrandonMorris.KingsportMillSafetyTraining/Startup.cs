@@ -62,7 +62,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             using (var store = new UserStore(db))
-            using (var manager = new ApplicationUserManager(store))
+            using (var manager = new UserManager(store))
             {
                 var ownerUserName =
                     ConfigurationManager.AppSettings["OwnerUserName"];
@@ -109,7 +109,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             using (var store = new UserStore(db))
-            using (var manager = new ApplicationUserManager(store))
+            using (var manager = new UserManager(store))
             {
                 foreach (var user in manager.Users.ToList())
                 {

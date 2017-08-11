@@ -27,7 +27,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// </param>
         /// TODO Edit XML Comment Template for #ctor
         public ApplicationSignInManager(
-            ApplicationUserManager userManager,
+            UserManager userManager,
             IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
         {
@@ -51,7 +51,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return new ApplicationSignInManager(
-                context.GetUserManager<ApplicationUserManager>(),
+                context.GetUserManager<UserManager>(),
                 context.Authentication);
         }
 
@@ -70,7 +70,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return user.GenerateUserIdentityAsync(
-                (ApplicationUserManager) UserManager);
+                (UserManager) UserManager);
         }
     }
 }

@@ -238,7 +238,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.MvcGrid
                 var currentUser = db.GetUser(id);
 
                 var userManager =
-                    new ApplicationUserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db));
+                    new UserManager(new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(db));
 
                 var query = userManager.IsInRole(id, "Supervisor")
                     ? currentUser.Company.GetEmployees().AsViewModels()

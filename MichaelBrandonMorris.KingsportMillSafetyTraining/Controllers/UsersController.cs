@@ -6,8 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -18,36 +21,74 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// TODO Edit XML Comment Template for UsersController
     public class UsersController : Controller
     {
-        /// <summary>
-        ///     Gets the database.
-        /// </summary>
-        /// <value>The database.</value>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private readonly CompanyManager _companyManager;
+        private readonly RoleManager<Role> _roleManager;
+        private readonly UserManager _userManager;
 
         /// <summary>
-        /// Changes the password.
+        ///     Initializes a new instance of the
+        ///     <see cref="UsersController" /> class.
+        /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
+        public UsersController()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="UsersController" /> class.
+        /// </summary>
+        /// <param name="userManager">The user manager.</param>
+        /// <param name="roleManager"></param>
+        /// <param name="companyManager"></param>
+        /// TODO Edit XML Comment Template for #ctor
+        public UsersController(
+            UserManager userManager,
+            RoleManager<Role> roleManager,
+            CompanyManager companyManager)
+        {
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _companyManager = companyManager;
+        }
+
+        private CompanyManager CompanyManager => _companyManager
+                                                 ?? OwinContext
+                                                     .Get<CompanyManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
+
+        private RoleManager<Role> RoleManager => _roleManager
+                                                 ?? OwinContext
+                                                     .Get<RoleManager<Role>>();
+
+        private UserManager UserManager => _userManager
+                                           ?? OwinContext.Get<UserManager>();
+
+
+        /// <summary>
+        ///     Changes the password.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangePassword
         [Authorize(Roles = "Owner, Administrator, Supervisor")]
         [HttpGet]
-        public ActionResult ChangePassword(string id)
+        public async Task<ActionResult> ChangePassword(string id)
         {
             try
             {
-                var user = Db.GetUser(id);
+                var user = await UserManager.FindByIdAsync(id);
 
                 if (User.IsInRole("Supervisor"))
                 {
-                    var currentUser = Db.GetUser(User.GetId());
+                    var currentUser =
+                        await UserManager.FindByIdAsync(User.GetId());
+
                     var company = currentUser.Company;
 
-                    if (company.GetEmployees().All(employee => employee.Id != user.Id))
+                    if (company.GetEmployees()
+                        .All(employee => employee.Id != user.Id))
                     {
                         throw new UnauthorizedAccessException(
                             "You are not permitted to change the password for this user.");
@@ -69,7 +110,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Changes the password.
+        ///     Changes the password.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
@@ -82,7 +123,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var manager = HttpContext.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>();
+                    .GetUserManager<UserManager>();
 
                 var user = await manager.FindByIdAsync(model.UserId);
 
@@ -100,18 +141,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        /// Changes the role.
+        ///     Changes the role.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangeRole
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult ChangeRole(string id)
+        public async Task<ActionResult> ChangeRole(string id)
         {
             try
             {
-                var model = new ChangeRoleViewModel(Db.GetUser(id));
+                var user = await UserManager.FindByIdAsync(id);
+                var model = new ChangeRoleViewModel(user);
                 return View(model);
             }
             catch (Exception e)
@@ -131,7 +173,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var roleName = Db.GetRole(model.RoleId).Name;
+                var roleName = (await RoleManager.FindByIdAsync(model.RoleId))
+                    .Name;
 
                 if (User.IsInRole("Administrator"))
                 {
@@ -144,7 +187,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var userManager = HttpContext.GetOwinContext()
-                    .GetUserManager<ApplicationUserManager>();
+                    .GetUserManager<UserManager>();
 
                 var roles = await userManager.GetRolesAsync(model.UserId);
 
@@ -152,9 +195,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     model.UserId,
                     roles.ToArray());
 
-                await userManager.AddToRoleAsync(
-                    model.UserId,
-                    Db.GetRole(model.RoleId).Name);
+                await userManager.AddToRoleAsync(model.UserId, roleName);
 
                 return RedirectToAction("Index");
             }
@@ -176,23 +217,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
             try
             {
                 if (User.IsInRole("Supervisor"))
                 {
-                    var currentUser = Db.GetUser(User.GetId());
+                    var currentUser =
+                        await UserManager.FindByIdAsync(User.GetId());
                     var company = currentUser.Company;
 
-                    if (company.GetEmployees().All(employee => employee.Id != id))
+                    if (company.GetEmployees()
+                        .All(employee => employee.Id != id))
                     {
                         throw new UnauthorizedAccessException(
                             "You are not permitted to view the details for this user.");
                     }
                 }
 
-                var model = Db.GetUser(id).AsViewModel();
+                var user = await UserManager.FindByIdAsync(id);
+                var model = user.AsViewModel();
                 return View(model);
             }
             catch (Exception e)
@@ -209,11 +253,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
             try
             {
-                var model = Db.GetUser(id).AsViewModel();
+                var user = await UserManager.FindByIdAsync(id);
+                var model = user.AsViewModel();
                 return View(model);
             }
             catch (Exception e)
@@ -232,7 +277,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserViewModel model)
+        public async Task<ActionResult> Edit(UserViewModel model)
         {
             try
             {
@@ -241,16 +286,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                Db.EditUser(
-                    model.CompanyId,
-                    model.Email,
-                    model.FirstName,
-                    model.Id,
-                    model.LastName,
-                    model.MiddleName,
-                    model.OtherCompanyName,
-                    model.PhoneNumber);
+                var user = await UserManager.FindByIdAsync(model.Id);
 
+                user.Company =
+                    await CompanyManager.FindByIdAsync(model.CompanyId);
+
+                user.Email = model.Email;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.MiddleName = model.MiddleName;
+                user.OtherCompanyName = model.OtherCompanyName;
+                user.PhoneNumber = model.PhoneNumber;
+                await UserManager.UpdateAsync(user);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -266,11 +313,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Index
         [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
-                var model = Db.GetUser(User.GetId()).AsViewModel();
+                var user = await UserManager.FindByIdAsync(User.GetId());
+                var model = user.AsViewModel();
                 return View(model);
             }
             catch (Exception e)
@@ -292,7 +340,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                CompanyManager?.Dispose();
+                RoleManager?.Dispose();
+                UserManager?.Dispose();
             }
 
             base.Dispose(disposing);
