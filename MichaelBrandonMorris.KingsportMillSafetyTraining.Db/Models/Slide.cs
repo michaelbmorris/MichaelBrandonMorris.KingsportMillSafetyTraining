@@ -10,7 +10,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// </summary>
     /// <seealso cref="IEquatable{T}" />
     /// TODO Edit XML Comment Template for Slide
-    public class Slide : IEquatable<Slide>
+    public class Slide : IEntity<int>, IEquatable<Slide>
     {
         /// <summary>
         /// Gets or sets the answers.

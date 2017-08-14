@@ -24,6 +24,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public CategoryManager(CategoryStore store)
             : base(store)
         {
+            Store = store;
+        }
+
+        private new CategoryStore Store
+        {
+            get;
         }
 
         /// <summary>
@@ -60,7 +66,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for Pair
         public Task Pair(Category category, Group group)
         {
-            return ((CategoryStore) Store).Pair(category, group);
+            return Store.Pair(category, group);
         }
 
         /// <summary>
@@ -71,7 +77,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for RemoveGroups
         public Task RemoveGroups(int id)
         {
-            return ((CategoryStore) Store).RemoveGroups(id);
+            return Store.RemoveGroups(id);
         }
     }
 }

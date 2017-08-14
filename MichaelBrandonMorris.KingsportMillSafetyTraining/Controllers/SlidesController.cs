@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.Web.HttpPostedFileBase;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -22,30 +28,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for JpgType
         private const string JpgType = "image/jpg";
 
-        /// <summary>
-        ///     Gets the index of the order category by.
-        /// </summary>
-        /// <value>The index of the order category by.</value>
-        /// TODO Edit XML Comment Template for OrderCategoryByIndex
-        private static Func<Category, object> OrderCategoryByIndex => category
-            => category.Index;
+        private AnswerManager AnswerManager => OwinContext.Get<AnswerManager>();
+        private CategoryManager CategoryManager => OwinContext
+            .Get<CategoryManager>();
 
-        /// <summary>
-        ///     Gets the order category by title.
-        /// </summary>
-        /// <value>The order category by title.</value>
-        /// TODO Edit XML Comment Template for OrderCategoryByTitle
-        private static Func<Category, object> OrderCategoryByTitle => category
-            => category.Title;
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
 
-        /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
+        private SlideManager SlideManager => OwinContext.Get<SlideManager>();
 
         /// <summary>
         ///     Adds the answer.
@@ -88,7 +78,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SlideViewModel model)
+        public async Task<ActionResult> Create(SlideViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +99,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 Title = model.Title
             };
 
-            Db.CreateSlide(slide, model.CategoryId);
+            await SlideManager.CreateAsync(slide);
             return RedirectToAction("Index");
         }
 
@@ -121,12 +111,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Delete
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             try
             {
-                var model = Db.GetSlide(id).AsViewModel();
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+                var model = slide.AsViewModel();
                 return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (Exception e)
             {
@@ -143,17 +143,33 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int? id)
         {
-            var slide = Db.GetSlide(id);
-
-            if (slide != null)
+            try
             {
-                Db.DeleteSlide(slide);
-            }
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
 
-            Db.SaveChanges();
-            return RedirectToAction("Index");
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                await SlideManager.DeleteAsync(slide);
+                return RedirectToAction("Index");
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -164,12 +180,28 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Details
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             try
             {
-                var slide = Db.GetSlide(id).AsViewModel();
-                return View(slide);
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                var model = slide.AsViewModel();
+                return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (Exception e)
             {
@@ -185,11 +217,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             try
             {
-                var model = Db.GetSlide(id).AsViewModel();
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                var model = slide.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -215,7 +259,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(SlideViewModel model)
+        public async Task<ActionResult> Edit(SlideViewModel model)
         {
             try
             {
@@ -224,22 +268,62 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                    Db.EditSlide(
-                        model.Answers,
-                        model.CategoryId,
-                    model.Content,
-                    model.CorrectAnswerIndex,
-                    model.Id,
-                    model.Image == null
-                            ? model.ImageBytes
-                            : model.Image.ToBytes(),
-                    model.ImageDescription,
-                    model.Question,
-                    model.ShouldShowImageOnQuiz,
-                    model.ShouldShowQuestionOnQuiz,
-                    model.ShouldShowSlideInSlideshow,
-                    model.Title
-                );
+                var slide = await SlideManager.FindByIdAsync(model.Id);
+
+                if (model.Answers == null)
+                {
+                    foreach (var answer in slide.Answers.ToList())
+                    {
+                        await AnswerManager.DeleteAsync(answer);
+                    }
+                }
+                else
+                {
+                    foreach (var answer in model.Answers)
+                    {
+                        var originalAnswer =
+                            await AnswerManager.FindByIdAsync(answer.Id);
+
+                        if (originalAnswer == null)
+                        {
+                            answer.Id = 0;
+                            slide.Answers.Add(answer);
+                        }
+                        else
+                        {
+                            originalAnswer.Title = answer.Title;
+                            await AnswerManager.UpdateAsync(originalAnswer);
+                        }
+                    }
+
+                    foreach (var answer in slide.Answers.ToList())
+                    {
+                        if (model.Answers.All(x => x.Id != answer.Id))
+                        {
+                            await AnswerManager.DeleteAsync(answer);
+                        }
+                    }
+                }
+
+                slide.Category =
+                    await CategoryManager.FindByIdAsync(model.CategoryId);
+
+                slide.CorrectAnswerIndex = model.CorrectAnswerIndex;
+
+                slide.ImageBytes = model.Image == null
+                    ? model.ImageBytes
+                    : model.Image.ToBytes();
+
+                slide.ImageDescription = model.ImageDescription;
+                slide.Question = model.Question;
+                slide.ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz;
+                slide.ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz;
+
+                slide.ShouldShowSlideInSlideshow =
+                    model.ShouldShowSlideInSlideshow;
+
+                slide.Title = model.Title;
+                await SlideManager.UpdateAsync(slide);
 
                 return RedirectToAction("Index");
             }
@@ -256,33 +340,79 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>The index view.</returns>
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Index(int? id)
+        public async Task<ActionResult> Index(int? id)
         {
-            var model = id == null ? Db.GetCategories(category => category.Index).AsViewModels() : Db.GetGroup(id.Value).GetCategories().AsViewModels();
+            try
+            {
+                IList<CategoryViewModel> model;
 
-            return View(model);
+                if (id == null)
+                {
+                    var categories = await CategoryManager.Categories
+                        .Include(c => c.Slides)
+                        .ToListAsync();
+
+                    model = categories.AsViewModels();
+                }
+                else
+                {
+                    var group = await GroupManager.Groups
+                        .Include(g => g.Categories.Select(c => c.Slides))
+                        .SingleOrDefaultAsync(g => g.Id == id);
+
+                    var categories = group.Categories.OrderBy(c => c.Index);
+                    model = categories.ToList().AsViewModels();
+                }
+
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
         ///     Renders the image.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for RenderImage
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="KeyNotFoundException"></exception>
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult RenderImage(int id)
+        public async Task<ActionResult> RenderImage(int? id)
         {
-            var slide = Db.GetSlide(id);
-
-            if (slide == null)
+            try
             {
-                return HttpNotFound();
-            }
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
 
-            return slide.ImageBytes == null
-                ? null
-                : File(slide.ImageBytes, JpgType);
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                return slide.ImageBytes == null
+                    ? null
+                    : File(slide.ImageBytes, JpgType);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -293,29 +423,95 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Reorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Reorder(int? id)
+        public async Task<ActionResult> Reorder(int? id)
         {
-            if (id == null)
+            try
             {
-                return RedirectToAction("SelectCategoryToReorder");
-            }
+                if (id == null)
+                {
+                    return RedirectToAction("SelectCategoryToReorder");
+                }
 
-            var model = Db.GetSlides(id.Value).AsViewModels();
-            return View(model);
+                var category = await CategoryManager.Categories
+                    .Include(c => c.Slides)
+                    .SingleOrDefaultAsync(c => c.Id == id.Value);
+
+                var slides = category.Slides.OrderBy(s => s.Index).ToList();
+                var model = slides.AsViewModels();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
-        ///     Reorders the specified slides.
+        ///     Reorders the specified model.
         /// </summary>
-        /// <param name="slides">The slides.</param>
-        /// <returns>ActionResult.</returns>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for Reorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public ActionResult Reorder(IList<Slide> slides)
+        public async Task<ActionResult> Reorder(IList<SlideViewModel> model)
         {
-            Db.Reorder(slides);
-            return RedirectToAction("Index");
+            try
+            {
+                foreach (var item in model)
+                {
+                    var slide = await SlideManager.FindByIdAsync(item.Id);
+                    slide.Index = item.Index;
+                    await SlideManager.UpdateAsync(slide);
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        /// <summary>
+        ///     Views the slide.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Review
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [HttpGet]
+        public async Task<ActionResult> Review(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                var model = slide.AsViewModel();
+                return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -325,24 +521,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for SelectCategoryToReorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult SelectCategoryToReorder()
+        public async Task<ActionResult> SelectCategoryToReorder()
         {
-            var model = Db.GetCategories().AsViewModels();
-            return View(model);
-        }
-
-        /// <summary>
-        ///     Views the slide.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for View
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult View(int id)
-        {
-            var model = Db.GetSlide(id).AsViewModel();
-            return View(model);
+            try
+            {
+                var categories = await CategoryManager.Categories.ToListAsync();
+                var model = categories.OrderBy(c => c.Index).AsViewModels();
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -358,7 +548,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                CategoryManager?.Dispose();
+                GroupManager?.Dispose();
+                SlideManager?.Dispose();
             }
 
             base.Dispose(disposing);

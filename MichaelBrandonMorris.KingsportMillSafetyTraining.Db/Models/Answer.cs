@@ -6,7 +6,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// Class Answer.
     /// </summary>
     /// TODO Edit XML Comment Template for Answer
-    public class Answer
+    public class Answer : IEntity<int>
     {
         /// <summary>
         /// The current index

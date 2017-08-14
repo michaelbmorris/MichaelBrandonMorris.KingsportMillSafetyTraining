@@ -3,7 +3,7 @@
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account
 {
     /// <summary>
-    ///     View model for confirming external login.
+    ///     Preview model for confirming external login.
     /// </summary>
     public class ExternalLoginConfirmationViewModel
     {
