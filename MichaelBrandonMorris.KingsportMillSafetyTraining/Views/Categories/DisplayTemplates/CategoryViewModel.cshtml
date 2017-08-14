@@ -21,7 +21,9 @@
         <dt>
             Groups
         </dt>
-        @Html.Grid(Model.Groups).Build(columns =>
+        
+        <dd>
+            @Html.Grid(Model.Groups).Build(columns =>
         {
             columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
             columns.Add(model => model.Title).Titled("Title");
@@ -43,7 +45,6 @@
                 id = model.Id
             }))).Encoded(false);
         }).Filterable().Sortable().Named("Groups")
-        <dd>
         </dd>
 
         <dt>

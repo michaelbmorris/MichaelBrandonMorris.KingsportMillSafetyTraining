@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.Math;
-using Microsoft.Owin;
-using System.Web;
 using Microsoft.AspNet.Identity.Owin;
-using System.Data.Entity;
-using System.Threading.Tasks;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -29,11 +29,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private static Func<Category, object> OrderByIndex => category =>
             category.Index;
 
-        private CategoryManager CategoryManager =>
-            OwinContext.Get<CategoryManager>();
+        private CategoryManager CategoryManager => OwinContext
+            .Get<CategoryManager>();
 
-        private GroupManager GroupManager =>
-            OwinContext.Get<GroupManager>();
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
 
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
@@ -50,16 +49,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 AssignGroupsViewModel model;
-                var groups = (await GroupManager.Groups.ToListAsync()).AsViewModels();
+
+                var groups = (await GroupManager.Groups.ToListAsync())
+                    .AsViewModels();
 
                 if (id == null)
                 {
-                    var categories = await CategoryManager.Categories.ToListAsync();
+                    var categories =
+                        await CategoryManager.Categories.ToListAsync();
+
                     model = new AssignGroupsViewModel(categories, groups);
                 }
                 else
                 {
-                    var category = await CategoryManager.FindByIdAsync(id.Value);
+                    var category =
+                        await CategoryManager.FindByIdAsync(id.Value);
+
                     model = new AssignGroupsViewModel(category, groups);
                 }
 
@@ -67,43 +72,59 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
-        ///     Assigns the roles.
+        ///     Assigns the groups.
         /// </summary>
-        /// <param name="categoryGroups">The category roles.</param>
-        /// <returns>ActionResult.</returns>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public ActionResult AssignGroups(IList<int> categoryGroups)
+        public async Task<ActionResult> AssignGroups(IList<int> model)
         {
             try
             {
-                CategoryManager.RemoveGroups();
-
-                if (categoryGroups == null)
+                if (model == null)
                 {
                     return RedirectToAction("Index");
                 }
 
-                foreach (var categoryGroup in categoryGroups)
+                var unpairedCategories = new HashSet<int>();
+
+                foreach (var item in model)
                 {
-                    Db.PairCategoryAndGroup(Cantor.Inverse(categoryGroup));
+                    // ReSharper disable once UnusedVariable
+                    (int categoryId, int groupId) = Cantor.Inverse(item);
+
+                    if (unpairedCategories.Contains(categoryId))
+                    {
+                        continue;
+                    }
+
+                    await CategoryManager.RemoveGroups(categoryId);
+                    unpairedCategories.Add(categoryId);
+                }
+
+                foreach (var item in model)
+                {
+                    (int categoryId, int groupId) = Cantor.Inverse(item);
+
+                    var category =
+                        await CategoryManager.FindByIdAsync(categoryId);
+
+                    var group = await GroupManager.FindByIdAsync(groupId);
+                    await CategoryManager.Pair(category, group);
                 }
 
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -122,9 +143,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -137,7 +156,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CategoryViewModel model)
+        public async Task<ActionResult> Create(CategoryViewModel model)
         {
             try
             {
@@ -146,7 +165,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                Db.CreateCategory(
+                await CategoryManager.CreateAsync(
                     new Category
                     {
                         Title = model.Title,
@@ -158,9 +177,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -177,12 +194,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Delete
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             try
             {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
 
-                var model = Db.GetCategory(id).AsViewModel();
+                var category = await CategoryManager.FindByIdAsync(id.Value);
+                var model = category.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -195,9 +217,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -216,7 +236,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public async Task<ActionResult> DeleteConfirmed(int? id)
         {
             try
             {
@@ -226,7 +246,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var category = Db.GetCategory(id.Value);
+                var category = await CategoryManager.FindByIdAsync(id.Value);
 
                 if (category == null)
                 {
@@ -234,7 +254,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         $"Category with Id {id} not found.");
                 }
 
-                Db.DeleteCategory(category);
+                await CategoryManager.DeleteAsync(category);
                 return RedirectToAction("Index");
             }
             catch (InvalidOperationException e)
@@ -247,9 +267,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -265,7 +283,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Details
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             try
             {
@@ -275,7 +293,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = Db.GetCategory(id.Value).AsViewModel();
+                var category = await CategoryManager.FindByIdAsync(id.Value);
+                var model = category.AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -288,9 +307,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -306,7 +323,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             try
             {
@@ -316,7 +333,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var model = Db.GetCategory(id.Value).AsViewModel();
+                var category = await CategoryManager.FindByIdAsync(id.Value);
+                var model = category.AsViewModel();
                 return View(model);
             }
             catch (InvalidOperationException e)
@@ -329,9 +347,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -344,7 +360,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CategoryViewModel model)
+        public async Task<ActionResult> Edit(
+            [Bind(Include = "Description,Id,Title")] CategoryViewModel model)
         {
             try
             {
@@ -353,23 +370,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                Db.Edit(new Category
-                {
-                    Title = model.Title,
-                    Description = model.Description,
-                    Index = model.Index,
-                    Id = model.Id,
-                    Groups = model.Groups,
-                    Slides = model.Slides
-                });
-
+                var category = await CategoryManager.FindByIdAsync(model.Id);
+                category.Description = model.Description;
+                category.Title = model.Title;
+                await CategoryManager.UpdateAsync(category);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -380,18 +389,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Index
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
-                var model = Db.GetCategories(x => x.Index).AsViewModels();
+                var categories = await CategoryManager.Categories.ToListAsync();
+                var model = categories.AsViewModels();
                 return View(model);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -402,41 +410,46 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Reorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Reorder()
+        public async Task<ActionResult> Reorder()
         {
             try
             {
-                var model = Db.GetCategories(OrderByIndex).AsViewModels();
+                var categories = await CategoryManager.Categories.ToListAsync();
+                var model = categories.OrderBy(OrderByIndex).AsViewModels();
                 return View(model);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
         /// <summary>
         ///     Reorders the specified categories.
         /// </summary>
-        /// <param name="categories">The categories.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Reorder
+        /// <param name="model">The model.</param>
+        /// <returns>
+        ///     System.Threading.Tasks.Task&lt;
+        ///     System.Web.Mvc.ActionResult&gt;.
+        /// </returns>
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public ActionResult Reorder(IList<Category> categories)
+        public async Task<ActionResult> Reorder(IList<CategoryViewModel> model)
         {
             try
             {
-                Db.Reorder(categories);
+                foreach (var item in model)
+                {
+                    var category = await CategoryManager.FindByIdAsync(item.Id);
+                    category.Index = item.Index;
+                    await CategoryManager.UpdateAsync(category);
+                }
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -453,7 +466,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                CategoryManager?.Dispose();
+                GroupManager?.Dispose();
             }
 
             base.Dispose(disposing);

@@ -25,13 +25,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             app.CreatePerOwinContext(
                 KingsportMillSafetyTrainingDbContext.Create);
 
-            app.CreatePerOwinContext<UserManager>(
-                UserManager.Create);
-
-            app.CreatePerOwinContext<SignInManager>(
-                SignInManager.Create);
-
+            app.CreatePerOwinContext<UserManager>(UserManager.Create);
+            app.CreatePerOwinContext<SignInManager>(SignInManager.Create);
             app.CreatePerOwinContext<CompanyManager>(CompanyManager.Create);
+            app.CreatePerOwinContext<CategoryManager>(CategoryManager.Create);
+            app.CreatePerOwinContext<GroupManager>(GroupManager.Create);
 
             app.UseCookieAuthentication(
                 new CookieAuthenticationOptions
