@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -19,9 +24,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
-        private static Func<Group, object> OrderByGroupIndex => group => group
-            .Index;
-
         /// <summary>
         ///     Gets the index of the order categories by.
         /// </summary>
@@ -46,14 +48,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private static Func<Slide, bool> ShouldShowOnQuiz => x =>
             x.ShouldShowSlideInSlideshow && x.ShouldShowQuestionOnQuiz;
 
-        /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
+
+        private TrainingResultManager TrainingResultManager => OwinContext
+            .Get<TrainingResultManager>();
+
+        private UserManager UserManager => OwinContext.Get<UserManager>();
 
         /// <summary>
         ///     Confirms the role.
@@ -63,19 +65,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     Cannot confirm
         ///     user role because no role is selected.
         /// </exception>
-        /// TODO Edit XML Comment Template for ConfirmRole
-        public ActionResult ConfirmRole()
+        /// TODO Edit XML Comment Template for ConfirmGroup
+        public async Task<ActionResult> ConfirmGroup()
         {
             try
             {
-                var role = GetCurrentUserRole();
+                var group = await GetCurrentUserGroup();
 
-                if (role == null)
+                if (group == null)
                 {
                     return RedirectToAction("SelectGroup");
                 }
 
-                return View(role);
+                return View(group);
             }
             catch (Exception e)
             {
@@ -89,14 +91,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             try
             {
-                var role = GetCurrentUserRole();
+                var group = await GetCurrentUserGroup();
 
                 return RedirectToAction(
-                    role == null ? "SelectGroup" : "ConfirmRole");
+                    group == null ? "SelectGroup" : "ConfirmGroup");
             }
             catch (Exception e)
             {
@@ -110,17 +112,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Quiz
         [HttpGet]
-        public ActionResult Quiz()
+        public async Task<ActionResult> Quiz()
         {
-            var role = GetCurrentUserRole();
+            var group = await GetCurrentUserGroup();
 
-            var model = role.GetSlides(slidesWhere: ShouldShowOnQuiz)
+            var model = group.GetSlides(slidesWhere: ShouldShowOnQuiz)
                 .AsQuizSlideViewModels()
                 .Shuffle();
 
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
-            Db.AddTrainingResult(User.GetId());
-            Db.SetUserLatestQuizStartDateTime(User.GetId());
+            await UserManager.AddTrainingResult(User.GetId());
+            await UserManager.SetLatestQuizStartDateTime(User.GetId());
             return View(model);
         }
 
@@ -132,7 +134,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <exception cref="Exception"></exception>
         /// TODO Edit XML Comment Template for Quiz
         [HttpPost]
-        public ActionResult Quiz(IList<QuizSlideViewModel> model)
+        public async Task<ActionResult> Quiz(IList<QuizSlideViewModel> model)
         {
             var quizViewModel =
                 (IList<QuizSlideViewModel>) System.Web.HttpContext.Current
@@ -144,17 +146,23 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
 
             model = quizViewModel;
-            var user = Db.GetUser(User.GetId());
-            var trainingResult = user.TrainingResults.Last();
+            var userId = User.GetId();
 
-            Db.AddQuizResult(
+            var user = await UserManager.Users.Include(u => u.TrainingResults)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            var trainingResult =
+                await TrainingResultManager.FindByIdAsync(
+                    user.TrainingResults.Last().Id);
+
+            await TrainingResultManager.AddQuizResult(
                 trainingResult.Id,
                 model.Count(x => x.IsCorrect()),
                 model.Count);
 
             if (!model.All(x => x.IsCorrect()))
             {
-                Db.SetUserLatestQuizStartDateTime(User.GetId());
+                await UserManager.SetLatestQuizStartDateTime(User.GetId());
                 return View(model);
             }
 
@@ -169,7 +177,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 trainingResult.CompletionDateTime.Value
                 - user.LatestTrainingStartDateTime.Value;
 
-            Db.Edit(trainingResult);
+            await TrainingResultManager.UpdateAsync(trainingResult);
 
             return RedirectToAction(
                 "Details",
@@ -186,9 +194,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for SelectGroup
         [HttpGet]
-        public ActionResult SelectGroup()
+        public async Task<ActionResult> SelectGroup()
         {
-            var groups = Db.GetGroups(OrderByGroupIndex);
+            var groups = await GroupManager.Groups.OrderBy(g => g.Index)
+                .ToListAsync();
 
             var model = new SelectGroupViewModel
             {
@@ -200,16 +209,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         }
 
         /// <summary>
-        ///     Selects the role.
+        ///     Selects the group.
         /// </summary>
-        /// <param name="groupId">The group identifier.</param>
-        /// <returns>ActionResult.</returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
+        /// <exception cref="ArgumentNullException">id</exception>
         /// TODO Edit XML Comment Template for SelectGroup
         [HttpPost]
-        public ActionResult SelectGroup(int? groupId)
+        public async Task<ActionResult> SelectGroup(int? id)
         {
-            Db.SetUserGroup(User.GetId(), groupId);
-            return RedirectToAction("Index");
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                await UserManager.SetGroup(User.GetId(), group);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>
@@ -217,18 +240,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Train
-        public ActionResult Train()
+        public async Task<ActionResult> Train()
         {
             try
             {
-                var group = GetCurrentUserRole();
+                var group = await GetCurrentUserGroup();
 
                 if (group == null)
                 {
                     return RedirectToAction("SelectGroup");
                 }
 
-                Db.SetUserLatestTrainingStartDateTime(User.GetId());
+                UserManager.SetLatestTrainingStartDateTime(User.GetId());
 
                 var model = group.GetSlides(
                         OrderCategoriesByIndex,
@@ -256,7 +279,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                UserManager?.Dispose();
             }
 
             base.Dispose(disposing);
@@ -267,17 +290,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>Group.</returns>
         /// <exception cref="Exception"></exception>
-        /// TODO Edit XML Comment Template for GetCurrentUserRole
-        private Group GetCurrentUserRole()
+        /// TODO Edit XML Comment Template for GetCurrentUserGroup
+        private Task<Group> GetCurrentUserGroup()
         {
-            var user = Db.GetUser(User.GetId());
-
-            if (user == null)
-            {
-                throw new Exception();
-            }
-
-            return user.Group;
+            return UserManager.GetGroup(User.GetId());
         }
     }
 }

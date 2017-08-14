@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
@@ -22,9 +21,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// </summary>
         /// <param name="store">The store.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public UserManager(IUserStore<User, string> store)
+        public UserManager(UserStore store)
             : base(store)
         {
+            Store = store;
+        }
+
+        private new UserStore Store
+        {
+            get;
         }
 
         /// <summary>
@@ -44,7 +49,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             var manager = new UserManager(
-                new UserStore<User, Role, string, IdentityUserLogin, IdentityUserRole, IdentityUserClaim>(
+                new UserStore(
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 
             manager.UserValidator = new UserValidator<User>(manager)
@@ -94,34 +99,71 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
-        ///     Gets the role.
+        ///     Adds the training result.
         /// </summary>
-        /// <param name="userId">The user identifier.</param>
-        /// <returns>Task&lt;Group&gt;.</returns>
-        /// <exception cref="Exception"></exception>
-        /// TODO Edit XML Comment Template for GetGroup
-        public async Task<Group> GetGroup(string userId)
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for AddTrainingResult
+        public Task AddTrainingResult(string id)
         {
-            var user = await FindByIdAsync(userId);
-
-            if (user.Group == null)
-            {
-                throw new Exception();
-            }
-
-            return user.Group;
+            return Store.AddTrainingResult(id);
         }
 
         /// <summary>
-        /// Sets the company.
+        ///     Gets the role.
         /// </summary>
-        /// <param name="userId">The user identifier.</param>
+        /// <param name="id">The user identifier.</param>
+        /// <returns>Task&lt;Group&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        /// TODO Edit XML Comment Template for GetGroup
+        public Task<Group> GetGroup(string id)
+        {
+            return Store.GetGroup(id);
+        }
+
+        /// <summary>
+        ///     Sets the company.
+        /// </summary>
+        /// <param name="id">The user identifier.</param>
         /// <param name="company">The company.</param>
         /// TODO Edit XML Comment Template for SetCompany
-        public async void SetCompany(string userId, Company company)
+        public Task SetCompany(string id, Company company)
         {
-            var user = await FindByIdAsync(userId);
-            user.Company = company;
+            return Store.SetCompany(id, company);
+        }
+
+        /// <summary>
+        ///     Sets the group.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <param name="group">The group.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for SetGroup
+        public Task SetGroup(string userId, Group group)
+        {
+            return Store.SetGroup(userId, group);
+        }
+
+        /// <summary>
+        ///     Sets the latest quiz start date time.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for SetLatestQuizStartDateTime
+        public Task SetLatestQuizStartDateTime(string id)
+        {
+            return Store.SetLatestQuizStartDateTime(id);
+        }
+
+        /// <summary>
+        ///     Sets the latest training start date time.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for SetLatestTrainingStartDateTime
+        public Task SetLatestTrainingStartDateTime(string id)
+        {
+            return Store.SetLatestTrainingStartDateTime(id);
         }
     }
 }

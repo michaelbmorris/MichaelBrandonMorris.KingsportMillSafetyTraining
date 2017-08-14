@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -22,6 +23,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public TrainingResultManager(TrainingResultStore store)
             : base(store)
         {
+            Store = store;
+        }
+
+        /// <summary>
+        /// Gets or sets the store.
+        /// </summary>
+        /// <value>The store.</value>
+        /// TODO Edit XML Comment Template for Store
+        private new TrainingResultStore Store
+        {
+            get;
         }
 
         /// <summary>
@@ -48,6 +60,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 
             return manager;
+        }
+
+        /// <summary>
+        /// Adds the quiz result.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="questionsCorrect">The questions correct.</param>
+        /// <param name="totalQuestions">The total questions.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for AddQuizResult
+        public Task AddQuizResult(
+            int id,
+            int questionsCorrect,
+            int totalQuestions)
+        {
+            return Store.AddQuizResult(id, questionsCorrect, totalQuestions);
         }
     }
 }

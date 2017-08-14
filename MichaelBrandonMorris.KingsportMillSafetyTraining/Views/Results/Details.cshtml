@@ -32,14 +32,14 @@
     <div class="col-md-6">
         @if (User.IsOwnTrainingResult(Model.Id))
         {
-            @Html.BootstrapActionLinkButton("Preview All Your Results", "UserResults", new
+            @Html.BootstrapActionLinkButton("View All Your Results", "UserResults", new
             {
                 id = Model.Id
             }, ContextualColor.Primary)
         }
         else
         {
-            @Html.BootstrapActionLinkButton("Preview All Results For This User", "UserResults", new
+            @Html.BootstrapActionLinkButton("View All Results For This User", "UserResults", new
             {
                 id = Model.Id
             }, ContextualColor.Primary)
@@ -52,8 +52,8 @@
          || User.IsInRole("Supervisor"))
     {
         <div class="col-md-6 text-right">
-            @Html.BootstrapActionLinkButton("Preview All Results", "Index", ContextualColor.Primary)
-            @Html.ActionLink("Preview All Users", "Index", "Users", null, new
+            @Html.BootstrapActionLinkButton("View All Results", "Index", ContextualColor.Primary)
+            @Html.ActionLink("View All Users", "Index", "Users", null, new
             {
                 @class = "btn btn-primary"
             })

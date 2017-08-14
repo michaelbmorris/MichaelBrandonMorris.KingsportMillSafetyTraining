@@ -750,7 +750,7 @@
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\UserResults.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Training\ConfirmRole.cshtml" />
+    <Content Include="Views\Training\ConfirmGroup.cshtml" />
     <Content Include="Views\Companies\Create.cshtml" />
     <Content Include="Views\Companies\Delete.cshtml" />
     <Content Include="Views\Companies\Details.cshtml" />

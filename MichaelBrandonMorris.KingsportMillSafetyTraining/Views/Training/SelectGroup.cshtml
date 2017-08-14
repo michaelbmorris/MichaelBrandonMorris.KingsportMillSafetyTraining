@@ -21,14 +21,14 @@
                         @Html.Raw(item.Question)
                     </p>
                             <button class="btn btn-default"
-                                    name="groupId"
+                                    name="id"
                                     value="@item.Id">
                                 Yes
                             </button>
                             @if (item == Model.Groups.Last())
                             {
                                 <button class="btn btn-default"
-                                        name="groupId"
+                                        name="id"
                                         value="@Model.DefaultGroupIndex">
                                     No
                                 </button>
