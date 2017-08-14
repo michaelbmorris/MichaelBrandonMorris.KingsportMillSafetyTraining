@@ -12,7 +12,7 @@
     <table class="table table-condensed table-striped">
         <thead>
             <tr>
-                @foreach (var role in Model.Roles)
+                @foreach (var role in Model.Groups)
                 {
                     <th>@Html.DisplayFor(modelRole => role.Title)</th>
                 }
@@ -22,7 +22,7 @@
             @foreach (var categoryViewModel in Model.CategoryViewModels)
             {
                 <tr>
-                    @foreach (var role in Model.Roles)
+                    @foreach (var role in Model.Groups)
                     {
                         <td>
                             <div class="checkbox">

@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using MichaelBrandonMorris.Math;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -16,6 +21,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// TODO Edit XML Comment Template for GroupsController
     public class GroupsController : Controller
     {
+        private const string EditInclude = "Description,Id,Question,Title";
+
         /// <summary>
         ///     Gets the index of the order by.
         /// </summary>
@@ -23,14 +30,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for OrderByIndex
         private static Func<Group, object> OrderByIndex => role => role.Index;
 
-        /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private CategoryManager CategoryManager => OwinContext
+            .Get<CategoryManager>();
+
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
         /// <summary>
         ///     Assigns the categories.
@@ -40,15 +45,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for AssignCategories
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult AssignCategories(int? id)
+        public async Task<ActionResult> AssignCategories(int? id)
         {
-            var model = id == null
-                ? new AssignCategoriesViewModel(
-                    Db.GetGroups(),
-                    Db.GetCategories().AsViewModels())
-                : new AssignCategoriesViewModel(
-                    Db.GetGroup(id.Value),
-                    Db.GetCategories().AsViewModels());
+            var categories = await CategoryManager.Categories.ToListAsync();
+            var categoryViewModels = categories.AsViewModels();
+            AssignCategoriesViewModel model;
+
+            if (id == null)
+            {
+                var groups = await GroupManager.Groups.ToListAsync();
+                model = new AssignCategoriesViewModel(
+                    groups,
+                    categoryViewModels);
+            }
+            else
+            {
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                model = new AssignCategoriesViewModel(
+                    group,
+                    categoryViewModels);
+            }
 
             return View(model);
         }
@@ -56,23 +72,40 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <summary>
         ///     Assigns the categories.
         /// </summary>
-        /// <param name="groupCategories">The role categories.</param>
-        /// <returns>ActionResult.</returns>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for AssignCategories
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public ActionResult AssignCategories(IList<int> groupCategories)
+        public async Task<ActionResult> AssignCategories(IList<int> model)
         {
-            Db.UnpairCategoriesAndGroups();
-
-            if (groupCategories == null)
+            if (model == null)
             {
                 return RedirectToAction("Index");
             }
 
-            foreach (var groupCategory in groupCategories)
+            var unpairedGroups = new HashSet<int>();
+
+            foreach (var item in model)
             {
-                Db.PairGroupAndCategory(Cantor.Inverse(groupCategory));
+                // ReSharper disable once UnusedVariable
+                (int groupId, int categoryId) = Cantor.Inverse(item);
+
+                if (unpairedGroups.Contains(groupId))
+                {
+                    continue;
+                }
+
+                await GroupManager.RemoveCategories(groupId);
+                unpairedGroups.Add(groupId);
+            }
+
+            foreach (var item in model)
+            {
+                (int groupId, int categoryId) = Cantor.Inverse(item);
+                var group = await GroupManager.FindByIdAsync(groupId);
+                var category = await CategoryManager.FindByIdAsync(categoryId);
+                await GroupManager.Pair(group, category);
             }
 
             return RedirectToAction("Index");
@@ -99,20 +132,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(GroupViewModel model)
+        public ActionResult Create(
+            [Bind(Include = "Description,Question,Title")] GroupViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            Db.CreateGroup(
+            GroupManager.CreateAsync(
                 new Group
                 {
-                    Title = model.Title,
                     Description = model.Description,
                     Index = ++Group.CurrentIndex,
-                    Question = model.Question
+                    Question = model.Question,
+                    Title = model.Title
                 });
 
             return RedirectToAction("Index");
@@ -126,19 +160,29 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Delete
         [Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             try
             {
-                var model = Db.GetGroup(id).AsViewModel();
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                var model = group.AsViewModel();
                 return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
+
         /// <summary>
         ///     Deletes the confirmed.
         /// </summary>
@@ -149,11 +193,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public async Task<ActionResult> DeleteConfirmed(int? id)
         {
             try
             {
-                Db.DeleteGroup(id);
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                await GroupManager.DeleteAsync(group);
                 return RedirectToAction("Index");
             }
             catch (ArgumentNullException e)
@@ -166,9 +216,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -180,38 +228,36 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Details
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             try
             {
                 if (id == null)
                 {
-                    throw new InvalidOperationException(
-                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                    throw new ArgumentNullException(nameof(id));
                 }
 
-                var model = Db.GetGroup(id.Value).AsViewModel();
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                var model = group.AsViewModel();
 
                 if (model == null)
                 {
-                    return HttpNotFound();
+                    throw new KeyNotFoundException();
                 }
 
                 return View(model);
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e);
-            }
-            catch (InvalidOperationException e)
-            {
                 return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -223,32 +269,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             try
             {
                 if (id == null)
                 {
-                    throw new InvalidOperationException(
-                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                    throw new ArgumentNullException(nameof(id));
                 }
 
-                var model = Db.GetGroup(id.Value).AsViewModel();
+                var group = await GroupManager.FindByIdAsync(id.Value);
+                var model = group.AsViewModel();
                 return View(model);
             }
             catch (ArgumentNullException e)
             {
-                return this.CreateError(HttpStatusCode.NotFound, e);
-            }
-            catch (InvalidOperationException e)
-            {
                 return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -261,7 +305,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(GroupViewModel model)
+        public async Task<ActionResult> Edit(
+            [Bind(Include = EditInclude)] GroupViewModel model)
         {
             try
             {
@@ -270,23 +315,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(model);
                 }
 
-                Db.Edit(
-                    new Group
-                    {
-                        Id = model.Id,
-                        Title = model.Title,
-                        Description = model.Description,
-                        Question = model.Question,
-                        Index = model.Index
-                    });
-
+                var group = await GroupManager.FindByIdAsync(model.Id);
+                group.Description = model.Description;
+                group.Question = model.Question;
+                group.Title = model.Title;
+                await GroupManager.UpdateAsync(group);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                return this.CreateError(
-                    HttpStatusCode.InternalServerError,
-                    e);
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }
 
@@ -297,9 +335,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Index
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var model = Db.GetGroups(OrderByIndex).AsViewModels();
+            var groups = await GroupManager.Groups.ToListAsync();
+            var model = groups.AsViewModels();
             return View(model);
         }
 
@@ -310,23 +349,30 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Reorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Reorder()
+        public async Task<ActionResult> Reorder()
         {
-            var model = Db.GetGroups(OrderByIndex).AsViewModels();
+            var groups = await GroupManager.Groups.ToListAsync();
+            var model = groups.OrderBy(OrderByIndex).AsViewModels();
             return View(model);
         }
 
         /// <summary>
-        ///     Reorders the specified roles.
+        ///     Reorders the specified model.
         /// </summary>
-        /// <param name="roles">The roles.</param>
-        /// <returns>ActionResult.</returns>
+        /// <param name="model">The model.</param>
+        /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for Reorder
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public ActionResult Reorder(IList<Group> roles)
+        public async Task<ActionResult> Reorder(IList<GroupViewModel> model)
         {
-            Db.Reorder(roles);
+            foreach (var item in model)
+            {
+                var group = await GroupManager.FindByIdAsync(item.Id);
+                group.Index = item.Index;
+                await GroupManager.UpdateAsync(group);
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -343,7 +389,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                CategoryManager?.Dispose();
+                GroupManager?.Dispose();
             }
 
             base.Dispose(disposing);

@@ -3,6 +3,7 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
@@ -35,7 +36,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// <param name="options">The options.</param>
         /// <param name="context">The context.</param>
         /// <returns>GroupManager.</returns>
-        /// TODO Edit XML Comment Template for Create
         public static GroupManager Create(
             IdentityFactoryOptions<GroupManager> options,
             IOwinContext context)
@@ -45,6 +45,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                     context.Get<KingsportMillSafetyTrainingDbContext>()));
 
             return manager;
+        }
+
+        public Task Pair(Group group, Category category)
+        {
+            return ((GroupStore)Store).Pair(group, category);
+        }
+
+        public Task RemoveCategories(int id)
+        {
+            return ((GroupStore)Store).RemoveCategories(id);
         }
     }
 }
