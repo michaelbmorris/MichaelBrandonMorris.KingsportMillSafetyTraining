@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -16,14 +21,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class ResultsController : Controller
     {
-        /// <summary>
-        ///     The database
-        /// </summary>
-        /// TODO Edit XML Comment Template for Db
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
+
+        private TrainingResultManager TrainingResultManager => OwinContext
+            .Get<TrainingResultManager>();
+
+        private UserManager UserManager => OwinContext.Get<UserManager>();
 
         /// <summary>
         ///     Detailses the specified identifier.
@@ -40,17 +43,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// TODO Edit XML Comment Template for Details
         [HttpGet]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             try
             {
                 if (id == null)
                 {
-                    throw new InvalidOperationException(
-                        "Parameter missing.\nType: 'int'\nName: 'id'");
+                    throw new ArgumentNullException(nameof(id));
                 }
 
-                var model = Db.GetTrainingResult(id.Value).AsViewModel();
+                var trainingResult =
+                    await TrainingResultManager.FindByIdAsync(id.Value);
+
+                var model = trainingResult.AsViewModel();
 
                 if (User.IsInRole("Owner")
                     || User.IsInRole("Administrator")
@@ -70,7 +75,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(HttpStatusCode.Forbidden, e);
             }
-            catch (InvalidOperationException e)
+            catch (ArgumentNullException e)
             {
                 return this.CreateError(HttpStatusCode.BadRequest, e);
             }
@@ -90,7 +95,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             if (!User.IsInRole("Administrator")
                 && !User.IsInRole("Owner")
@@ -105,7 +110,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     });
             }
 
-            var model = Db.GetTrainingResults().AsViewModels();
+            var trainingResults =
+                await TrainingResultManager.TrainingResults.ToListAsync();
+
+            var model = trainingResults.AsViewModels();
             return View(model);
         }
 
@@ -124,7 +132,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// TODO Edit XML Comment Template for UserResults
         [HttpGet]
-        public ActionResult UserResults(string id)
+        public async Task<ActionResult> UserResults(string id)
         {
             try
             {
@@ -145,7 +153,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         new Exception("You are not permitted to access this."));
                 }
 
-                var user = Db.GetUser(id);
+                var user = await UserManager.FindByIdAsync(id);
 
                 var model = new UserTrainingResultsViewModel(
                     user.AsViewModel(),
@@ -184,7 +192,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                Db.Dispose();
+                TrainingResultManager?.Dispose();
+                UserManager?.Dispose();
             }
 
             base.Dispose(disposing);

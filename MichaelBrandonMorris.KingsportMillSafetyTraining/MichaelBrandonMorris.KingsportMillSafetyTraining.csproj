@@ -224,6 +224,8 @@
     <Compile Include="App_Start\EntityStore.cs" />
     <Compile Include="App_Start\GroupManager.cs" />
     <Compile Include="App_Start\GroupStore.cs" />
+    <Compile Include="App_Start\TrainingResultManager.cs" />
+    <Compile Include="App_Start\TrainingResultStore.cs" />
     <Compile Include="App_Start\SignInManager.cs" />
     <Compile Include="App_Start\CompanyManager.cs" />
     <Compile Include="App_Start\UserManager.cs" />

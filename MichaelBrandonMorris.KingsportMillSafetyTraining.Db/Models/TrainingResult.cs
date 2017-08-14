@@ -7,7 +7,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// Class TrainingResult.
     /// </summary>
     /// TODO Edit XML Comment Template for TrainingResult
-    public class TrainingResult
+    public class TrainingResult : IEntity<int>
     {
         /// <summary>
         /// Gets or sets the completion date time.
