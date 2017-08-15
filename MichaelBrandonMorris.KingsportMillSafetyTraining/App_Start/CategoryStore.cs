@@ -68,5 +68,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
             return Context.SaveChangesAsync();
         }
+
+        /// <summary>
+        ///     Updates the index of the current.
+        /// </summary>
+        /// TODO Edit XML Comment Template for UpdateCurrentIndex
+        public void UpdateCurrentIndex()
+        {
+            Category.CurrentIndex = !Categories.Any()
+                ? 0
+                : Categories.Max(answer => answer.Index);
+        }
     }
 }

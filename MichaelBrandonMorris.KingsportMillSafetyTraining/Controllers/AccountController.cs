@@ -4,7 +4,6 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.Account;
 using Microsoft.AspNet.Identity;
@@ -29,12 +28,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private SignInManager _signInManager;
 
         /// <summary>
-        ///     The user manager
-        /// </summary>
-        /// TODO Edit XML Comment Template for _userManager
-        private UserManager _userManager;
-
-        /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="AccountController" /> class.
         /// </summary>
@@ -47,14 +40,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     Initializes a new instance of the
         ///     <see cref="AccountController" /> class.
         /// </summary>
-        /// <param name="userManager">The user manager.</param>
         /// <param name="signInManager">The sign in manager.</param>
         /// TODO Edit XML Comment Template for #ctor
         public AccountController(
-            UserManager userManager,
             SignInManager signInManager)
         {
-            UserManager = userManager;
             SignInManager = signInManager;
         }
 
@@ -69,16 +59,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             private set => _signInManager = value;
         }
 
-        /// <summary>
-        ///     Gets the user manager.
-        /// </summary>
-        /// <value>The user manager.</value>
-        /// TODO Edit XML Comment Template for UserManager
-        public UserManager UserManager
-        {
-            get => _userManager ?? OwinContext.GetUserManager<UserManager>();
-            private set => _userManager = value;
-        }
+        private UserManager UserManager => OwinContext.Get<UserManager>();
+
+        private CompanyManager CompanyManager =>
+            OwinContext.Get<CompanyManager>();
 
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
@@ -90,11 +74,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private IAuthenticationManager AuthenticationManager => HttpContext
             .GetOwinContext()
             .Authentication;
-
-        private KingsportMillSafetyTrainingDbContext Db
-        {
-            get;
-        } = new KingsportMillSafetyTrainingDbContext();
 
         /// <summary>
         ///     Forgots the password.
@@ -259,7 +238,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        Db.UpdateUserLastLogon(model.Email);
+                        await UserManager.SetLatestLogOnDateTime(model.Email);
                         return RedirectToLocal(returnUrl);
                     case SignInStatus.LockedOut: return View("Lockout");
                     case SignInStatus.RequiresVerification: goto default;
@@ -353,7 +332,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     user = await UserManager.FindByEmailAsync(user.Email);
                     await UserManager.AddToRoleAsync(user.Id, "User");
-                    Db.SetUserCompany(user.Id, model.CompanyId);
+                    var company = await CompanyManager.FindByIdAsync(model.CompanyId);
+                    await UserManager.SetCompany(user.Id, company);
                     return RedirectToAction("Index", "Training");
                 }
 
@@ -467,11 +447,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (disposing)
             {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
+                CompanyManager?.Dispose();
+                UserManager?.Dispose();
 
                 if (_signInManager != null)
                 {

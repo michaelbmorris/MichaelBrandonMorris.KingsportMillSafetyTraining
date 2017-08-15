@@ -6,9 +6,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     ///     Class Role.
     /// </summary>
     /// <seealso
-    ///     cref="Microsoft.AspNet.Identity.EntityFramework.IdentityRole" />
+    ///     cref="IdentityRole" />
     /// TODO Edit XML Comment Template for Role
-    public class Role : IdentityRole
+    public class Role : IdentityRole, IEntity<string>
     {
         /// <summary>
         ///     Initializes a new instance of the <see cref="Role" />

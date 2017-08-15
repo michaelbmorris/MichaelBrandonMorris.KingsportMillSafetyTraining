@@ -4,7 +4,6 @@ using System.Web;
 using System.Web.Mvc;
 using Foolproof;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation;
 
@@ -21,8 +20,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     <see cref="SlideViewModel" /> class.
         /// </summary>
         /// TODO Edit XML Comment Template for #ctor
-        public SlideViewModel()
+        public SlideViewModel(IList<Category> categories)
         {
+            Categories = categories;
         }
 
         /// <summary>
@@ -30,8 +30,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     <see cref="SlideViewModel" /> class.
         /// </summary>
         /// <param name="slide">The slide.</param>
+        /// <param name="categories"></param>
         /// TODO Edit XML Comment Template for #ctor
-        public SlideViewModel(Slide slide)
+        public SlideViewModel(Slide slide, IList<Category> categories)
+            :this(categories)
         {
             if (slide == null)
             {
@@ -86,8 +88,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public IList<Category> Categories
         {
             get;
-            set;
-        } = GetCategories();
+        }
 
         /// <summary>
         ///     Gets or sets the category identifier.
@@ -272,14 +273,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
-        }
-
-        private static IList<Category> GetCategories()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetCategories();
-            }
         }
     }
 }

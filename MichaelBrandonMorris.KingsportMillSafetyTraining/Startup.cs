@@ -1,20 +1,13 @@
 ﻿using System.Configuration;
-using System.Linq;
 using System.Net.Mail;
 using System.Web.Security;
-using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.Owin;
 using Owin;
-using UserStore =
-    Microsoft.AspNet.Identity.EntityFramework.UserStore<
-        MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.User,
-        MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Role, string,
-        Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin,
-        Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole, Microsoft.
-        AspNet.Identity.EntityFramework.IdentityUserClaim>;
+using System.Data.Entity;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -45,12 +38,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// TODO Edit XML Comment Template for UpdateCurrentIndices
         private static void UpdateCurrentIndices()
         {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
+            using (var context = new KingsportMillSafetyTrainingDbContext())
+            using (var answerStore = new AnswerStore(context))
+            using (var answerManager = new AnswerManager(answerStore))
+            using (var categoryStore = new CategoryStore(context))
+            using (var categoryManager = new CategoryManager(categoryStore))
+            using (var groupStore = new GroupStore(context))
+            using (var groupManager = new GroupManager(groupStore))
             {
-                db.UpdateCurrentAnswerIndex();
-                db.UpdateCurrentCategoryIndex();
-                db.UpdateCurrentGroupIndex();
-                db.UpdateCurrentRoleIndex();
+                answerManager.UpdateCurrentIndex();
+                categoryManager.UpdateCurrentIndex();
+                groupManager.UpdateCurrentIndex();
             }
         }
 
@@ -105,13 +103,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         ///     Updates the user roles.
         /// </summary>
         /// TODO Edit XML Comment Template for UpdateUserRoles
-        private async void UpdateUserRoles()
+        private static async void UpdateUserRoles()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             using (var store = new UserStore(db))
             using (var manager = new UserManager(store))
             {
-                foreach (var user in manager.Users.ToList())
+                foreach (var user in await manager.Users.ToListAsync())
                 {
                     if (user.Roles.IsNullOrEmpty())
                     {

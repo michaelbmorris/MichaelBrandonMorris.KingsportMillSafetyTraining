@@ -37,11 +37,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation
 
             Company company;
 
-            using (var db = new KingsportMillSafetyTrainingDbContext())
+            using (var context = new KingsportMillSafetyTrainingDbContext())
+            using (var store = new CompanyStore(context))
+            using (var companyManager = new CompanyManager(store))
             {
                 try
                 {
-                    company = db.GetCompany(model.CompanyId);
+                    company = companyManager.FindByIdAsync(model.CompanyId).Result;
                 }
                 catch (Exception)
                 {

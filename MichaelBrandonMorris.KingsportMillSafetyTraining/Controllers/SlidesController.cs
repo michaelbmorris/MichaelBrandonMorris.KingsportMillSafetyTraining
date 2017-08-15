@@ -47,7 +47,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public ActionResult AddAnswer()
         {
             return View(
-                new SlideViewModel
+                new SlideViewModel(new List<Category>())
                 {
                     Answers = new List<Answer>
                     {
@@ -121,7 +121,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var slide = await SlideManager.FindByIdAsync(id.Value);
-                var model = slide.AsViewModel();
+                var model = new SlideViewModel(slide, new List<Category>());
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -196,7 +196,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new KeyNotFoundException();
                 }
 
-                var model = slide.AsViewModel();
+                var model = new SlideViewModel(slide, new List<Category>());
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -233,7 +233,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new KeyNotFoundException();
                 }
 
-                var model = slide.AsViewModel();
+                var categories = await CategoryManager.Categories.ToListAsync();
+                var model = new SlideViewModel(slide, categories);
                 return View(model);
             }
             catch (ArgumentNullException e)
@@ -437,7 +438,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     .SingleOrDefaultAsync(c => c.Id == id.Value);
 
                 var slides = category.Slides.OrderBy(s => s.Index).ToList();
-                var model = slides.AsViewModels();
+                var model =
+                    slides.Select(
+                        s => new SlideViewModel(s, new List<Category>()));
                 return View(model);
             }
             catch (Exception e)
@@ -497,7 +500,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new KeyNotFoundException();
                 }
 
-                var model = slide.AsViewModel();
+                var model = new SlideViewModel(slide, new List<Category>());
                 return View(model);
             }
             catch (ArgumentNullException e)

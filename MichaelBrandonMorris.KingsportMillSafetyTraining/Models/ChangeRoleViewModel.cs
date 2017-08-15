@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
@@ -28,8 +29,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     <see cref="ChangeRoleViewModel" /> class.
         /// </summary>
         /// <param name="user">The user.</param>
+        /// <param name="roles"></param>
         /// TODO Edit XML Comment Template for #ctor
-        public ChangeRoleViewModel(User user)
+        public ChangeRoleViewModel(User user, string roleName, IList<string> roleNames)
         {
             if (user == null)
             {
@@ -42,8 +44,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
                 ? $"{user.FirstName} {user.LastName}"
                 : $"{user.FirstName} {user.MiddleName} {user.LastName}";
 
-            RoleId = user.Roles.Single().RoleId;           
+            RoleName = roleName;           
             UserId = user.Id;
+            RoleNames = roleNames;
         }
 
         /// <summary>
@@ -51,21 +54,21 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// </summary>
         /// <value>The roles.</value>
         /// TODO Edit XML Comment Template for Groups
-        public IList<Role> Roles
+        public IList<string> RoleNames
         {
             get;
-        } = GetRoles();
+        }
 
         /// <summary>
         ///     Gets the role select list.
         /// </summary>
         /// <value>The role select list.</value>
         /// TODO Edit XML Comment Template for RoleSelectList
-        public IEnumerable<SelectListItem> RoleSelectList => Roles.Select(
+        public IEnumerable<SelectListItem> RoleSelectList => RoleNames.Select(
             role => new SelectListItem
             {
-                Value = role.Id,
-                Text = role.Name
+                Value = role,
+                Text = role
             });
 
         /// <summary>
@@ -91,11 +94,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
-        ///     Gets or sets the role identifier.
+        ///     Gets or sets the role name.
         /// </summary>
         /// <value>The role identifier.</value>
         /// TODO Edit XML Comment Template for RoleId
-        public string RoleId
+        [DisplayName("Role")]
+        public string RoleName
         {
             get;
             set;
@@ -110,19 +114,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
-        }
-
-        /// <summary>
-        ///     Gets the roles.
-        /// </summary>
-        /// <returns>IList&lt;Role&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetRoles
-        private static IList<Role> GetRoles()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetRoles(role => role.Index);
-            }
         }
     }
 }

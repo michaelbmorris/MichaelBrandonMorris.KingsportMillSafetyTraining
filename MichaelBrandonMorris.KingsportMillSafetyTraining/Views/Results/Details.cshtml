@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @if (User.IsOwnTrainingResult(Model.Id))
+        @if (User.IsOwnTrainingResult(Model.Id).Result)
         {
             @Html.BootstrapActionLinkButton("View All Your Results", "UserResults", new
             {

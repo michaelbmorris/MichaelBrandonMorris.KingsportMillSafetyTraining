@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
@@ -69,6 +68,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             }
 
             return Context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        ///     Updates the index of the current.
+        /// </summary>
+        /// TODO Edit XML Comment Template for UpdateCurrentIndex
+        public void UpdateCurrentIndex()
+        {
+            Group.CurrentIndex = !Groups.Any()
+                ? 0
+                : Groups.Max(answer => answer.Index);
         }
     }
 }

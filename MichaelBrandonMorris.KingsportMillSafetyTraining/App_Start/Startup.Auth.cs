@@ -2,6 +2,7 @@
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -36,6 +37,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 TrainingResultManager.Create);
 
             app.CreatePerOwinContext<SlideManager>(SlideManager.Create);
+            app.CreatePerOwinContext<RoleManager<Role>>(CreateRoleManager);
 
             app.UseCookieAuthentication(
                 new CookieAuthenticationOptions
@@ -64,6 +66,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 
             app.UseTwoFactorRememberBrowserCookie(
                 DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
+        }
+
+        private static RoleManager<Role> CreateRoleManager(
+            IdentityFactoryOptions<RoleManager<Role>> options,
+            IOwinContext context)
+        {
+            return new RoleManager<Role>(new RoleStore<Role>(context.Get<KingsportMillSafetyTrainingDbContext>()));
         }
     }
 }

@@ -47,26 +47,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
         }
 
         /// <summary>
-        ///     Gets the employees.
-        /// </summary>
-        /// <param name="company">The company.</param>
-        /// <param name="orderBy">The order by.</param>
-        /// <param name="where">The where.</param>
-        /// <returns>IList&lt;User&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetEmployees
-        public static IList<User> GetEmployees(
-            this Company company,
-            Func<User, object> orderBy = null,
-            Func<User, bool> where = null)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.DoTransaction(
-                    () => company.Employees.OrderByWhere(orderBy, where));
-            }
-        }
-
-        /// <summary>
         ///     Gets the roles.
         /// </summary>
         /// <param name="category">The category.</param>
@@ -124,32 +104,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db
                 category => category.GetSlides(
                     orderByPredicate,
                     wherePredicate));
-        }
-
-        /// <summary>
-        ///     Gets the slides.
-        /// </summary>
-        /// <param name="group">The group.</param>
-        /// <param name="orderCategoriesBy">The order categories by.</param>
-        /// <param name="categoriesWhere">The categories where.</param>
-        /// <param name="orderSlidesBy">The order slides by.</param>
-        /// <param name="slidesWhere">The slides where.</param>
-        /// <returns>IList&lt;Slide&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetSlides
-        public static IList<Slide> GetSlides(
-            this Group group,
-            Func<Category, object> orderCategoriesBy = null,
-            Func<Category, bool> categoriesWhere = null,
-            Func<Slide, object> orderSlidesBy = null,
-            Func<Slide, bool> slidesWhere = null)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.DoTransaction(
-                    () => group
-                        .GetCategories(orderCategoriesBy, categoriesWhere)
-                        .GetSlides(orderSlidesBy, slidesWhere));
-            }
         }
 
         /// <summary>

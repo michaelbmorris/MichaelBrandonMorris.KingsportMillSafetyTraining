@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation;
 
@@ -16,7 +15,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
     /// TODO Edit XML Comment Template for RegisterViewModel
     public class RegisterViewModel
     {
+        /// <summary>
+        ///     The required error message
+        /// </summary>
+        /// TODO Edit XML Comment Template for RequiredErrorMessage
         private const string RequiredErrorMessage = "This field is required.";
+
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="RegisterViewModel" /> class.
+        /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
+        public RegisterViewModel()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="RegisterViewModel" /> class.
+        /// </summary>
+        /// <param name="companies">The companies.</param>
+        /// TODO Edit XML Comment Template for #ctor
+        public RegisterViewModel(IList<Company> companies)
+        {
+            Companies = companies;
+        }
 
         /// <summary>
         ///     Gets the companies.
@@ -26,7 +49,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         public IList<Company> Companies
         {
             get;
-        } = GetCompanies();
+        }
 
         /// <summary>
         ///     Gets the company select list.
@@ -168,19 +191,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         {
             get;
             set;
-        }
-
-        /// <summary>
-        ///     Gets the companies.
-        /// </summary>
-        /// <returns>IList&lt;Company&gt;.</returns>
-        /// TODO Edit XML Comment Template for GetCompanies
-        private static IList<Company> GetCompanies()
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetCompanies(company => company.Name);
-            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
-@using MichaelBrandonMorris.KingsportMillSafetyTraining.Db
 
 @model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
 
@@ -14,16 +13,8 @@
     @Html.BootstrapActionLinkButton("Reorder", "Reorder", ContextualColor.Primary)
 </p>
 <p class="pull-right">
-    @using (var db = new KingsportMillSafetyTrainingDbContext())
-    {
-        foreach (var group in db.GetGroups(group => group.Index))
-        {
-            @Html.BootstrapActionLinkButton(group.Title, "Index", new
-            {
-                id = group.Id
-            }, ContextualColor.Primary)
-            <span>&nbsp;</span>
-        }
+    @{
+        // TODO Show groups here
     }
 </p>
 

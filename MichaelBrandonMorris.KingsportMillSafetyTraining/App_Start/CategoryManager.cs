@@ -27,17 +27,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
             Store = store;
         }
 
-        private new CategoryStore Store
-        {
-            get;
-        }
-
         /// <summary>
         ///     Gets the categories.
         /// </summary>
         /// <value>The categories.</value>
         /// TODO Edit XML Comment Template for Categories
         public virtual IQueryable<Category> Categories => Store.Entities;
+
+        private new CategoryStore Store
+        {
+            get;
+        }
 
         /// <summary>
         ///     Creates the specified options.
@@ -78,6 +78,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         public Task RemoveGroups(int id)
         {
             return Store.RemoveGroups(id);
+        }
+
+        /// <summary>
+        ///     Updates the index of the current.
+        /// </summary>
+        /// TODO Edit XML Comment Template for UpdateCurrentIndex
+        public void UpdateCurrentIndex()
+        {
+            Category.CurrentIndex = !Categories.Any()
+                ? 0
+                : Categories.Max(answer => answer.Index);
         }
     }
 }

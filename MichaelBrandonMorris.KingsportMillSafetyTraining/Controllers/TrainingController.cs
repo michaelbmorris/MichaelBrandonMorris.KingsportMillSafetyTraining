@@ -114,12 +114,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [HttpGet]
         public async Task<ActionResult> Quiz()
         {
-            var group = await GetCurrentUserGroup();
+            var groupId = (await GetCurrentUserGroup()).Id;
 
-            var model = group.GetSlides(slidesWhere: ShouldShowOnQuiz)
-                .AsQuizSlideViewModels()
-                .Shuffle();
+            var group = await GroupManager.Groups
+                .Include(g => g.Categories.Select(c => c.Slides))
+                .SingleOrDefaultAsync(g => g.Id == groupId);
 
+            var categories = group.Categories;
+            var slides = categories.SelectMany(c => c.Slides);
+
+            var model = slides.AsQuizSlideViewModels().Shuffle();
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;
             await UserManager.AddTrainingResult(User.GetId());
             await UserManager.SetLatestQuizStartDateTime(User.GetId());
@@ -244,21 +248,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var group = await GetCurrentUserGroup();
+                var groupId = (await GetCurrentUserGroup()).Id;
+                await UserManager.SetLatestTrainingStartDateTime(User.GetId());
 
-                if (group == null)
-                {
-                    return RedirectToAction("SelectGroup");
-                }
+                var group = await GroupManager.Groups
+                    .Include(g => g.Categories.Select(c => c.Slides))
+                    .SingleOrDefaultAsync(g => g.Id == groupId);
 
-                UserManager.SetLatestTrainingStartDateTime(User.GetId());
+                var categories = group.Categories.OrderBy(c => c.Index);
 
-                var model = group.GetSlides(
-                        OrderCategoriesByIndex,
-                        orderSlidesBy: OrderSlidesByIndex)
-                    .AsViewModels();
+                var slides =
+                    categories.SelectMany(c => c.Slides.OrderBy(s => s.Index));
 
+                var model =
+                    slides.Select(
+                        s => new SlideViewModel(s, new List<Category>()));
                 return View(model);
+            }
+            catch (NullReferenceException)
+            {
+                return RedirectToAction("SelectGroup");
             }
             catch (Exception e)
             {

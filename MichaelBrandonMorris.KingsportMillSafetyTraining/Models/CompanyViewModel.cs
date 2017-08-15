@@ -18,7 +18,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// TODO Edit XML Comment Template for #ctor
         public CompanyViewModel(Company company)
         {
-            Employees = company.Employees.AsViewModels();
+            Employees = company.Employees.Select(e => new UserViewModel(e, null, new List<Company>(), new List<Role>(), new List<Group>())).ToList();
             Id = company.Id;
             Name = company.Name;
         }

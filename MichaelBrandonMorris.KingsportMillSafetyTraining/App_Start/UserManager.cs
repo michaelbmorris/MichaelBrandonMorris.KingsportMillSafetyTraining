@@ -145,6 +145,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         }
 
         /// <summary>
+        ///     Sets the latest log on date time.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns>Task.</returns>
+        /// TODO Edit XML Comment Template for SetLatestLogOnDateTime
+        public Task SetLatestLogOnDateTime(string userName)
+        {
+            return Store.SetLatestLogOnDateTime(userName);
+        }
+
+        /// <summary>
         ///     Sets the latest quiz start date time.
         /// </summary>
         /// <param name="id">The identifier.</param>

@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MichaelBrandonMorris.Extensions.CollectionExtensions;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity;
@@ -22,50 +23,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// TODO Edit XML Comment Template for UsersController
     public class UsersController : Controller
     {
-        private readonly CompanyManager _companyManager;
-        private readonly RoleManager<Role> _roleManager;
-        private readonly UserManager _userManager;
+        private CompanyManager CompanyManager =>
+            OwinContext.Get<CompanyManager>();
 
-        /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="UsersController" /> class.
-        /// </summary>
-        /// TODO Edit XML Comment Template for #ctor
-        public UsersController()
-        {
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the
-        ///     <see cref="UsersController" /> class.
-        /// </summary>
-        /// <param name="userManager">The user manager.</param>
-        /// <param name="roleManager"></param>
-        /// <param name="companyManager"></param>
-        /// TODO Edit XML Comment Template for #ctor
-        public UsersController(
-            UserManager userManager,
-            RoleManager<Role> roleManager,
-            CompanyManager companyManager)
-        {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _companyManager = companyManager;
-        }
-
-        private CompanyManager CompanyManager => _companyManager
-                                                 ?? OwinContext
-                                                     .Get<CompanyManager>();
-
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
-        private RoleManager<Role> RoleManager => _roleManager
-                                                 ?? OwinContext
-                                                     .Get<RoleManager<Role>>();
+        private RoleManager<Role> RoleManager => OwinContext
+            .Get<RoleManager<Role>>();
 
-        private UserManager UserManager => _userManager
-                                           ?? OwinContext.Get<UserManager>();
-
+        private UserManager UserManager => OwinContext.Get<UserManager>();
 
         /// <summary>
         ///     Changes the password.
@@ -86,10 +53,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     var currentUser =
                         await UserManager.FindByIdAsync(User.GetId());
 
-                    var company = currentUser.Company;
+                    var companyId = currentUser.Company.Id;
 
-                    if (company.GetEmployees()
-                        .All(employee => employee.Id != user.Id))
+                    var company = await CompanyManager.Companies
+                        .Include(c => c.Employees)
+                        .SingleOrDefaultAsync(c => c.Id == companyId);
+
+                    if (company.Employees.All(e => e.Id != user.Id))
                     {
                         throw new UnauthorizedAccessException(
                             "You are not permitted to change the password for this user.");
@@ -123,16 +93,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var manager = HttpContext.GetOwinContext()
-                    .GetUserManager<UserManager>();
-
-                var user = await manager.FindByIdAsync(model.UserId);
+                var user = await UserManager.FindByIdAsync(model.UserId);
 
                 user.PasswordHash =
-                    manager.PasswordHasher.HashPassword(model.Password);
+                    UserManager.PasswordHasher.HashPassword(model.Password);
 
-                await manager.UpdateSecurityStampAsync(user.Id);
-                await manager.UpdateAsync(user);
+                await UserManager.UpdateSecurityStampAsync(user.Id);
+                await UserManager.UpdateAsync(user);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -154,7 +121,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var user = await UserManager.FindByIdAsync(id);
-                var model = new ChangeRoleViewModel(user);
+                var roleName = (await UserManager.GetRolesAsync(id)).Single();
+                var roles = await RoleManager.Roles.ToListAsync();
+                var roleNames = roles.Select(r => r.Name);
+                var model = new ChangeRoleViewModel(user, roleName, roleNames);
                 return View(model);
             }
             catch (Exception e)
@@ -174,8 +144,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var roleName = (await RoleManager.FindByIdAsync(model.RoleId))
-                    .Name;
+                var roleName = model.RoleName;
 
                 if (User.IsInRole("Administrator"))
                 {
@@ -187,17 +156,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     }
                 }
 
-                var userManager = HttpContext.GetOwinContext()
-                    .GetUserManager<UserManager>();
+                var roles = await UserManager.GetRolesAsync(model.UserId);
 
-                var roles = await userManager.GetRolesAsync(model.UserId);
-
-                await userManager.RemoveFromRolesAsync(
+                await UserManager.RemoveFromRolesAsync(
                     model.UserId,
                     roles.ToArray());
 
-                await userManager.AddToRoleAsync(model.UserId, roleName);
-
+                await UserManager.AddToRoleAsync(model.UserId, roleName);
                 return RedirectToAction("Index");
             }
             catch (AccessViolationException e)
@@ -226,10 +191,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     var currentUser =
                         await UserManager.FindByIdAsync(User.GetId());
-                    var company = currentUser.Company;
 
-                    if (company.GetEmployees()
-                        .All(employee => employee.Id != id))
+                    var companyId = currentUser.Company.Id;
+
+                    var company = await CompanyManager.Companies
+                        .Include(c => c.Employees)
+                        .SingleOrDefaultAsync(c => c.Id == companyId);
+
+                    if (company.Employees.All(employee => employee.Id != id))
                     {
                         throw new UnauthorizedAccessException(
                             "You are not permitted to view the details for this user.");
@@ -237,7 +206,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var user = await UserManager.FindByIdAsync(id);
-                var model = user.AsViewModel();
+
+                var role =
+                    await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
+
+                var companies = await CompanyManager.Companies.ToListAsync();
+                var roles = await RoleManager.Roles.ToListAsync();
+                var groups = await GroupManager.Groups.ToListAsync();
+
+                var model = new UserViewModel(
+                    user,
+                    role,
+                    companies,
+                    roles,
+                    groups);
                 return View(model);
             }
             catch (Exception e)
@@ -259,7 +241,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var user = await UserManager.FindByIdAsync(id);
-                var model = user.AsViewModel();
+                var role =
+                    await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
+
+                var companies = await CompanyManager.Companies.ToListAsync();
+                var roles = await RoleManager.Roles.ToListAsync();
+                var groups = await GroupManager.Groups.ToListAsync();
+
+                var model = new UserViewModel(
+                    user,
+                    role,
+                    companies,
+                    roles,
+                    groups);
                 return View(model);
             }
             catch (Exception e)
@@ -318,8 +312,31 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var users = await UserManager.Users.ToListAsync();
-                var model = users.Select(user => new UserViewModel(user)).ToList();
+                var users = await UserManager.Users.Include(u => u.Roles)
+                    .ToListAsync();
+                var companies = await CompanyManager.Companies.ToListAsync();
+                if (RoleManager == null)
+                {
+                    throw new Exception("Role manager null");
+                }
+
+                var roles = await RoleManager.Roles.ToListAsync();
+                var groups = await GroupManager.Groups.ToListAsync();
+                IList<UserViewModel> model = new List<UserViewModel>();
+
+                foreach (var user in users)
+                {
+                    var roleId = user.Roles.Single().RoleId;
+                    var role = await RoleManager.FindByIdAsync(roleId);
+                    model.Add(
+                        new UserViewModel(
+                            user,
+                            role,
+                            companies,
+                            roles,
+                            groups));
+                }
+
                 return View(model);
             }
             catch (Exception e)
@@ -342,6 +359,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             if (disposing)
             {
                 CompanyManager?.Dispose();
+                GroupManager?.Dispose();
                 RoleManager?.Dispose();
                 UserManager?.Dispose();
             }

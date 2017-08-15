@@ -110,37 +110,5 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             HttpContext.Current.Session["Error"] = null;
             return ((HttpStatusCode, string)) error;
         }
-
-        internal static bool IsEmployeeTrainingResult(
-            this IPrincipal user,
-            int id)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetUser(user.GetId())
-                    .Company.Employees
-                    .SelectMany(employee => employee.TrainingResults)
-                    .Any(trainingResult => trainingResult.Id == id);
-            }
-        }
-
-        public static bool IsOwnTrainingResult(this IPrincipal user, int id)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetUser(user.GetId())
-                    .TrainingResults
-                    .Any(trainingResult => trainingResult.Id == id);
-            }
-        }
-
-        internal static bool IsEmployee(this IPrincipal user, string id)
-        {
-            using (var db = new KingsportMillSafetyTrainingDbContext())
-            {
-                return db.GetUser(user.GetId())
-                    .Company.Employees.Any(employee => employee.Id == id);
-            }
-        }
     }
 }

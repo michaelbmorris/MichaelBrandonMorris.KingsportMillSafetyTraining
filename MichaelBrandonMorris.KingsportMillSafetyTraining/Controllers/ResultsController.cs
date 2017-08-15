@@ -8,8 +8,12 @@ using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Views;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using System.Linq;
+using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
@@ -27,6 +31,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             .Get<TrainingResultManager>();
 
         private UserManager UserManager => OwinContext.Get<UserManager>();
+
+        private CompanyManager CompanyManager =>
+            OwinContext.Get<CompanyManager>();
+
+        private GroupManager GroupManager => OwinContext.Get<GroupManager>();
+
+        private RoleManager<Role> RoleManager => OwinContext
+            .Get<RoleManager<Role>>();
 
         /// <summary>
         ///     Detailses the specified identifier.
@@ -61,8 +73,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     || User.IsInRole("Administrator")
                     || User.IsInRole("Security")
                     || User.IsInRole("Supervisor")
-                    && User.IsEmployeeTrainingResult(id.Value)
-                    || User.IsOwnTrainingResult(id.Value))
+                    && await User.IsEmployeeTrainingResult(id.Value)
+                    || await User.IsOwnTrainingResult(id.Value))
                 {
                     return View(model);
                 }
@@ -145,7 +157,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (!User.IsInRole("Owner")
                     && !User.IsInRole("Administrator")
                     && !User.IsInRole("Security")
-                    && (!User.IsInRole("Supervisor") || !User.IsEmployee(id))
+                    && (!User.IsInRole("Supervisor")
+                    || !await User.IsEmployee(id))
                     && User.GetId() != id)
                 {
                     return this.CreateError(
@@ -155,8 +168,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var user = await UserManager.FindByIdAsync(id);
 
+                var role =
+                    await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
+
+                var companies = await CompanyManager.Companies.ToListAsync();
+                var roles = await RoleManager.Roles.ToListAsync();
+                var groups = await GroupManager.Groups.ToListAsync();
+
                 var model = new UserTrainingResultsViewModel(
-                    user.AsViewModel(),
+                    new UserViewModel(user, role, companies, roles, groups), 
                     user.GetTrainingResults().AsViewModels());
 
                 return View(model);
