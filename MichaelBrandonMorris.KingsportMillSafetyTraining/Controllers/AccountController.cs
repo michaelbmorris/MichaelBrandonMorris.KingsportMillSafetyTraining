@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -42,8 +44,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="signInManager">The sign in manager.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public AccountController(
-            SignInManager signInManager)
+        public AccountController(SignInManager signInManager)
         {
             SignInManager = signInManager;
         }
@@ -59,13 +60,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             private set => _signInManager = value;
         }
 
-        private UserManager UserManager => OwinContext.Get<UserManager>();
-
-        private CompanyManager CompanyManager =>
-            OwinContext.Get<CompanyManager>();
-
-        private IOwinContext OwinContext => HttpContext.GetOwinContext();
-
         /// <summary>
         ///     Gets the authentication manager.
         /// </summary>
@@ -74,6 +68,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private IAuthenticationManager AuthenticationManager => HttpContext
             .GetOwinContext()
             .Authentication;
+
+        private CompanyManager CompanyManager =>
+            OwinContext.Get<CompanyManager>();
+
+        private IOwinContext OwinContext => HttpContext.GetOwinContext();
+
+        private UserManager UserManager => OwinContext.Get<UserManager>();
 
         /// <summary>
         ///     Forgots the password.
@@ -148,10 +149,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         Subject = "Reset Password"
                     })
                     {
-                        var toAddress = 
-                            new MailAddress(
-                                user.Email,
-                                $"{user.FirstName} {user.LastName}");
+                        var toAddress = new MailAddress(
+                            user.Email,
+                            $"{user.FirstName} {user.LastName}");
 
                         mailMessage.To.Add(toAddress);
                         smtpClient.Send(mailMessage);
@@ -283,11 +283,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Register
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Register()
+        public async Task<ActionResult> Register()
         {
             try
             {
-                var model = new RegisterViewModel();
+                var companies = await CompanyManager.Companies
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
+                var model = new RegisterViewModel(companies);
                 return View(model);
             }
             catch (Exception e)
@@ -332,7 +336,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     user = await UserManager.FindByEmailAsync(user.Email);
                     await UserManager.AddToRoleAsync(user.Id, "User");
-                    var company = await CompanyManager.FindByIdAsync(model.CompanyId);
+                    var company =
+                        await CompanyManager.FindByIdAsync(model.CompanyId);
                     await UserManager.SetCompany(user.Id, company);
                     return RedirectToAction("Index", "Training");
                 }
