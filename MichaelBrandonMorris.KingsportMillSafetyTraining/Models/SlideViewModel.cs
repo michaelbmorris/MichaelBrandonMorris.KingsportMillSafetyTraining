@@ -15,6 +15,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
     /// TODO Edit XML Comment Template for SlideViewModel
     public class SlideViewModel
     {
+        public SlideViewModel()
+        {
+        }
+
         /// <summary>
         ///     Initializes a new instance of the
         ///     <see cref="SlideViewModel" /> class.
