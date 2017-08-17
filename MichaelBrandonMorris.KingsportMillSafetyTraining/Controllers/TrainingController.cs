@@ -203,6 +203,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var groups = await GroupManager.Groups.OrderBy(g => g.Index)
                 .ToListAsync();
 
+            if (groups.Count == 0)
+            {
+                return View("Error");
+            }
+
             var model = new SelectGroupViewModel
             {
                 Groups = groups.SkipLast(1).AsViewModels(),

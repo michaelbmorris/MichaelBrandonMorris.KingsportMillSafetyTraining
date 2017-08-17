@@ -342,6 +342,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return RedirectToAction("Index", "Training");
                 }
 
+                model.Companies = await CompanyManager.Companies
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
                 AddErrors(result);
                 return View(model);
             }

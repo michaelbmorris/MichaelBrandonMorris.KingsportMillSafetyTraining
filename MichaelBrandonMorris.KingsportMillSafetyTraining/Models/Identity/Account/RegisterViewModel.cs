@@ -49,6 +49,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Identity.
         public IList<Company> Companies
         {
             get;
+            set;
         }
 
         /// <summary>

@@ -14,14 +14,40 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Initializes a new instance of the
         ///     <see cref="CompanyViewModel" /> class.
         /// </summary>
+        /// TODO Edit XML Comment Template for #ctor
+        public CompanyViewModel()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the
+        ///     <see cref="CompanyViewModel" /> class.
+        /// </summary>
         /// <param name="company">The company.</param>
         /// TODO Edit XML Comment Template for #ctor
         public CompanyViewModel(Company company)
         {
-            Employees = company.Employees.Select(e => new UserViewModel(e, null, new List<Company>(), new List<Role>(), new List<Group>())).ToList();
+            Employees = company.Employees
+                .Select(
+                    e => new UserViewModel(
+                        e,
+                        null,
+                        new List<Company>(),
+                        new List<Role>(),
+                        new List<Group>()))
+                .ToList();
             Id = company.Id;
             Name = company.Name;
         }
+
+        /// <summary>
+        ///     Gets the supervisors.
+        /// </summary>
+        /// <value>The supervisors.</value>
+        /// TODO Edit XML Comment Template for Supervisors
+        public IList<UserViewModel> Supervisors => Employees
+            .Where(employee => employee.Role.Name == "Supervisor")
+            .ToList();
 
         /// <summary>
         ///     Gets or sets the employees.
@@ -33,14 +59,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             get;
             set;
         }
-
-        /// <summary>
-        /// Gets the supervisors.
-        /// </summary>
-        /// <value>The supervisors.</value>
-        /// TODO Edit XML Comment Template for Supervisors
-        public IList<UserViewModel> Supervisors => Employees.Where(
-            employee => employee.Role.Name == "Supervisor").ToList();
 
         /// <summary>
         ///     Gets or sets the identifier.
