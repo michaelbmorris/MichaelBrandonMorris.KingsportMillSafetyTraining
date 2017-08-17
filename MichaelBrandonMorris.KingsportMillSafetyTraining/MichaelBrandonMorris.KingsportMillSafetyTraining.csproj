@@ -257,7 +257,6 @@
     </Compile>
     <Compile Include="Models\AssignCategoriesViewModel.cs" />
     <Compile Include="Models\AssignGroupsViewModel.cs" />
-    <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangeRoleViewModel.cs" />
     <Compile Include="Models\CompanyViewModel.cs" />
@@ -730,11 +729,11 @@
     <Content Include="Views\Slides\AddAnswer.cshtml" />
     <Content Include="Views\Groups\AssignCategories.cshtml" />
     <Content Include="Views\Categories\Reorder.cshtml" />
-    <Content Include="Views\Categories\EditorTemplates\CategoryViewModel.cshtml" />
+    <Content Include="Views\Categories\EditorTemplates\Category.cshtml" />
     <Content Include="Views\Groups\EditorTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\AssignGroups.cshtml" />
     <Content Include="Views\Groups\DisplayTemplates\GroupViewModel.cshtml" />
-    <Content Include="Views\Categories\DisplayTemplates\CategoryViewModel.cshtml" />
+    <Content Include="Views\Categories\DisplayTemplates\Category.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
     <Content Include="Views\Training\SelectGroup.cshtml" />
     <Content Include="Views\Training\Train.cshtml" />

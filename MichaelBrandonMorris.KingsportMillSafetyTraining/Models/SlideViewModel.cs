@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Foolproof;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models.Validation;
 
@@ -46,7 +47,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 
             Answers = slide.Answers;
             CategoryId = slide.Category.Id;
-            CategoryTitle = slide.Category.Title;
+            CategoryName = slide.Category.DisplayName.IsNullOrEmpty() ? slide.Category.Name : slide.Category.DisplayName;
             Content = slide.Content;
             CorrectAnswerIndex = slide.CorrectAnswerIndex;
             Id = slide.Id;
@@ -69,7 +70,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             category => new SelectListItem
             {
                 Value = category.Id.ToString(),
-                Text = category.Title
+                Text = category.Name
             });
 
         /// <summary>
@@ -112,9 +113,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     Gets or sets the category title.
         /// </summary>
         /// <value>The category title.</value>
-        /// TODO Edit XML Comment Template for CategoryTitle
+        /// TODO Edit XML Comment Template for CategoryName
         [Display(Name = "Category")]
-        public string CategoryTitle
+        public string CategoryName
         {
             get;
             set;

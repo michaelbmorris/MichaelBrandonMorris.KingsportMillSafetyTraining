@@ -1,0 +1,9 @@
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form.Horizontal
+@model MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category
+
+@Html.BootstrapHorizontalTextBoxFor(model => model.Name, true)
+<p class="bg-info">
+    The <b>Display Name</b> will be shown to users instead of the <b>Name</b> if one is specified. If one is not specified, the <b>Name</b> will be shown instead.
+</p>
+@Html.BootstrapHorizontalTextBoxFor(model => model.DisplayName)
+@Html.BootstrapHorizontalCkeditorFor(model => model.Description)

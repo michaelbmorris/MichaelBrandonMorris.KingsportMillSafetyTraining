@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var categoryViewModel in Model.CategoryViewModels)
+            @foreach (var category in Model.Categories)
             {
                 <tr>
                     @foreach (var role in Model.Groups)
@@ -29,9 +29,9 @@
                                 <label>
                                     <input name="model"
                                            type="checkbox"
-                                           value="@Cantor.Pair(role.Id, categoryViewModel.Id)"
-                                           @Html.Attribute("checked", "checked", categoryViewModel.Groups.Contains(role))/>
-                                    @Html.DisplayFor(modelCategoryViewModel => categoryViewModel.Title)
+                                           value="@Cantor.Pair(role.Id, category.Id)"
+                                           @Html.Attribute("checked", "checked", category.Groups.Contains(role))/>
+                                    @Html.DisplayFor(modelCategoryViewModel => category.Name)
                                 </label>
                             </div>
 

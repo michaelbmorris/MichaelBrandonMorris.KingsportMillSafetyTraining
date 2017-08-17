@@ -1,7 +1,7 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 
-@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
+@model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category>
 
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
@@ -54,7 +54,8 @@
                 {
                     <td class="rowspan"
                         rowspan="@category.Slides.Count">
-                        <h4>@Html.DisplayFor(model => category.Title)</h4>
+                        <h4>@category.Name</h4>
+                        <h5>"@category.DisplayName"</h5>
                         <ul>
                             @foreach (var group in category.Groups)
                             {

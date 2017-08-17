@@ -43,23 +43,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     Ases the view model.
         /// </summary>
-        /// <param name="category">The category.</param>
-        /// <returns>CategoryViewModel.</returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        /// TODO Edit XML Comment Template for AsViewModel
-        public static CategoryViewModel AsViewModel(this Category category)
-        {
-            if (category == null)
-            {
-                throw new ArgumentNullException(nameof(category));
-            }
-
-            return new CategoryViewModel(category);
-        }
-
-        /// <summary>
-        ///     Ases the view model.
-        /// </summary>
         /// <param name="trainingResult">The training result.</param>
         /// <returns>TrainingResultViewModel.</returns>
         /// <exception cref="ArgumentNullException"></exception>
@@ -114,18 +97,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             this IList<Group> roles)
         {
             return roles.Select(x => new GroupViewModel(x));
-        }
-
-        /// <summary>
-        ///     Ases the view models.
-        /// </summary>
-        /// <param name="categories">The categories.</param>
-        /// <returns>IList&lt;CategoryViewModel&gt;.</returns>
-        /// TODO Edit XML Comment Template for AsViewModels
-        public static IList<CategoryViewModel> AsViewModels(
-            this IList<Category> categories)
-        {
-            return categories.Select(x => new CategoryViewModel(x));
         }
 
         /// <summary>

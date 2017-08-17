@@ -48,7 +48,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         public async Task<ActionResult> AssignCategories(int? id)
         {
             var categories = await CategoryManager.Categories.ToListAsync();
-            var categoryViewModels = categories.AsViewModels();
             AssignCategoriesViewModel model;
 
             if (id == null)
@@ -56,14 +55,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var groups = await GroupManager.Groups.ToListAsync();
                 model = new AssignCategoriesViewModel(
                     groups,
-                    categoryViewModels);
+                    categories);
             }
             else
             {
                 var group = await GroupManager.FindByIdAsync(id.Value);
                 model = new AssignCategoriesViewModel(
                     group,
-                    categoryViewModels);
+                    categories);
             }
 
             return View(model);

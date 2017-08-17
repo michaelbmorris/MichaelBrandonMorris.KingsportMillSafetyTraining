@@ -23,14 +23,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     <see cref="AssignCategoriesViewModel" /> class.
         /// </summary>
         /// <param name="groups">The groups.</param>
-        /// <param name="categoryViewModels">The category view models.</param>
+        /// <param name="categories">The categories.</param>
         /// TODO Edit XML Comment Template for #ctor
         public AssignCategoriesViewModel(
             IList<Group> groups,
-            IList<CategoryViewModel> categoryViewModels)
+            IList<Category> categories)
         {
             Groups = groups;
-            CategoryViewModels = categoryViewModels;
+            Categories = categories;
         }
 
         /// <summary>
@@ -38,26 +38,24 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         ///     <see cref="AssignCategoriesViewModel" /> class.
         /// </summary>
         /// <param name="role">The role.</param>
-        /// <param name="categoryViewModels">The category view models.</param>
+        /// <param name="categories">The category view models.</param>
         /// TODO Edit XML Comment Template for #ctor
-        public AssignCategoriesViewModel(
-            Group role,
-            IList<CategoryViewModel> categoryViewModels)
+        public AssignCategoriesViewModel(Group role, IList<Category> categories)
         {
             Groups = new List<Group>
             {
                 role
             };
 
-            CategoryViewModels = categoryViewModels;
+            Categories = categories;
         }
 
         /// <summary>
         ///     Gets or sets the category view models.
         /// </summary>
         /// <value>The category view models.</value>
-        /// TODO Edit XML Comment Template for CategoryViewModels
-        public IList<CategoryViewModel> CategoryViewModels
+        /// TODO Edit XML Comment Template for Categories
+        public IList<Category> Categories
         {
             get;
             set;

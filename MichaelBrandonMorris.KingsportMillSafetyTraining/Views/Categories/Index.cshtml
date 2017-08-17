@@ -1,7 +1,7 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 
-@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.CategoryViewModel>
+@model IEnumerable<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category>
 
 @{
     ViewBag.Title = "Categories";
@@ -15,7 +15,8 @@
 @Html.Grid(Model).Build(columns =>
   {
       columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
-      columns.Add(model => model.Title).Titled("Title");
+      columns.Add(model => model.Name).Titled("Name");
+      columns.Add(model => model.DisplayName).Titled("Display Name");
       columns.Add(model => model.Slides.Count).Titled("Number of Slides");
       columns.Add(model => model.Groups.Count).Titled("Number of Groups");
       columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new

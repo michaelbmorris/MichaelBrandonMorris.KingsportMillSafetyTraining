@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -156,23 +157,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CategoryViewModel model)
+        public async Task<ActionResult> Create(Category category)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(model);
+                    return View(category);
                 }
 
-                await CategoryManager.CreateAsync(
-                    new Category
-                    {
-                        Title = model.Title,
-                        Description = model.Description,
-                        Index = ++Category.CurrentIndex
-                    });
-
+                await CategoryManager.CreateAsync(category);
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -204,8 +198,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var category = await CategoryManager.FindByIdAsync(id.Value);
-                var model = category.AsViewModel();
-                return View(model);
+                return View(category);
             }
             catch (ArgumentNullException e)
             {
@@ -246,12 +239,19 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         "Parameter missing.\nType: 'int'\nName: 'id'");
                 }
 
-                var category = await CategoryManager.FindByIdAsync(id.Value);
+                var category = await CategoryManager.Categories
+                    .Include(c => c.Slides)
+                    .SingleOrDefaultAsync(c => c.Id == id);
 
                 if (category == null)
                 {
                     throw new KeyNotFoundException(
                         $"Category with Id {id} not found.");
+                }
+
+                if (category.Slides.Count > 0)
+                {
+                    return View("Error");
                 }
 
                 await CategoryManager.DeleteAsync(category);
@@ -294,8 +294,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var category = await CategoryManager.FindByIdAsync(id.Value);
-                var model = category.AsViewModel();
-                return View(model);
+                return View(category);
             }
             catch (InvalidOperationException e)
             {
@@ -334,8 +333,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var category = await CategoryManager.FindByIdAsync(id.Value);
-                var model = category.AsViewModel();
-                return View(model);
+                return View(category);
             }
             catch (InvalidOperationException e)
             {
@@ -351,17 +349,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        /// <summary>
-        ///     Edits the specified category.
-        /// </summary>
-        /// <param name="model">The category.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(
-            [Bind(Include = "Description,Id,Title")] CategoryViewModel model)
+        public async Task<ActionResult> Edit(Category model)
         {
             try
             {
@@ -372,7 +363,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var category = await CategoryManager.FindByIdAsync(model.Id);
                 category.Description = model.Description;
-                category.Title = model.Title;
+                category.DisplayName = model.DisplayName;
+                category.Name = model.Name;
                 await CategoryManager.UpdateAsync(category);
                 return RedirectToAction("Index");
             }
@@ -394,8 +386,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var categories = await CategoryManager.Categories.ToListAsync();
-                var model = categories.AsViewModels();
-                return View(model);
+                return View(categories);
             }
             catch (Exception e)
             {
@@ -414,9 +405,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var categories = await CategoryManager.Categories.ToListAsync();
-                var model = categories.OrderBy(OrderByIndex).AsViewModels();
-                return View(model);
+                var categories = await CategoryManager.Categories.OrderBy(c => c.Index).ToListAsync();
+                return View(categories);
             }
             catch (Exception e)
             {
@@ -424,17 +414,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        /// <summary>
-        ///     Reorders the specified categories.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>
-        ///     System.Threading.Tasks.Task&lt;
-        ///     System.Web.Mvc.ActionResult&gt;.
-        /// </returns>
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
-        public async Task<ActionResult> Reorder(IList<CategoryViewModel> model)
+        public async Task<ActionResult> Reorder(IList<Category> model)
         {
             try
             {

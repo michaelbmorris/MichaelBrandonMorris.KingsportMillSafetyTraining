@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
@@ -8,6 +10,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
     /// TODO Edit XML Comment Template for Category
     public class Category : IEntity<int>
     {
+        /// <summary>
+        ///     The current index
+        /// </summary>
+        /// TODO Edit XML Comment Template for CurrentIndex
+        public static int CurrentIndex
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         ///     Gets or sets the description.
         /// </summary>
@@ -20,22 +32,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        ///     Gets or sets the identifier.
+        ///     Gets or sets the display name.
         /// </summary>
-        /// <value>The identifier.</value>
-        /// TODO Edit XML Comment Template for Id
-        public int Id
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        ///     Gets or sets the index.
-        /// </summary>
-        /// <value>The index.</value>
-        /// TODO Edit XML Comment Template for Index
-        public int Index
+        /// <value>The display name.</value>
+        /// TODO Edit XML Comment Template for DisplayName
+        [DisplayName("Display Name")]
+        public string DisplayName
         {
             get;
             set;
@@ -53,32 +55,44 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         } = new List<Group>();
 
         /// <summary>
-        ///     Gets or sets the slides.
+        ///     Gets or sets the index.
         /// </summary>
-        /// <value>The slides.</value>
-        /// TODO Edit XML Comment Template for Slides
-        public virtual IList<Slide> Slides
-        {
-            get;
-            set;
-        } = new List<Slide>();
-
-        /// <summary>
-        ///     Gets or sets the title.
-        /// </summary>
-        /// <value>The title.</value>
-        /// TODO Edit XML Comment Template for Title
-        public string Title
+        /// <value>The index.</value>
+        /// TODO Edit XML Comment Template for Index
+        public int Index
         {
             get;
             set;
         }
 
         /// <summary>
-        ///     The current index
+        ///     Gets or sets the name.
         /// </summary>
-        /// TODO Edit XML Comment Template for CurrentIndex
-        public static int CurrentIndex
+        /// <value>The name.</value>
+        /// TODO Edit XML Comment Template for Name
+        public string Name
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        ///     Gets or sets the slides.
+        /// </summary>
+        /// <value>The slides.</value>
+        /// TODO Edit XML Comment Template for Slides
+        public virtual ICollection<Slide> Slides
+        {
+            get;
+            set;
+        } = new Collection<Slide>();
+
+        /// <summary>
+        ///     Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        /// TODO Edit XML Comment Template for Id
+        public int Id
         {
             get;
             set;

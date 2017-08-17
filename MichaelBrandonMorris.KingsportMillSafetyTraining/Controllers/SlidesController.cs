@@ -94,9 +94,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 return View(model);
             }
 
+            var category =
+                await CategoryManager.FindByIdAsync(model.CategoryId);
+
             var slide = new Slide
             {
                 Answers = model.Answers,
+                Category = category,
                 Content = model.Content,
                 CorrectAnswerIndex = model.CorrectAnswerIndex,
                 ImageBytes = model.Image?.ToBytes(),
@@ -161,11 +165,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new ArgumentNullException(nameof(id));
                 }
 
-                var slide = await SlideManager.FindByIdAsync(id.Value);
+                var slide = await SlideManager.Slides.Include(s => s.Answers)
+                    .SingleOrDefaultAsync(s => s.Id == id.Value);
 
                 if (slide == null)
                 {
                     throw new KeyNotFoundException();
+                }
+
+                foreach (var answer in slide.Answers.ToList())
+                {
+                    await AnswerManager.DeleteAsync(answer);
                 }
 
                 await SlideManager.DeleteAsync(slide);
@@ -361,7 +371,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                IList<CategoryViewModel> model;
+                IList<Category> model;
 
                 if (id == null)
                 {
@@ -369,7 +379,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         .Include(c => c.Slides)
                         .ToListAsync();
 
-                    model = categories.AsViewModels();
+                    model = categories;
                 }
                 else
                 {
@@ -377,8 +387,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         .Include(g => g.Categories.Select(c => c.Slides))
                         .SingleOrDefaultAsync(g => g.Id == id);
 
-                    var categories = group.Categories.OrderBy(c => c.Index);
-                    model = categories.ToList().AsViewModels();
+                    model = group.Categories.OrderBy(c => c.Index);
                 }
 
                 return View(model);
@@ -544,9 +553,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var categories = await CategoryManager.Categories.ToListAsync();
-                var model = categories.OrderBy(c => c.Index).AsViewModels();
-                return View(model);
+                var categories = await CategoryManager.Categories.OrderBy(c => c.Index).ToListAsync();
+                return View(categories);
             }
             catch (Exception e)
             {
