@@ -29,6 +29,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private const string JpgType = "image/jpg";
 
         private AnswerManager AnswerManager => OwinContext.Get<AnswerManager>();
+
         private CategoryManager CategoryManager => OwinContext
             .Get<CategoryManager>();
 
@@ -63,9 +64,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Create
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            var model = new SlideViewModel(null);
+            var categories = await CategoryManager.Categories
+                .OrderBy(c => c.Index)
+                .ToListAsync();
+
+            var model = new SlideViewModel(categories);
             return View(model);
         }
 
@@ -82,6 +87,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.Categories = await CategoryManager.Categories
+                    .OrderBy(c => c.Index)
+                    .ToListAsync();
+
                 return View(model);
             }
 
@@ -233,7 +242,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new KeyNotFoundException();
                 }
 
-                var categories = await CategoryManager.Categories.ToListAsync();
+                var categories = await CategoryManager.Categories
+                    .OrderBy(c => c.Index)
+                    .ToListAsync();
+
                 var model = new SlideViewModel(slide, categories);
                 return View(model);
             }
@@ -266,6 +278,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    model.Categories = await CategoryManager.Categories
+                        .OrderBy(c => c.Index)
+                        .ToListAsync();
+
                     return View(model);
                 }
 

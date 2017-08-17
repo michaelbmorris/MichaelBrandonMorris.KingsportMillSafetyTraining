@@ -92,6 +92,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         public IList<Category> Categories
         {
             get;
+            set;
         }
 
         /// <summary>
