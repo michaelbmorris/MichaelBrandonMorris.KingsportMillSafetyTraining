@@ -113,3 +113,8 @@ ul li:last-child .btn {
 td ul li {
     margin-bottom: 0;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}

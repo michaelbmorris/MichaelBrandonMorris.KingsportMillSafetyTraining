@@ -1,4 +1,5 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+﻿@using MichaelBrandonMorris.Extensions.PrimitiveExtensions
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 
 @model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category>
@@ -55,7 +56,7 @@
                     <td class="rowspan"
                         rowspan="@category.Slides.Count">
                         <h4>@category.Name</h4>
-                        <h5>"@category.DisplayName"</h5>
+                        <h5>"@(category.DisplayName.IsNullOrWhiteSpace() ? category.Name : category.DisplayName)"</h5>
                         <ul>
                             @foreach (var group in category.Groups)
                             {

@@ -57,6 +57,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
+        public async Task RemoveImage(int id)
+        {
+            var slide = await SlideManager.FindByIdAsync(id);
+            slide.ImageBytes = null;
+            await SlideManager.UpdateAsync(slide);
+        }
+
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -337,9 +344,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 slide.CorrectAnswerIndex = model.CorrectAnswerIndex;
 
-                slide.ImageBytes = model.Image == null
-                    ? model.ImageBytes
-                    : model.Image.ToBytes();
+                if (model.Image != null)
+                {
+                    slide.ImageBytes = model.Image.ToBytes();
+
+                    slide.MimeType =
+                        MimeMapping.GetMimeMapping(model.Image.FileName);
+                }
 
                 slide.ImageDescription = model.ImageDescription;
                 slide.Question = model.Question;
@@ -425,7 +436,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 return slide.ImageBytes == null
                     ? null
-                    : File(slide.ImageBytes, JpgType);
+                    : File(slide.ImageBytes, slide.MimeType);
             }
             catch (ArgumentNullException e)
             {

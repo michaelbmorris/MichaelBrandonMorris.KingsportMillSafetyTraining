@@ -122,7 +122,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 var user = await UserManager.FindByIdAsync(id);
                 var roleName = (await UserManager.GetRolesAsync(id)).Single();
-                var roles = await RoleManager.Roles.ToListAsync();
+
+                var roles = await RoleManager.Roles.OrderBy(r => r.Index).ToListAsync();
+
                 var roleNames = roles.Select(r => r.Name);
                 var model = new ChangeRoleViewModel(user, roleName, roleNames);
                 return View(model);
@@ -220,6 +222,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     companies,
                     roles,
                     groups);
+
                 return View(model);
             }
             catch (Exception e)
@@ -241,6 +244,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var user = await UserManager.FindByIdAsync(id);
+
                 var role =
                     await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
 
@@ -254,6 +258,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     companies,
                     roles,
                     groups);
+
                 return View(model);
             }
             catch (Exception e)
@@ -328,6 +333,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     var roleId = user.Roles.Single().RoleId;
                     var role = await RoleManager.FindByIdAsync(roleId);
+
                     model.Add(
                         new UserViewModel(
                             user,

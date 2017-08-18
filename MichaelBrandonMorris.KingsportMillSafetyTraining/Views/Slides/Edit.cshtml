@@ -44,6 +44,14 @@
                 });
         });
 
+        $(document).ready(function($) {
+            $("#remove-image").on('click',
+                function() {
+                    $.post("@Url.Action("RemoveImage", new { id = Model.Id })");
+                    $("#image").remove();
+                });
+        });
+
         var s = "input[name=CorrectAnswerIndex][value=";
 
         $(document).ready(function() {
@@ -53,5 +61,11 @@
         function removeAnswer(answerIndex) {
             $("#answer-" + answerIndex).remove();
         }
+
+        $('#file-upload').bind('change',
+            function () {
+                var fileName = $(this).val();
+                $('#file-selected').html(fileName.substring(fileName.lastIndexOf('\\') + 1));
+            });
     </script>
 }

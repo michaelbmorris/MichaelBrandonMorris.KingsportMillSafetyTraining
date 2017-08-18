@@ -148,12 +148,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        /// <summary>
-        ///     Creates the specified category.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        /// <returns>ActionResult.</returns>
-        /// TODO Edit XML Comment Template for Create
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -166,6 +160,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     return View(category);
                 }
 
+                category.Index = await CategoryManager.Categories.CountAsync();
                 await CategoryManager.CreateAsync(category);
                 return RedirectToAction("Index");
             }

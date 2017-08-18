@@ -56,7 +56,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         ///     Creates the owner account.
         /// </summary>
         /// TODO Edit XML Comment Template for CreateRoles
-        private async void CreateOwner()
+        private static async void CreateOwner()
         {
             using (var db = new KingsportMillSafetyTrainingDbContext())
             using (var store = new UserStore(db))

@@ -18,23 +18,35 @@
         @class = "control-label col-md-2"
     })
     <div class="col-md-10">
-        @Html.HiddenFor(model => model.ImageBytes)
         @if (Model.ImageBytes != null)
         {
-            <img src="@Url.Action("RenderImage", new
-                      {
-                          id = Model.Id
-                      })"
-                 alt="@Model.ImageDescription"/>
-            <br />
+            <div id="image">
+                <img src="@Url.Action("RenderImage", new
+                          {
+                              id = Model.Id
+                          })"
+                     alt="@Model.ImageDescription"/>
+                <br/>
+                <p>
+                    <button class="btn btn-danger"
+                            id="remove-image"
+                            type="button">
+                        Remove Image
+                    </button>
+                </p>
+            </div>
         }
-        <label class="btn btn-primary">
-            <input id="file-upload"name="Image"
-                   type="file"
-                   style="display: none;"/>
-            Upload Image...
-        </label>
-        <span id="file-selected"></span>
+        <p>
+            <label class="btn btn-primary">
+                <input id="file-upload"
+                       name="Image"
+                       type="file"
+                       style="display: none;"
+                       accept="image/*"/>
+                Upload Image...
+            </label>
+            <span id="file-selected"></span>
+        </p>
         @Html.ValidationMessageFor(model => model.Image, "", new
         {
             @class = "text-danger"

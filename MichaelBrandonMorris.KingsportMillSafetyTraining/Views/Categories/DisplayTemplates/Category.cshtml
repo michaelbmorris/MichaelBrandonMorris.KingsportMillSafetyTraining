@@ -46,10 +46,10 @@
             {
                 columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
                 columns.Add(model => model.Title).Titled("Title");
-                columns.Add(model => string.Format("<img src=\"{0} alt=\"{1}\"", Url.Action("RenderImage", "Slides", new
+                columns.Add(model => string.Format("<img src=\"{0}\" alt=\"{1}\"", Url.Action("RenderImage", "Slides", new
                 {
                     id = model.Id
-                }), model.ImageDescription)).Titled("Image");
+                }), model.ImageDescription)).Titled("Image").Encoded(false);
                 columns.Add(model => model.ShouldShowSlideInSlideshow).Titled("Show Slide in Slideshow?");
                 columns.Add(model => model.ShouldShowQuestionOnQuiz).Titled("Show Question on Quiz?");
                 columns.Add(model => model.ShouldShowImageOnQuiz).Titled("Show Image on Quiz?");

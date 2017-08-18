@@ -245,6 +245,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             return obj.GetType() == GetType() && Equals((Slide) obj);
         }
 
+        public string MimeType
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
