@@ -46,7 +46,17 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
                 var user = await UserManager.FindByIdAsync(id);
+
+                if (user == null)
+                {
+                    throw new KeyNotFoundException();
+                }
 
                 if (User.IsInRole("Supervisor"))
                 {
@@ -73,6 +83,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 };
 
                 return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return this.CreateError(HttpStatusCode.Forbidden, e);
             }
             catch (Exception e)
             {
@@ -120,14 +142,34 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
                 var user = await UserManager.FindByIdAsync(id);
+
+                if (user == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
                 var roleName = (await UserManager.GetRolesAsync(id)).Single();
 
-                var roles = await RoleManager.Roles.OrderBy(r => r.Index).ToListAsync();
+                var roles = await RoleManager.Roles.OrderBy(r => r.Index)
+                    .ToListAsync();
 
                 var roleNames = roles.Select(r => r.Name);
                 var model = new ChangeRoleViewModel(user, roleName, roleNames);
                 return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {
@@ -189,6 +231,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
                 if (User.IsInRole("Supervisor"))
                 {
                     var currentUser =
@@ -209,6 +256,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var user = await UserManager.FindByIdAsync(id);
 
+                if (user == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
                 var role =
                     await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
 
@@ -225,9 +277,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 return View(model);
             }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                return this.CreateError(HttpStatusCode.Forbidden, e);
+            }
             catch (Exception e)
             {
-                // TODO Replace general error handling with specific.
                 return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
         }

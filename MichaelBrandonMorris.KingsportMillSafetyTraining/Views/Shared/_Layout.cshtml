@@ -172,21 +172,24 @@
                                 </ul>
                             </li>
                         }
-                        <li>
-                            <a aria-expanded="false"
-                               aria-haspopup="true"
-                               class="dropdown-toggle"
-                               data-toggle="dropdown"
-                               href="#"
-                               role="button">
-                                Users <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    @Html.ActionLink("View All", "Index", "Users")
-                                </li>
-                            </ul>
-                        </li>
+                        @if (!User.IsInRole("Collaborator"))
+                        {
+                            <li>
+                                <a aria-expanded="false"
+                                   aria-haspopup="true"
+                                   class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#"
+                                   role="button">
+                                    Users <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("View All", "Index", "Users")
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                         <li>
                             @Html.ActionLink("Results", "Index", "Results")
                         </li>
