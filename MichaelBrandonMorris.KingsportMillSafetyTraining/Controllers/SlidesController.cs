@@ -50,13 +50,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 });
         }
 
-        public async Task RemoveImage(int id)
-        {
-            var slide = await SlideManager.FindByIdAsync(id);
-            slide.ImageBytes = null;
-            await SlideManager.UpdateAsync(slide);
-        }
-
         /// <summary>
         ///     Creates this instance.
         /// </summary>
@@ -380,8 +373,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (id == null)
                 {
                     var categories = await CategoryManager.Categories
-                        .Include(c => c.Slides.OrderBy(s => s.Index))
+                        .Include(c => c.Slides)
                         .ToListAsync();
+
+                    foreach (var category in categories)
+                    {
+                        category.Slides =
+                            category.Slides.OrderBy(s => s.Index).ToList();
+                    }
 
                     model = categories;
                 }
@@ -400,6 +399,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 return this.CreateError(HttpStatusCode.InternalServerError, e);
             }
+        }
+
+        public async Task RemoveImage(int id)
+        {
+            var slide = await SlideManager.FindByIdAsync(id);
+            slide.ImageBytes = null;
+            await SlideManager.UpdateAsync(slide);
         }
 
         /// <summary>
@@ -557,7 +563,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             try
             {
-                var categories = await CategoryManager.Categories.OrderBy(c => c.Index).ToListAsync();
+                var categories = await CategoryManager.Categories
+                    .OrderBy(c => c.Index)
+                    .ToListAsync();
                 return View(categories);
             }
             catch (Exception e)
