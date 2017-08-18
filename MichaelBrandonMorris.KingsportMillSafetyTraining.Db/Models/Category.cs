@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Web.Mvc;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
@@ -25,6 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
+        [AllowHtml]
         public string Description
         {
             get;

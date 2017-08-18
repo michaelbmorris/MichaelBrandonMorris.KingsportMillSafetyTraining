@@ -38,19 +38,19 @@
                   columns.Add(model => model.DisplayName).Titled("Display Name");
                   columns.Add(model => model.Slides.Count).Titled("Number of Slides");
                   columns.Add(model => model.Groups.Count).Titled("Number of Groups");
-                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", "Categories", new
                   {
                       id = model.Id
                   }))).Encoded(false);
-                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", "Categories", new
                   {
                       id = model.Id
                   }))).Encoded(false);
-                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Categories</a>", Url.Action("AssignCategories", new
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Assign Groups</a>", Url.Action("AssignGroups", "Categories", new
                   {
                       id = model.Id
                   }))).Encoded(false);
-                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+                  columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", "Categories", new
                   {
                       id = model.Id
                   }))).Encoded(false);

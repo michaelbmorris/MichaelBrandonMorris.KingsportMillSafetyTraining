@@ -328,6 +328,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var category = await CategoryManager.FindByIdAsync(id.Value);
+
+                if (category == null)
+                {
+                    return HttpNotFound();
+                }
+
                 return View(category);
             }
             catch (InvalidOperationException e)

@@ -1,9 +1,15 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
+﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models.Category
 
 <div>
-    @Html.BootstrapHorizontalDefinitionListFor(model => model.Name, model => model.DisplayName)
     <dl class="dl-horizontal">
+        @Html.BootstrapDefinitionFor(model => model.Name)
+        @Html.BootstrapDefinitionFor(model => model.DisplayName)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
         <dd>
             @Html.Raw(Model.Description)
         </dd>
@@ -18,11 +24,11 @@
                 columns.Add(model => model.Index).Titled("Index").InitialSort(GridSortOrder.Asc);
                 columns.Add(model => model.Title).Titled("Title");
                 columns.Add(model => model.Categories.Count).Titled("Number of Categories");
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", "Groups", new
                 {
                     id = model.Id
                 }))).Encoded(false);
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", "Groups", new
                 {
                     id = model.Id
                 }))).Encoded(false);
@@ -30,7 +36,7 @@
                 {
                     id = model.Id
                 }))).Encoded(false);
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", "Groups", new
                 {
                     id = model.Id
                 }))).Encoded(false);
@@ -53,11 +59,11 @@
                 columns.Add(model => model.ShouldShowSlideInSlideshow).Titled("Show Slide in Slideshow?");
                 columns.Add(model => model.ShouldShowQuestionOnQuiz).Titled("Show Question on Quiz?");
                 columns.Add(model => model.ShouldShowImageOnQuiz).Titled("Show Image on Quiz?");
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Details</a>", Url.Action("Details", "Slides", new
                 {
                     id = model.Id
                 }))).Encoded(false);
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-primary"">Edit</a>", Url.Action("Edit", "Slides", new
                 {
                     id = model.Id
                 }))).Encoded(false);
@@ -65,7 +71,7 @@
                 {
                     id = model.Id
                 }))).Encoded(false);
-                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", new
+                columns.Add(model => string.Format(@"<a href=""{0}"" class=""btn btn-danger"">Delete</a>", Url.Action("Delete", "Slides", new
                 {
                     id = model.Id
                 }))).Encoded(false);
