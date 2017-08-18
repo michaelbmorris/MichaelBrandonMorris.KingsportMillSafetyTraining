@@ -52,6 +52,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
+        public bool IsUserTrainingResult
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         ///     Gets the completion date time string.
         /// </summary>

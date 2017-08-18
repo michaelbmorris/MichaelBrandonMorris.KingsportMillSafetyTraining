@@ -46,7 +46,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <value>The supervisors.</value>
         /// TODO Edit XML Comment Template for Supervisors
         public IList<UserViewModel> Supervisors => Employees
-            .Where(employee => employee.Role.Name == "Supervisor")
+            .Where(employee => employee.Role?.Name == "Supervisor")
             .ToList();
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         {
             get;
             set;
-        }
+        } = new List<UserViewModel>();
 
         /// <summary>
         ///     Gets or sets the identifier.

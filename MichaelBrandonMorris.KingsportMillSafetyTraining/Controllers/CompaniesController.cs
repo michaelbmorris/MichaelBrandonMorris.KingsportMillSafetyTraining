@@ -164,11 +164,22 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
         [Authorize(Roles = "Owner, Administrator")]
-        public async Task<ActionResult> Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
             try
             {
-                var company = await CompanyManager.FindByIdAsync(id);
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var company = await CompanyManager.FindByIdAsync(id.Value);
+
+                if (company == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
                 var model = company.AsViewModel();
                 return View(model);
             }

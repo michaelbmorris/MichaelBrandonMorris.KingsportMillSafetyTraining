@@ -22,19 +22,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// TODO Edit XML Comment Template for SlidesController
     public class SlidesController : Controller
     {
-        /// <summary>
-        ///     The JPG type
-        /// </summary>
-        /// TODO Edit XML Comment Template for JpgType
-        private const string JpgType = "image/jpg";
-
         private AnswerManager AnswerManager => OwinContext.Get<AnswerManager>();
 
         private CategoryManager CategoryManager => OwinContext
             .Get<CategoryManager>();
 
         private GroupManager GroupManager => OwinContext.Get<GroupManager>();
-
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
         private SlideManager SlideManager => OwinContext.Get<SlideManager>();
 
@@ -387,7 +380,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (id == null)
                 {
                     var categories = await CategoryManager.Categories
-                        .Include(c => c.Slides)
+                        .Include(c => c.Slides.OrderBy(s => s.Index))
                         .ToListAsync();
 
                     model = categories;

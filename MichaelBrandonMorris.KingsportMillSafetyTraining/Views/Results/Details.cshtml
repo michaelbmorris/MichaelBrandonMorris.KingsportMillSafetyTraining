@@ -1,7 +1,6 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
-@using MichaelBrandonMorris.KingsportMillSafetyTraining.Views
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.TrainingResultViewModel
 
 @{
@@ -30,7 +29,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        @if (User.IsOwnTrainingResult(Model.Id).Result)
+        @if (Model.IsUserTrainingResult)
         {
             @Html.BootstrapActionLinkButton("View All Your Results", "UserResults", new
             {

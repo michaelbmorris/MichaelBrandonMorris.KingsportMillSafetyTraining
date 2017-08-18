@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using System.Linq;
+using System.Linq.Expressions;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
@@ -40,6 +41,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         private RoleManager<Role> RoleManager => OwinContext
             .Get<RoleManager<Role>>();
 
+        private static Expression<Func<TrainingResult, User>> TrainingResultUser =>
+            trainingResult => trainingResult.User;
+
         /// <summary>
         ///     Detailses the specified identifier.
         /// </summary>
@@ -64,10 +68,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     throw new ArgumentNullException(nameof(id));
                 }
 
-                var trainingResult =
-                    await TrainingResultManager.FindByIdAsync(id.Value);
+                var trainingResult = await TrainingResultManager.TrainingResults
+                    .Include(TrainingResultUser)
+                    .SingleOrDefaultAsync(t => t.Id == id);
 
                 var model = trainingResult.AsViewModel();
+
+                if (await User.IsOwnTrainingResult(id.Value))
+                {
+                    model.IsUserTrainingResult = true;
+                }
 
                 if (User.IsInRole("Owner")
                     || User.IsInRole("Administrator")
