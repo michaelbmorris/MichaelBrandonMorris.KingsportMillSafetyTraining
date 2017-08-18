@@ -33,14 +33,14 @@
         {
             @Html.BootstrapActionLinkButton("View All Your Results", "UserResults", new
             {
-                id = Model.Id
+                id = Model.UserId
             }, ContextualColor.Primary)
         }
         else
         {
             @Html.BootstrapActionLinkButton("View All Results For This User", "UserResults", new
             {
-                id = Model.Id
+                id = Model.UserId
             }, ContextualColor.Primary)
         }
     </div>

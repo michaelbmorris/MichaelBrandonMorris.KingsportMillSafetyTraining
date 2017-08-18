@@ -121,8 +121,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         {
             if (!User.IsInRole("Administrator")
                 && !User.IsInRole("Owner")
-                && User.IsInRole("Security")
-                && User.IsInRole("Supervisor"))
+                && !User.IsInRole("Security")
+                && !User.IsInRole("Supervisor"))
             {
                 return RedirectToAction(
                     "UserResults",
@@ -135,7 +135,26 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var trainingResults =
                 await TrainingResultManager.TrainingResults.ToListAsync();
 
-            var model = trainingResults.AsViewModels();
+            IList<TrainingResultViewModel> model;
+
+            if (User.IsInRole("Supervisor"))
+            {
+                model = new List<TrainingResultViewModel>();
+
+                foreach (var trainingResult in trainingResults)
+                {
+                    if (await User.IsEmployeeTrainingResult(trainingResult.Id))
+                    {
+                        model.Add(new TrainingResultViewModel(trainingResult));
+                    }
+                }
+            }
+            else
+            {
+                model = trainingResults.AsViewModels();
+            }
+
+            
             return View(model);
         }
 
@@ -160,15 +179,14 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 if (id == null)
                 {
-                    throw new InvalidOperationException(
-                        "Parameter missing.\nName: 'id'\nType: 'string'");
+                    throw new ArgumentNullException(nameof(id));
                 }
 
                 if (!User.IsInRole("Owner")
                     && !User.IsInRole("Administrator")
                     && !User.IsInRole("Security")
                     && (!User.IsInRole("Supervisor")
-                    || !await User.IsEmployee(id))
+                        || !await User.IsEmployee(id))
                     && User.GetId() != id)
                 {
                     return this.CreateError(
@@ -178,6 +196,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 
                 var user = await UserManager.FindByIdAsync(id);
 
+                if (user == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
                 var role =
                     await RoleManager.FindByIdAsync(user.Roles.Single().RoleId);
 
@@ -186,18 +209,18 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var groups = await GroupManager.Groups.ToListAsync();
 
                 var model = new UserTrainingResultsViewModel(
-                    new UserViewModel(user, role, companies, roles, groups), 
+                    new UserViewModel(user, role, companies, roles, groups),
                     user.GetTrainingResults().AsViewModels());
 
                 return View(model);
             }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
             catch (UnauthorizedAccessException e)
             {
                 return this.CreateError(HttpStatusCode.Forbidden, e);
-            }
-            catch (InvalidOperationException e)
-            {
-                return this.CreateError(HttpStatusCode.BadRequest, e);
             }
             catch (KeyNotFoundException e)
             {

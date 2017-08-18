@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.Extensions.CollectionExtensions;
+using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
 using MichaelBrandonMorris.Extensions.PrincipalExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
 using Microsoft.AspNet.Identity.Owin;
@@ -24,32 +24,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     [Authorize]
     public class TrainingController : Controller
     {
-        /// <summary>
-        ///     Gets the index of the order categories by.
-        /// </summary>
-        /// <value>The index of the order categories by.</value>
-        /// TODO Edit XML Comment Template for OrderCategoriesByIndex
-        private static Func<Category, object> OrderCategoriesByIndex => category
-            => category.Index;
-
-        /// <summary>
-        ///     Gets the index of the order slides by.
-        /// </summary>
-        /// <value>The index of the order slides by.</value>
-        /// TODO Edit XML Comment Template for OrderSlidesByIndex
-        private static Func<Slide, object> OrderSlidesByIndex => slide => slide
-            .Index;
-
-        /// <summary>
-        ///     Gets the should show on quiz.
-        /// </summary>
-        /// <value>The should show on quiz.</value>
-        /// TODO Edit XML Comment Template for ShouldShowOnQuiz
-        private static Func<Slide, bool> ShouldShowOnQuiz => x =>
-            x.ShouldShowSlideInSlideshow && x.ShouldShowQuestionOnQuiz;
-
         private GroupManager GroupManager => OwinContext.Get<GroupManager>();
-
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
 
         private TrainingResultManager TrainingResultManager => OwinContext
@@ -121,7 +96,13 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 .SingleOrDefaultAsync(g => g.Id == groupId);
 
             var categories = group.Categories;
-            var slides = categories.SelectMany(c => c.Slides);
+
+            var slides = categories.SelectMany(
+                c => c.Slides).Where(
+                s => s.ShouldShowSlideInSlideshow
+                     && s.ShouldShowQuestionOnQuiz
+                     && !s.Question.IsNullOrWhiteSpace()
+                     && s.Answers.Count >= 2);
 
             var model = slides.AsQuizSlideViewModels().Shuffle();
             System.Web.HttpContext.Current.Session["QuizViewModel"] = model;

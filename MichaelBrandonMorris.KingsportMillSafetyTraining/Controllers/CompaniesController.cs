@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
@@ -23,6 +25,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             OwinContext.Get<CompanyManager>();
 
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
+
+        private RoleManager<Role> RoleManager => OwinContext
+            .Get<RoleManager<Role>>();
 
         /// <summary>
         ///     Creates this instance.
@@ -237,10 +242,38 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var companies = await CompanyManager.Companies
-                    .Include(company => company.Employees)
+                    .Include(company => company.Employees.Select(e => e.Roles))
                     .ToListAsync();
 
-                var model = companies.AsViewModels();
+                var model = new List<CompanyViewModel>();
+
+                foreach (var company in companies)
+                {
+                    var companyViewModel = new CompanyViewModel
+                    {
+                        Id = company.Id,
+                        Name = company.Name
+                    };
+
+                    foreach (var employee in company.Employees)
+                    {
+                        var role =
+                            await RoleManager.FindByIdAsync(
+                                employee.Roles.Single().RoleId);
+
+                        var userViewModel = new UserViewModel(
+                            employee,
+                            role,
+                            new List<Company>(),
+                            new List<Role>(),
+                            new List<Group>());
+
+                        companyViewModel.Employees.Add(userViewModel);
+                    }
+
+                    model.Add(companyViewModel);
+                }
+
                 return View(model);
             }
             catch (Exception e)
