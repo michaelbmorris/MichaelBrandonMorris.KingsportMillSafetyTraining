@@ -379,6 +379,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     var categories = await CategoryManager.Categories
                         .Include(c => c.Slides)
+                        .OrderBy(c => c.Index)
                         .ToListAsync();
 
                     foreach (var category in categories)
@@ -396,6 +397,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                         .SingleOrDefaultAsync(g => g.Id == id);
 
                     model = group.Categories.OrderBy(c => c.Index);
+
+                    foreach (var category in model)
+                    {
+                        category.Slides =
+                            category.Slides.OrderBy(s => s.Index).ToList();
+                    }
                 }
 
                 return View(model);
