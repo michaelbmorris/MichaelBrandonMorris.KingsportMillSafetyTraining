@@ -379,6 +379,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     var categories = await CategoryManager.Categories
                         .Include(c => c.Slides)
+                        .OrderBy(c => c.Index)
                         .ToListAsync();
 
                     foreach (var category in categories)
