@@ -13,8 +13,6 @@ using MichaelBrandonMorris.Extensions.CollectionExtensions;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
-    using System.Diagnostics;
-
     /// <summary>
     ///     Class Startup.
     /// </summary>
@@ -81,7 +79,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
                 };
 
                 var password = Membership.GeneratePassword(8, 1);
-                Debug.WriteLine(password);
                 await manager.CreateAsync(user, password);
                 user = await manager.FindByEmailAsync(user.Email);
                 await manager.AddToRoleAsync(user.Id, "Owner");

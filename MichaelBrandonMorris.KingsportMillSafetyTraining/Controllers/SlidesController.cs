@@ -46,7 +46,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                     Answers = new List<Answer>
                     {
                         new Answer()
-                    }
+                    },
                 });
         }
 
@@ -63,7 +63,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 .OrderBy(c => c.Index)
                 .ToListAsync();
 
-            var model = new SlideViewModel(categories);
+            var model = new SlideViewModel(categories)
+            {
+                ShouldShowSlideInSlideshow = true
+            };
+
             return View(model);
         }
 
@@ -98,6 +102,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 CorrectAnswerIndex = model.CorrectAnswerIndex,
                 ImageBytes = model.Image?.ToBytes(),
                 ImageDescription = model.ImageDescription,
+                MimeType = model.Image == null ? null : MimeMapping.GetMimeMapping(model.Image?.FileName),
                 Question = model.Question,
                 ShouldShowImageOnQuiz = model.ShouldShowImageOnQuiz,
                 ShouldShowQuestionOnQuiz = model.ShouldShowQuestionOnQuiz,
@@ -401,11 +406,42 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        public async Task RemoveImage(int id)
+        /// <summary>
+        ///     Removes the image from the specified slide.
+        /// </summary>
+        /// <param name="id">The slide identifier.</param>
+        /// <returns></returns>
+        public async Task RemoveImage(int? id)
         {
-            var slide = await SlideManager.FindByIdAsync(id);
-            slide.ImageBytes = null;
-            await SlideManager.UpdateAsync(slide);
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                slide.ImageBytes = null;
+                await SlideManager.UpdateAsync(slide);
+            }
+            catch (ArgumentNullException e)
+            {
+                this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                this.CreateError(HttpStatusCode.NotFound, e);
+            }
+            catch (Exception e)
+            {
+                this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>

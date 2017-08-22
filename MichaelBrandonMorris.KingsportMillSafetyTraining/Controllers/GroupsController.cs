@@ -14,6 +14,8 @@ using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    using System.Data.Entity.Infrastructure;
+
     /// <summary>
     ///     Class GroupsController.
     /// </summary>
@@ -131,24 +133,39 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(
-            [Bind(Include = "Description,Question,Title")] GroupViewModel model)
+        public async Task<ActionResult> Create(GroupViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(model);
-            }
-
-            GroupManager.CreateAsync(
-                new Group
+                if (!ModelState.IsValid)
                 {
-                    Description = model.Description,
-                    Index = ++Group.CurrentIndex,
-                    Question = model.Question,
-                    Title = model.Title
-                });
+                    return View(model);
+                }
 
-            return RedirectToAction("Index");
+                var result = await GroupManager.CreateAsync(
+                    new Group
+                    {
+                        Description = model.Description,
+                        Index = ++Group.CurrentIndex,
+                        Question = model.Question,
+                        Title = model.Title
+                    });
+
+                if (result == 0)
+                {
+                    throw new DbUpdateException("Failed to save changes.");
+                }
+
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
         }
 
         /// <summary>

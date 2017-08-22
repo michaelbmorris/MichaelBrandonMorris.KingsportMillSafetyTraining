@@ -5,6 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
+    using System.Web.Mvc;
+
     /// <summary>
     /// Class Slide.
     /// </summary>
@@ -39,6 +41,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// </summary>
         /// <value>The content.</value>
         /// TODO Edit XML Comment Template for Content
+        [AllowHtml]
         [Required]
         public string Content
         {
@@ -225,10 +228,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" /> is equal to this instance.
+        /// Determines whether the specified <see cref="object" /> is equal to this instance.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
         /// TODO Edit XML Comment Template for Equals
         public override bool Equals(object obj)
         {
@@ -245,6 +248,9 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
             return obj.GetType() == GetType() && Equals((Slide) obj);
         }
 
+        /// <summary>
+        /// The mime type for the image.
+        /// </summary>
         public string MimeType
         {
             get;
@@ -255,7 +261,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
-        /// <exception cref="System.NotImplementedException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         /// TODO Edit XML Comment Template for GetHashCode
         public override int GetHashCode()
         {

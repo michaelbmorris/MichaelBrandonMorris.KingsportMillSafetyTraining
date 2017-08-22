@@ -336,8 +336,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 {
                     user = await UserManager.FindByEmailAsync(user.Email);
                     await UserManager.AddToRoleAsync(user.Id, "User");
+
                     var company =
                         await CompanyManager.FindByIdAsync(model.CompanyId);
+
                     await UserManager.SetCompany(user.Id, company);
                     return RedirectToAction("Index", "Training");
                 }

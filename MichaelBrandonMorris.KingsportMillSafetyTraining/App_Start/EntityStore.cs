@@ -60,7 +60,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         /// <param name="entity">The entity.</param>
         /// <returns>Task.</returns>
         /// TODO Edit XML Comment Template for CreateAsync
-        public virtual Task CreateAsync(TEntity entity)
+        public virtual Task<int> CreateAsync(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
             return Context.SaveChangesAsync();
