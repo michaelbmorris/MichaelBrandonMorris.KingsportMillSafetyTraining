@@ -2,6 +2,8 @@
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
 {
+    using System.Web.Mvc;
+
     /// <summary>
     ///     Class Group.
     /// </summary>
@@ -24,6 +26,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// </summary>
         /// <value>The description.</value>
         /// TODO Edit XML Comment Template for Description
+        [AllowHtml]
         public string Description
         {
             get;
@@ -57,6 +60,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models
         /// </summary>
         /// <value>The question.</value>
         /// TODO Edit XML Comment Template for Question
+        [AllowHtml]
         public string Question
         {
             get;
