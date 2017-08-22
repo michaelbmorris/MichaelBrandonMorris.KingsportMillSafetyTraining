@@ -118,3 +118,8 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+ul {
+    list-style-position: inside;
+    list-style-type: disc;
+}
