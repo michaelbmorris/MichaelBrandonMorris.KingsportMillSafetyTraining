@@ -4,8 +4,11 @@
 
 @{
     ViewBag.Title = "Register";
-    ViewBag.Subtitle = "Create a new account.";
 }
+
+<h2>@ViewBag.Title</h2>
+<h4>Create a new account.</h4>
+<hr/>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new
 {

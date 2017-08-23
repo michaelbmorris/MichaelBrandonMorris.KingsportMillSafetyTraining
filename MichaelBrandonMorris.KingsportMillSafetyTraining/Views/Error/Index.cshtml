@@ -3,8 +3,10 @@
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
     ViewBag.Title = "HTTP Error " + Model.CodeNumber;
-    ViewBag.Subtitle = Model.CodeName;
 }
+
+<h2>HTTP Error @Model.CodeNumber</h2>
+<h4>@Model.CodeName</h4>
 
 <div class="jumbotron">
     @Html.Raw(Html.Encode(Model.Message).Replace("\n", "<br />"))

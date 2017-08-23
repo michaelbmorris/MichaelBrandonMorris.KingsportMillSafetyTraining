@@ -123,3 +123,7 @@ ul {
     list-style-position: inside;
     list-style-type: disc;
 }
+
+.slide-content {
+    font-size: 24px;
+}

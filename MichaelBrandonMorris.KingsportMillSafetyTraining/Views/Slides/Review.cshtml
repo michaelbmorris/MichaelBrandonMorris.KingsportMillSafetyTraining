@@ -3,11 +3,11 @@
 @{
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
     ViewBag.Title = Model.CategoryName;
-    ViewBag.Subtitle = Model.Title;
 }
 
-<!DOCTYPE html>
-
+<h1>@Model.CategoryName</h1>
+<h2>@Model.Title</h2>
+<hr/>
 <div class="row">
     @if (Model.ImageBytes == null)
     {
@@ -17,7 +17,7 @@
     }
     else
     {
-        <div class="col-md-6">
+        <div class="col-md-6 slide-content">
             @Html.Raw(Model.Content)
         </div>
         <div class="col-md-6">

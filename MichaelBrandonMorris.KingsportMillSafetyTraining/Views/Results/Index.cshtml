@@ -5,6 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Index</h2>
+<h4>Results</h4>
+<hr/>
+
 @Html.Grid(Model).Build(columns =>
 {
     columns.Add(model => model.FirstName).Titled("First Name");

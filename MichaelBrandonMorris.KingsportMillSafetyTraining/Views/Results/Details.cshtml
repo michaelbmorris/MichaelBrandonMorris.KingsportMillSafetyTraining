@@ -5,9 +5,12 @@
 
 @{
     ViewBag.Title = "Details";
-    ViewBag.Subtitle = "Training Result";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Details</h2>
+<h4>Result</h4>
+<hr/>
 
 @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.LastName, model => model.CompanyName, model => model.Email, model => model.PhoneNumber, model => model.GroupTitle, model => model.CompletionDateTimeString, model => model.TimeToCompleteString)
 

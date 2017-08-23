@@ -4,6 +4,10 @@
     ViewBag.Title = "Users";
 }
 
+<h2>Index</h2>
+<h4>Users</h4>
+<hr/>
+
 @(Html.Grid(Model).Build(columns =>
   {
       columns.Add(model => model.FirstName).Titled("First Name");

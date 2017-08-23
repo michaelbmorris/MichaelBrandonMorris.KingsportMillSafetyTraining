@@ -2,10 +2,12 @@
 
 @{
     ViewBag.Title = "Delete";
-    ViewBag.Subtitle = "Are you sure you want to delete this?";
     Layout = Url.Content("~/Views/Shared/_Layout.cshtml");
 }
 
+<h2>Delete</h2>
+<h4>Category</h4>
+<p class="bg-danger">Are you sure you want to delete this?</p>
 @Html.DisplayForModel(Model)
 
 @using (Html.BeginForm())

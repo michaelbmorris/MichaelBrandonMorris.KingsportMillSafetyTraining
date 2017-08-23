@@ -22,7 +22,6 @@
     <script src=@Url.Content("~/Content/ckeditor/ckeditor.js")></script>
 </head>
 <body onresize="AdjustPadding();">
-    
     <div class="navbar navbar-fixed-top navbar-inverse"
          id="navbar">
         <div class="container">
@@ -199,18 +198,6 @@
         </div>
     </div>
     <div class="body-content container">
-        <h2>@ViewBag.Title</h2>
-
-        @if (ViewBag.Subtitle != null)
-        {
-            <h4>@ViewBag.Subtitle</h4>
-        }
-
-        @if (ViewBag.Title != null)
-        {
-            <hr/>
-        }
-
         @RenderBody()
         <footer>
             <hr/>
