@@ -27,7 +27,7 @@
             {
                 @Html.HiddenFor(x => Model[i].SelectedAnswerIndex)
             }
-            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger " : "")row"
+            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger " : "")row question slide-content"
                  id="Question-@Model[i].Id">
                 <div class="col-md-4">
                     @if (Model[i].ShouldShowImageOnQuiz)
@@ -145,15 +145,11 @@
                     </div>
                 </div>
             </div>
-
-            if (i + 1 != Model.Count)
-            {
-                <hr/>
-            }
         }
 
         if (!Model.All(x => x.IsCorrect()))
         {
+            <br/>
             @Html.BootstrapSubmit("Submit", ContextualColor.Primary)
         }
     }
@@ -163,7 +159,7 @@
 {
     <script type="text/javascript">
         function viewSlide(slideId) {
-            var url = "@Url.Action("Review", "Slides", new { id = "_ID_"})";
+            var url = "@Url.Action("Review", "Training", new { id = "_ID_"})";
             
             window.open(url.replace("_ID_", slideId));
             $(".AnswerFor-" + slideId).prop("readonly", false);

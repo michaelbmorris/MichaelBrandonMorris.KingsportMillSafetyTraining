@@ -31,6 +31,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             .Get<TrainingResultManager>();
 
         private UserManager UserManager => OwinContext.Get<UserManager>();
+        private SlideManager SlideManager => OwinContext.Get<SlideManager>();
 
         /// <summary>
         ///     Confirms the role.
@@ -254,6 +255,47 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             catch (NullReferenceException)
             {
                 return RedirectToAction("SelectGroup");
+            }
+            catch (Exception e)
+            {
+                return this.CreateError(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        /// <summary>
+        ///     Views the slide.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ActionResult.</returns>
+        /// TODO Edit XML Comment Template for Review
+        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [HttpGet]
+        public async Task<ActionResult> Review(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    throw new ArgumentNullException(nameof(id));
+                }
+
+                var slide = await SlideManager.FindByIdAsync(id.Value);
+
+                if (slide == null)
+                {
+                    throw new KeyNotFoundException();
+                }
+
+                var model = new SlideViewModel(slide, new List<Category>());
+                return View(model);
+            }
+            catch (ArgumentNullException e)
+            {
+                return this.CreateError(HttpStatusCode.BadRequest, e);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return this.CreateError(HttpStatusCode.NotFound, e);
             }
             catch (Exception e)
             {

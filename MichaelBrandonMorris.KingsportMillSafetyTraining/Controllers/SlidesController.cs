@@ -562,7 +562,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// TODO Edit XML Comment Template for Review
         [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
-        public async Task<ActionResult> Review(int? id)
+        public async Task<ActionResult> Preview(int? id)
         {
             try
             {

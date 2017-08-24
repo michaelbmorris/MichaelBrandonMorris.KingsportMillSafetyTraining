@@ -748,7 +748,7 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Slides\Review.cshtml" />
+    <Content Include="Views\Slides\Preview.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Results\Details.cshtml" />
@@ -768,6 +768,7 @@
     <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
+    <Content Include="Views\Training\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
