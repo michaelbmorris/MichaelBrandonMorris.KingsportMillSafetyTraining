@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using MichaelBrandonMorris.Extensions.CollectionExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using MichaelBrandonMorris.Math;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
+﻿namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using Db.Models;
+
+    using Math;
+
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+
+    using Models;
+
     /// <summary>
     ///     Class CategoriesController.
     /// </summary>
@@ -43,7 +46,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> AssignGroups(int? id)
         {
@@ -51,13 +55,15 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 AssignGroupsViewModel model;
 
-                var groups = (await GroupManager.Groups.ToListAsync())
+                var groups = (await GroupManager.Groups.OrderBy(g => g.Index)
+                        .ToListAsync())
                     .AsViewModels();
 
                 if (id == null)
                 {
                     var categories =
-                        await CategoryManager.Categories.ToListAsync();
+                        await CategoryManager.Categories.OrderBy(c => c.Index)
+                            .ToListAsync();
 
                     model = new AssignGroupsViewModel(categories, groups);
                 }
@@ -83,7 +89,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for AssignGroups
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         public async Task<ActionResult> AssignGroups(IList<int> model)
         {
@@ -134,7 +141,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Create
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -148,7 +156,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Category category)
@@ -181,7 +190,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for Delete
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public async Task<ActionResult> Delete(int? id)
         {
@@ -220,7 +229,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </exception>
         /// <exception cref="KeyNotFoundException"></exception>
         /// TODO Edit XML Comment Template for DeleteConfirmed
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [ActionName("Delete")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -276,7 +285,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     missing.\nType: 'int'\nName: 'id'
         /// </exception>
         /// TODO Edit XML Comment Template for Details
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> Details(int? id)
         {
@@ -315,7 +325,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         ///     missing.\nType: 'int'\nName: 'id'
         /// </exception>
         /// TODO Edit XML Comment Template for Edit
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> Edit(int? id)
         {
@@ -350,7 +361,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Category model)
@@ -380,7 +392,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -400,13 +413,16 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Reorder
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> Reorder()
         {
             try
             {
-                var categories = await CategoryManager.Categories.OrderBy(c => c.Index).ToListAsync();
+                var categories = await CategoryManager.Categories
+                    .OrderBy(c => c.Index)
+                    .ToListAsync();
                 return View(categories);
             }
             catch (Exception e)
@@ -415,7 +431,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             }
         }
 
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Collaborator")]
         [HttpPost]
         public async Task<ActionResult> Reorder(IList<Category> model)
         {
