@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining
 {
+    using System.Diagnostics;
+
     /// <summary>
     ///     Class UserStore.
     /// </summary>
@@ -91,6 +93,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining
         {
             var user = await Users.FirstOrDefaultAsync(u => u.Id == userId);
             user.Group = group;
+            Debug.WriteLine(user.Group.Title);
             Context.Entry(user).State = EntityState.Modified;
             await Context.SaveChangesAsync();
         }

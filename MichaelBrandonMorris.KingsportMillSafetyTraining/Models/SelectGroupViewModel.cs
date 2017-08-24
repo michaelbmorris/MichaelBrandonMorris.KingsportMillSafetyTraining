@@ -9,11 +9,11 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
     public class SelectGroupViewModel
     {
         /// <summary>
-        ///     Gets or sets the default index of the group.
+        ///     Gets or sets the default id of the group.
         /// </summary>
         /// <value>The default index of the group.</value>
         /// TODO Edit XML Comment Template for DefaultGroupIndex
-        public int DefaultGroupIndex
+        public int DefaultGroupId
         {
             get;
             set;

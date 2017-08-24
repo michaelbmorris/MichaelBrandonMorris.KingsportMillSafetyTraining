@@ -16,6 +16,8 @@ using Microsoft.Owin;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    using System.Diagnostics;
+
     /// <summary>
     ///     Class TrainingController.
     /// </summary>
@@ -72,6 +74,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             try
             {
                 var group = await GetCurrentUserGroup();
+                Debug.WriteLine(group == null);
 
                 return RedirectToAction(
                     group == null ? "SelectGroup" : "ConfirmGroup");
@@ -193,7 +196,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             var model = new SelectGroupViewModel
             {
                 Groups = groups.SkipLast(1).AsViewModels(),
-                DefaultGroupIndex = groups.Max(group => group.Index)
+                DefaultGroupId= groups.Max(group => group.Id)
             };
 
             return View(model);
@@ -217,6 +220,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 }
 
                 var group = await GroupManager.FindByIdAsync(id.Value);
+                Debug.WriteLine(group == null);
                 await UserManager.SetGroup(User.GetId(), group);
                 return RedirectToAction("Index");
             }
