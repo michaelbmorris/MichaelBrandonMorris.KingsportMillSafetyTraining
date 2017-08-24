@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using MichaelBrandonMorris.Extensions.CollectionExtensions;
-using MichaelBrandonMorris.Extensions.PrincipalExtensions;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
-using MichaelBrandonMorris.KingsportMillSafetyTraining.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-
-namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
+﻿namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+
+    using Db.Models;
+
+    using MichaelBrandonMorris.Extensions.CollectionExtensions;
+    using MichaelBrandonMorris.Extensions.PrincipalExtensions;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+
+    using Models;
+
+    using Views;
+
     /// <summary>
     ///     Class UsersController.
     /// </summary>
@@ -40,7 +46,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangePassword
-        [Authorize(Roles = "Owner, Administrator, Supervisor")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Supervisor")]
         [HttpGet]
         public async Task<ActionResult> ChangePassword(string id)
         {
@@ -108,7 +115,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The model.</param>
         /// <returns>Task&lt;ActionResult&gt;.</returns>
         /// TODO Edit XML Comment Template for ChangePassword
-        [Authorize(Roles = "Owner, Administrator, Supervisor")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Supervisor")]
         [HttpPost]
         public async Task<ActionResult> ChangePassword(
             ChangePasswordViewModel model)
@@ -136,7 +144,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for ChangeRole
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public async Task<ActionResult> ChangeRole(string id)
         {
@@ -182,7 +190,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns>ActionResult.</returns>
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         public async Task<ActionResult> ChangeRole(ChangeRoleViewModel model)
         {
@@ -225,7 +233,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
         public async Task<ActionResult> Details(string id)
         {
@@ -300,7 +309,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [HttpGet]
         public async Task<ActionResult> Edit(string id)
         {
@@ -337,7 +346,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="model">The user.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Edit
-        [Authorize(Roles = "Owner, Administrator")]
+        [KingsportMillSafetyTraining.Authorize(Roles = "Owner, Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(UserViewModel model)
@@ -374,7 +383,8 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Index
-        [Authorize(Roles = "Owner, Administrator, Security, Supervisor")]
+        [KingsportMillSafetyTraining.Authorize(
+            Roles = "Owner, Administrator, Security, Supervisor")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
@@ -382,28 +392,48 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             {
                 var users = await UserManager.Users.Include(u => u.Roles)
                     .ToListAsync();
-                var companies = await CompanyManager.Companies.ToListAsync();
-                if (RoleManager == null)
-                {
-                    throw new Exception("Role manager null");
-                }
 
+                var companies = await CompanyManager.Companies.ToListAsync();
                 var roles = await RoleManager.Roles.ToListAsync();
                 var groups = await GroupManager.Groups.ToListAsync();
                 IList<UserViewModel> model = new List<UserViewModel>();
 
-                foreach (var user in users)
+                if (User.IsInRole("Supervisor"))
                 {
-                    var roleId = user.Roles.Single().RoleId;
-                    var role = await RoleManager.FindByIdAsync(roleId);
+                    foreach (var user in users)
+                    {
+                        if (!await User.IsEmployee(user.Id))
+                        {
+                            continue;
+                        }
 
-                    model.Add(
-                        new UserViewModel(
-                            user,
-                            role,
-                            companies,
-                            roles,
-                            groups));
+                        var roleId = user.Roles.Single().RoleId;
+                        var role = await RoleManager.FindByIdAsync(roleId);
+
+                        model.Add(
+                            new UserViewModel(
+                                user,
+                                role,
+                                companies,
+                                roles,
+                                groups));
+                    }
+                }
+                else
+                {
+                    foreach (var user in users)
+                    {
+                        var roleId = user.Roles.Single().RoleId;
+                        var role = await RoleManager.FindByIdAsync(roleId);
+
+                        model.Add(
+                            new UserViewModel(
+                                user,
+                                role,
+                                companies,
+                                roles,
+                                groups));
+                    }
                 }
 
                 return View(model);
