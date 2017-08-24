@@ -333,6 +333,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 slide.Category =
                     await CategoryManager.FindByIdAsync(model.CategoryId);
 
+                slide.Content = model.Content;
                 slide.CorrectAnswerIndex = model.CorrectAnswerIndex;
 
                 if (model.Image != null)

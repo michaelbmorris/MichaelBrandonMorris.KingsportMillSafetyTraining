@@ -1,7 +1,6 @@
 ﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Display.Horizontal
-
 @model MichaelBrandonMorris.KingsportMillSafetyTraining.Models.UserViewModel
 
 @{
@@ -14,7 +13,7 @@
 <hr/>
 
 <div>
-    @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.MiddleName, model => model.LastName, model => model.CompanyName, model => model.OtherCompanyName, model => model.Email, model => model.PhoneNumber, model => model.LastLogonDateTimeString, model => model.LastTrainingStartDateTimeString)
+    @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.MiddleName, model => model.LastName, model => model.CompanyName, model => model.OtherCompanyName, model => model.Email, model => model.FormattedPhoneNumber, model => model.LastLogonDateTimeString, model => model.LastTrainingStartDateTimeString)
 </div>
 <div class="pull-left">
     @Html.BootstrapActionLinkButton("Edit", Model.Id, ContextualColor.Primary)

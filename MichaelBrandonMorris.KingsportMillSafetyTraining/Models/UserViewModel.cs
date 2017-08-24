@@ -326,6 +326,12 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         }
 
         /// <summary>
+        ///     The phone number, formatted as (###)###-####
+        /// </summary>
+        public string FormattedPhoneNumber =>
+            $"({PhoneNumber.Substring(0, 3)}) {PhoneNumber.Substring(3, 3)}-{PhoneNumber.Substring(6, PhoneNumber.Length - 6)}";
+
+        /// <summary>
         ///     Gets or sets the role.
         /// </summary>
         /// <value>The role.</value>

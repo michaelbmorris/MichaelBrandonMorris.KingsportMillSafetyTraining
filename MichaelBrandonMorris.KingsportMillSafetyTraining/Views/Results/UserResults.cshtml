@@ -10,7 +10,7 @@
 <h4>Results</h4>
 <hr/>
 
-@Html.BootstrapHorizontalDefinitionListFor(model => Model.User.FirstName, model => Model.User.LastName, model => Model.User.CompanyName, model => Model.User.Email, model => Model.User.PhoneNumber)
+@Html.BootstrapHorizontalDefinitionListFor(model => Model.User.FirstName, model => Model.User.LastName, model => Model.User.CompanyName, model => Model.User.Email, model => Model.User.FormattedPhoneNumber)
 
 @if (User.IsInRole("Owner") || User.IsInRole("Administrator") || User.IsInRole("Security") || User.IsInRole("Supervisor"))
 {

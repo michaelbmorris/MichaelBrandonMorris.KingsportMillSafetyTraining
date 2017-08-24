@@ -52,11 +52,20 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
             }
         }
 
+        /// <summary>
+        ///     Whether the training result belongs to the current user.
+        /// </summary>
         public bool IsUserTrainingResult
         {
             get;
             set;
         }
+
+        /// <summary>
+        ///     The phone number, formatted as (###)###-####
+        /// </summary>
+        public string FormattedPhoneNumber =>
+            $"({PhoneNumber.Substring(0, 3)}) {PhoneNumber.Substring(3, 3)}-{PhoneNumber.Substring(6, PhoneNumber.Length - 6)}";
 
         /// <summary>
         ///     Gets the completion date time string.
