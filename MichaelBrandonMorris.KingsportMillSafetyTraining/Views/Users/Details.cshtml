@@ -14,7 +14,9 @@
 
 <div>
     @Html.BootstrapHorizontalDefinitionListFor(model => model.FirstName, model => model.MiddleName, model => model.LastName, model => model.CompanyName, model => model.OtherCompanyName, model => model.Email, model => model.FormattedPhoneNumber, model => model.LastLogonDateTimeString, model => model.LastTrainingStartDateTimeString)
+    @Html.BootstrapHorizontalDefinitionList(MvcHtmlString.Create("<dt>Role</dt><dd>" + Model.Role.Name + "</dd>"));
 </div>
+
 <div class="pull-left">
     @Html.BootstrapActionLinkButton("Edit", Model.Id, ContextualColor.Primary)
 </div>

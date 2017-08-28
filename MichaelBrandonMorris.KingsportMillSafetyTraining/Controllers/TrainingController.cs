@@ -272,7 +272,6 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// <param name="id">The identifier.</param>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Review
-        [Authorize(Roles = "Owner, Administrator, Collaborator")]
         [HttpGet]
         public async Task<ActionResult> Review(int? id)
         {

@@ -119,13 +119,16 @@ img {
     height: auto;
 }
 
-ul {
-    list-style-position: inside;
+.slide-content ul {
     list-style-type: disc;
 }
 
+.slide-content ol {
+    list-style-type: decimal;
+}
+
 .slide-content {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .question {
@@ -137,10 +140,6 @@ ul {
 
 .question:first-of-type {
     border-top: 5px solid black;
-}
-
-.question ul {
-    list-style-type: none;
 }
 
 .question input[type="radio"] {

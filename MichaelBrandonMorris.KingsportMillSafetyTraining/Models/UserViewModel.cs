@@ -10,6 +10,8 @@ using MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Models;
 
 namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
 {
+    using MichaelBrandonMorris.Extensions.PrimitiveExtensions;
+
     /// <summary>
     ///     Class UserViewModel.
     /// </summary>
@@ -328,7 +330,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Models
         /// <summary>
         ///     The phone number, formatted as (###)###-####
         /// </summary>
-        public string FormattedPhoneNumber =>
+        public string FormattedPhoneNumber => PhoneNumber.IsNullOrWhiteSpace() || PhoneNumber.Length != 9 ? string.Empty :
             $"({PhoneNumber.Substring(0, 3)}) {PhoneNumber.Substring(3, 3)}-{PhoneNumber.Substring(6, PhoneNumber.Length - 6)}";
 
         /// <summary>
