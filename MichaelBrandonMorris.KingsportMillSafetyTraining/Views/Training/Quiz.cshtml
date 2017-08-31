@@ -1,4 +1,5 @@
-﻿@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
+﻿@using MichaelBrandonMorris.Extensions.PrimitiveExtensions
+@using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap
 @using MichaelBrandonMorris.Extensions.Web.HtmlHelper.Bootstrap.Form
 @model IList<MichaelBrandonMorris.KingsportMillSafetyTraining.Models.QuizSlideViewModel>
 
@@ -27,10 +28,10 @@
             {
                 @Html.HiddenFor(x => Model[i].SelectedAnswerIndex)
             }
-            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger " : "")row question slide-content"
+            <div class="@(Model[i].IsCorrect() ? "bg-success " : Model[i].IsIncorrect() ? "bg-danger " : "")row question"
                  id="Question-@Model[i].Id">
                 <div class="col-md-4">
-                    @if (Model[i].ShouldShowImageOnQuiz)
+                    @if (Model[i].ShouldShowImageOnQuiz && !Model[i].ImageDescription.IsNullOrWhiteSpace())
                     {
                         <img alt="@Model[i].ImageDescription"
                              class="image-quiz"

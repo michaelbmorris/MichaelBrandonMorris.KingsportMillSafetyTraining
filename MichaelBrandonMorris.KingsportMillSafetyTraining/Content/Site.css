@@ -119,6 +119,10 @@ img {
     height: auto;
 }
 
+.question img {
+    max-height: 200px;
+}
+
 .slide-content ul {
     list-style-type: disc;
 }
@@ -127,7 +131,7 @@ img {
     list-style-type: decimal;
 }
 
-.slide-content {
+.slide-content, .question {
     font-size: 18px;
 }
 

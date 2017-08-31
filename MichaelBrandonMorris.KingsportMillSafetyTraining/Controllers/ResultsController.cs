@@ -82,6 +82,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (User.IsInRole("Owner")
                     || User.IsInRole("Administrator")
                     || User.IsInRole("Security")
+                    || User.IsInRole("Collaborator")
                     || User.IsInRole("Supervisor")
                     && await User.IsEmployeeTrainingResult(id.Value)
                     || await User.IsOwnTrainingResult(id.Value))
@@ -122,6 +123,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
             if (!User.IsInRole("Administrator")
                 && !User.IsInRole("Owner")
                 && !User.IsInRole("Security")
+                && !User.IsInRole("Collaborator")
                 && !User.IsInRole("Supervisor"))
             {
                 return RedirectToAction(
@@ -185,6 +187,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 if (!User.IsInRole("Owner")
                     && !User.IsInRole("Administrator")
                     && !User.IsInRole("Security")
+                    && !User.IsInRole("Collaborator")
                     && (!User.IsInRole("Supervisor")
                         || !await User.IsEmployee(id))
                     && User.GetId() != id)
