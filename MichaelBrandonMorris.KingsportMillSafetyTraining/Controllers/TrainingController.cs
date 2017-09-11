@@ -249,7 +249,10 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
                 var categories = group.Categories.OrderBy(c => c.Index);
 
                 var slides =
-                    categories.SelectMany(c => c.Slides.OrderBy(s => s.Index));
+                    categories.SelectMany(
+                        c => c.Slides
+                        .OrderBy(s => s.Index)
+                        .Where(s => s.ShouldShowSlideInSlideshow));
 
                 var model =
                     slides.Select(
