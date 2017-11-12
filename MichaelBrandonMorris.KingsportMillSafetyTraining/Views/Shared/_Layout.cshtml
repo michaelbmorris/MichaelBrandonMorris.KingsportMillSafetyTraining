@@ -14,7 +14,7 @@
     <title>
         @controllerName
         @(ViewBag.Title == null || actionName.Equals("Index") ? string.Empty : " - " + ViewBag.Title)
-        | Kingsport Mill Safety Training
+        | Kingsport Mill Safety Orientation
     </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -34,7 +34,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Kingsport Mill Safety Training", "Index", "Home", new
+                @Html.ActionLink("Kingsport Mill Safety Orientation", "Index", "Home", new
                 {
                     area = ""
                 }, new
@@ -47,7 +47,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Training", "Index", "Training")</li>
+                    <li>@Html.ActionLink("Orientation", "Index", "Orientation")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -201,7 +201,7 @@
         @RenderBody()
         <footer>
             <hr/>
-            <p>&copy; @DateTime.Now.Year - Kingsport Mill Safety Training</p>
+            <p>&copy; @DateTime.Now.Year - Kingsport Mill Safety Orientation</p>
         </footer>
     </div>
 

@@ -51,7 +51,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Db.Migrations
                 new Role
                 {
                     Index = 5,
-                    Name = "Owner"
+                    Name = "Owner (IT ONLY)"
                 });
         }
     }

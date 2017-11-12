@@ -253,7 +253,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\SlidesController.cs" />
-    <Compile Include="Controllers\TrainingController.cs" />
+    <Compile Include="Controllers\OrientationController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -740,11 +740,11 @@
     <Content Include="Views\Groups\DisplayTemplates\GroupViewModel.cshtml" />
     <Content Include="Views\Categories\DisplayTemplates\Category.cshtml" />
     <Content Include="Views\Slides\SelectCategoryToReorder.cshtml" />
-    <Content Include="Views\Training\SelectGroup.cshtml" />
-    <Content Include="Views\Training\Train.cshtml" />
+    <Content Include="Views\Orientation\SelectGroup.cshtml" />
+    <Content Include="Views\Orientation\Orientation.cshtml" />
     <Content Include="Views\Groups\Reorder.cshtml" />
     <Content Include="Views\Slides\DisplayTemplates\SlideViewModel.cshtml" />
-    <Content Include="Views\Training\Quiz.cshtml" />
+    <Content Include="Views\Orientation\Quiz.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
@@ -754,7 +754,7 @@
     <Content Include="Views\Results\Details.cshtml" />
     <Content Include="Views\Results\UserResults.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
-    <Content Include="Views\Training\ConfirmGroup.cshtml" />
+    <Content Include="Views\Orientation\ConfirmGroup.cshtml" />
     <Content Include="Views\Companies\Create.cshtml" />
     <Content Include="Views\Companies\Delete.cshtml" />
     <Content Include="Views\Companies\Details.cshtml" />
@@ -768,7 +768,7 @@
     <Content Include="Views\Shared\MvcGrid\_Pager.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_Grid.cshtml" />
     <Content Include="Views\Shared\MvcGrid\_AjaxGrid.cshtml" />
-    <Content Include="Views\Training\Review.cshtml" />
+    <Content Include="Views\Orientation\Review.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
     /// <seealso cref="Controller" />
     /// TODO Edit XML Comment Template for TrainingController
     [Authorize]
-    public class TrainingController : Controller
+    public class OrientationController : Controller
     {
         private GroupManager GroupManager => OwinContext.Get<GroupManager>();
         private IOwinContext OwinContext => HttpContext.GetOwinContext();
@@ -235,7 +235,7 @@ namespace MichaelBrandonMorris.KingsportMillSafetyTraining.Controllers
         /// </summary>
         /// <returns>ActionResult.</returns>
         /// TODO Edit XML Comment Template for Train
-        public async Task<ActionResult> Train()
+        public async Task<ActionResult> Orientation()
         {
             try
             {
